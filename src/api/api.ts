@@ -4,14 +4,15 @@ import jsonp from 'jsonp';
 import lodash from 'lodash';
 import router from '@/router/index';
 import { message } from 'ant-design-vue';
-import lfServce, { LfService } from '@/utils/request.localforage';
+import lfServce, { LfService, LfResponse } from '@/utils/request.localforage';
 import { ApiList, Apis, defaultApiList } from './index';
 
 interface Options {
-  data: any;
   url: string;
-  fetchType?: string;
   method?: string;
+  params?: string;
+  data: any;
+  fetchType?: string;
   headers?: any;
 }
 
@@ -78,12 +79,13 @@ export default class Api {
           message: response.data.result.resultMessage,
         });
       }
-      return Promise.resolve({
+      const finalResponse: LfResponse = {
         success: true,
         message: statusText,
         statusCode: status,
-        data,
-      });
+        ...response
+      };
+      return Promise.resolve(finalResponse);
     })
     .catch((error: any) => {
       const { response } = error;
@@ -160,16 +162,19 @@ export default class Api {
         data,
       });
     }
+    // if fetchType is not defined
     switch (method.toLowerCase()) {
       case 'get':
         // hack here with special service
         await this.lfService.request({
           method: 'get',
           url,
-          data: cloneData,
-          pagination: {
-            pageNo: 0,
-            pageSize: 1000
+          data,
+          params: {
+            pagination: {
+              pageNo: 0,
+              pageSize: 1000
+            }
           }
         })
         return this.service.get(`${url}?${cloneData}`, { headers });
@@ -178,7 +183,7 @@ export default class Api {
         await this.lfService.request({
           method: 'delete',
           url,
-          data: cloneData
+          data
         })
         return this.service.delete(url, {
           data: cloneData,
@@ -189,7 +194,7 @@ export default class Api {
         await this.lfService.request({
           method: 'post',
           url,
-          data: cloneData
+          data
         })
         return this.service.post(url, cloneData, { headers });
       case 'put':
@@ -197,19 +202,20 @@ export default class Api {
         await this.lfService.request({
           method: 'put',
           url,
-          data: cloneData
+          data
         })
         return this.service.put(url, cloneData, { headers });
       case 'patch':
         await this.lfService.request({
           method: 'patch',
           url,
-          data: cloneData
+          data
         })
         // hack here with special service
         return this.service.patch(url, cloneData, { headers });
       default:
         // hack here with special service
+        await this.lfService.request(options);
         return this.service(options);
     }
   };

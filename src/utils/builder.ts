@@ -3,8 +3,10 @@ const responseBody: LfResponse = {
   data: null,
   config: {},
   status: null,
+  statusText: '',
   headers: null,
   message: '',
+  success: false,
   code: 0,
   timestamp: 0,
 };
@@ -25,6 +27,8 @@ export const builder = (data, message, code = 0, config = {}, headers = {}) => {
   if (code !== undefined && code !== 0) {
     responseBody.code = code;
     responseBody.status = code;
+    responseBody.statusText = 'Ok';
+    responseBody.success = true;
   }
   if (headers !== null && typeof headers === 'object' && Object.keys(headers).length > 0) {
     responseBody.headers = headers;

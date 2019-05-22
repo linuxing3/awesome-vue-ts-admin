@@ -13,6 +13,7 @@ export interface LfRequestConfig {
   method?: string
   params?: any
   data?: any
+  fetchType?: string
   baseURL?: string
   headers?: any
   paramsSerializer?: (params: any) => string
@@ -37,9 +38,11 @@ export interface LfResponse<T = any> {
   statusText?: string
   headers?: any
   config?: LfRequestConfig
-  request?: any,
+  request?: any
+  success? boolean
   message?: string
-  code?: number,
+  code?: number
+  statusCode?: number
   timestamp?: number
 }
 
@@ -94,9 +97,9 @@ const lfService: LfService = {
       params: {
         ...options.params,
         model,
-        action,
         prefix,
         namespace,
+        action,
         columns,
         headers
       }
@@ -154,24 +157,21 @@ const lfService: LfService = {
       // data from localforage
       switch (method) {
         case 'post':
-          const createdItems = await model.$create({ data })
+          const result = await model.$create({ data })
           requestedData = {
-            model,
-            data: createdItems
+            result
           }
           break
         case 'delete':
-          const deletedItems = await model.$delete(data.id || data)
+          const result = await model.$delete(data.id || data)
           requestedData = {
-            model,
-            data: deletedItems
+            result
           }
           break
         case 'patch':
-          const updatedItems = await model.$update({ data })
+          const result = await model.$update({ data })
           requestedData = {
-            model,
-            data: updatedItems
+            result
           }
           break
         case 'get':
@@ -183,11 +183,12 @@ const lfService: LfService = {
               model,
               pagination
             )
-            requestedData = model
+            const result = model
               .query()
               .offset(paginationConfig.offset)
               .limit(paginationConfig.pageSize)
               .get()
+            requestedData = { result }
           } else {
             await model.$get(data.id || data)
             requestedData = model.find(data.id || data) || {}
