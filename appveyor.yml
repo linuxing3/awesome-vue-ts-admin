@@ -1,0 +1,45 @@
+image:
+  - Visual Studio 2017
+
+platform:
+  - x86
+
+environment:
+  APPVEYOR_RDP_PASSWORD: Vue#2009
+  APPVEYOR_SSH_KEY: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCe/RQ/JBdeqhCHk43pMwZtexeqim1trOxjzlnrQxXJOkUIY4l9Y9uIxTKCS3oNJfYRm+oXyLzIVbrfdMgDJ0EVn3cAlq7iDaRhHZJ7fFo2hxjMNHNGVp84dKt+n1oKpP0+xZWJFOl17qlyJ8IIf9FiGedLow0NKRCa8adQf0I56Dt4qdPHn6/w73Ybc8jRLZVHdLP85BLRcx3Xu9ZkqkJibyk41+37cENMU28DP9/XNSRzSCUyzfOB27epYOTDlNC7hAyZ3aoSYaQKynDmMPAwkx/Y9esaYpv4/jnuLgAn0tFkl/z6qiHMla9RLf14ceHo+04J9t+/kO1D1LH+yfY5 pi@raspberrypi
+  matrix:
+    - nodejs_version: "10"
+  GH_TOKEN:
+    secure: nHwMgMQEtRz4aOFCd55jOo41s9dXD2S4m9Tf0hohiQFQofo2mJ3KThNyL5HBg/Eb
+  ACCESS_TOKEN:
+    secure: nHwMgMQEtRz4aOFCd55jOo41s9dXD2S4m9Tf0hohiQFQofo2mJ3KThNyL5HBg/Eb
+
+init:
+  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+  - sh: curl -sflL 'https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-ssh.sh' | bash -e -
+
+install:
+  - ps: Install-Product node $env:nodejs_version
+  - npm install -g npm@latest
+  - npm install -g yarn
+  - set PATH=%APPDATA%\npm;%PATH%
+  - yarn install
+
+matrix:
+  fast_finish: true
+
+skip_tags: true
+
+shallow_clone: true
+
+build_script:
+  - yarn electron:build
+
+artifacts:
+  - path: dist_electron\*.exe
+    name: bin
+
+cache:
+  - node_modules
+  - "%LOCALAPPDATA%\\Yarn"
+  - '%APPDATA%\npm-cache'
