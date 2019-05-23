@@ -66,11 +66,14 @@ Vue.config.productionTip = false;
 let flag: boolean = true;
 // 路由拦截，权限验证和菜单生成
 router.beforeEach((to, from, next) => {
+  // if (to.name = 'login') {
+  //   next({ name: 'login', replace: true })
+  // }
   if (!store.state.app.menuData.length && flag) {
     // 判断是否获取到菜单数据,并且只执行一次
     flag = false;
     store
-      .dispatch('getUserLocalInfo')
+      .dispatch('getUserInfo')
       .then((entity) => {
         console.log('Route Guard Found Entity:', entity);
         const toPath = config.noLoginList.indexOf(`#${to.path}`) > -1 ? '/dashboard' : to.path;
