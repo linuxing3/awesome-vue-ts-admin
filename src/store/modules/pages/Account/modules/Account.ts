@@ -137,13 +137,13 @@ const AccountActions: IAccountActions = {
   async signup(ctx, signupData) {
     // 按姓名查找账户
     const {
-      result: { data },
+      data: { entity },
     } = await lfService.request({
       url: 'account',
       method: 'get',
     });
 
-    const authedAccount = data.find(item => item.name === signupData.name);
+    const authedAccount = entity.find(item => item.name === signupData.name);
 
     if (authedAccount === undefined) {
       try {

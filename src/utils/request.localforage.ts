@@ -1,8 +1,15 @@
-import store from '@/store';
 import models from '@/models';
-import { builder } from '@/utils/builder';
+import { builder, baseData } from '@/utils/builder';
 import { AGenTableColumns, VGenTableHeaders } from '@/utils/genFormData';
 
+
+export interface BaseData {
+  result: {
+    resultCode: number;
+    resultMessage: any;
+  };
+  entity: any;
+}
 export interface LfBasicCredentials {
   username: string
   password: string
@@ -39,7 +46,7 @@ export interface LfResponse<T = any> {
   headers?: any
   config?: LfRequestConfig
   request?: any
-  success? boolean
+  success?: boolean
   message?: string
   code?: number
   statusCode?: number
@@ -51,17 +58,16 @@ export interface LfService {
 
   request(params: any): Promise<LfResponse>
 
-  post(model: any, data: any): Promise<LfResponse>
+  post?(model: any, data: any): Promise<LfResponse>
 
-  remove(model: any, data: any): Promise<LfResponse>
+  remove?(model: any, data: any): Promise<LfResponse>
 
-  patch(model: any, data: any): Promise<LfResponse>
+  patch?(model: any, data: any): Promise<LfResponse>
 
   handleRequest: (options: LfRequestConfig) => Promise<LfResponse>
 
   response(params: any): Promise<LfResponse>
 
-  $response: (options: LfRequestConfig) => Promise<LfResponse>
 }
 
 const genPagination = (model, pagination) => {
@@ -82,16 +88,14 @@ const genPagination = (model, pagination) => {
   };
 };
 
-
-
 // 创建 axios localforage 实例
 const lfService: LfService = {
   validateUrl: (options: LfRequestConfig) => {
-    const [prefix, namespace, action] = options.url.split('/')
-    const model: any = models[namespace]
+    const [prefix, namespace, action] = options.url.split('/');
+    const model: any = models[namespace];
     // header, columns
-    const columns = AGenTableColumns(model.fieldsKeys())
-    const headers = VGenTableHeaders(model.fieldsKeys())
+    const columns = AGenTableColumns(model.fieldsKeys());
+    const headers = VGenTableHeaders(model.fieldsKeys());
     const newOptions: LfRequestConfig = {
       ...options,
       params: {
@@ -101,164 +105,78 @@ const lfService: LfService = {
         namespace,
         action,
         columns,
-        headers
-      }
-    }
-    return newOptions
+        headers,
+      },
+    };
+    return newOptions;
   },
   async response(params) {
-    const result = await this.request(params)
-    return result
+    const result = await this.request(params);
+    return result;
   },
   /**
    * 从请求参数中获取model等，包装返回类axios的内容
    * @param {any} params 请求参数
    */
   async request(params: LfRequestConfig) {
-    const newParams = this.validateUrl(params)
-    console.log(newParams)
-    const result = await this.handleRequest(newParams)
-    return result
+    const newParams = this.validateUrl(params);
+    console.log(newParams);
+    const result = await this.handleRequest(newParams);
+    return result;
   },
-  async post(model, data) {
-    const createdItems = await model.$create({ data })
-    return {
-      model,
-      data: createdItems
-    }
-  },
-  async remove(model, data) {
-    const deletedItems = await model.$delete(data.id || data)
-    return {
-      model,
-      data: deletedItems
-    }
-  },
-  async patch(model, data) {
-    const updatedItems = await model.$delete({ data })
-    return {
-      model,
-      data: updatedItems
-    }
-  },
-  handleRequest: async (options: LfRequestConfig) => {
-    // Using vuex-orm with localforage
-    try {
-      const {
-        method,
-        data,
-        params: { model, namespace, pagination }
-      } = options
-
-      let requestedData = null
-      let requestedConfig: LfRequestConfig = {
-        ...options
-      }
-      // data from localforage
-      switch (method) {
-        case 'post':
-          const result = await model.$create({ data })
-          requestedData = {
-            result
-          }
-          break
-        case 'delete':
-          const result = await model.$delete(data.id || data)
-          requestedData = {
-            result
-          }
-          break
-        case 'patch':
-          const result = await model.$update({ data })
-          requestedData = {
-            result
-          }
-          break
-        case 'get':
-          if (!data) {
-            await model.$fetch()
-            // query with pagination, header, columns
-            // pagination
-            const paginationConfig = genPagination(
-              model,
-              pagination
-            )
-            const result = model
-              .query()
-              .offset(paginationConfig.offset)
-              .limit(paginationConfig.pageSize)
-              .get()
-            requestedData = { result }
-          } else {
-            await model.$get(data.id || data)
-            requestedData = model.find(data.id || data) || {}
-          }
-          break
-      }
-
-      // build response
-      console.log(`${method} Localforage vuex -> `, requestedData)
-      const response = builder(
-        requestedData,
-        `${method} ${namespace} Ok`,
-        200,
-        requestedConfig,
-        {}
-      )
-      return Promise.resolve(response)
-      // eslint-disable-next-line no-unreachable
-    } catch (error) {
-      const response = builder(error, 'Error', 500, {}, {})
-      return Promise.reject(response)
-    }
-  },
-  $response: async (options: LfRequestConfig) => {
-    // Using vuex-orm without localforage
+  handleRequest: async (options: LfRequestConfig) => new Promise(async (resolve, reject) => {
     const {
       method,
       data,
-      params: { namespace }
-    } = options
-    try {
-      let requestedData
-      switch (method) {
-        case 'post':
-          requestedData = await store.dispatch(`entities/${namespace}/create`, data)
-          break
-        case 'delete':
-          requestedData = await store.dispatch(`entities/${namespace}/delete`, data.id || data)
-          break
-        case 'patch':
-          requestedData = await store.dispatch(`entities/${namespace}/update`, data)
-          break
-        case 'put':
-          requestedData = await store.dispatch(`entities/${namespace}/update`, data)
-          break
-        case 'get':
-          if (!data) {
-            const foundItems = await store.dispatch(`entities/${namespace}/all`)
-            requestedData = foundItems || []
-          } else {
-            const foundItem = await store.dispatch(`entities/${namespace}/find`, data.id || data)
-            requestedData = foundItem || {}
-          }
-          break
-      }
-      return Promise.resolve(
-        builder(
-          {
-            data: requestedData
-          },
-          '',
-          200,
-          {}
-        )
-      )
-      // eslint-disable-next-line no-unreachable
-    } catch (error) {
-      return Promise.reject(error)
+      params: { model, namespace, pagination },
+    } = options;
+
+    let requestedData: BaseData = null;
+    const requestedConfig: LfRequestConfig = {
+      ...options,
+    };
+
+    switch (method) {
+      case 'post':
+        const createdItems = await model.$create({ data });
+        requestedData = baseData('success', '创建成功');
+        requestedData.entity = createdItems;
+        break;
+      case 'delete':
+        const deletedItems = await model.$delete(data.id || data);
+        requestedData = baseData('success', '删除成功');
+        requestedData.entity = deletedItems;
+        break;
+      case 'patch':
+        const patchedItems = await model.$update({ data });
+        requestedData = baseData('success', '更新成功');
+        requestedData.entity = patchedItems;
+        break;
+      case 'get':
+        if (!data) {
+          await model.$fetch();
+          // query with pagination, header, columns
+          // pagination
+          const paginationConfig = genPagination(model, pagination);
+          const entity = model
+            .query()
+            .offset(paginationConfig.offset)
+            .limit(paginationConfig.pageSize)
+            .get();
+          requestedData = baseData('success', '查询成功');
+          requestedData.entity = entity;
+        }
     }
-  }
-}
+    console.log(`${method} Localforage vuex -> `, requestedData);
+    const response = builder(
+      requestedData,
+      `${method} ${namespace} Ok`,
+      200,
+      requestedConfig,
+      {},
+    );
+    resolve(response);
+  }),
+};
 
 export default lfService;

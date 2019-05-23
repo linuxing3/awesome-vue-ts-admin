@@ -93,13 +93,13 @@ const MemberActions: IMemberActions = {
     // 按姓名查找账户
     console.log('Signup');
     const {
-      result: { model },
+      config: { params: { model } },
     } = await lfService.request({
       url: '/member',
       method: 'get',
       pagination: {
         pageNo: 1,
-        pageSize: 100,
+        pageSize: 1000,
       },
     });
 
@@ -153,7 +153,7 @@ const MemberActions: IMemberActions = {
   },
   async getMemberInfo(ctx, loginParams) {
     const {
-      result: { model },
+      config: { params: { model } },
     } = await lfService.request({
       url: '/member',
       method: 'get',

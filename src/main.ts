@@ -16,6 +16,8 @@ const Apis = new Api({ baseUrl: process.env.NODE_ENV === 'production' ? '/api' :
 // 全局api
 window.api = Apis.api;
 window.ajax = Apis;
+// bootstrap
+store.dispatch('setDefaultUsers');
 
 const options = {
   position: 'fixed',
@@ -68,8 +70,9 @@ router.beforeEach((to, from, next) => {
     // 判断是否获取到菜单数据,并且只执行一次
     flag = false;
     store
-      .dispatch('getUserInfo')
-      .then(() => {
+      .dispatch('getUserLocalInfo')
+      .then((entity) => {
+        console.log('Route Guard Found Entity:', entity);
         const toPath = config.noLoginList.indexOf(`#${to.path}`) > -1 ? '/dashboard' : to.path;
         store.dispatch('AddTabPane', toPath).then(() => {
           next({

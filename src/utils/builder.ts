@@ -1,4 +1,4 @@
-import { LfResponse } from '@/utils/request.localforage'
+import { LfResponse } from '@/utils/request.localforage';
 const responseBody: LfResponse = {
   data: null,
   config: {},
@@ -60,3 +60,16 @@ export const getQueryParameters = (options) => {
  * @param {any} options 获取请求体
  */
 export const getBody = options => options.body && JSON.parse(options.body);
+
+export const baseData = (type, message, code?) => {
+  let resultCode = 0;
+  if (code) {
+    resultCode = code;
+  } else {
+    resultCode = type === 'success' ? 0 : 1;
+  }
+  return {
+    result: { resultCode, resultMessage: message },
+    entity: null,
+  };
+};

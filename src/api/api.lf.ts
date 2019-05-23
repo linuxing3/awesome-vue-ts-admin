@@ -4,6 +4,7 @@ import jsonp from 'jsonp';
 import lodash from 'lodash';
 import router from '@/router/index';
 import { message } from 'ant-design-vue';
+import lfServce, { LfService, LfResponse } from '@/utils/request.localforage';
 import { ApiList, Apis, defaultApiList } from './index';
 
 interface Options {
@@ -17,7 +18,7 @@ interface Options {
 
 export default class Api {
   // hack here with special service
-  service: AxiosInstance;
+  service: LfService;
 
   // 请求列表，在这里添加相应接口
   apiList: ApiList = defaultApiList;
@@ -29,10 +30,7 @@ export default class Api {
     axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded';
 
     // hack here with custom service
-    this.service = axios.create({
-      baseURL: options.baseUrl, // api的base_url
-      timeout: 20000, // 请求超时时间
-    });
+    this.service = lfServce;
 
     for (const i in this.apiList) {
       this.api[i] = (data: any) => {
@@ -75,7 +73,7 @@ export default class Api {
           message: response.data.result.resultMessage,
         });
       }
-      const finalResponse = {
+      const finalResponse: LfResponse = {
         success: true,
         message: statusText,
         statusCode: status,
@@ -111,63 +109,52 @@ export default class Api {
       ...options.headers,
     };
 
-    if (fetchType === 'jsonp') {
-      return new Promise((resolve, reject) => {
-        jsonp(
-          url,
-          {
-            param: `${qs.stringify(data)}&callback`,
-            name: `jsonp_${new Date().getTime()}`,
-            timeout: 4000,
-          },
-          (error, result) => {
-            if (error) {
-              reject(error);
-            }
-            resolve({ statusText: 'OK', status: 200, data: result });
-          },
-        );
-      });
-    }
-    if (fetchType === 'jsonfile') {
-      return axios.get(url, { headers });
-    }
-    // common type for json response
-    if (fetchType === 'json') {
-      // hack here with special service
-      return this.service({
-        url,
-        method: method.toLowerCase(),
-        headers: {
-          'Content-Type': 'application/json',
-          ...headers,
-        },
-        data,
-      });
-    }
     // if fetchType is not defined
     switch (method.toLowerCase()) {
       case 'get':
         // hack here with special service
-        return this.service.get(`${url}?${cloneData}`, { headers });
+        return this.service.request({
+          method: 'get',
+          url,
+          data,
+          params: {
+            pagination: {
+              pageNo: 0,
+              pageSize: 1000,
+            },
+          },
+        });
       case 'delete':
         // hack here with special service
-        return this.service.delete(url, {
-          data: cloneData,
-          headers,
+        return this.service.request({
+          method: 'delete',
+          url,
+          data,
         });
       case 'post':
         // hack here with special service
-        return this.service.post(url, cloneData, { headers });
+        await this.service.request({
+          method: 'post',
+          url,
+          data,
+        });
       case 'put':
         // hack here with special service
-        return this.service.put(url, cloneData, { headers });
+        await this.service.request({
+          method: 'put',
+          url,
+          data,
+        });
       case 'patch':
+        await this.service.request({
+          method: 'patch',
+          url,
+          data,
+        });
         // hack here with special service
-        return this.service.patch(url, cloneData, { headers });
       default:
         // hack here with special service
-        return this.service(options);
+        return this.service.request(options);
     }
   };
   // end fetch

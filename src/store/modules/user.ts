@@ -1,6 +1,8 @@
-import config from '@/utils/config';
+import config, { adminUsers, noAuthList } from '@/utils/config';
 import router, { asyncRouterMap, constantRouterMap } from '@/router';
 import { routerItem } from '@/interface';
+import { builder, baseData } from '@/utils/builder';
+import User from '@/store/modules/pages/User/models/User';
 
 interface UserData {
   username: string,
@@ -51,7 +53,7 @@ const user = {
     SAVEROLES: (state: any, roles: Array<any>) => {
       state.roles = roles;
     },
-    SVAEUSER: (state: any, userData: UserData) => {
+    SAVEUSER: (state: any, userData: UserData) => {
       state.user = user;
     },
     LOADING: (state: any, loading: boolean) => {
@@ -59,33 +61,107 @@ const user = {
     },
   },
   actions: {
-    getUserInfo: (context: any) => new Promise((resolve, reject) => {
-      const params = {
-        token: localStorage.getItem('token'),
-      };
-      context.commit('LOADING', false);
-      window.api.getUserInfo(params).then((res: returnData) => {
-        context.commit('LOADING', true);
-        const { result, entity } = res.data;
-        if (!result.resultCode) {
+    setDefaultUsers: (context: any) => {
+      const Entity: any = User;
+      adminUsers.map(async (user) => {
+        const foundItems = Entity.query().where(
+          'username', user.username,
+        ).get();
+        console.log('Found Existing User:', foundItems);
+        if (foundItems.length === 0) {
+          Entity.$create({
+            data: {
+              name: user.username,
+              username: user.username,
+              password: user.password,
+              permissions: user.permissions,
+            },
+          });
+        }
+      });
+    },
+    loginByName: (context: any, loginParams: any) => {
+      const { username, password } = loginParams;
+      const user = adminUsers.filter(item => item.username === username);
+      if (user.length > 0 && user[0].password === password) {
+        const now = new Date();
+        now.setDate(now.getDate() + 1);
+        const token = 'qqyzkzldrx';
+        window.localStorage.setItem('token', token);
+        const data = baseData('success', '登录成功');
+        return Promise.resolve(builder(data, 'OK'));
+      }
+      const error = baseData('success', '登录成功');
+      return Promise.reject(builder(error, 'error'));
+    },
+    authLogin: (context: any) => {
+      const token = window.localStorage.getItem('token');
+      if (!token) {
+        const response = baseData('error', '登录超时', 3);
+        return Promise.reject(response);
+      }
+      const response = baseData('success', '托证通过');
+      return Promise.resolve(response);
+    },
+    getUserLocalInfo: async (context: any) => {
+      const Entity: any = User;
+      const token = window.localStorage.getItem('token');
+      console.log('token:', token);
+      const foundEntities = Entity.query().where(
+        'token', token,
+      ).get();
+      console.log('User List:', foundEntities);
+      const entity = foundEntities[0];
+      console.log('User Information:', entity);
+      return new Promise((resolve, reject) => {
+        context.commit('LOADING', false);
+        if (entity) {
           const userData: UserData = {
             username: entity.username,
             userid: entity.id,
             avatarUri: entity.avatar_uri,
             email: entity.email,
           };
-          context.commit('SVAEUSER', userData);
+          context.commit('SAVEUSER', userData);
           context.commit('SAVEROLES', entity.permissions);
           const getRouter = hasPermission(entity.permissions.permission);
           context.dispatch('GetMenuData', getRouter);
           resolve(entity);
         } else {
-          reject(result.resultMessage);
+          reject('无法获取用户信息！');
         }
-      }).catch((error: any) => {
-        context.commit('LOADING', true);
-        reject(error);
       });
+    },
+    getUserInfo: (context: any) => new Promise((resolve, reject) => {
+      const params = {
+        token: localStorage.getItem('token'),
+      };
+      context.commit('LOADING', false);
+      window.api
+        .getUserInfo(params)
+        .then((res: returnData) => {
+          context.commit('LOADING', true);
+          const { result, entity } = res.data;
+          if (!result.resultCode) {
+            const userData: UserData = {
+              username: entity.username,
+              userid: entity.id,
+              avatarUri: entity.avatar_uri,
+              email: entity.email,
+            };
+            context.commit('SAVEUSER', userData);
+            context.commit('SAVEROLES', entity.permissions);
+            const getRouter = hasPermission(entity.permissions.permission);
+            context.dispatch('GetMenuData', getRouter);
+            resolve(entity);
+          } else {
+            reject(result.resultMessage);
+          }
+        })
+        .catch((error: any) => {
+          context.commit('LOADING', true);
+          reject(error);
+        });
     }),
   },
 };

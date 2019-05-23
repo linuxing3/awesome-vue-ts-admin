@@ -30,16 +30,19 @@ class Login extends Vue {
 
   loading = false;
 
-  created() {}
+  created() {
+  }
 
   @Emit()
   submitForm() {
     this.Form.validateFields((err: any, values: object) => {
       if (!err) {
         this.loading = true;
-        window.api
-          .login({ ...values })
+        // window.api
+        //   .login({ ...values })
+        this.$store.dispatch('loginByName', values)
           .then((res) => {
+            console.log('response from loginByName', res);
             this.loading = false;
             const {
               result: { resultCode, resultMessage },
@@ -49,7 +52,7 @@ class Login extends Vue {
             } else {
               this.$message.success(resultMessage);
               this.$store
-                .dispatch('getUserInfo')
+                .dispatch('getUserLocalInfo')
                 .then(() => {
                   this.$router.push('/');
                 })

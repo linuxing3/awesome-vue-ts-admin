@@ -16,43 +16,43 @@ export const defaultApiList: ApiList = {
   login: {
     url: '/user/login',
     fetchType: 'json',
-    method: 'post'
+    method: 'post',
   },
   logout: {
     url: '/user/logout',
     fetchType: 'json',
-    method: 'post'
+    method: 'post',
   },
   getUserInfo: {
     url: '/user/getUserInfo',
     fetchType: 'json',
-    method: 'post'
+    method: 'post',
   },
   dashboard: {
     url: '/dashboard',
     fetchType: 'json',
-    method: 'post'
+    method: 'post',
   },
   baseInfoAdd: {
     url: '/customers/baseInfo/add',
     fetchType: 'json',
-    method: 'post'
+    method: 'post',
   },
   baseInfoUpdate: {
     url: '/customers/baseInfo/update',
     fetchType: 'json',
-    method: 'post'
+    method: 'post',
   },
   baseInfoDelete: {
     url: '/customers/baseInfo/delete',
     fetchType: 'json',
-    method: 'post'
+    method: 'post',
   },
   gpsToAddress: {
     url: 'https://api.map.baidu.com/geocoder/v2/',
     method: 'get',
-    fetchType: 'jsonp'
-  }
-}
+    fetchType: 'jsonp',
+  },
+};
 
-export default  defaultApiList
+export default defaultApiList;
