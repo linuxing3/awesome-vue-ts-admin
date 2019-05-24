@@ -110,14 +110,14 @@ export default class Header extends Vue {
   @Emit()
   notificationClick(): void {
     this.$router.push({
-      name: 'ProfileBaseForm'
+      name: 'ProfileBaseForm',
     });
   }
 
   @Emit()
   bellClick(): void {
     this.$router.push({
-      name: 'ProfileBaseForm'
+      name: 'ProfileBaseForm',
     });
   }
 
