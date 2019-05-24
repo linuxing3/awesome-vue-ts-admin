@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/7576e708-c11b-43dd-b90e-b983c5a8067e/deploy-status)](https://app.netlify.com/sites/embajadachinave/deploys)
+
 # vue-ts-admin
 
   > 一个基于`typesciprt` + `vue` + `vue-cli@3.4.1`的中台管理系统
