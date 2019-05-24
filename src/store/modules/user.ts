@@ -5,20 +5,18 @@ import { builder, baseData } from '@/utils/builder';
 import User from '@/store/modules/pages/User/models/User';
 
 interface UserData {
-  username: string,
-  userid: string,
-  avatarUri: string,
-  email: string
+  username: string;
+  userid: string;
+  avatarUri: string;
+  email: string;
 }
 
-function filterAsyncRouter(
-  AsyncRouterMap: routerItem[],
-  permission: string[],
-): routerItem[] {
+function filterAsyncRouter(AsyncRouterMap: routerItem[], permission: string[]): routerItem[] {
   const routerMap = AsyncRouterMap.filter((item) => {
     if (typeof item.permission === 'string') {
       return permission.indexOf(item.permission) > -1;
-    } if (item.permission instanceof Array) {
+    }
+    if (item.permission instanceof Array) {
       const filter = item.permission.filter(items => permission.indexOf(items) > -1);
       if (filter.length && item.children) {
         item.children = filterAsyncRouter(item.children, permission);
@@ -30,7 +28,8 @@ function filterAsyncRouter(
   return routerMap;
 }
 
-const hasPermission = (permission: string[]) => { // 过滤路由
+const hasPermission = (permission: string[]) => {
+  // 过滤路由
   const filterRouter = filterAsyncRouter(asyncRouterMap, permission);
   // 添加路由的时候排除掉dashboard
   router.addRoutes(filterRouter);
@@ -64,9 +63,9 @@ const user = {
     setDefaultUsers: (context: any) => {
       const Entity: any = User;
       adminUsers.map(async (user) => {
-        const foundItems = Entity.query().where(
-          'username', user.username,
-        ).get();
+        const foundItems = Entity.query()
+          .where('username', user.username)
+          .get();
         console.log('Found Existing User:', foundItems);
         if (foundItems.length === 0) {
           Entity.$create({
@@ -87,11 +86,17 @@ const user = {
         const now = new Date();
         now.setDate(now.getDate() + 1);
         const token = 'qqyzkzldrx';
-        window.localStorage.setItem('token', token);
+        window.localStorage.setItem(
+          'token',
+          JSON.stringify({
+            id: user[0].id,
+            deadline: now.getTime(),
+          }),
+        );
         const data = baseData('success', '登录成功');
         return Promise.resolve(builder(data, 'OK'));
       }
-      const error = baseData('success', '登录成功');
+      const error = baseData('success', '登录失败');
       return Promise.reject(builder(error, 'error'));
     },
     authLogin: (context: any) => {
@@ -105,11 +110,9 @@ const user = {
     },
     getUserLocalInfo: async (context: any) => {
       const Entity: any = User;
-      const token = window.localStorage.getItem('token');
+      const token = JSON.parse(window.localStorage.getItem('token'));
       console.log('token:', token);
-      const foundEntities = Entity.query().where(
-        'token', token,
-      ).get();
+      const foundEntities = Entity.find(token.id);
       console.log('User List:', foundEntities);
       const entity = foundEntities[0];
       console.log('User Information:', entity);
