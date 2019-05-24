@@ -8,8 +8,8 @@ import './index.less';
 @Component({
   name: 'MemberTable',
   components: {
-    'a-tag': Tag
-  }
+    'a-tag': Tag,
+  },
 })
 export default class MemberTable extends Vue {
   modelName: string = 'member'
@@ -19,7 +19,7 @@ export default class MemberTable extends Vue {
   pageParams: object = {
     pageNum: 1,
     pageSize: 100,
-    page: true
+    page: true,
   }
 
   filterParams: any = {
@@ -27,7 +27,7 @@ export default class MemberTable extends Vue {
     address: [],
     createtime: [],
     startTime: '',
-    endTime: ''
+    endTime: '',
   }
 
   BackParams: any = {
@@ -36,7 +36,7 @@ export default class MemberTable extends Vue {
     message: 'data.result.resultMessage',
     data: 'data.entity',
     columns: 'config.params.columns',
-    total: 'config.params.pagination.total'
+    total: 'config.params.pagination.total',
   }
 
   outParams: any = {}
@@ -46,15 +46,15 @@ export default class MemberTable extends Vue {
       key: 'name',
       label: 'name',
       type: 'input',
-      placeholder: 'Seach Name'
-    }
+      placeholder: 'Seach Name',
+    },
   ]
 
   tableList: tableList[] = [
     {
       title: 'Name',
-      dataIndex: 'name'
-    }
+      dataIndex: 'name',
+    },
   ]
 
   opreat: Opreat[] = [
@@ -63,7 +63,7 @@ export default class MemberTable extends Vue {
       rowKey: 'id',
       color: 'blue',
       text: '编辑',
-      roles: true
+      roles: true,
     },
     {
       key: 'delete',
@@ -71,8 +71,8 @@ export default class MemberTable extends Vue {
       color: 'red',
       text: '删除',
       roles: true,
-      msg: '确定删除？'
-    }
+      msg: '确定删除？',
+    },
   ]
 
   title: string = 'Add Member'
@@ -84,30 +84,30 @@ export default class MemberTable extends Vue {
   editData: object = {}
 
   async handleDelete(row) {
-    console.log('Deleting ... ')
+    console.log('Deleting ... ');
     await lfService.request({
       url: `/${this.modelName}`,
       method: 'delete',
-      data: row.id
-    })
-    setTimeout(() => this.success(), 1000)
+      data: row.id,
+    });
+    setTimeout(() => this.success(), 1000);
   }
 
   handleEdit(row) {
-    console.log('Editing ... ')
+    console.log('Editing ... ');
     this.$router.replace({
       name: 'MemberForm',
       params: {
-        id: row.id
-      }
-    })
+        id: row.id,
+      },
+    });
   }
 
   handleCreate() {
-    console.log('Creating ... ')
+    console.log('Creating ... ');
     this.$router.replace({
-      name: 'MemberForm'
-    })
+      name: 'MemberForm',
+    });
   }
 
   handleRemove(row) {
@@ -118,53 +118,53 @@ export default class MemberTable extends Vue {
       okType: 'danger',
       cancelText: '取消',
       onOk: () => {
-        console.log('OK')
-        this.handleDelete(row)
+        console.log('OK');
+        this.handleDelete(row);
         return new Promise((resolve, reject) => {
-          setTimeout(Math.random() > 0.5 ? resolve : reject, 1000)
-        }).catch(() => console.log('Oops errors!'))
+          setTimeout(Math.random() > 0.5 ? resolve : reject, 1000);
+        }).catch(() => console.log('Oops errors!'));
       },
       onCancel: () => {
-        console.log('Cancel')
-      }
-    })
+        console.log('Cancel');
+      },
+    });
   }
 
   genderRender(text: any) {
-    return <a-tag color={text ? 'blue' : 'purple'}>{text ? 'Male' : 'Female'}</a-tag>
+    return <a-tag color={text ? 'blue' : 'purple'}>{text ? 'Male' : 'Female'}</a-tag>;
   }
 
   tableClick(key: string, row: any) {
     switch (key) {
       case 'edit':
-        this.handleEdit(row)
-        break
+        this.handleEdit(row);
+        break;
       default:
-        this.handleDelete(row)
-        break
+        this.handleDelete(row);
+        break;
     }
   }
 
   addWithModal() {
-    this.title = 'Add Member'
-    this.modelType = 'add'
-    this.visible = true
-    this.editData = {}
+    this.title = 'Add Member';
+    this.modelType = 'add';
+    this.visible = true;
+    this.editData = {};
     this.$router.replace({
-      name: 'MemberForm'
-    })
+      name: 'MemberForm',
+    });
   }
 
   closeModal() {
-    this.visible = false
-    this.editData = {}
+    this.visible = false;
+    this.editData = {};
   }
 
   success() {
-    this.visible = false
-    const Table: any = this.$refs.MemberInfoTable
-    this.editData = {}
-    Table.reloadTable()
+    this.visible = false;
+    const Table: any = this.$refs.MemberInfoTable;
+    this.editData = {};
+    Table.reloadTable();
   }
 
   render() {
@@ -190,6 +190,6 @@ export default class MemberTable extends Vue {
           on-add={this.handleCreate}
         />
       </div>
-    )
+    );
   }
 }

@@ -172,7 +172,7 @@ const lfService: LfService = {
           await Entity.$fetch();
           const entities = await Entity.$get(data.id.toString());
           requestedData = baseData('success', '查询成功');
-          requestedData.entity = entities[namespace][0]
+          requestedData.entity = entities[namespace][0];
         }
     }
     console.log(`${method} Localforage vuex -> `, requestedData);

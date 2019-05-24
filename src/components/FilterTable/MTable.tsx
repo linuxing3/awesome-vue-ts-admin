@@ -115,7 +115,7 @@ export default class MTable extends Vue {
    * @method 获取表格数据
    */
   getData() {
-    console.log('Fetching ...')
+    console.log('Fetching ...');
     this.loading = true;
     window.ajax.request({
       url: this.url,
@@ -123,9 +123,9 @@ export default class MTable extends Vue {
       params: {
         pagination: {
           pageNum: 1,
-          pageSize: 100
-        }
-      }
+          pageSize: 100,
+        },
+      },
     }).then((res: any) => {
       console.log('Table backparams:', this.backParams);
       console.log('Table Fetch response:', res);

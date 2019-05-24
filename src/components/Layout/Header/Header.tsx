@@ -40,8 +40,8 @@ export default class Header extends Vue {
 
   onIndex: number = 0;
 
-  get id () {
-    return this.$store.getters.currentUser.id
+  get id() {
+    return this.$store.getters.currentUser.id;
   }
 
   @Watch('$route', { immediate: true, deep: true })
@@ -83,24 +83,24 @@ export default class Header extends Vue {
         this.$router.push({
           name: 'ProfileBaseForm',
           params: {
-            id: self.id
-          }
-        })
+            id: self.id,
+          },
+        });
         break;
       case '2':
         this.$router.push({
           name: 'ProfileBaseForm',
           params: {
-            id: self.id
-          }
-        })
+            id: self.id,
+          },
+        });
         break;
       case '3':
         // Cookies.remove('token');
         this.$store.dispatch('logout')
           .then(() => {
             this.$router.push('/login');
-          })
+          });
         break;
       default:
         break;
@@ -167,6 +167,6 @@ export default class Header extends Vue {
           </li>
         </ul>
       </header>
-    )
+    );
   }
 }

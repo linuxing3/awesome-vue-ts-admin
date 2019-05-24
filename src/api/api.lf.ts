@@ -22,7 +22,6 @@ export default class Api {
   api: Apis<any> = {};
 
   constructor(options: { baseUrl: string }) {
-
     // hack here with custom service
     this.service = lfServce;
 
@@ -44,7 +43,7 @@ export default class Api {
     .then((response: any) => {
       console.log('Api Lf fetch response:', response);
       const { statusText, status } = response;
-      let { data } = response;
+      const { data } = response;
       const finalResponse: LfResponse = {
         success: true,
         message: statusText,
@@ -72,7 +71,7 @@ export default class Api {
   // fetch methods
   fetch = async (options: Options) => {
     console.log('Api Lf:', options);
-    return this.service.request(options)
+    return this.service.request(options);
   };
   // end fetch
 }

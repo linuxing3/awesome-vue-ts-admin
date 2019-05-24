@@ -43,14 +43,14 @@ class MemberForm extends Vue {
     },
   }
 
-  get id () {
-    return this.$route.params.id || -1
+  get id() {
+    return this.$route.params.id || -1;
   }
 
-  mounted () {
+  mounted() {
     this.$nextTick(() => {
-      this.handleGetInfo()
-    })
+      this.handleGetInfo();
+    });
   }
 
   submit(e: HTMLFormElement) {
@@ -64,9 +64,9 @@ class MemberForm extends Vue {
             this.handleAddOrEdit(values);
             setTimeout(() => {
               this.$router.replace({
-                name: 'MemberTable'
-              })
-            }, 1000)
+                name: 'MemberTable',
+              });
+            }, 1000);
           },
           onCancel: () => {
             this.handleReset();
@@ -76,26 +76,26 @@ class MemberForm extends Vue {
     });
   }
 
-  handleAddOrEdit (data) {
+  handleAddOrEdit(data) {
     if (this.id === -1) {
-      console.log('Creating...')
+      console.log('Creating...');
       lfService.request({
         url: `/${this.modelName}`,
         method: 'post',
-        data
-      })
+        data,
+      });
     } else {
-      console.log('updating...')
+      console.log('updating...');
       lfService.request({
         url: `/${this.modelName}`,
         method: 'patch',
-        data
-      })
+        data,
+      });
     }
   }
 
-  async handleGetInfo () {
-    console.log('getting edit info...')
+  async handleGetInfo() {
+    console.log('getting edit info...');
     if (this.id === -1) return;
     const { data: { entity } } = await lfService.request({
       url: `/${this.modelName}`,
@@ -106,21 +106,21 @@ class MemberForm extends Vue {
     this.loadEditInfo(entity);
   }
 
-  loadEditInfo (data) {
-    console.log(`编辑记录 ${this.id}`)
+  loadEditInfo(data) {
+    console.log(`编辑记录 ${this.id}`);
     new Promise((resolve) => {
-      setTimeout(resolve, 500)
+      setTimeout(resolve, 500);
     }).then(() => {
-      console.log('formData:', data)
-      this.Form.setFieldsValue(data)
-    })
+      console.log('formData:', data);
+      this.Form.setFieldsValue(data);
+    });
   }
 
-  handleReset () {
+  handleReset() {
     this.Form.setFieldsValue({});
     this.$router.replace({
-      name: 'MemberList'
-    })
+      name: 'MemberList',
+    });
   }
 
   render() {
@@ -149,7 +149,7 @@ class MemberForm extends Vue {
           <a-form on-submit={this.submit}>
             <a-form-item {...{ props: this.itemLayout }} label="编号">
               {getFieldDecorator('id', {
-                rules: [{ required: false, message: '编号' }]
+                rules: [{ required: false, message: '编号' }],
               })(<a-input placeholder="自动编号" disabled />)}
             </a-form-item>
             <a-form-item {...{ props: this.itemLayout }} label="姓名">
@@ -198,7 +198,7 @@ class MemberForm extends Vue {
             </a-form-item>
             <a-form-item {...{ props: this.itemLayout }} label="备注">
               {getFieldDecorator('note', {
-                rules: [{ required: false, message: '请输入备注信息' }]
+                rules: [{ required: false, message: '请输入备注信息' }],
               })(<a-input placeholder="任何备注信息" />)}
               <div class="form-btn-wrap">
                 <a-button type="primary" htmlType="submit">

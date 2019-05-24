@@ -11,7 +11,7 @@ interface UserData {
   email: string;
 }
 
-const Entity: any = User
+const Entity: any = User;
 
 function filterAsyncRouter(AsyncRouterMap: routerItem[], permission: string[]): routerItem[] {
   const routerMap = AsyncRouterMap.filter((item) => {
@@ -101,7 +101,7 @@ const user = {
       return Promise.reject(builder(error, 'error'));
     },
     logout: (context: any, loginParams: any) => {
-      window.localStorage.clear()
+      window.localStorage.clear();
       const data = baseData('success', '登出成功');
       return Promise.resolve(builder(data, 'OK'));
     },
@@ -165,9 +165,9 @@ const user = {
     currentUser: (state: any) => {
       const { id } = JSON.parse(window.localStorage.getItem('token'));
       const entity = Entity.find(id);
-      return entity
-    }
-  }
+      return entity;
+    },
+  },
 };
 
 export default user;

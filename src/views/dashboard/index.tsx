@@ -43,8 +43,8 @@ export default class Dashboard extends Vue {
     this.pageData = entity;
     this.loading = false;
     setTimeout(() => {
-      this.init()
-    }, 200)
+      this.init();
+    }, 200);
   }
 
   init() {
