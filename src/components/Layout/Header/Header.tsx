@@ -4,8 +4,7 @@ import {
 import {
   Badge, Dropdown, Breadcrumb, Popover, Icon, Menu,
 } from 'ant-design-vue';
-import Cookies from 'js-cookie';
-import { menuItem, routerItem } from '@/interface';
+import { routerItem } from '@/interface';
 import { routeToArray } from '@/utils';
 import MenuList from '@/components/Layout/Sidebar/MenuList';
 import './Header.less';
@@ -30,14 +29,20 @@ interface breadItem {
   },
 })
 export default class Header extends Vue {
-  @Prop() private username!: string;
+  // @Prop() private username!: string;
 
   // data
+  username: string = 'admin';
+
   menuData: routerItem[] = [];
 
   breadList: breadItem[] = [];
 
   onIndex: number = 0;
+
+  get id () {
+    return this.$store.getters.currentUser.id
+  }
 
   @Watch('$route', { immediate: true, deep: true })
   routeChange(to: any, from: any) {
@@ -75,12 +80,27 @@ export default class Header extends Vue {
     const self = this;
     switch (params.key) {
       case '1':
+        this.$router.push({
+          name: 'ProfileBaseForm',
+          params: {
+            id: self.id
+          }
+        })
         break;
       case '2':
+        this.$router.push({
+          name: 'ProfileBaseForm',
+          params: {
+            id: self.id
+          }
+        })
         break;
       case '3':
-        Cookies.remove('token');
-        this.$router.push('/login');
+        // Cookies.remove('token');
+        this.$store.dispatch('logout')
+          .then(() => {
+            this.$router.push('/login');
+          })
         break;
       default:
         break;
@@ -93,56 +113,60 @@ export default class Header extends Vue {
   }
 
   render() {
-    const { username } = this;
+    this.username = this.$store.getters.currentUser.username;
     const { menuData, sidebar: { opened }, isMobile } = this.$store.state.app;
     this.menuData = menuData;
     return (
       <header class="header-wrap">
         <div class="header-left">
-          {
-            isMobile ? <a-popover
-            placement="bottom"
-            title=""
-            width="300"
-            trigger="click">
-            <menu-list slot="content" bgColor="#fff" txtColor="#898989" />
-            <i class="menu-btn iconfont-listMenu"></i>
-          </a-popover> : <i class={`menu-btn iconfont-${opened ? 'indent' : 'outdent'}`} on-click={this.switchSidebar}></i>
-          }
-          {
-            isMobile ? null
-              : <a-breadcrumb class="header-bread" separator="/">
-              {
-                this.breadList.map((item: breadItem) => <a-breadcrumb-item to={item.url ? { path: '/' } : null}>{item.text}</a-breadcrumb-item>)
-              }
+          {isMobile ? (
+            <a-popover placement="bottom" title="" width="300" trigger="click">
+              <menu-list slot="content" bgColor="#fff" txtColor="#898989" />
+              <i class="menu-btn iconfont-listMenu" />
+            </a-popover>
+          ) : (
+            <i
+              class={`menu-btn iconfont-${opened ? 'indent' : 'outdent'}`}
+              on-click={this.switchSidebar}
+            />
+          )}
+          {isMobile ? null : (
+            <a-breadcrumb class="header-bread" separator="/">
+              {this.breadList.map((item: breadItem) => (
+                <a-breadcrumb-item to={item.url ? { path: '/' } : null}>
+                  {item.text}
+                </a-breadcrumb-item>
+              ))}
             </a-breadcrumb>
-          }
+          )}
         </div>
         <ul class="header-menu">
           <li>
             <a-badge count={12} class="item">
-              <i class="iconfont-email"></i>
+              <i class="iconfont-email" />
             </a-badge>
           </li>
           <li>
-            <i class="iconfont-bell"></i>
+            <i class="iconfont-bell" />
           </li>
           <li class="user">
             <a-dropdown>
               <span class="ant-dropdown-link">
                 <a-icon type="user" />
-                <span class="name">admin</span>
+                <span class="name">{ this.username }</span>
               </span>
               <a-menu slot="overlay" on-click={this.menuClick}>
                 <a-menu-item key="1">个人中心</a-menu-item>
                 <a-menu-item key="2">修改密码</a-menu-item>
                 <a-menu-divider />
-                <a-menu-item key="3"><font color="red">退出登录</font></a-menu-item>
+                <a-menu-item key="3">
+                  <font color="red">退出登录</font>
+                </a-menu-item>
               </a-menu>
             </a-dropdown>
           </li>
         </ul>
       </header>
-    );
+    )
   }
 }

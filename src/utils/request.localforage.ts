@@ -71,16 +71,16 @@ export interface LfService {
 }
 
 const genPagination = (model, pagination) => {
-  const totalCount = model.query().count();
-  const pageNo = (pagination.pageNo && parseInt(pagination.pageNo)) || 1;
+  const total = model.query().count();
+  const pageNum = (pagination.pageNum && parseInt(pagination.pageNum)) || 1;
   const pageSize = (pagination.pageSize && parseInt(pagination.pageSize)) || 10;
-  const totalPage = Math.ceil(totalCount / pageSize) || 0;
+  const totalPage = Math.ceil(total / pageSize) || 0;
   // offset and next
-  const offset = (pageNo - 1) * pageSize || 0;
-  const next = (pageNo >= totalPage ? totalCount % pageSize : pageSize) + 1;
+  const offset = (pageNum - 1) * pageSize || 0;
+  const next = (pageNum >= totalPage ? total % pageSize : pageSize) + 1;
   return {
-    totalCount,
-    pageNo,
+    total,
+    pageNum,
     pageSize,
     totalPage,
     offset,
@@ -120,7 +120,7 @@ const lfService: LfService = {
    */
   async request(params: LfRequestConfig) {
     const newParams = this.validateUrl(params);
-    console.log(newParams);
+    console.log('New params', newParams);
     const result = await this.handleRequest(newParams);
     return result;
   },
@@ -131,6 +131,8 @@ const lfService: LfService = {
       params: { model, namespace, pagination },
     } = options;
 
+    const Entity = model;
+
     let requestedData: BaseData = null;
     const requestedConfig: LfRequestConfig = {
       ...options,
@@ -138,33 +140,39 @@ const lfService: LfService = {
 
     switch (method) {
       case 'post':
-        const createdItems = await model.$create({ data });
+        const createdItems = await Entity.$create({ data });
         requestedData = baseData('success', '创建成功');
         requestedData.entity = createdItems;
         break;
       case 'delete':
-        const deletedItems = await model.$delete(data.id || data);
+        const deletedItems = await Entity.$delete(data.id || data);
         requestedData = baseData('success', '删除成功');
         requestedData.entity = deletedItems;
         break;
       case 'patch':
-        const patchedItems = await model.$update({ data });
+        const patchedItems = await Entity.$update({ data });
         requestedData = baseData('success', '更新成功');
         requestedData.entity = patchedItems;
         break;
       case 'get':
         if (!data) {
-          await model.$fetch();
+          await Entity.$fetch();
           // query with pagination, header, columns
           // pagination
-          const paginationConfig = genPagination(model, pagination);
-          const entity = model
+          const paginationConfig = genPagination(Entity, pagination);
+          const entity = Entity
             .query()
             .offset(paginationConfig.offset)
             .limit(paginationConfig.pageSize)
             .get();
           requestedData = baseData('success', '查询成功');
           requestedData.entity = entity;
+          requestedConfig.params.pagination = paginationConfig;
+        } else {
+          await Entity.$fetch();
+          const entities = await Entity.$get(data.id.toString());
+          requestedData = baseData('success', '查询成功');
+          requestedData.entity = entities[namespace][0]
         }
     }
     console.log(`${method} Localforage vuex -> `, requestedData);

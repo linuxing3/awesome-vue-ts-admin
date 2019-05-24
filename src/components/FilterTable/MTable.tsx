@@ -29,11 +29,11 @@ export default class MTable extends Vue {
 
   @Prop({
     default: () => ({
-      code: 'result.resultCode',
+      code: 'data.result.resultCode',
       codeOK: '0',
-      message: 'result.resultMessage',
-      data: 'entity.data',
-      total: 'entity.count',
+      message: 'data.result.resultMessage',
+      data: 'data.entity',
+      total: 'config.params.pagination.total',
     }),
   }) private backParams!: {
     code: string,
@@ -66,12 +66,12 @@ export default class MTable extends Vue {
   @Prop() private tableParams!: any;
 
   // 请求类型
-  @Prop({ default: 'post' }) private fetchType!: string;
+  @Prop({ default: 'get' }) private fetchType!: string;
 
   // 表格分页大小参数
   @Prop({ default: () => ['5', '10', '15', '20', '50', '100'] }) private pageSizeList!: number[];
 
-  @Prop({ default: 10 }) private defaultPageSize!: number;
+  @Prop({ default: 100 }) private defaultPageSize!: number;
 
   @Prop() private highlightCurrentRow!: boolean;
 
@@ -113,6 +113,36 @@ export default class MTable extends Vue {
    * @method 获取表格数据
    */
   getData() {
+    console.log('Fetching ...')
+    this.loading = true;
+    window.ajax.request({
+      url: this.url,
+      method: this.fetchType,
+      params: {
+        pagination: {
+          pageNum: 1,
+          pageSize: 100
+        }
+      }
+    }).then((res: any) => {
+      console.log('Table backparams:', this.backParams);
+      console.log('Table Fetch response:', res);
+      this.loading = false;
+      const code = this.getValue(this.backParams.code, res);
+      if (code === this.backParams.codeOK) {
+        this.tableData = this.getValue(this.backParams.data, res);
+        this.dataTotal = this.getValue(this.backParams.total, res)
+          ? this.getValue(this.backParams.total, res) : 0;
+      } else {
+        this.$message.error(this.getValue(this.backParams.message, res));
+      }
+    });
+  }
+
+  /**
+   * @method 获取表格数据
+   */
+  getAjaxData() {
     this.loading = true;
     window.ajax.request({
       url: this.url,

@@ -43,14 +43,14 @@ class MemberForm extends Vue {
     },
   }
 
-  get id() {
-    return this.$route.params.id || -1;
+  get id () {
+    return this.$route.params.id || -1
   }
 
-  mounted() {
+  mounted () {
     this.$nextTick(() => {
-      this.handleGetInfo();
-    });
+      this.handleGetInfo()
+    })
   }
 
   submit(e: HTMLFormElement) {
@@ -62,54 +62,65 @@ class MemberForm extends Vue {
           content: JSON.stringify(values),
           onOk: () => {
             this.handleAddOrEdit(values);
+            setTimeout(() => {
+              this.$router.push({
+                name: 'MemberTable'
+              })
+            }, 1000)
+          },
+          onCancel: () => {
+            this.handleReset();
           },
         });
       }
     });
   }
 
-  handleAddOrEdit(data) {
+  handleAddOrEdit (data) {
     if (this.id === -1) {
-      console.log('Creating...');
+      console.log('Creating...')
       lfService.request({
         url: `/${this.modelName}`,
         method: 'post',
-        data,
-      });
+        data
+      })
     } else {
-      console.log('updating...');
+      console.log('updating...')
       lfService.request({
         url: `/${this.modelName}`,
         method: 'patch',
-        data,
-      });
+        data
+      })
     }
   }
 
-  async handleGetInfo() {
+  async handleGetInfo () {
+    console.log('getting edit info...')
     if (this.id === -1) return;
-    const { data } = await lfService.request({
+    const { data: { entity } } = await lfService.request({
       url: `/${this.modelName}`,
       method: 'get',
       data: { id: this.id },
     });
-    this.loadEditInfo(data);
+    console.log('Get Data:', entity);
+    this.loadEditInfo(entity);
   }
 
-  loadEditInfo(data) {
-    console.log(`编辑记录 ${this.id}`);
+  loadEditInfo (data) {
+    console.log(`编辑记录 ${this.id}`)
     new Promise((resolve) => {
-      setTimeout(resolve, 500);
+      setTimeout(resolve, 500)
     }).then(() => {
-      console.log('formData:', data);
-      this.Form.setFieldsValue(data);
-    });
+      console.log('formData:', data)
+      this.Form.setFieldsValue(data)
+    })
   }
 
-  handleReset() {
+  handleReset () {
+    this.Form.setFieldsValue({});
     this.$router.push({
-      name: 'MemberList',
-    });
+      name: 'MemberList'
+    })
   }
 
   render() {
@@ -117,7 +128,7 @@ class MemberForm extends Vue {
     return (
       <div class="base-form-wrap">
         <a-card
-          title="Base Form"
+          title="Member Form"
         >
           <a-dropdown slot="extra">
             <a class="ant-dropdown-link">
@@ -125,17 +136,22 @@ class MemberForm extends Vue {
             </a>
             <a-menu slot="overlay">
               <a-menu-item>
-                <a>1st menu item</a>
+                <a>Import</a>
               </a-menu-item>
               <a-menu-item>
-                <a>2nd menu item</a>
+                <a>Export</a>
               </a-menu-item>
               <a-menu-item>
-                <a>3rd menu item</a>
+                <a>Validate</a>
               </a-menu-item>
             </a-menu>
           </a-dropdown>
           <a-form on-submit={this.submit}>
+            <a-form-item {...{ props: this.itemLayout }} label="编号">
+              {getFieldDecorator('id', {
+                rules: [{ required: false, message: '编号' }]
+              })(<a-input placeholder="自动编号" disabled />)}
+            </a-form-item>
             <a-form-item {...{ props: this.itemLayout }} label="姓名">
               {
                 getFieldDecorator('name', {
@@ -145,29 +161,11 @@ class MemberForm extends Vue {
                 })(<a-input placeholder="请输入姓名"></a-input>)
               }
             </a-form-item>
-            <a-form-item {...{ props: this.itemLayout }} label="昵称">
-              {
-                getFieldDecorator('nickname', {
-                  rules: [
-                    { required: true, message: '请输入昵称' },
-                  ],
-                })(<a-input placeholder="请输入昵称"></a-input>)
-              }
-            </a-form-item>
-            <a-form-item {...{ props: this.itemLayout }} label="登录名">
-              {
-                getFieldDecorator('loginName', {
-                  rules: [
-                    { required: true, message: '请输入登录名' },
-                  ],
-                })(<a-input placeholder="请输入登录名"></a-input>)
-              }
-            </a-form-item>
             <a-form-item {...{ props: this.itemLayout }} label="手机号">
               {
                 getFieldDecorator('loginName', {
                   rules: [
-                    { required: true, message: '请输入手机号' },
+                    { required: false, message: '请输入手机号' },
                     {
                       pattern: /^1([358][0-9]|4[579]|66|7[0135678]|9[89])[0-9]{8}$/,
                       message: '请输入正确的手机号',
@@ -180,7 +178,7 @@ class MemberForm extends Vue {
               {
                 getFieldDecorator('birthDate', {
                   rules: [
-                    { required: true, message: '请选择出生日期' },
+                    { required: false, message: '请选择出生日期' },
                   ],
                 })(<a-date-picker placeholder="请选择出生日期"></a-date-picker>)
               }
@@ -189,7 +187,7 @@ class MemberForm extends Vue {
               {
                 getFieldDecorator('isMale', {
                   rules: [
-                    { required: true, message: '请选择性别' },
+                    { required: false, message: '请选择性别' },
                   ],
                 })(<a-radio-group>
                 <a-radio value={0}>男</a-radio>
@@ -197,37 +195,16 @@ class MemberForm extends Vue {
                 <a-radio value={2}>火星人</a-radio>
               </a-radio-group>)
               }
-
             </a-form-item>
-            <a-form-item {...{ props: this.itemLayout }} label="身份证号码">
-              {
-                getFieldDecorator('idNumber', {
-                  rules: [
-                    { required: true, message: '请输入身份证号码' },
-                  ],
-                })(<a-input placeholder="身份证号码"></a-input>)
-              }
-            </a-form-item>
-            <a-form-item {...{ props: this.itemLayout }} label="Email">
-              {
-                getFieldDecorator('email', {
-                  rules: [
-                    { required: true, message: '请输入Email' },
-                  ],
-                })(<a-input placeholder="请输入Email"></a-input>)
-              }
-            </a-form-item>
-            <a-form-item {...{ props: this.itemLayout }} label="联系地址">
-            {
-                getFieldDecorator('address', {
-                  rules: [
-                    { required: true, message: '请输入联系地址' },
-                  ],
-                })(<a-input placeholder="请输入联系地址"></a-input>)
-              }
+            <a-form-item {...{ props: this.itemLayout }} label="备注">
+              {getFieldDecorator('note', {
+                rules: [{ required: false, message: '请输入备注信息' }]
+              })(<a-input placeholder="任何备注信息" />)}
               <div class="form-btn-wrap">
-                <a-button type="primary" htmlType="submit">提交</a-button>
-                <a-button>重置</a-button>
+                <a-button type="primary" htmlType="submit">
+                  提交
+                </a-button>
+                <a-button on-click={this.handleReset}>重置</a-button>
               </div>
             </a-form-item>
           </a-form>

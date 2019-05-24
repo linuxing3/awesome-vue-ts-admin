@@ -42,6 +42,7 @@ export default class Api {
 
   request = (options: Options) => this.fetch(options)
     .then((response: any) => {
+      console.log('Api Lf fetch response:', response);
       const { statusText, status } = response;
       let { data } = response;
       const finalResponse: LfResponse = {
@@ -70,57 +71,8 @@ export default class Api {
 
   // fetch methods
   fetch = async (options: Options) => {
-    const {
-      url, data, fetchType, method = 'get',
-    } = options;
-
-    // if fetchType is not defined
-    switch (method.toLowerCase()) {
-      case 'get':
-        // hack here with special service
-        return this.service.request({
-          method: 'get',
-          url,
-          data,
-          params: {
-            pagination: {
-              pageNo: 0,
-              pageSize: 1000,
-            },
-          },
-        });
-      case 'delete':
-        // hack here with special service
-        return this.service.request({
-          method: 'delete',
-          url,
-          data,
-        });
-      case 'post':
-        // hack here with special service
-        await this.service.request({
-          method: 'post',
-          url,
-          data,
-        });
-      case 'put':
-        // hack here with special service
-        await this.service.request({
-          method: 'put',
-          url,
-          data,
-        });
-      case 'patch':
-        await this.service.request({
-          method: 'patch',
-          url,
-          data,
-        });
-        // hack here with special service
-      default:
-        // hack here with special service
-        return this.service.request(options);
-    }
+    console.log('Api Lf:', options);
+    return this.service.request(options)
   };
   // end fetch
 }

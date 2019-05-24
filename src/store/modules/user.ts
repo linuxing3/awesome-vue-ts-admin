@@ -11,6 +11,8 @@ interface UserData {
   email: string;
 }
 
+const Entity: any = User
+
 function filterAsyncRouter(AsyncRouterMap: routerItem[], permission: string[]): routerItem[] {
   const routerMap = AsyncRouterMap.filter((item) => {
     if (typeof item.permission === 'string') {
@@ -61,7 +63,6 @@ const user = {
   },
   actions: {
     setDefaultUsers: (context: any) => {
-      const Entity: any = User;
       adminUsers.map(async (user) => {
         const foundItems = Entity.query()
           .where('username', user.username)
@@ -80,7 +81,6 @@ const user = {
       });
     },
     loginByName: (context: any, loginParams: any) => {
-      const Entity: any = User;
       const user = Entity.query()
         .where('username', loginParams.username)
         .get();
@@ -100,8 +100,12 @@ const user = {
       const error = baseData('success', '登录失败');
       return Promise.reject(builder(error, 'error'));
     },
+    logout: (context: any, loginParams: any) => {
+      window.localStorage.clear()
+      const data = baseData('success', '登出成功');
+      return Promise.resolve(builder(data, 'OK'));
+    },
     getUserLocalInfo: async (context: any) => {
-      const Entity: any = User;
       const token = JSON.parse(window.localStorage.getItem('token'));
       console.log('token:', token);
       const entity = Entity.find(token.id);
@@ -157,6 +161,13 @@ const user = {
         });
     }),
   },
+  getters: {
+    currentUser: (state: any) => {
+      const { id } = JSON.parse(window.localStorage.getItem('token'));
+      const entity = Entity.find(id);
+      return entity
+    }
+  }
 };
 
 export default user;

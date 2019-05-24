@@ -1,21 +1,23 @@
 import Vue from 'vue';
 import { message } from 'ant-design-vue';
-// 自定义全局组件
-import FilterTable from '@/components/FilterTable/index.vue';
 
 import App from '@/App';
 import router from '@/router';
 import store from '@/store';
-import config from '@/utils/config';
-import Api from '@/api/api';
+import config from '@/utils/config'
+import Api from '@/api/api.lf';
 import i18n from './utils/i18n';
 
 import './styles/global.less';
 
-const Apis = new Api({ baseUrl: process.env.NODE_ENV === 'production' ? '/api' : '/api' });
+// 自定义全局组件
+import FilterTable from '@/components/FilterTable/index.vue';
+
 // 全局api
+const Apis = new Api({ baseUrl: process.env.NODE_ENV === 'production' ? '/api' : '/api' });
 window.api = Apis.api;
 window.ajax = Apis;
+
 // bootstrap
 store.dispatch('setDefaultUsers');
 
@@ -31,71 +33,36 @@ Vue.component('filter-table', FilterTable);
 
 Vue.config.productionTip = false;
 
-// Vue.mixin({
-//   beforeRouteLeave(to, from, next) {
-//     const vnode = (this as any).$vnode;
-//     if (from && from.meta.rank && to.meta.rank && from.meta.rank > to.meta.rank) {
-//       if (vnode && vnode.data.keepAlive) {
-//         if (vnode.parent && vnode.parent.componentInstance
-//            && vnode.parent.componentInstance.cache) {
-//           if (vnode.componentOptions) {
-//             const key = vnode.key == null
-//               ? vnode.componentOptions.Ctor.cid +
-// (vnode.componentOptions.tag ? `::${vnode.componentOptions.tag}` : '')
-//               : vnode.key;
-//             const cache = vnode.parent.componentInstance.cache;
-//             const keys = vnode.parent.componentInstance.keys;
-//             if (cache[key]) {
-//               if (keys.length) {
-//                 const index = keys.indexOf(key);
-//                 if (index > -1) {
-//                   keys.splice(index, 1);
-//                 }
-//               }
-//               delete cache[key];
-//             }
-//           }
-//         }
-//       }
-//       this.$destroy();
-//     }
-//     next();
-//   },
-// });
-
-let flag: boolean = true;
 // 路由拦截，权限验证和菜单生成
+let flag: boolean = true
 router.beforeEach((to, from, next) => {
-  // if (to.name = 'login') {
-  //   next({ name: 'login', replace: true })
-  // }
   if (!store.state.app.menuData.length && flag) {
     // 判断是否获取到菜单数据,并且只执行一次
-    flag = false;
+    flag = false
     store
       .dispatch('getUserLocalInfo')
-      .then((entity) => {
-        console.log('Route Guard Found Entity:', entity);
-        const toPath = config.noLoginList.indexOf(`#${to.path}`) > -1 ? '/dashboard' : to.path;
+      .then(entity => {
+        console.log('Route Guard Found Entity:', entity)
+        const toPath = config.noLoginList.indexOf(`#${to.path}`) > -1 ? '/dashboard' : to.path
         store.dispatch('AddTabPane', toPath).then(() => {
           next({
             path: toPath,
             query: to.query,
             params: to.params,
-            replace: true,
-          });
-        });
+            replace: true
+          })
+        })
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(err => {
+        console.log(err)
         if (config.noLoginList.indexOf(to.path) < 0) {
-          next({ name: 'login', replace: true });
+          next({ name: 'login', replace: true })
         }
-        next();
-      });
+        next()
+      })
   }
-  next();
-});
+  next()
+})
 
 new Vue({
   router,

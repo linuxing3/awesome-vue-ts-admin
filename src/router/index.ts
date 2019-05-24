@@ -156,23 +156,23 @@ export const asyncRouterMap: routerItem[] = [
     ],
   },
   {
-    path: '/components',
+    path: '/profile',
     icon: 'appstore-o',
-    name: 'Components',
+    name: 'Profile',
     component: getComponent('components/index'),
     permission: true,
-    meta: { key: 'Components' },
+    meta: { key: 'Profile' },
     children: [
       {
         path: 'form',
-        name: 'Form',
+        name: 'ProfileForm',
         component: getComponent('components/form/index'),
         permission: true,
         meta: { key: 'Form' },
         children: [
           {
             path: 'baseForm',
-            name: 'BaseForm',
+            name: 'ProfileBaseForm',
             component: getComponent('components/form/baseForm/index'),
             permission: true,
             meta: { key: 'BaseForm' },
