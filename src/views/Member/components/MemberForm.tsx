@@ -63,7 +63,7 @@ class MemberForm extends Vue {
           onOk: () => {
             this.handleAddOrEdit(values);
             setTimeout(() => {
-              this.$router.push({
+              this.$router.replace({
                 name: 'MemberTable'
               })
             }, 1000)
@@ -118,7 +118,7 @@ class MemberForm extends Vue {
 
   handleReset () {
     this.Form.setFieldsValue({});
-    this.$router.push({
+    this.$router.replace({
       name: 'MemberList'
     })
   }

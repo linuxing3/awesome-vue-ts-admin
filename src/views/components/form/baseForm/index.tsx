@@ -130,13 +130,7 @@ class BaseForm extends Vue {
             </a>
             <a-menu slot="overlay">
               <a-menu-item>
-                <a>1st menu item</a>
-              </a-menu-item>
-              <a-menu-item>
-                <a>2nd menu item</a>
-              </a-menu-item>
-              <a-menu-item>
-                <a>3rd menu item</a>
+                <a>Export</a>
               </a-menu-item>
             </a-menu>
           </a-dropdown>
@@ -160,6 +154,16 @@ class BaseForm extends Vue {
               {getFieldDecorator('email', {
                 rules: [{ required: false, message: '请输入Email' }]
               })(<a-input placeholder="请输入Email" />)}
+            </a-form-item>
+            <a-form-item {...{ props: this.itemLayout }} label="Telephone">
+              {getFieldDecorator('telephone', {
+                rules: [{ required: false, message: '请输入电话' }]
+              })(<a-input placeholder="请输入电话" />)}
+            </a-form-item>
+            <a-form-item {...{ props: this.itemLayout }} label="证书">
+              {getFieldDecorator('token', {
+                rules: [{ required: false, message: '请输入证书' }]
+              })(<a-input placeholder="请输入证书" />)}
             </a-form-item>
             <a-form-item {...{ props: this.itemLayout }} label="联系地址">
               {getFieldDecorator('address', {

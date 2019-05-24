@@ -173,7 +173,6 @@ export default class FilterTable extends Vue {
   }
 
   @Emit()
-  @Emit()
   setTable(list: Array<string>) {
     const filterList = this.defalutTableList.filter((item, index) => list.indexOf(item.dataIndex) > -1);
     this.changeTableList = filterList;

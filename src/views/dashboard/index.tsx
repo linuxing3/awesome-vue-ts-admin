@@ -4,6 +4,7 @@ import {
 } from 'ant-design-vue';
 import Chart from 'chart.js';
 import { numFormat } from '@/utils/index';
+import { entity } from '@/mock/dashboard';
 
 import './index.less';
 
@@ -22,16 +23,28 @@ import './index.less';
   },
 })
 export default class Dashboard extends Vue {
+  modelName: string = 'member'
+
   pageData: any = null;
 
   created() {
-    window.api.dashboard(null).then((res: returnData) => {
-      this.pageData = res.data.entity;
-      this.loading = false;
-      setTimeout(() => {
-        this.init();
-      }, 200);
-    });
+    // window.api.dashboard(null).then((res: returnData) => {
+    //   this.pageData = res.data.entity;
+    //   this.loading = false;
+    //   setTimeout(() => {
+    //     this.init();
+    //   }, 200);
+    // });
+    this.loadMock();
+  }
+
+  loadMock() {
+    console.log(entity);
+    this.pageData = entity;
+    this.loading = false;
+    setTimeout(() => {
+      this.init()
+    }, 200)
   }
 
   init() {

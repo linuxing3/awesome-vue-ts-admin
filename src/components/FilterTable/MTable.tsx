@@ -33,12 +33,14 @@ export default class MTable extends Vue {
       codeOK: '0',
       message: 'data.result.resultMessage',
       data: 'data.entity',
+      columns: 'config.params.columns',
       total: 'config.params.pagination.total',
     }),
   }) private backParams!: {
     code: string,
     message: string,
     data: string,
+    columns: string,
     codeOK: string | number,
     total: string
   };
@@ -130,7 +132,11 @@ export default class MTable extends Vue {
       this.loading = false;
       const code = this.getValue(this.backParams.code, res);
       if (code === this.backParams.codeOK) {
+        // table list and columns
+        this.tableList = this.getValue(this.backParams.columns, res);
+        // table data
         this.tableData = this.getValue(this.backParams.data, res);
+        // table total
         this.dataTotal = this.getValue(this.backParams.total, res)
           ? this.getValue(this.backParams.total, res) : 0;
       } else {
@@ -197,6 +203,7 @@ export default class MTable extends Vue {
   }
 
   render() {
+    // Generate table list/ columns
     if (this.opreat.length && this.tableList[this.tableList.length -1].title !== '操作') {
       this.tableList.push({
         title: '操作',

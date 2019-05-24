@@ -26,25 +26,25 @@ export default class <%= modelTableName %> extends Vue {
 
   data: any[] = []
 
-  pagination: object = {
-    pageNo: 1,
-    pageSize: 10
+  pageParams: object = {
+    pageNum: 1,
+    pageSize: 100,
+    page: true
   }
 
   filterParams: any = {
     name: '',
     address: [],
     createtime: [],
-    startTime: '',
-    endTime: '',
   };
 
   BackParams: any = {
     code: 'data.result.resultCode',
     codeOK: 0,
     message: 'data.result.resultMessage',
-    data: 'data.entity.data',
-    total: 'data.entity.total',
+    data: 'data.entity',
+    columns: 'config.params.columns',
+    total: 'config.params.pagination.total',
   };
 
   outParams: any = {};
@@ -76,40 +76,7 @@ export default class <%= modelTableName %> extends Vue {
     {
       title: 'Name',
       dataIndex: 'name',
-    },
-    {
-      title: 'Nickname',
-      dataIndex: 'nickName',
-    },
-    {
-      title: 'age',
-      dataIndex: 'age',
-    },
-    {
-      title: 'Phone number',
-      dataIndex: 'phone',
-    },
-    {
-      title: 'Birth date',
-      dataIndex: 'birthDate',
-    },
-    {
-      title: 'Gender',
-      dataIndex: 'isMale',
-      customRender: this.genderRender,
-    },
-    {
-      title: 'ID number',
-      dataIndex: 'id',
-    },
-    {
-      title: 'Email',
-      dataIndex: 'email',
-    },
-    {
-      title: 'Address',
-      dataIndex: 'address',
-    },
+    }
   ];
 
   opreat: Opreat[] = [
@@ -130,28 +97,13 @@ export default class <%= modelTableName %> extends Vue {
     },
   ];
 
-  title: string = 'add <%= ModelName %>';
+  title: string = 'Add <%= ModelName %>';
 
   visible: boolean = false;
 
   modelType: string = 'add';
 
   editData: object = {};
-
-  async mounted () {
-    await this.handleFetch()
-  }
-
-  async handleFetch () {
-    const { pagination } = this
-    const { result: { data } } = await lfService.request({
-      url: `/${this.modelName}`,
-      method: 'get',
-      pagination
-    })
-    console.log(data)
-    this.data = data
-  }
 
   async handleDelete (row) {
     console.log('Deleting ... ')
@@ -160,12 +112,12 @@ export default class <%= modelTableName %> extends Vue {
       method: 'delete',
       data: row.id
     })
-    setTimeout(() => this.handleFetch(), 1000)
+    setTimeout(() => this.success(), 1000)
   }
 
   handleEdit (row) {
     console.log('Editing ... ')
-    this.$router.push({
+    this.$router.replace({
       name: '<%= modelFormName %>',
       params: {
         id: row.id
@@ -175,7 +127,7 @@ export default class <%= modelTableName %> extends Vue {
 
   handleCreate () {
     console.log('Creating ... ')
-    this.$router.push({
+    this.$router.replace({
       name: '<%= modelFormName %>'
     })
   }
@@ -205,25 +157,24 @@ export default class <%= modelTableName %> extends Vue {
   }
 
   tableClick(key: string, row: any) {
-    const data = JSON.parse(JSON.stringify(row));
-    data.address = data.address.split(' ');
-    data.birthDate = moment(data.birthDate, 'YYYY-MM-DD HH:mm:ss');
     switch (key) {
       case 'edit':
-        this.editData = data;
-        this.visible = true;
-        this.modelType = 'edit';
+        this.handleEdit(row);
         break;
       default:
+        this.handleDelete(row);
         break;
     }
   }
 
-  add() {
-    this.title = 'Add customer';
+  addWithModal() {
+    this.title = 'Add Member';
     this.modelType = 'add';
     this.visible = true;
     this.editData = {};
+    this.$router.replace({
+      name: 'MemberForm'
+    })
   }
 
   closeModal() {
@@ -233,7 +184,7 @@ export default class <%= modelTableName %> extends Vue {
 
   success() {
     this.visible = false;
-    const Table: any = this.$refs.baseInfoTable;
+    const Table: any = this.$refs.<%= ModelName %>InfoTable;
     this.editData = {};
     Table.reloadTable();
   }
@@ -242,12 +193,12 @@ export default class <%= modelTableName %> extends Vue {
     return (
       <div class="baseInfo-wrap">
         <filter-table
-          ref="baseInfoTable"
+          ref="<%= ModelName %>InfoTable"
           tableList={this.tableList}
           filterList={this.filterList}
           filterGrade={[]}
           scroll={{ x: 900 }}
-          url={'/customers/baseInfoList'}
+          url={'/<%= EntityName %>/fetch'}
           filterParams={this.filterParams}
           outParams={this.outParams}
           addBtn={true}
@@ -258,7 +209,7 @@ export default class <%= modelTableName %> extends Vue {
           fetchType={'post'}
           backParams={this.BackParams}
           on-menuClick={this.tableClick}
-          on-add={this.add}
+          on-add={this.handleCreate}
         />
       </div>
     );
