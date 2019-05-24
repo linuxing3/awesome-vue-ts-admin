@@ -14,12 +14,14 @@ const adminUsers = [
     username: 'admin',
     password: 'admin',
     permissions: userPermission.ADMIN,
-  }, {
+  },
+  {
     id: 1,
     username: 'guest',
     password: 'guest',
     permissions: userPermission.DEFAULT,
-  }, {
+  },
+  {
     id: 2,
     username: '吴彦祖',
     password: '123456',
@@ -69,6 +71,7 @@ module.exports = {
     const cookie = req.headers.cookie || '';
     const cookies = qs.parse(cookie.replace(/\s/g, ''), { delimiter: ';' });
     const token = JSON.parse(cookies.token);
+    console.log('Token for mock:', token);
     const user = {};
     const userItem = adminUsers.filter(_ => _.id === token.id);
     if (userItem.length > 0) {

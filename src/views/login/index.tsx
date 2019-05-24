@@ -38,9 +38,8 @@ class Login extends Vue {
     this.Form.validateFields((err: any, values: object) => {
       if (!err) {
         this.loading = true;
-        window.api
-          .login({ ...values })
-        // this.$store.dispatch('loginByName', values)
+        // window.api.login({ ...values })
+        this.$store.dispatch('loginByName', values)
           .then((res) => {
             console.log('response from loginByName', res);
             this.loading = false;

@@ -73,7 +73,7 @@ router.beforeEach((to, from, next) => {
     // 判断是否获取到菜单数据,并且只执行一次
     flag = false;
     store
-      .dispatch('getUserInfo')
+      .dispatch('getUserLocalInfo')
       .then((entity) => {
         console.log('Route Guard Found Entity:', entity);
         const toPath = config.noLoginList.indexOf(`#${to.path}`) > -1 ? '/dashboard' : to.path;

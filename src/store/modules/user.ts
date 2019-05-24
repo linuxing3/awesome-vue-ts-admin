@@ -80,12 +80,13 @@ const user = {
       });
     },
     loginByName: (context: any, loginParams: any) => {
-      const { username, password } = loginParams;
-      const user = adminUsers.filter(item => item.username === username);
-      if (user.length > 0 && user[0].password === password) {
+      const Entity: any = User;
+      const user = Entity.query()
+        .where('username', loginParams.username)
+        .get();
+      if (user.length > 0 && user[0].password === loginParams.password) {
         const now = new Date();
         now.setDate(now.getDate() + 1);
-        const token = 'qqyzkzldrx';
         window.localStorage.setItem(
           'token',
           JSON.stringify({
@@ -99,25 +100,13 @@ const user = {
       const error = baseData('success', '登录失败');
       return Promise.reject(builder(error, 'error'));
     },
-    authLogin: (context: any) => {
-      const token = window.localStorage.getItem('token');
-      if (!token) {
-        const response = baseData('error', '登录超时', 3);
-        return Promise.reject(response);
-      }
-      const response = baseData('success', '托证通过');
-      return Promise.resolve(response);
-    },
     getUserLocalInfo: async (context: any) => {
       const Entity: any = User;
       const token = JSON.parse(window.localStorage.getItem('token'));
       console.log('token:', token);
-      const foundEntities = Entity.find(token.id);
-      console.log('User List:', foundEntities);
-      const entity = foundEntities[0];
-      console.log('User Information:', entity);
+      const entity = Entity.find(token.id);
+      console.log('User Entity:', entity);
       return new Promise((resolve, reject) => {
-        context.commit('LOADING', false);
         if (entity) {
           const userData: UserData = {
             username: entity.username,
@@ -131,7 +120,7 @@ const user = {
           context.dispatch('GetMenuData', getRouter);
           resolve(entity);
         } else {
-          reject('无法获取用户信息！');
+          reject('获取用户信息失败');
         }
       });
     },
@@ -143,6 +132,7 @@ const user = {
       window.api
         .getUserInfo(params)
         .then((res: returnData) => {
+          console.log('getUsrInfo Response:', res);
           context.commit('LOADING', true);
           const { result, entity } = res.data;
           if (!result.resultCode) {

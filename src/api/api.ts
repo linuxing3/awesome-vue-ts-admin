@@ -68,13 +68,13 @@ export default class Api {
         };
       }
       // 登录超时判断
-      if (response.data.result && response.data.result.resultCode === 3) {
-        router.replace({ name: 'login' });
-        return Promise.reject({
-          success: false,
-          message: response.data.result.resultMessage,
-        });
-      }
+      // if (response.data.result && response.data.result.resultCode === 3) {
+      //   router.replace({ name: 'login' });
+      //   return Promise.reject({
+      //     success: false,
+      //     message: response.data.result.resultMessage,
+      //   });
+      // }
       const finalResponse = {
         success: true,
         message: statusText,
