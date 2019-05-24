@@ -108,6 +108,20 @@ export default class Header extends Vue {
   }
 
   @Emit()
+  notificationClick(): void {
+    this.$router.push({
+      name: 'ProfileBaseForm'
+    });
+  }
+
+  @Emit()
+  bellClick(): void {
+    this.$router.push({
+      name: 'ProfileBaseForm'
+    });
+  }
+
+  @Emit()
   switchSidebar(): void {
     this.$store.dispatch('ToggleSideBar');
   }
@@ -143,11 +157,11 @@ export default class Header extends Vue {
         <ul class="header-menu">
           <li>
             <a-badge count={12} class="item">
-              <i class="iconfont-email" />
+              <i class="iconfont-email" on-click={this.notificationClick} />
             </a-badge>
           </li>
           <li>
-            <i class="iconfont-bell" />
+            <i class="iconfont-bell" on-click={this.bellClick} />
           </li>
           <li class="user">
             <a-dropdown>

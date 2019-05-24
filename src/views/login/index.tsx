@@ -107,7 +107,7 @@ class Login extends Vue {
                   prefix-icon="iconfont-lock"
                   type="password"
                   on-pressEnter={this.submitForm}
-                  placeholder="Please enter a user name"
+                  placeholder="Please enter a user password"
                 >
                   <a-icon slot="prefix" type="lock" />
                 </a-input>,
@@ -119,9 +119,9 @@ class Login extends Vue {
               </a-button>
             </a-form-item>
           </a-form>
-          <div class="tips">
-            <span>username：admin</span>
-            <span class="right">password：admin</span>
+          <div class="tips" hidden={true}>
+            <span>username：...</span>
+            <span class="right">password：...</span>
           </div>
         </div>
       </div>

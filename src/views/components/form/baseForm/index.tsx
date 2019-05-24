@@ -137,37 +137,50 @@ class BaseForm extends Vue {
           <a-form on-submit={this.submit}>
             <a-form-item {...{ props: this.itemLayout }} label="编号">
               {getFieldDecorator('id', {
-                rules: [{ required: false, message: '编号' }],
+                rules: [{ required: false, message: '编号' }]
               })(<a-input placeholder="自动编号" disabled />)}
             </a-form-item>
             <a-form-item {...{ props: this.itemLayout }} label="姓名">
               {getFieldDecorator('name', {
-                rules: [{ required: true, message: '请输入姓名' }],
+                rules: [{ required: true, message: '请输入姓名' }]
               })(<a-input placeholder="请输入姓名" />)}
+            </a-form-item>
+            <a-form-item {...{ props: this.itemLayout }} label="密码">
+              {getFieldDecorator('password', {
+                rules: [{ required: true, message: '请输入密码' }]
+              })(
+                <a-input
+                  prefix-icon="iconfont-lock"
+                  type="password"
+                  placeholder="Please enter a user name"
+                >
+                  <a-icon slot="prefix" type="lock" />
+                </a-input>
+              )}
             </a-form-item>
             <a-form-item {...{ props: this.itemLayout }} label="用户名">
               {getFieldDecorator('username', {
-                rules: [{ required: true, message: '请输入用户名' }],
+                rules: [{ required: true, message: '请输入用户名' }]
               })(<a-input placeholder="请输入客户名" />)}
             </a-form-item>
             <a-form-item {...{ props: this.itemLayout }} label="Email">
               {getFieldDecorator('email', {
-                rules: [{ required: false, message: '请输入Email' }],
+                rules: [{ required: false, message: '请输入Email' }]
               })(<a-input placeholder="请输入Email" />)}
             </a-form-item>
             <a-form-item {...{ props: this.itemLayout }} label="Telephone">
               {getFieldDecorator('telephone', {
-                rules: [{ required: false, message: '请输入电话' }],
+                rules: [{ required: false, message: '请输入电话' }]
               })(<a-input placeholder="请输入电话" />)}
             </a-form-item>
             <a-form-item {...{ props: this.itemLayout }} label="证书">
               {getFieldDecorator('token', {
-                rules: [{ required: false, message: '请输入证书' }],
+                rules: [{ required: false, message: '请输入证书' }]
               })(<a-input placeholder="请输入证书" />)}
             </a-form-item>
             <a-form-item {...{ props: this.itemLayout }} label="联系地址">
               {getFieldDecorator('address', {
-                rules: [{ required: false, message: '请输入联系地址' }],
+                rules: [{ required: false, message: '请输入联系地址' }]
               })(<a-input placeholder="请输入联系地址" />)}
               <div class="form-btn-wrap">
                 <a-button type="primary" htmlType="submit">
@@ -179,7 +192,7 @@ class BaseForm extends Vue {
           </a-form>
         </a-card>
       </div>
-    );
+    )
   }
 }
 

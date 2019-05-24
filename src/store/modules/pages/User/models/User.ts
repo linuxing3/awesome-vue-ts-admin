@@ -23,6 +23,7 @@ export default class User extends BaseModel {
       password: this.string(''),
       email: this.string(''),
       telephone: this.string(''),
+      address: this.string(''),
       status: this.number('50'),
       hash: this.string(''),
       token: this.string('qqyzkzldrx'),

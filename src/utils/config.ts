@@ -12,13 +12,13 @@ export const adminUsers = [
   {
     id: 0,
     username: 'admin',
-    password: 'admin',
+    password: '20090909',
     permissions: userPermission.ADMIN,
   },
   {
     id: 1,
     username: 'guest',
-    password: 'guest',
+    password: 'guestantd',
     permissions: userPermission.DEFAULT,
   },
   {
@@ -32,8 +32,8 @@ export const adminUsers = [
 export const noAuthList = ['/api/user/login'];
 
 const config = {
-  name: 'vue-ts-admin',
-  footerText: 'vue-ts-admin  © 2018 xiaoyang',
+  name: 'Embajada China Ve',
+  footerText: 'Embajada China en Venzuela  © 2019 linuxing3',
   logo: Logo,
   icon: '/favicon.ico',
   API,
