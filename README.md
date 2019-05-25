@@ -1,5 +1,7 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/7576e708-c11b-43dd-b90e-b983c5a8067e/deploy-status)](https://app.netlify.com/sites/embajadachinave/deploys)
 
+![https://ci.appveyor.com/api/projects/status/32r7s2skrgm9ubva?svg=true](https://ci.appveyor.com/api/projects/status/32r7s2skrgm9ubva?svg=true)
+
 # vue-ts-admin
 
   > 一个基于`typesciprt` + `vue` + `vue-cli@3.4.1`的中台管理系统
@@ -21,5 +23,4 @@
 
 
 ![perview](/perview/vue-ts-admin-mobile.gif)
-
 
