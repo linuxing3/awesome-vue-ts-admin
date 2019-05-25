@@ -1,5 +1,6 @@
 import config, { adminUsers, noAuthList } from '@/utils/config';
 import router, { asyncRouterMap, constantRouterMap } from '@/router';
+import bcrypt from 'bcryptjs';
 import { routerItem } from '@/interface';
 import { builder, baseData } from '@/utils/builder';
 import User from '@/store/modules/pages/User/models/User';
@@ -69,36 +70,43 @@ const user = {
           .get();
         console.log('Found Existing User:', foundItems);
         if (foundItems.length === 0) {
+          const hash = await bcrypt.hash(user.password, 10);
           Entity.$create({
             data: {
               name: user.username,
               username: user.username,
               password: user.password,
+              hash,
               permissions: user.permissions,
             },
           });
         }
       });
     },
-    loginByName: (context: any, loginParams: any) => {
+    loginByName: async (context: any, loginParams: any) => {
       const user = Entity.query()
         .where('username', loginParams.username)
         .get();
-      if (user.length > 0 && user[0].password === loginParams.password) {
-        const now = new Date();
-        now.setDate(now.getDate() + 1);
-        window.localStorage.setItem(
-          'token',
-          JSON.stringify({
-            id: user[0].id,
-            deadline: now.getTime(),
-          }),
-        );
-        const data = baseData('success', '登录成功');
-        return Promise.resolve(builder(data, 'OK'));
+      if (user.length > 0) {
+        const validPassword = await bcrypt.compare(loginParams.password, user[0].hash);
+        if (validPassword) {
+          const now = new Date();
+          now.setDate(now.getDate() + 1);
+          window.localStorage.setItem(
+            'token',
+            JSON.stringify({
+              id: user[0].id,
+              deadline: now.getTime(),
+            }),
+          );
+          const data = baseData('success', '登录成功');
+          return Promise.resolve(builder(data, 'OK'));
+        }
+        const error = baseData('fail', '登录失败');
+        return Promise.reject(builder(error, 'Password Check Failed'));
       }
-      const error = baseData('success', '登录失败');
-      return Promise.reject(builder(error, 'error'));
+      const error = baseData('fail', '登录失败');
+      return Promise.reject(builder(error, 'No matched username'));
     },
     logout: (context: any, loginParams: any) => {
       window.localStorage.clear();
@@ -164,6 +172,7 @@ const user = {
   getters: {
     currentUser: (state: any) => {
       const { id } = JSON.parse(window.localStorage.getItem('token'));
+      Entity.$fetch();
       const entity = Entity.find(id);
       return entity;
     },
