@@ -97,7 +97,7 @@ const MemberActions: IMemberActions = {
     } = await lfService.request({
       url: '/member',
       method: 'get',
-      pagination: {
+      pageParams: {
         pageNo: 1,
         pageSize: 1000,
       },
@@ -157,7 +157,7 @@ const MemberActions: IMemberActions = {
     } = await lfService.request({
       url: '/member',
       method: 'get',
-      pagination: {
+      pageParams: {
         pageNo: 1,
         pageSize: 100,
       },

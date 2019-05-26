@@ -111,7 +111,7 @@ const lfService: LfService = {
       method,
       data,
       params: {
-        model, namespace, pagination, filter, statistic,
+        model, namespace, pageParams, filter, statistic,
       },
     } = options;
 
@@ -145,11 +145,11 @@ const lfService: LfService = {
         break;
       case 'get':
         if (!data) {
-          // query with pagination, header, columns
-          if (pagination.page) {
-            const paginationConfig = Entity.pageConfig(pagination);
+          // query with pageParams, header, columns
+          if (pageParams.page) {
+            const paginationConfig = Entity.pageConfig(pageParams);
             query = Entity.pageQuery(paginationConfig, query);
-            requestedConfig.params.pagination = paginationConfig;
+            requestedConfig.params.pageParams = paginationConfig;
           }
           // query with filter
           if (filter) {

@@ -33,7 +33,7 @@ export default class MemberTable extends Vue {
     message: 'data.result.resultMessage',
     data: 'data.entity',
     columns: 'config.params.columns',
-    total: 'config.params.pagination.total',
+    total: 'config.params.pageParams.total',
   }
 
   outParams: any = {}

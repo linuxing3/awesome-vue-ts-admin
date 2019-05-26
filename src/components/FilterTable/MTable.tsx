@@ -36,7 +36,7 @@ export default class MTable extends Vue {
       message: 'data.result.resultMessage',
       data: 'data.entity',
       columns: 'config.params.columns',
-      total: 'config.params.pagination.total',
+      total: 'config.params.pageParams.total',
     }),
   }) private backParams!: {
     code: string,
@@ -120,7 +120,7 @@ export default class MTable extends Vue {
     console.log('Fetching ...');
     this.loading = true;
     const params = {
-      pagination: { ...this.pageParams },
+      pageParams: { ...this.pageParams },
       filter: { ...this.tableParams },
       out: { ...this.outParams },
     };
@@ -134,24 +134,6 @@ export default class MTable extends Vue {
       this.loading = false;
       const code = this.getValue(this.backParams.code, res);
       if (code === this.backParams.codeOK) {
-        // table data
-        // if (Object.keys(this.tableParams).length !== 0) {
-        //   // filter
-        //   const filter = Object.keys(this.tableParams)
-        //     .reduce((r, key) => {
-        //       r.concat(this.tableParams[key], ' ')
-        //       return r
-        //     }, '');
-        //   const apiData = this.getValue(this.backParams.data, res);
-        //   const newData = {
-        //     ...apiData,
-        //     entity: lazyFilter(filter)(apiData.entity)
-        //   };
-        //   console.log('Filtered Data', newData);
-        // } else {
-        //   // all
-        //   // this.tableData = this.getValue(this.backParams.data, res);
-        // }
         this.tableData = this.getValue(this.backParams.data, res);
         console.log('MTable table data:', this.tableData);
         // table list and columns

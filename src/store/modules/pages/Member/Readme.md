@@ -198,14 +198,14 @@ import models from "@/store/models";
 
 // 创建 axios 实例
 const service = {
-  validateUrl: ({ url, method, data, pagination }) => {
+  validateUrl: ({ url, method, data, pageParams }) => {
     const [prefix, namespace, action] = url.split("/");
     const model = models[namespace];
     return {
       method,
       data,
       model,
-      pagination,
+      pageParams,
       namespace,
       url,
       prefix,
@@ -218,7 +218,7 @@ const service = {
     const result = await this.handleRequest(newParams);
     return result;
   },
-  handleRequest: async ({ method, data, model, namespace, pagination }) => {
+  handleRequest: async ({ method, data, model, namespace, pageParams }) => {
     // Using vuex-orm with localforage
     try {
       let requestedData = null;
@@ -248,18 +248,18 @@ const service = {
         case "get":
           if (!data) {
             await model.$fetch();
-            // pagination
+            // pageParams
             const totalCount = model.query().count() || 0;
             const pageNo =
-              (pagination.pageNo && parseInt(pagination.pageNo)) || 1;
+              (pageParams.pageNo && parseInt(pageParams.pageNo)) || 1;
             const pageSize =
-              (pagination.pageSize && parseInt(pagination.pageSize)) || 10;
+              (pageParams.pageSize && parseInt(pageParams.pageSize)) || 10;
             const totalPage = Math.ceil(totalCount / pageSize) || 0;
             // offset and next
             const offset = (pageNo - 1) * pageSize || 0;
             const next =
               (pageNo >= totalPage ? totalCount % pageSize : pageSize) + 1;
-            // query with pagination
+            // query with pageParams
             const paginatedData = model
               .query()
               .offset(offset)
