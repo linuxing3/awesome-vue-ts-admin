@@ -132,6 +132,13 @@ export default class <%= modelTableName %> extends Vue {
     })
   }
 
+  handleExport () {
+    console.log('Exporting ... ')
+    this.$router.replace({
+      name: 'ExportHelper'
+    })
+  }
+
   handleRemove (row) {
     this.$confirm({
       title: '警告',
@@ -202,14 +209,15 @@ export default class <%= modelTableName %> extends Vue {
           filterParams={this.filterParams}
           outParams={this.outParams}
           addBtn={true}
-          exportBtn={false}
+          exportBtn={true}
           dataType={'json'}
           rowKey={'id'}
           opreat={this.opreat}
-          fetchType={'post'}
+          fetchType={'get'}
           backParams={this.BackParams}
           on-menuClick={this.tableClick}
           on-add={this.handleCreate}
+          on-export={this.handleExport}
         />
       </div>
     );

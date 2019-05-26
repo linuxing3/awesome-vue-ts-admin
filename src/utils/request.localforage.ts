@@ -1,7 +1,7 @@
+import { values } from 'lodash';
 import models from '@/models';
 import { builder, baseData } from '@/utils/builder';
 import { AGenTableColumns, VGenTableHeaders } from '@/utils/genFormData';
-
 
 export interface BaseData {
   result: {
@@ -11,82 +11,64 @@ export interface BaseData {
   entity: any;
 }
 export interface LfBasicCredentials {
-  username: string
-  password: string
+  username: string;
+  password: string;
 }
 
 export interface LfRequestConfig {
-  url?: string
-  method?: string
-  params?: any
-  data?: any
-  fetchType?: string
-  baseURL?: string
-  headers?: any
-  paramsSerializer?: (params: any) => string
-  timeout?: number
-  withCredentials?: boolean
-  auth?: LfBasicCredentials
-  responseType?: string
-  xsrfCookieName?: string
-  xsrfHeaderName?: string
-  onUploadProgress?: (progressEvent: any) => void
-  onDownloadProgress?: (progressEvent: any) => void
-  maxContentLength?: number
-  validateStatus?: (status: number) => boolean
-  maxRedirects?: number
-  httpAgent?: any
-  httpsAgent?: any
+  url?: string;
+  method?: string;
+  params?: any;
+  data?: any;
+  fetchType?: string;
+  baseURL?: string;
+  headers?: any;
+  paramsSerializer?: (params: any) => string;
+  timeout?: number;
+  withCredentials?: boolean;
+  auth?: LfBasicCredentials;
+  responseType?: string;
+  xsrfCookieName?: string;
+  xsrfHeaderName?: string;
+  onUploadProgress?: (progressEvent: any) => void;
+  onDownloadProgress?: (progressEvent: any) => void;
+  maxContentLength?: number;
+  validateStatus?: (status: number) => boolean;
+  maxRedirects?: number;
+  httpAgent?: any;
+  httpsAgent?: any;
 }
 
 export interface LfResponse<T = any> {
-  data: T
-  status?: number
-  statusText?: string
-  headers?: any
-  config?: LfRequestConfig
-  request?: any
-  success?: boolean
-  message?: string
-  code?: number
-  statusCode?: number
-  timestamp?: number
+  data: T;
+  status?: number;
+  statusText?: string;
+  headers?: any;
+  config?: LfRequestConfig;
+  request?: any;
+  success?: boolean;
+  message?: string;
+  code?: number;
+  statusCode?: number;
+  timestamp?: number;
 }
 
 export interface LfService {
-  validateUrl: (options: LfRequestConfig) => LfRequestConfig
+  validateUrl: (options: LfRequestConfig) => LfRequestConfig;
 
-  request(params: any): Promise<LfResponse>
+  request(params: any): Promise<LfResponse>;
 
-  post?(model: any, data: any): Promise<LfResponse>
+  post?(model: any, data: any): Promise<LfResponse>;
 
-  remove?(model: any, data: any): Promise<LfResponse>
+  remove?(model: any, data: any): Promise<LfResponse>;
 
-  patch?(model: any, data: any): Promise<LfResponse>
+  patch?(model: any, data: any): Promise<LfResponse>;
 
-  handleRequest: (options: LfRequestConfig) => Promise<LfResponse>
+  handleRequest: (options: LfRequestConfig) => Promise<LfResponse>;
 
-  response(params: any): Promise<LfResponse>
-
+  response(params: any): Promise<LfResponse>;
 }
 
-const genPagination = (model, pagination) => {
-  const total = model.query().count();
-  const pageNum = (pagination.pageNum && parseInt(pagination.pageNum)) || 1;
-  const pageSize = (pagination.pageSize && parseInt(pagination.pageSize)) || 10;
-  const totalPage = Math.ceil(total / pageSize) || 0;
-  // offset and next
-  const offset = (pageNum - 1) * pageSize || 0;
-  const next = (pageNum >= totalPage ? total % pageSize : pageSize) + 1;
-  return {
-    total,
-    pageNum,
-    pageSize,
-    totalPage,
-    offset,
-    next,
-  };
-};
 
 // 创建 axios localforage 实例
 const lfService: LfService = {
@@ -128,16 +110,23 @@ const lfService: LfService = {
     const {
       method,
       data,
-      params: { model, namespace, pagination },
+      params: {
+        model, namespace, pagination, filter, statistic,
+      },
     } = options;
 
     const Entity = model;
 
+    let query = Entity.query();
     let requestedData: BaseData = null;
     const requestedConfig: LfRequestConfig = {
       ...options,
     };
 
+    // Sync localforage with vuex state
+    Entity.$fetch();
+
+    // response api
     switch (method) {
       case 'post':
         const createdItems = await Entity.$create({ data });
@@ -156,18 +145,24 @@ const lfService: LfService = {
         break;
       case 'get':
         if (!data) {
-          await Entity.$fetch();
           // query with pagination, header, columns
-          // pagination
-          const paginationConfig = genPagination(Entity, pagination);
-          const entity = Entity
-            .query()
-            .offset(paginationConfig.offset)
-            .limit(paginationConfig.pageSize)
-            .get();
+          if (pagination.page) {
+            const paginationConfig = Entity.pageConfig(pagination);
+            query = Entity.pageQuery(paginationConfig, query);
+            requestedConfig.params.pagination = paginationConfig;
+          }
+          // query with filter
+          if (filter) {
+            query = Entity.searchQuery(filter, query);
+            requestedConfig.params.filter = filter;
+          }
+          if (statistic) {
+            const statistic = Entity.aggregateValuesOfAllFields();
+            requestedConfig.params.statistic = statistic;
+          }
           requestedData = baseData('success', '查询成功');
-          requestedData.entity = entity;
-          requestedConfig.params.pagination = paginationConfig;
+          // using query builder get real data
+          requestedData.entity = query.get();
         } else {
           await Entity.$fetch();
           const entities = await Entity.$get(data.id.toString());

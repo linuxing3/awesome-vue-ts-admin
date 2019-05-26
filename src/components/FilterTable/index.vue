@@ -8,12 +8,12 @@
       :table-list="defalutTableList"
       :add-btn="addBtn"
       :export-btn="exportBtn"
+      :export-fun="exportBack"
       :local-name="localName"
       @search="searchFun"
-      @export="exportBack"
+      @addFun="addBack"
       @clearOut="clearFun"
       @setTable="setTable"
-      @addFun="addBack"
       @tableHeight="tableHeight"
     />
     <m-table
@@ -148,6 +148,7 @@ export default class FilterTable extends Vue {
 
   @Emit()
   searchFun(params: any) {
+    this.$emit('search', params);
     this.tableParams = params;
     const table: any = this.$refs.MTable;
     // 延迟100ms加载数据
@@ -158,6 +159,7 @@ export default class FilterTable extends Vue {
 
   @Emit()
   addBack() {
+    console.log('Emit adding from FilterTable...');
     this.$emit('add');
   }
 
@@ -169,7 +171,8 @@ export default class FilterTable extends Vue {
 
   @Emit()
   exportBack() {
-    this.$emit('exportBack');
+    console.log('Emit exporting from FilterTable...');
+    this.$emit('export');
   }
 
   @Emit()

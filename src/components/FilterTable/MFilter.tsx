@@ -359,7 +359,7 @@ class MFilterClass extends Vue {
             this.addBtn ? <a-button on-click={this.addFun} id={isNormal ? 'tableAdd' : 'tableAdd2'} icon="plus">Add</a-button> : null
           }
           {
-            this.exportBtn ? <a-button on-click={this.addFun} id={isNormal ? 'tableExport' : 'tableExport2'} icon="download" shape="circle"></a-button> : null
+            this.exportBtn ? <a-button on-click={this.exportFun} id={isNormal ? 'tableExport' : 'tableExport2'} icon="download" shape="circle"></a-button> : null
           }
           <a-button on-click={this.openSetting} id="tableSet" icon="setting" shape="circle"></a-button>
         </div>

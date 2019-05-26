@@ -24,10 +24,7 @@ export default class MemberTable extends Vue {
 
   filterParams: any = {
     name: '',
-    address: [],
-    createtime: [],
-    startTime: '',
-    endTime: '',
+    gender: '',
   }
 
   BackParams: any = {
@@ -47,6 +44,12 @@ export default class MemberTable extends Vue {
       label: 'name',
       type: 'input',
       placeholder: 'Seach Name',
+    },
+    {
+      key: 'gender',
+      label: 'gender',
+      type: 'input',
+      placeholder: 'Seach Gender',
     },
   ]
 
@@ -108,6 +111,17 @@ export default class MemberTable extends Vue {
     this.$router.replace({
       name: 'MemberForm',
     });
+  }
+
+  handleExport() {
+    console.log('Exporting from MemberTable ... ');
+    this.$router.replace({
+      name: 'ExportHelper',
+    });
+  }
+
+  handleSearch(params) {
+    console.log('Searching from MemberTable ... ', params);
   }
 
   handleRemove(row) {
@@ -180,7 +194,7 @@ export default class MemberTable extends Vue {
           filterParams={this.filterParams}
           outParams={this.outParams}
           addBtn={true}
-          exportBtn={false}
+          exportBtn={true}
           dataType={'json'}
           rowKey={'id'}
           opreat={this.opreat}
@@ -188,6 +202,8 @@ export default class MemberTable extends Vue {
           backParams={this.BackParams}
           on-menuClick={this.tableClick}
           on-add={this.handleCreate}
+          on-export={this.handleExport}
+          on-search={this.handleSearch}
         />
       </div>
     );

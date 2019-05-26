@@ -1,5 +1,6 @@
 import {
   Model,
+  Query,
   Attr,
   String,
   Number,
@@ -21,6 +22,7 @@ import {
 import {
   keys, pullAll, uniq, map,
 } from 'lodash';
+import { baseFilter, checkStringMatch } from '@/utils/helper';
 
 export class BaseModel extends Model {
   static primaryKey = 'id';
@@ -73,6 +75,61 @@ export class BaseModel extends Model {
   }
 
   /**
+   * 获取分页配置
+   * @param {any} pageParams page params should be equal to front
+   * @returns {any}
+   */
+  static pageConfig(pageParams: { page, pageNum, pageSize}): any {
+    const total = this.query().count();
+    const page = pageParams.page;
+    const pageNum = (pageParams.pageNum && parseInt(pageParams.pageNum)) || 1;
+    const pageSize = (pageParams.pageSize && parseInt(pageParams.pageSize)) || 10;
+    const totalPage = Math.ceil(total / pageSize) || 0;
+    // offset and next
+    const offset = (pageNum - 1) * pageSize || 0;
+    const next = (pageNum >= totalPage ? total % pageSize : pageSize) + 1;
+    return {
+      page,
+      total,
+      pageNum,
+      pageSize,
+      totalPage,
+      offset,
+      next,
+    };
+  }
+
+  static pageQuery(paginationConfig: any, query?: Query): Query {
+    if (!query) query = this.query();
+    return query
+      .offset(paginationConfig.offset)
+      .limit(paginationConfig.pageSize);
+  }
+
+  /**
+   * 使用一个过滤器对象，返回符合条件的数组
+   * @param filter filter in format { name: 'xx', age: ''}, or 'xx'
+   */
+  static searchQuery(filter, query?: Query): Query {
+    if (!query) query = this.query();
+    if (typeof (filter) === 'object') {
+      return Object.keys(filter).reduce((query, key) => query.where((record) => {
+        // lazy search
+        checkStringMatch(record[key])(filter[key]);
+        // exact match search
+        // record[key] = filter[key]
+        // with query builder
+        // query.where(key, filter[key])
+      }), this.query());
+    } if (typeof (filter) === 'string') {
+      return this.fieldsKeys().reduce((query, key) => query.where((record) => {
+        checkStringMatch(record[key])(filter);
+      }), query);
+    }
+    return query;
+  }
+
+  /**
    * 使用lodash获取某模型中某一字段的全部值组成的数组
    * @param Model 模型
    * @param fieldDef 字段名
@@ -82,6 +139,42 @@ export class BaseModel extends Model {
     const records: any[] = this.query().get();
     return uniq(map(records, fieldName));
     // return uniq(keys(mapKeys(records, record => record[fieldName])))
+  }
+
+  /**
+   * Generate statistic from unique value of a field
+   * As the max, min, sum in Query
+   * @param fieldName string
+   * @returns 某一字段的全部值的计数
+   */
+  static aggregateValuesOfField(fieldName: string): any {
+    const uniqueValues = this.uniqueValuesOfField(fieldName);
+    const max = this.query().max(fieldName);
+    const min = this.query().min(fieldName);
+    const sum = this.query().sum(fieldName);
+    const statisticInfo = {
+      field: fieldName,
+      max,
+      min,
+      sum,
+      statistic: {},
+    };
+    return uniqueValues.reduce((statistic, value) => {
+      const count = this.query().where(fieldName, value).count();
+      statistic.statistic[value] = count;
+      return statistic;
+    }, statisticInfo);
+  }
+
+  /**
+   * Generate statistic from unique value of all fields
+   * As the max, min, sum in Query
+   */
+  static aggregateValuesOfAllFields(): any {
+    return this.fieldsKeys().reduce((statistic, field) => {
+      statistic[field] = this.aggregateValuesOfField(field);
+      return statistic;
+    }, {});
   }
 
   /**
@@ -139,5 +232,19 @@ export class BaseModel extends Model {
   $uniqueValuesOfField(fieldName: string): any[] {
     const records: any[] = this.$query().get();
     return uniq(map(records, fieldName));
+  }
+
+  /**
+   * Generate statistic from unique value of a field
+   * As the max, min, sum in Query
+   * @param fieldName string
+   */
+  $aggregateValuesOfField(fieldName: string): any[] {
+    const uniqueValues = this.$uniqueValuesOfField(fieldName);
+    uniqueValues.reduce((statistic, value) => {
+      statistic[value] = this.$query().where(fieldName, value).count();
+      return statistic;
+    }, {});
+    return [];
   }
 }

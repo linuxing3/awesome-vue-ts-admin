@@ -51,6 +51,14 @@ export const asyncRouterMap: routerItem[] = [
     permission: true,
     meta: { key: 'Dashboard' },
   },
+  {
+    path: '/export-helper',
+    icon: 'dashboard',
+    name: 'ExportHelper',
+    component: getComponent('helpers/ExportHelper'),
+    permission: true,
+    meta: { key: 'Export' },
+  },
   // insert more route below
   // member
   {

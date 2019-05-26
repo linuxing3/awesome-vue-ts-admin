@@ -6,7 +6,9 @@ import {
 } from 'ant-design-vue';
 import { tableList, Opreat, Directives } from '@/interface';
 import Spin from '@/components/Spin';
+import { lazyFilter } from '@/utils/helper';
 import './MTable.less';
+import { createNamespacedHelpers } from 'vuex';
 
 @Component({
   components: {
@@ -117,25 +119,43 @@ export default class MTable extends Vue {
   getData() {
     console.log('Fetching ...');
     this.loading = true;
+    const params = {
+      pagination: { ...this.pageParams },
+      filter: { ...this.tableParams },
+      out: { ...this.outParams },
+    };
+    console.log('Mtable get Data Params:', params);
     window.ajax.request({
       url: this.url,
       method: this.fetchType,
-      params: {
-        pagination: {
-          pageNum: 1,
-          pageSize: 100,
-        },
-      },
+      params,
     }).then((res: any) => {
-      console.log('Table backparams:', this.backParams);
       console.log('Table Fetch response:', res);
       this.loading = false;
       const code = this.getValue(this.backParams.code, res);
       if (code === this.backParams.codeOK) {
+        // table data
+        // if (Object.keys(this.tableParams).length !== 0) {
+        //   // filter
+        //   const filter = Object.keys(this.tableParams)
+        //     .reduce((r, key) => {
+        //       r.concat(this.tableParams[key], ' ')
+        //       return r
+        //     }, '');
+        //   const apiData = this.getValue(this.backParams.data, res);
+        //   const newData = {
+        //     ...apiData,
+        //     entity: lazyFilter(filter)(apiData.entity)
+        //   };
+        //   console.log('Filtered Data', newData);
+        // } else {
+        //   // all
+        //   // this.tableData = this.getValue(this.backParams.data, res);
+        // }
+        this.tableData = this.getValue(this.backParams.data, res);
+        console.log('MTable table data:', this.tableData);
         // table list and columns
         this.tableList = this.getValue(this.backParams.columns, res);
-        // table data
-        this.tableData = this.getValue(this.backParams.data, res);
         // table total
         this.dataTotal = this.getValue(this.backParams.total, res)
           ? this.getValue(this.backParams.total, res) : 0;
@@ -174,7 +194,7 @@ export default class MTable extends Vue {
 
   /**
    * @method 根据backParams参数，获取对应值
-   * @param {string} position 需要值的位置, 格式为 data.entity.list
+   * @param {string} position 需要值的位置, 格式为 data.entity
    * @param {object} res 返回的表格数据
    */
   getValue(position: string, res: any) {
