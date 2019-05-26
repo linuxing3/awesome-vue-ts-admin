@@ -154,7 +154,7 @@ const lfService: LfService = {
           }
           // query with filter
           if (filter) {
-            console.log('Get fitlered information')
+            console.log('Get fitlered information');
             query = Entity.searchQuery(filter, query);
             requestedConfig.params.filter = filter;
           }
