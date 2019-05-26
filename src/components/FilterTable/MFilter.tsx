@@ -350,7 +350,7 @@ class MFilterClass extends Vue {
     return (
       <div>
         <a-button type="primary" on-click={this.onSearch} id="tableSearch" icon="search">Search</a-button>
-        <a-button type="primary" on-click={this.reset} id="tableReset" icon="reload">Reset</a-button>
+        <a-button type="primary" on-click={this.reset} id="tableReset" icon="reload">Refresh</a-button>
         {
           this.filterGrade.length ? <a on-click={() => this.gradeSwitch(isNormal)} class="grade-btn">{isNormal ? 'Common' : 'Senior'} Search{isNormal ? <i class="iconfont-down"></i> : <i class="iconfont-up"></i>}</a> : null
         }

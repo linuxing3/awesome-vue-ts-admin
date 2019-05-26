@@ -74,7 +74,7 @@ export default class MTable extends Vue {
   // 表格分页大小参数
   @Prop({ default: () => ['5', '10', '15', '20', '50', '100'] }) private pageSizeList!: number[];
 
-  @Prop({ default: 100 }) private defaultPageSize!: number;
+  @Prop({ default: 50 }) private defaultPageSize!: number;
 
   @Prop() private highlightCurrentRow!: boolean;
 

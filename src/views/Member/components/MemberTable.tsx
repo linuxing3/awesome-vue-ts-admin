@@ -25,6 +25,9 @@ export default class MemberTable extends Vue {
   filterParams: any = {
     name: '',
     gender: '',
+    department: '',
+    fromEntity: '',
+    arrivingDate: ''
   }
 
   BackParams: any = {
@@ -48,9 +51,25 @@ export default class MemberTable extends Vue {
     {
       key: 'gender',
       label: 'gender',
-      type: 'input',
-      placeholder: 'Seach Gender',
+      type: 'checkboxButton',
+      placeholder: 'male',
+      options: [
+        {
+          label: 'male',
+          value: 'male'
+        },
+        {
+          label: 'female',
+          value: 'female'
+        }
+      ],
     },
+    {
+      key: 'arrivingDate',
+      label: 'arriving Date',
+      type: 'date',
+      placeholder: '2019-01-01'
+    }
   ]
 
   tableList: tableList[] = [

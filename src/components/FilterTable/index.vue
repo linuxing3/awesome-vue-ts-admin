@@ -101,7 +101,7 @@ export default class FilterTable extends Vue {
   @Prop() private fetchError!: string;
 
   // 默认分页数量
-  @Prop({ default: 10 }) private defaultPageSize!: number;
+  @Prop({ default: 50 }) private defaultPageSize!: number;
 
   // 数据返回格式
   @Prop() private backParams!: object;
@@ -148,6 +148,7 @@ export default class FilterTable extends Vue {
 
   @Emit()
   searchFun(params: any) {
+    console.log('Emit searching from FilterTable...');
     this.$emit('search', params);
     this.tableParams = params;
     const table: any = this.$refs.MTable;
