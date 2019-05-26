@@ -27,7 +27,7 @@ export default class MemberTable extends Vue {
     gender: '',
     department: '',
     fromEntity: '',
-    arrivingDate: ''
+    arrivingDate: '',
   }
 
   BackParams: any = {
@@ -56,26 +56,43 @@ export default class MemberTable extends Vue {
       options: [
         {
           label: 'male',
-          value: 'male'
+          value: 'male',
         },
         {
           label: 'female',
-          value: 'female'
-        }
+          value: 'female',
+        },
       ],
     },
     {
       key: 'arrivingDate',
       label: 'arriving Date',
       type: 'date',
-      placeholder: '2019-01-01'
-    }
+      placeholder: '2019-01-01',
+    },
   ]
 
   tableList: tableList[] = [
     {
       title: 'Name',
       dataIndex: 'name',
+    },
+    {
+      title: 'Age',
+      dataIndex: 'age',
+    },
+    {
+      title: 'Department',
+      dataIndex: 'department',
+    },
+    {
+      title: 'From Entity',
+      dataIndex: 'fromEntity',
+    },
+    {
+      title: 'Gender',
+      dataIndex: 'gender',
+      // customRender: this.genderRender,
     },
   ]
 
