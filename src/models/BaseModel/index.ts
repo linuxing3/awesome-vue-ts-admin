@@ -110,18 +110,24 @@ export class BaseModel extends Model {
    * 使用一个过滤器对象，返回符合条件的数组
    * @param filter filter in format { name: 'xx', age: ''}, or 'xx'
    */
-  static searchQuery(filter, query?: Query): Query {
+  static searchQuery(filter = {}, query?: Query): Query {
     if (!query) query = this.query();
-    if (typeof (filter) === 'object') {
+    console.log('type of filter: ', typeof filter);
+    if (typeof filter === 'object') {
+      console.log('searchQuery with object: ', filter);
       return Object.keys(filter).reduce((query, key) => query.where((record) => {
         // lazy search
-        checkStringMatch(record[key])(filter[key]);
+        const filterValue = typeof filter[key] === 'string' ? filter[key] : '';
+        const matchResult = checkStringMatch(record[key])(filterValue);
+        console.log(`filter key ${key} matched: `, matchResult);
+        return matchResult;
         // exact match search
-        // record[key] = filter[key]
+        // (filter[key] === undefined || '') ? true : record[key] === filter[key]
         // with query builder
-        // query.where(key, filter[key])
-      }), this.query());
-    } if (typeof (filter) === 'string') {
+        // (filter[key] === undefined || '') ? true : query.where(key, filter[key])
+      }), query);
+    } if (typeof filter === 'string') {
+      console.log('searchQuery with string: ', filter);
       return this.fieldsKeys().reduce((query, key) => query.where((record) => {
         checkStringMatch(record[key])(filter);
       }), query);

@@ -6,7 +6,6 @@ import {
 } from 'ant-design-vue';
 import { tableList, Opreat, Directives } from '@/interface';
 import Spin from '@/components/Spin';
-import { lazyFilter } from '@/utils/helper';
 import './MTable.less';
 import { createNamespacedHelpers } from 'vuex';
 

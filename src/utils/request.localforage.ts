@@ -147,12 +147,14 @@ const lfService: LfService = {
         if (!data) {
           // query with pageParams, header, columns
           if (pageParams.page) {
+            console.log('Get pagination information');
             const paginationConfig = Entity.pageConfig(pageParams);
             query = Entity.pageQuery(paginationConfig, query);
             requestedConfig.params.pageParams = paginationConfig;
           }
           // query with filter
           if (filter) {
+            console.log('Get fitlered information')
             query = Entity.searchQuery(filter, query);
             requestedConfig.params.filter = filter;
           }
