@@ -1,7 +1,7 @@
 import { values } from 'lodash';
 import models from '@/models';
 import { builder, baseData } from '@/utils/builder';
-import { AGenTableColumns, VGenTableHeaders } from '@/utils/genFormData';
+import { AGenTableColumns } from '@/utils/genFormData';
 
 export interface BaseData {
   result: {
@@ -77,7 +77,6 @@ const lfService: LfService = {
     const model: any = models[namespace];
     // header, columns
     const columns = AGenTableColumns(model.fieldsKeys());
-    const headers = VGenTableHeaders(model.fieldsKeys());
     const newOptions: LfRequestConfig = {
       ...options,
       params: {
@@ -87,7 +86,6 @@ const lfService: LfService = {
         namespace,
         action,
         columns,
-        headers,
       },
     };
     return newOptions;
