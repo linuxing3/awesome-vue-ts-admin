@@ -129,7 +129,8 @@ class MFormClass extends Vue {
         method: 'get',
       });
       this.itemList = config.params.columns;
-      // this.Form.setFieldsValue();
+      const Entity = config.params.model;
+      this.Form.setFieldsValue(new Entity());
     } else {
       // for edit a exiting record
       const { config, data: { entity } } = await lfService.request({
