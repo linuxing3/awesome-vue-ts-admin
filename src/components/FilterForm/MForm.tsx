@@ -130,7 +130,7 @@ class MFormClass extends Vue {
       });
       this.itemList = config.params.columns;
       const Entity = config.params.model;
-      this.Form.setFieldsValue(new Entity());
+      this.loadEditInfo(new Entity());
     } else {
       // for edit a exiting record
       const { config, data: { entity } } = await lfService.request({
@@ -145,7 +145,7 @@ class MFormClass extends Vue {
   }
 
   loadEditInfo(data) {
-    console.log(`编辑记录 ${this.id}`);
+    console.log(`记录 ${this.id}`);
     new Promise((resolve) => {
       setTimeout(resolve, 500);
     }).then(() => {
