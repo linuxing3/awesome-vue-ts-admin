@@ -41,7 +41,7 @@ class Login extends Vue {
         // window.api.login({ ...values })
         this.$store.dispatch('loginByName', values)
           .then((res) => {
-            console.log('response from loginByName', res);
+            this.$log.suc('response from loginByName', res);
             this.loading = false;
             const {
               result: { resultCode, resultMessage },
@@ -77,7 +77,7 @@ class Login extends Vue {
         <h2 class="loginTxt">
           WELCOME
           <br />
-          VUE-TS-ADMIN
+          EM-VE-ADMIN
         </h2>
         <div class="loginForm">
           <div class="logo">

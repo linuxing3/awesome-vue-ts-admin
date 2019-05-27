@@ -415,3 +415,23 @@ export const ImportCSV = async ({ file = {}, keysDef = {} }): Promise<any> => ne
     },
   });
 });
+
+/**
+ * @method 根据backParams参数，获取对应值
+ * @param {string} position 需要值的位置, 格式为 data.entity
+ * @param {object} res 返回的表格数据
+ */
+export const getValue = (position: string, res: any) => {
+  let data = JSON.parse(JSON.stringify(res));
+  const keyList = position.split('.');
+  keyList.forEach((item, index) => {
+    if (data !== null && data[item] !== null) {
+      data = data[item];
+    } else {
+      data = null;
+      return false;
+    }
+    return true;
+  });
+  return data;
+};

@@ -85,23 +85,6 @@ export const asyncRouterMap: routerItem[] = [
       },
     ],
   },
-  // {
-  //   path: '/customers',
-  //   icon: 'team',
-  //   name: 'Customers',
-  //   component: getComponent('customers/index'),
-  //   permission: true,
-  //   meta: { key: 'Customers' },
-  //   children: [
-  //     {
-  //       path: 'baseInfo',
-  //       name: 'Base Info',
-  //       component: getComponent('customers/baseInfo/index'),
-  //       permission: true,
-  //       meta: { key: 'BaseInfo' },
-  //     },
-  //   ],
-  // },
   {
     path: '/charts',
     icon: 'line-chart',
@@ -196,6 +179,23 @@ export const asyncRouterMap: routerItem[] = [
         component: getComponent('map/trajectory/index'),
         permission: true,
         meta: { key: 'Trajectory' },
+      },
+    ],
+  },
+  {
+    path: '/playground',
+    icon: 'setting',
+    name: 'Playground',
+    component: getComponent('playground/index'),
+    permission: true,
+    meta: { key: 'Playground' },
+    children: [
+      {
+        path: 'crudForm',
+        name: 'Crud From',
+        component: getComponent('playground/crudForm/index'),
+        permission: true,
+        meta: { key: 'CrudForm' },
       },
     ],
   },

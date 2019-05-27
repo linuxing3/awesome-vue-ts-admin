@@ -28,7 +28,7 @@ export default class AppMain extends Vue {
 
   @Emit()
   removeTab(name: string) {
-    console.log(this);
+    this.$log.suc(this);
     this.$store.dispatch('RemoveTab', name);
   }
 

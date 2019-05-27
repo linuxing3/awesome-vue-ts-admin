@@ -123,7 +123,7 @@ export default class MemberTable extends Vue {
   editData: object = {}
 
   async handleDelete(row) {
-    console.log('Deleting ... ');
+    this.$log.suc('Deleting ... ');
     await lfService.request({
       url: `/${this.modelName}`,
       method: 'delete',
@@ -133,7 +133,7 @@ export default class MemberTable extends Vue {
   }
 
   handleEdit(row) {
-    console.log('Editing ... ');
+    this.$log.suc('Editing ... ');
     this.$router.replace({
       name: 'MemberForm',
       params: {
@@ -143,21 +143,21 @@ export default class MemberTable extends Vue {
   }
 
   handleCreate() {
-    console.log('Creating ... ');
+    this.$log.suc('Creating ... ');
     this.$router.replace({
       name: 'MemberForm',
     });
   }
 
   handleExport() {
-    console.log('Exporting from MemberTable ... ');
+    this.$log.suc('Exporting from MemberTable ... ');
     this.$router.replace({
       name: 'ExportHelper',
     });
   }
 
   handleSearch(params) {
-    console.log('Searching from MemberTable ... ', params);
+    this.$log.suc('Searching from MemberTable ... ', params);
   }
 
   handleRemove(row) {
@@ -168,14 +168,14 @@ export default class MemberTable extends Vue {
       okType: 'danger',
       cancelText: '取消',
       onOk: () => {
-        console.log('OK');
+        this.$log.suc('OK');
         this.handleDelete(row);
         return new Promise((resolve, reject) => {
           setTimeout(Math.random() > 0.5 ? resolve : reject, 1000);
-        }).catch(() => console.log('Oops errors!'));
+        }).catch(() => this.$log.suc('Oops errors!'));
       },
       onCancel: () => {
-        console.log('Cancel');
+        this.$log.suc('Cancel');
       },
     });
   }

@@ -7,11 +7,10 @@ import store from '@/store';
 import config from '@/utils/config';
 import Api from '@/api/api.lf';
 import i18n from './utils/i18n';
+import { log } from './utils/helper';
 
 import './styles/global.less';
-
-// 自定义全局组件
-import FilterTable from '@/components/FilterTable/index.vue';
+import './components';
 
 // 全局api
 const Apis = new Api({ baseUrl: process.env.NODE_ENV === 'production' ? '/api' : '/api' });
@@ -27,9 +26,8 @@ const options = {
   height: '3px',
 };
 
-// Vue.use(VueInsProgressBar, options);
 Vue.prototype.$message = message;
-Vue.component('filter-table', FilterTable);
+Vue.prototype.$log = log;
 
 Vue.config.productionTip = false;
 
@@ -42,7 +40,7 @@ router.beforeEach((to, from, next) => {
     store
       .dispatch('getUserLocalInfo')
       .then((entity) => {
-        console.log('Route Guard Found Entity:', entity);
+        log.info('Route Guard Found Entity:', entity);
         const toPath = config.noLoginList.indexOf(`#${to.path}`) > -1 ? '/dashboard' : to.path;
         store.dispatch('AddTabPane', toPath).then(() => {
           next({
@@ -54,7 +52,7 @@ router.beforeEach((to, from, next) => {
         });
       })
       .catch((err) => {
-        console.log(err);
+        log.err(err);
         if (config.noLoginList.indexOf(to.path) < 0) {
           next({ name: 'login', replace: true });
         }

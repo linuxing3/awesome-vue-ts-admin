@@ -72,14 +72,14 @@ class BaseForm extends Vue {
 
   handleAddOrEdit(data) {
     if (this.id === -1) {
-      console.log('Creating...');
+      this.$log.suc('Creating...');
       lfService.request({
         url: `/${this.modelName}`,
         method: 'post',
         data,
       });
     } else {
-      console.log('updating...');
+      this.$log.suc('updating...');
       lfService.request({
         url: `/${this.modelName}`,
         method: 'patch',
@@ -89,7 +89,7 @@ class BaseForm extends Vue {
   }
 
   async handleGetInfo() {
-    console.log('getting edit info...');
+    this.$log.suc('getting edit info...');
     if (this.id === -1) return;
     const {
       data: { entity },
@@ -98,16 +98,16 @@ class BaseForm extends Vue {
       method: 'get',
       data: { id: this.id },
     });
-    console.log('Get Data:', entity);
+    this.$log.suc('Get Data:', entity);
     this.loadEditInfo(entity);
   }
 
   loadEditInfo(data) {
-    console.log(`编辑记录 ${this.id}`);
+    this.$log.suc(`编辑记录 ${this.id}`);
     new Promise((resolve) => {
       setTimeout(resolve, 500);
     }).then(() => {
-      console.log('formData:', data);
+      this.$log.suc('formData:', data);
       this.Form.setFieldsValue(data);
     });
   }

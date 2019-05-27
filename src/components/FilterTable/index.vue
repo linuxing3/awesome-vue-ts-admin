@@ -148,7 +148,7 @@ export default class FilterTable extends Vue {
 
   @Emit()
   searchFun(params: any) {
-    console.log('Emit searching from FilterTable...');
+    this.$log.suc('Emit searching from FilterTable...');
     this.$emit('search', params);
     this.tableParams = params;
     const table: any = this.$refs.MTable;
@@ -160,7 +160,7 @@ export default class FilterTable extends Vue {
 
   @Emit()
   addBack() {
-    console.log('Emit adding from FilterTable...');
+    this.$log.suc('Emit adding from FilterTable...');
     this.$emit('add');
   }
 
@@ -172,7 +172,7 @@ export default class FilterTable extends Vue {
 
   @Emit()
   exportBack() {
-    console.log('Emit exporting from FilterTable...');
+    this.$log.suc('Emit exporting from FilterTable...');
     this.$emit('export');
   }
 

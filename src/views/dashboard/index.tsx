@@ -39,7 +39,7 @@ export default class Dashboard extends Vue {
   }
 
   loadMock() {
-    console.log(entity);
+    this.$log.suc(entity);
     this.pageData = entity;
     this.loading = false;
     setTimeout(() => {

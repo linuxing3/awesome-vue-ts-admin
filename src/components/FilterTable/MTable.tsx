@@ -8,6 +8,7 @@ import { tableList, Opreat, Directives } from '@/interface';
 import Spin from '@/components/Spin';
 import './MTable.less';
 import { createNamespacedHelpers } from 'vuex';
+import { getValue } from '@/utils/helper';
 
 @Component({
   components: {
@@ -116,32 +117,32 @@ export default class MTable extends Vue {
    * @method 获取表格数据
    */
   getData() {
-    console.log('Fetching ...');
+    this.$log.suc('Fetching ...');
     this.loading = true;
     const params = {
       pageParams: { ...this.pageParams },
       filter: { ...this.tableParams },
       out: { ...this.outParams },
     };
-    console.log('Mtable get Data Params:', params);
+    this.$log.suc('Mtable get Data Params:', params);
     window.ajax.request({
       url: this.url,
       method: this.fetchType,
       params,
     }).then((res: any) => {
-      console.log('Table Fetch response:', res);
+      this.$log.suc('Table Fetch response:', res);
       this.loading = false;
-      const code = this.getValue(this.backParams.code, res);
+      const code = getValue(this.backParams.code, res);
       if (code === this.backParams.codeOK) {
-        this.tableData = this.getValue(this.backParams.data, res);
-        console.log('MTable table data:', this.tableData);
+        this.tableData = getValue(this.backParams.data, res);
+        this.$log.suc('MTable table data:', this.tableData);
         // table list and columns
-        this.tableList = this.getValue(this.backParams.columns, res);
+        this.tableList = getValue(this.backParams.columns, res);
         // table total
-        this.dataTotal = this.getValue(this.backParams.total, res)
-          ? this.getValue(this.backParams.total, res) : 0;
+        this.dataTotal = getValue(this.backParams.total, res)
+          ? getValue(this.backParams.total, res) : 0;
       } else {
-        this.$message.error(this.getValue(this.backParams.message, res));
+        this.$message.error(getValue(this.backParams.message, res));
       }
     });
   }
@@ -162,35 +163,15 @@ export default class MTable extends Vue {
       ),
     }).then((res: any) => {
       this.loading = false;
-      const code = this.getValue(this.backParams.code, res);
+      const code = getValue(this.backParams.code, res);
       if (code === this.backParams.codeOK) {
-        this.tableData = this.getValue(this.backParams.data, res);
-        this.dataTotal = this.getValue(this.backParams.total, res)
-          ? this.getValue(this.backParams.total, res) : 0;
+        this.tableData = getValue(this.backParams.data, res);
+        this.dataTotal = getValue(this.backParams.total, res)
+          ? getValue(this.backParams.total, res) : 0;
       } else {
-        this.$message.error(this.getValue(this.backParams.message, res));
+        this.$message.error(getValue(this.backParams.message, res));
       }
     });
-  }
-
-  /**
-   * @method 根据backParams参数，获取对应值
-   * @param {string} position 需要值的位置, 格式为 data.entity
-   * @param {object} res 返回的表格数据
-   */
-  getValue(position: string, res: any) {
-    let data = JSON.parse(JSON.stringify(res));
-    const keyList = position.split('.');
-    keyList.forEach((item, index) => {
-      if (data !== null && data[item] !== null) {
-        data = data[item];
-      } else {
-        data = null;
-        return false;
-      }
-      return true;
-    });
-    return data;
   }
 
   // 选择变化

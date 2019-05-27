@@ -15,7 +15,7 @@ export const genAFormData = (field: string): FilterFormList => {
       key: field,
       type: 'textarea',
       label: field,
-      placeholder: `Input ${field}`
+      placeholder: `Input ${field}`,
     };
   }
   if (field.match(new RegExp(/(s|S)elect/))) {
@@ -27,9 +27,9 @@ export const genAFormData = (field: string): FilterFormList => {
       options: [
         {
           value: field,
-          label: field
-        }
-      ]
+          label: field,
+        },
+      ],
     };
   }
   if (field.match(new RegExp(/(d|D)a(y|te)/))) {
@@ -37,7 +37,7 @@ export const genAFormData = (field: string): FilterFormList => {
       key: field,
       type: 'date',
       label: field,
-      placeholder: `2019-01-01`
+      placeholder: '2019-01-01',
     };
   }
   if (field.match(new RegExp(/(t|T)ime/))) {
@@ -45,14 +45,14 @@ export const genAFormData = (field: string): FilterFormList => {
       key: field,
       type: 'datetime',
       label: field,
-      placeholder: `12:00:00`
+      placeholder: '12:00:00',
     };
   }
   return {
     key: field,
     type: 'input',
     label: field,
-    placeholder: `Input ${field}`
+    placeholder: `Input ${field}`,
   };
 };
 
