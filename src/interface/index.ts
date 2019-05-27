@@ -19,7 +19,7 @@ export interface FilterFormList {
   key: string;
   type: FilterType;
   label: string;
-  title: string;
+  title?: string;
   dataIndex?: string;
   placeholder?: string | string[];
   value?: string[];
