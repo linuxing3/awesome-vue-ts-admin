@@ -1,10 +1,4 @@
-const formDataSchema = {
-  content: 'v-textarea',
-  text: 'v-textarea',
-  select: 'v-select',
-  date: 'v-date-picker',
-  '*': 'v-text-field',
-};
+import { FilterFormList } from '@/interface';
 
 export interface ATableColumnConfig {
   dataIndex: string;
@@ -14,45 +8,54 @@ export interface ATableColumnConfig {
   scopedSlots?: any;
 }
 
-export interface VTableHeaderConfig {
-  value: string;
-  text: string;
-  align?: string;
-  sortable?: boolean;
-  type?: string;
-  attrs?: any;
-}
-
-export interface FormDataConfig {
-  type?: string;
-  attrs?: any;
-}
-
-export const genFormData = (field: string): FormDataConfig => {
+export const genAFormData = (field: string): FilterFormList => {
   // /.*$/.test(field)
-  if (field.match(new RegExp(/(c|C)ontent/))) {
-    return { type: 'v-textarea', attrs: { class: 'pa-1 ma-1' } };
+  if (field.match(new RegExp(/(c|C|n|N)o(te|ntent)/))) {
+    return {
+      key: field,
+      type: 'textarea',
+      label: field,
+      placeholder: `Input ${field}`
+    };
   }
   if (field.match(new RegExp(/(s|S)elect/))) {
-    return { type: 'v-select', attrs: { class: 'pa-1 ma-1' } };
+    return {
+      key: field,
+      type: 'select',
+      label: field,
+      placeholder: [field],
+      options: [
+        {
+          value: field,
+          label: field
+        }
+      ]
+    };
   }
-  if (field.match(new RegExp(/(d|D)ate/))) {
-    return { type: 'v-date-picker', attrs: { class: 'pa-1 ma-1' } };
+  if (field.match(new RegExp(/(d|D)a(y|te)/))) {
+    return {
+      key: field,
+      type: 'date',
+      label: field,
+      placeholder: `2019-01-01`
+    };
   }
-  return { type: 'v-text-field', attrs: { class: 'pa-1 ma-1' } };
+  if (field.match(new RegExp(/(t|T)ime/))) {
+    return {
+      key: field,
+      type: 'datetime',
+      label: field,
+      placeholder: `12:00:00`
+    };
+  }
+  return {
+    key: field,
+    type: 'input',
+    label: field,
+    placeholder: `Input ${field}`
+  };
 };
 
-export const VGenTableHeaders = (fields: string[]): VTableHeaderConfig[] => fields.reduce((headersConfig: VTableHeaderConfig[], field: string): VTableHeaderConfig[] => {
-  const config: VTableHeaderConfig = {
-    value: field,
-    text: field,
-    align: 'left',
-    sortable: true,
-    ...genFormData(field),
-  };
-  headersConfig.push(config);
-  return headersConfig;
-}, []);
 
 export const AGenTableColumns = (fields: string[]): ATableColumnConfig[] => fields.reduce((columnsConfig: ATableColumnConfig[], field: string): ATableColumnConfig[] => {
   const config: ATableColumnConfig = {
@@ -60,6 +63,7 @@ export const AGenTableColumns = (fields: string[]): ATableColumnConfig[] => fiel
     dataIndex: field,
     width: '60px',
     sorter: true,
+    ...genAFormData(field),
   };
   columnsConfig.push(config);
   return columnsConfig;

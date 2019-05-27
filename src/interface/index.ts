@@ -14,17 +14,20 @@ import { ScopedSlot } from 'vue/types/vnode';
  * @param change 表单的change事件
  * @param disabledTime 时间范围选择的不可选日期，
  */
-type FilterType = 'input' | 'select' | 'cascader' | 'levelcode' | 'datetime' | 'date' | 'datetimerange' | 'checkboxButton';
+export type FilterType = 'input' | 'textarea' | 'select' | 'cascader' | 'levelcode' | 'datetime' | 'date' | 'datetimerange' | 'checkboxButton';
 export interface FilterFormList {
   key: string;
   type: FilterType;
   label: string;
-  placeholder: string | string[];
+  title: string;
+  dataIndex?: string;
+  placeholder?: string | string[];
   value?: string[];
   fieldNames?: any;
   options?: Array<{ value: any, label: string }>;
   change?: Function;
   disabledTime?: (dates: [object, object], partial: 'start'|'end') => any;
+  attrs?: any;
 }
 
 export interface TableColumnFilter {
