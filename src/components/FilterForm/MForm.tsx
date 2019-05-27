@@ -121,7 +121,7 @@ class MFormClass extends Vue {
   }
 
   async handleGetInfo() {
-    console.log('getting edit info...');
+    console.log('getting form info...');
     // For add new record
     if (this.id === -1) {
       const { config } = await lfService.request({
@@ -129,16 +129,18 @@ class MFormClass extends Vue {
         method: 'get',
       });
       this.itemList = config.params.columns;
-      return;
+      // this.Form.setFieldsValue();
+    } else {
+      // for edit a exiting record
+      const { config, data: { entity } } = await lfService.request({
+        url: `/${this.modelName}`,
+        method: 'get',
+        data: { id: this.id },
+      });
+      this.itemList = config.params.columns;
+      console.log('Get Data:', entity);
+      this.loadEditInfo(entity);
     }
-    // for edit a exiting record
-    const { data: { entity } } = await lfService.request({
-      url: `/${this.modelName}`,
-      method: 'get',
-      data: { id: this.id },
-    });
-    console.log('Get Data:', entity);
-    this.loadEditInfo(entity);
   }
 
   loadEditInfo(data) {
