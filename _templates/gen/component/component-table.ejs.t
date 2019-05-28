@@ -12,8 +12,11 @@ import moment from 'moment';
 import { tableList, FilterFormList, Opreat } from '@/interface';
 import city from '@/utils/city';
 import lfService from '@/utils/request.localforage';
-
+import models from '@/models';
 import './index.less';
+
+const Entity = models['<%= EntityName %>'];
+const defaultItemList = Entity.fieldsKeys();
 
 @Component({
   name: '<%= modelTableName %>',
