@@ -1,1 +1,254 @@
-{"columns":[{"title":"id","dataIndex":"id","width":"60px","sorter":true,"key":"id","type":"input","label":"id","placeholder":"Input id"},{"title":"department","dataIndex":"department","width":"60px","sorter":true,"key":"department","type":"input","label":"department","placeholder":"Input department"},{"title":"name","dataIndex":"name","width":"60px","sorter":true,"key":"name","type":"input","label":"name","placeholder":"Input name"},{"title":"gender","dataIndex":"gender","width":"60px","sorter":true,"key":"gender","type":"input","label":"gender","placeholder":"Input gender"},{"title":"birthday","dataIndex":"birthday","width":"60px","sorter":true,"key":"birthday","type":"date","label":"birthday","placeholder":"2019-01-01"},{"title":"etnia","dataIndex":"etnia","width":"60px","sorter":true,"key":"etnia","type":"input","label":"etnia","placeholder":"Input etnia"},{"title":"academicBackground","dataIndex":"academicBackground","width":"60px","sorter":true,"key":"academicBackground","type":"input","label":"academicBackground","placeholder":"Input academicBackground"},{"title":"foreignLanguage","dataIndex":"foreignLanguage","width":"60px","sorter":true,"key":"foreignLanguage","type":"input","label":"foreignLanguage","placeholder":"Input foreignLanguage"},{"title":"politicalRole","dataIndex":"politicalRole","width":"60px","sorter":true,"key":"politicalRole","type":"input","label":"politicalRole","placeholder":"Input politicalRole"},{"title":"positionAndRank","dataIndex":"positionAndRank","width":"60px","sorter":true,"key":"positionAndRank","type":"input","label":"positionAndRank","placeholder":"Input positionAndRank"},{"title":"militantRole","dataIndex":"militantRole","width":"60px","sorter":true,"key":"militantRole","type":"input","label":"militantRole","placeholder":"Input militantRole"},{"title":"duty","dataIndex":"duty","width":"60px","sorter":true,"key":"duty","type":"input","label":"duty","placeholder":"Input duty"},{"title":"fromEntity","dataIndex":"fromEntity","width":"60px","sorter":true,"key":"fromEntity","type":"input","label":"fromEntity","placeholder":"Input fromEntity"},{"title":"arrivingDate","dataIndex":"arrivingDate","width":"60px","sorter":true,"key":"arrivingDate","type":"date","label":"arrivingDate","placeholder":"2019-01-01"},{"title":"rotatingDate","dataIndex":"rotatingDate","width":"60px","sorter":true,"key":"rotatingDate","type":"date","label":"rotatingDate","placeholder":"2019-01-01"},{"title":"sendingEntity","dataIndex":"sendingEntity","width":"60px","sorter":true,"key":"sendingEntity","type":"input","label":"sendingEntity","placeholder":"Input sendingEntity"},{"title":"conyugeName","dataIndex":"conyugeName","width":"60px","sorter":true,"key":"conyugeName","type":"input","label":"conyugeName","placeholder":"Input conyugeName"},{"title":"conyugeEntity","dataIndex":"conyugeEntity","width":"60px","sorter":true,"key":"conyugeEntity","type":"input","label":"conyugeEntity","placeholder":"Input conyugeEntity"},{"title":"conyugeBonus","dataIndex":"conyugeBonus","width":"60px","sorter":true,"key":"conyugeBonus","type":"input","label":"conyugeBonus","placeholder":"Input conyugeBonus"},{"title":"memo","dataIndex":"memo","width":"60px","sorter":true,"key":"memo","type":"textarea","label":"memo","placeholder":"Input memo"},{"title":"protocolId","dataIndex":"protocolId","width":"60px","sorter":true,"key":"protocolId","type":"input","label":"protocolId","placeholder":"Input protocolId"},{"title":"isActive","dataIndex":"isActive","width":"60px","sorter":true,"key":"isActive","type":"input","label":"isActive","placeholder":"Input isActive"},{"title":"militant","dataIndex":"militant","width":"60px","sorter":true,"key":"militant","type":"input","label":"militant","placeholder":"Input militant"},{"title":"appraisals","dataIndex":"appraisals","width":"60px","sorter":true,"key":"appraisals","type":"input","label":"appraisals","placeholder":"Input appraisals"},{"title":"designations","dataIndex":"designations","width":"60px","sorter":true,"key":"designations","type":"input","label":"designations","placeholder":"Input designations"}]}
+{
+  "columns": [
+    {
+      "title": "id",
+      "dataIndex": "id",
+      "width": "60px",
+      "sorter": true,
+      "key": "id",
+      "type": "input",
+      "label": "id",
+      "placeholder": "Input id"
+    },
+    {
+      "title": "department",
+      "dataIndex": "department",
+      "width": "60px",
+      "sorter": true,
+      "key": "department",
+      "type": "input",
+      "label": "department",
+      "placeholder": "Input department"
+    },
+    {
+      "title": "name",
+      "dataIndex": "name",
+      "width": "60px",
+      "sorter": true,
+      "key": "name",
+      "type": "input",
+      "label": "name",
+      "placeholder": "Input name"
+    },
+    {
+      "title": "gender",
+      "dataIndex": "gender",
+      "width": "60px",
+      "sorter": true,
+      "key": "gender",
+      "type": "input",
+      "label": "gender",
+      "placeholder": "Input gender"
+    },
+    {
+      "title": "birthday",
+      "dataIndex": "birthday",
+      "width": "60px",
+      "sorter": true,
+      "key": "birthday",
+      "type": "date",
+      "label": "birthday",
+      "placeholder": "2019-01-01"
+    },
+    {
+      "title": "etnia",
+      "dataIndex": "etnia",
+      "width": "60px",
+      "sorter": true,
+      "key": "etnia",
+      "type": "input",
+      "label": "etnia",
+      "placeholder": "Input etnia"
+    },
+    {
+      "title": "academicBackground",
+      "dataIndex": "academicBackground",
+      "width": "60px",
+      "sorter": true,
+      "key": "academicBackground",
+      "type": "input",
+      "label": "academicBackground",
+      "placeholder": "Input academicBackground"
+    },
+    {
+      "title": "foreignLanguage",
+      "dataIndex": "foreignLanguage",
+      "width": "60px",
+      "sorter": true,
+      "key": "foreignLanguage",
+      "type": "input",
+      "label": "foreignLanguage",
+      "placeholder": "Input foreignLanguage"
+    },
+    {
+      "title": "politicalRole",
+      "dataIndex": "politicalRole",
+      "width": "60px",
+      "sorter": true,
+      "key": "politicalRole",
+      "type": "input",
+      "label": "politicalRole",
+      "placeholder": "Input politicalRole"
+    },
+    {
+      "title": "positionAndRank",
+      "dataIndex": "positionAndRank",
+      "width": "60px",
+      "sorter": true,
+      "key": "positionAndRank",
+      "type": "input",
+      "label": "positionAndRank",
+      "placeholder": "Input positionAndRank"
+    },
+    {
+      "title": "militantRole",
+      "dataIndex": "militantRole",
+      "width": "60px",
+      "sorter": true,
+      "key": "militantRole",
+      "type": "input",
+      "label": "militantRole",
+      "placeholder": "Input militantRole"
+    },
+    {
+      "title": "duty",
+      "dataIndex": "duty",
+      "width": "60px",
+      "sorter": true,
+      "key": "duty",
+      "type": "input",
+      "label": "duty",
+      "placeholder": "Input duty"
+    },
+    {
+      "title": "fromEntity",
+      "dataIndex": "fromEntity",
+      "width": "60px",
+      "sorter": true,
+      "key": "fromEntity",
+      "type": "input",
+      "label": "fromEntity",
+      "placeholder": "Input fromEntity"
+    },
+    {
+      "title": "arrivingDate",
+      "dataIndex": "arrivingDate",
+      "width": "60px",
+      "sorter": true,
+      "key": "arrivingDate",
+      "type": "date",
+      "label": "arrivingDate",
+      "placeholder": "2019-01-01"
+    },
+    {
+      "title": "rotatingDate",
+      "dataIndex": "rotatingDate",
+      "width": "60px",
+      "sorter": true,
+      "key": "rotatingDate",
+      "type": "date",
+      "label": "rotatingDate",
+      "placeholder": "2019-01-01"
+    },
+    {
+      "title": "sendingEntity",
+      "dataIndex": "sendingEntity",
+      "width": "60px",
+      "sorter": true,
+      "key": "sendingEntity",
+      "type": "input",
+      "label": "sendingEntity",
+      "placeholder": "Input sendingEntity"
+    },
+    {
+      "title": "conyugeName",
+      "dataIndex": "conyugeName",
+      "width": "60px",
+      "sorter": true,
+      "key": "conyugeName",
+      "type": "input",
+      "label": "conyugeName",
+      "placeholder": "Input conyugeName"
+    },
+    {
+      "title": "conyugeEntity",
+      "dataIndex": "conyugeEntity",
+      "width": "60px",
+      "sorter": true,
+      "key": "conyugeEntity",
+      "type": "input",
+      "label": "conyugeEntity",
+      "placeholder": "Input conyugeEntity"
+    },
+    {
+      "title": "conyugeBonus",
+      "dataIndex": "conyugeBonus",
+      "width": "60px",
+      "sorter": true,
+      "key": "conyugeBonus",
+      "type": "input",
+      "label": "conyugeBonus",
+      "placeholder": "Input conyugeBonus"
+    },
+    {
+      "title": "memo",
+      "dataIndex": "memo",
+      "width": "60px",
+      "sorter": true,
+      "key": "memo",
+      "type": "textarea",
+      "label": "memo",
+      "placeholder": "Input memo"
+    },
+    {
+      "title": "protocolId",
+      "dataIndex": "protocolId",
+      "width": "60px",
+      "sorter": true,
+      "key": "protocolId",
+      "type": "input",
+      "label": "protocolId",
+      "placeholder": "Input protocolId"
+    },
+    {
+      "title": "isActive",
+      "dataIndex": "isActive",
+      "width": "60px",
+      "sorter": true,
+      "key": "isActive",
+      "type": "input",
+      "label": "isActive",
+      "placeholder": "Input isActive"
+    },
+    {
+      "title": "militant",
+      "dataIndex": "militant",
+      "width": "60px",
+      "sorter": true,
+      "key": "militant",
+      "type": "input",
+      "label": "militant",
+      "placeholder": "Input militant"
+    },
+    {
+      "title": "appraisals",
+      "dataIndex": "appraisals",
+      "width": "60px",
+      "sorter": true,
+      "key": "appraisals",
+      "type": "input",
+      "label": "appraisals",
+      "placeholder": "Input appraisals"
+    },
+    {
+      "title": "designations",
+      "dataIndex": "designations",
+      "width": "60px",
+      "sorter": true,
+      "key": "designations",
+      "type": "input",
+      "label": "designations",
+      "placeholder": "Input designations"
+    }
+  ]
+}

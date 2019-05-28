@@ -1,1 +1,54 @@
-{"columns":[{"title":"id","dataIndex":"id","width":"60px","sorter":true,"key":"id","type":"input","label":"id","placeholder":"Input id"},{"title":"name","dataIndex":"name","width":"60px","sorter":true,"key":"name","type":"input","label":"name","placeholder":"Input name"},{"title":"department","dataIndex":"department","width":"60px","sorter":true,"key":"department","type":"input","label":"department","placeholder":"Input department"},{"title":"promotionDate","dataIndex":"promotionDate","width":"60px","sorter":true,"key":"promotionDate","type":"date","label":"promotionDate","placeholder":"2019-01-01"},{"title":"promotionDetails","dataIndex":"promotionDetails","width":"60px","sorter":true,"key":"promotionDetails","type":"input","label":"promotionDetails","placeholder":"Input promotionDetails"}]}
+{
+  "columns": [
+    {
+      "title": "id",
+      "dataIndex": "id",
+      "width": "60px",
+      "sorter": true,
+      "key": "id",
+      "type": "input",
+      "label": "id",
+      "placeholder": "Input id"
+    },
+    {
+      "title": "name",
+      "dataIndex": "name",
+      "width": "60px",
+      "sorter": true,
+      "key": "name",
+      "type": "input",
+      "label": "name",
+      "placeholder": "Input name"
+    },
+    {
+      "title": "department",
+      "dataIndex": "department",
+      "width": "60px",
+      "sorter": true,
+      "key": "department",
+      "type": "input",
+      "label": "department",
+      "placeholder": "Input department"
+    },
+    {
+      "title": "promotionDate",
+      "dataIndex": "promotionDate",
+      "width": "60px",
+      "sorter": true,
+      "key": "promotionDate",
+      "type": "date",
+      "label": "promotionDate",
+      "placeholder": "2019-01-01"
+    },
+    {
+      "title": "promotionDetails",
+      "dataIndex": "promotionDetails",
+      "width": "60px",
+      "sorter": true,
+      "key": "promotionDetails",
+      "type": "input",
+      "label": "promotionDetails",
+      "placeholder": "Input promotionDetails"
+    }
+  ]
+}

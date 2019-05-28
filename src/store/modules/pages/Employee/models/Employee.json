@@ -1,1 +1,584 @@
-{"columns":[{"title":"id","dataIndex":"id","width":"60px","sorter":true,"key":"id","type":"input","label":"id","placeholder":"Input id"},{"title":"salutation","dataIndex":"salutation","width":"60px","sorter":true,"key":"salutation","type":"input","label":"salutation","placeholder":"Input salutation"},{"title":"firstName","dataIndex":"firstName","width":"60px","sorter":true,"key":"firstName","type":"input","label":"firstName","placeholder":"Input firstName"},{"title":"middleName","dataIndex":"middleName","width":"60px","sorter":true,"key":"middleName","type":"input","label":"middleName","placeholder":"Input middleName"},{"title":"lastName","dataIndex":"lastName","width":"60px","sorter":true,"key":"lastName","type":"input","label":"lastName","placeholder":"Input lastName"},{"title":"image","dataIndex":"image","width":"60px","sorter":true,"key":"image","type":"input","label":"image","placeholder":"Input image"},{"title":"status","dataIndex":"status","width":"60px","sorter":true,"key":"status","type":"input","label":"status","placeholder":"Input status"},{"title":"employeeNo","dataIndex":"employeeNo","width":"60px","sorter":true,"key":"employeeNo","type":"input","label":"employeeNo","placeholder":"Input employeeNo"},{"title":"gender","dataIndex":"gender","width":"60px","sorter":true,"key":"gender","type":"input","label":"gender","placeholder":"Input gender"},{"title":"birthday","dataIndex":"birthday","width":"60px","sorter":true,"key":"birthday","type":"date","label":"birthday","placeholder":"2019-01-01"},{"title":"joiningDate","dataIndex":"joiningDate","width":"60px","sorter":true,"key":"joiningDate","type":"date","label":"joiningDate","placeholder":"2019-01-01"},{"title":"emergencyContact","dataIndex":"emergencyContact","width":"60px","sorter":true,"key":"emergencyContact","type":"input","label":"emergencyContact","placeholder":"Input emergencyContact"},{"title":"emergencyPhoneNo","dataIndex":"emergencyPhoneNo","width":"60px","sorter":true,"key":"emergencyPhoneNo","type":"input","label":"emergencyPhoneNo","placeholder":"Input emergencyPhoneNo"},{"title":"contractStartDate","dataIndex":"contractStartDate","width":"60px","sorter":true,"key":"contractStartDate","type":"date","label":"contractStartDate","placeholder":"2019-01-01"},{"title":"contractEndDate","dataIndex":"contractEndDate","width":"60px","sorter":true,"key":"contractEndDate","type":"date","label":"contractEndDate","placeholder":"2019-01-01"},{"title":"department","dataIndex":"department","width":"60px","sorter":true,"key":"department","type":"input","label":"department","placeholder":"Input department"},{"title":"designation","dataIndex":"designation","width":"60px","sorter":true,"key":"designation","type":"input","label":"designation","placeholder":"Input designation"},{"title":"reportsTo","dataIndex":"reportsTo","width":"60px","sorter":true,"key":"reportsTo","type":"input","label":"reportsTo","placeholder":"Input reportsTo"},{"title":"grade","dataIndex":"grade","width":"60px","sorter":true,"key":"grade","type":"input","label":"grade","placeholder":"Input grade"},{"title":"branch","dataIndex":"branch","width":"60px","sorter":true,"key":"branch","type":"input","label":"branch","placeholder":"Input branch"},{"title":"leavePolicy","dataIndex":"leavePolicy","width":"60px","sorter":true,"key":"leavePolicy","type":"input","label":"leavePolicy","placeholder":"Input leavePolicy"},{"title":"holidayList","dataIndex":"holidayList","width":"60px","sorter":true,"key":"holidayList","type":"date","label":"holidayList","placeholder":"2019-01-01"},{"title":"salaryMode","dataIndex":"salaryMode","width":"60px","sorter":true,"key":"salaryMode","type":"input","label":"salaryMode","placeholder":"Input salaryMode"},{"title":"bankName","dataIndex":"bankName","width":"60px","sorter":true,"key":"bankName","type":"input","label":"bankName","placeholder":"Input bankName"},{"title":"bankAccount","dataIndex":"bankAccount","width":"60px","sorter":true,"key":"bankAccount","type":"input","label":"bankAccount","placeholder":"Input bankAccount"},{"title":"healthInsurance","dataIndex":"healthInsurance","width":"60px","sorter":true,"key":"healthInsurance","type":"input","label":"healthInsurance","placeholder":"Input healthInsurance"},{"title":"healthInsuranceProvider","dataIndex":"healthInsuranceProvider","width":"60px","sorter":true,"key":"healthInsuranceProvider","type":"input","label":"healthInsuranceProvider","placeholder":"Input healthInsuranceProvider"},{"title":"healthInsuranceNo","dataIndex":"healthInsuranceNo","width":"60px","sorter":true,"key":"healthInsuranceNo","type":"input","label":"healthInsuranceNo","placeholder":"Input healthInsuranceNo"},{"title":"cellPhone","dataIndex":"cellPhone","width":"60px","sorter":true,"key":"cellPhone","type":"input","label":"cellPhone","placeholder":"Input cellPhone"},{"title":"preferedEmail","dataIndex":"preferedEmail","width":"60px","sorter":true,"key":"preferedEmail","type":"input","label":"preferedEmail","placeholder":"Input preferedEmail"},{"title":"companyEmail","dataIndex":"companyEmail","width":"60px","sorter":true,"key":"companyEmail","type":"input","label":"companyEmail","placeholder":"Input companyEmail"},{"title":"personalEmail","dataIndex":"personalEmail","width":"60px","sorter":true,"key":"personalEmail","type":"input","label":"personalEmail","placeholder":"Input personalEmail"},{"title":"unsubscribed","dataIndex":"unsubscribed","width":"60px","sorter":true,"key":"unsubscribed","type":"input","label":"unsubscribed","placeholder":"Input unsubscribed"},{"title":"permanentAccommodation","dataIndex":"permanentAccommodation","width":"60px","sorter":true,"key":"permanentAccommodation","type":"input","label":"permanentAccommodation","placeholder":"Input permanentAccommodation"},{"title":"permanentAddress","dataIndex":"permanentAddress","width":"60px","sorter":true,"key":"permanentAddress","type":"input","label":"permanentAddress","placeholder":"Input permanentAddress"},{"title":"currentAccomodation","dataIndex":"currentAccomodation","width":"60px","sorter":true,"key":"currentAccomodation","type":"input","label":"currentAccomodation","placeholder":"Input currentAccomodation"},{"title":"currentAddress","dataIndex":"currentAddress","width":"60px","sorter":true,"key":"currentAddress","type":"input","label":"currentAddress","placeholder":"Input currentAddress"},{"title":"bio","dataIndex":"bio","width":"60px","sorter":true,"key":"bio","type":"input","label":"bio","placeholder":"Input bio"},{"title":"passportNumber","dataIndex":"passportNumber","width":"60px","sorter":true,"key":"passportNumber","type":"input","label":"passportNumber","placeholder":"Input passportNumber"},{"title":"dateOfIssue","dataIndex":"dateOfIssue","width":"60px","sorter":true,"key":"dateOfIssue","type":"date","label":"dateOfIssue","placeholder":"2019-01-01"},{"title":"placeOfIssue","dataIndex":"placeOfIssue","width":"60px","sorter":true,"key":"placeOfIssue","type":"input","label":"placeOfIssue","placeholder":"Input placeOfIssue"},{"title":"maritalStatus","dataIndex":"maritalStatus","width":"60px","sorter":true,"key":"maritalStatus","type":"input","label":"maritalStatus","placeholder":"Input maritalStatus"},{"title":"bloodGroup","dataIndex":"bloodGroup","width":"60px","sorter":true,"key":"bloodGroup","type":"input","label":"bloodGroup","placeholder":"Input bloodGroup"},{"title":"familyBackground","dataIndex":"familyBackground","width":"60px","sorter":true,"key":"familyBackground","type":"input","label":"familyBackground","placeholder":"Input familyBackground"},{"title":"healthDetails","dataIndex":"healthDetails","width":"60px","sorter":true,"key":"healthDetails","type":"input","label":"healthDetails","placeholder":"Input healthDetails"},{"title":"educationalQualification","dataIndex":"educationalQualification","width":"60px","sorter":true,"key":"educationalQualification","type":"input","label":"educationalQualification","placeholder":"Input educationalQualification"},{"title":"previousWorkExperience","dataIndex":"previousWorkExperience","width":"60px","sorter":true,"key":"previousWorkExperience","type":"input","label":"previousWorkExperience","placeholder":"Input previousWorkExperience"},{"title":"externalWorkHistory","dataIndex":"externalWorkHistory","width":"60px","sorter":true,"key":"externalWorkHistory","type":"input","label":"externalWorkHistory","placeholder":"Input externalWorkHistory"},{"title":"historyInCompany","dataIndex":"historyInCompany","width":"60px","sorter":true,"key":"historyInCompany","type":"input","label":"historyInCompany","placeholder":"Input historyInCompany"},{"title":"relievingDate","dataIndex":"relievingDate","width":"60px","sorter":true,"key":"relievingDate","type":"date","label":"relievingDate","placeholder":"2019-01-01"},{"title":"reasonForLeaving","dataIndex":"reasonForLeaving","width":"60px","sorter":true,"key":"reasonForLeaving","type":"input","label":"reasonForLeaving","placeholder":"Input reasonForLeaving"},{"title":"leaveEncashed","dataIndex":"leaveEncashed","width":"60px","sorter":true,"key":"leaveEncashed","type":"input","label":"leaveEncashed","placeholder":"Input leaveEncashed"},{"title":"encashDate","dataIndex":"encashDate","width":"60px","sorter":true,"key":"encashDate","type":"date","label":"encashDate","placeholder":"2019-01-01"},{"title":"resiged","dataIndex":"resiged","width":"60px","sorter":true,"key":"resiged","type":"input","label":"resiged","placeholder":"Input resiged"},{"title":"reasonForResignation","dataIndex":"reasonForResignation","width":"60px","sorter":true,"key":"reasonForResignation","type":"input","label":"reasonForResignation","placeholder":"Input reasonForResignation"},{"title":"feedback","dataIndex":"feedback","width":"60px","sorter":true,"key":"feedback","type":"input","label":"feedback","placeholder":"Input feedback"},{"title":"promotions","dataIndex":"promotions","width":"60px","sorter":true,"key":"promotions","type":"input","label":"promotions","placeholder":"Input promotions"},{"title":"leaves","dataIndex":"leaves","width":"60px","sorter":true,"key":"leaves","type":"input","label":"leaves","placeholder":"Input leaves"}]}
+{
+  "columns": [
+    {
+      "title": "id",
+      "dataIndex": "id",
+      "width": "60px",
+      "sorter": true,
+      "key": "id",
+      "type": "input",
+      "label": "id",
+      "placeholder": "Input id"
+    },
+    {
+      "title": "salutation",
+      "dataIndex": "salutation",
+      "width": "60px",
+      "sorter": true,
+      "key": "salutation",
+      "type": "input",
+      "label": "salutation",
+      "placeholder": "Input salutation"
+    },
+    {
+      "title": "firstName",
+      "dataIndex": "firstName",
+      "width": "60px",
+      "sorter": true,
+      "key": "firstName",
+      "type": "input",
+      "label": "firstName",
+      "placeholder": "Input firstName"
+    },
+    {
+      "title": "middleName",
+      "dataIndex": "middleName",
+      "width": "60px",
+      "sorter": true,
+      "key": "middleName",
+      "type": "input",
+      "label": "middleName",
+      "placeholder": "Input middleName"
+    },
+    {
+      "title": "lastName",
+      "dataIndex": "lastName",
+      "width": "60px",
+      "sorter": true,
+      "key": "lastName",
+      "type": "input",
+      "label": "lastName",
+      "placeholder": "Input lastName"
+    },
+    {
+      "title": "image",
+      "dataIndex": "image",
+      "width": "60px",
+      "sorter": true,
+      "key": "image",
+      "type": "input",
+      "label": "image",
+      "placeholder": "Input image"
+    },
+    {
+      "title": "status",
+      "dataIndex": "status",
+      "width": "60px",
+      "sorter": true,
+      "key": "status",
+      "type": "input",
+      "label": "status",
+      "placeholder": "Input status"
+    },
+    {
+      "title": "employeeNo",
+      "dataIndex": "employeeNo",
+      "width": "60px",
+      "sorter": true,
+      "key": "employeeNo",
+      "type": "input",
+      "label": "employeeNo",
+      "placeholder": "Input employeeNo"
+    },
+    {
+      "title": "gender",
+      "dataIndex": "gender",
+      "width": "60px",
+      "sorter": true,
+      "key": "gender",
+      "type": "input",
+      "label": "gender",
+      "placeholder": "Input gender"
+    },
+    {
+      "title": "birthday",
+      "dataIndex": "birthday",
+      "width": "60px",
+      "sorter": true,
+      "key": "birthday",
+      "type": "date",
+      "label": "birthday",
+      "placeholder": "2019-01-01"
+    },
+    {
+      "title": "joiningDate",
+      "dataIndex": "joiningDate",
+      "width": "60px",
+      "sorter": true,
+      "key": "joiningDate",
+      "type": "date",
+      "label": "joiningDate",
+      "placeholder": "2019-01-01"
+    },
+    {
+      "title": "emergencyContact",
+      "dataIndex": "emergencyContact",
+      "width": "60px",
+      "sorter": true,
+      "key": "emergencyContact",
+      "type": "input",
+      "label": "emergencyContact",
+      "placeholder": "Input emergencyContact"
+    },
+    {
+      "title": "emergencyPhoneNo",
+      "dataIndex": "emergencyPhoneNo",
+      "width": "60px",
+      "sorter": true,
+      "key": "emergencyPhoneNo",
+      "type": "input",
+      "label": "emergencyPhoneNo",
+      "placeholder": "Input emergencyPhoneNo"
+    },
+    {
+      "title": "contractStartDate",
+      "dataIndex": "contractStartDate",
+      "width": "60px",
+      "sorter": true,
+      "key": "contractStartDate",
+      "type": "date",
+      "label": "contractStartDate",
+      "placeholder": "2019-01-01"
+    },
+    {
+      "title": "contractEndDate",
+      "dataIndex": "contractEndDate",
+      "width": "60px",
+      "sorter": true,
+      "key": "contractEndDate",
+      "type": "date",
+      "label": "contractEndDate",
+      "placeholder": "2019-01-01"
+    },
+    {
+      "title": "department",
+      "dataIndex": "department",
+      "width": "60px",
+      "sorter": true,
+      "key": "department",
+      "type": "input",
+      "label": "department",
+      "placeholder": "Input department"
+    },
+    {
+      "title": "designation",
+      "dataIndex": "designation",
+      "width": "60px",
+      "sorter": true,
+      "key": "designation",
+      "type": "input",
+      "label": "designation",
+      "placeholder": "Input designation"
+    },
+    {
+      "title": "reportsTo",
+      "dataIndex": "reportsTo",
+      "width": "60px",
+      "sorter": true,
+      "key": "reportsTo",
+      "type": "input",
+      "label": "reportsTo",
+      "placeholder": "Input reportsTo"
+    },
+    {
+      "title": "grade",
+      "dataIndex": "grade",
+      "width": "60px",
+      "sorter": true,
+      "key": "grade",
+      "type": "input",
+      "label": "grade",
+      "placeholder": "Input grade"
+    },
+    {
+      "title": "branch",
+      "dataIndex": "branch",
+      "width": "60px",
+      "sorter": true,
+      "key": "branch",
+      "type": "input",
+      "label": "branch",
+      "placeholder": "Input branch"
+    },
+    {
+      "title": "leavePolicy",
+      "dataIndex": "leavePolicy",
+      "width": "60px",
+      "sorter": true,
+      "key": "leavePolicy",
+      "type": "input",
+      "label": "leavePolicy",
+      "placeholder": "Input leavePolicy"
+    },
+    {
+      "title": "holidayList",
+      "dataIndex": "holidayList",
+      "width": "60px",
+      "sorter": true,
+      "key": "holidayList",
+      "type": "date",
+      "label": "holidayList",
+      "placeholder": "2019-01-01"
+    },
+    {
+      "title": "salaryMode",
+      "dataIndex": "salaryMode",
+      "width": "60px",
+      "sorter": true,
+      "key": "salaryMode",
+      "type": "input",
+      "label": "salaryMode",
+      "placeholder": "Input salaryMode"
+    },
+    {
+      "title": "bankName",
+      "dataIndex": "bankName",
+      "width": "60px",
+      "sorter": true,
+      "key": "bankName",
+      "type": "input",
+      "label": "bankName",
+      "placeholder": "Input bankName"
+    },
+    {
+      "title": "bankAccount",
+      "dataIndex": "bankAccount",
+      "width": "60px",
+      "sorter": true,
+      "key": "bankAccount",
+      "type": "input",
+      "label": "bankAccount",
+      "placeholder": "Input bankAccount"
+    },
+    {
+      "title": "healthInsurance",
+      "dataIndex": "healthInsurance",
+      "width": "60px",
+      "sorter": true,
+      "key": "healthInsurance",
+      "type": "input",
+      "label": "healthInsurance",
+      "placeholder": "Input healthInsurance"
+    },
+    {
+      "title": "healthInsuranceProvider",
+      "dataIndex": "healthInsuranceProvider",
+      "width": "60px",
+      "sorter": true,
+      "key": "healthInsuranceProvider",
+      "type": "input",
+      "label": "healthInsuranceProvider",
+      "placeholder": "Input healthInsuranceProvider"
+    },
+    {
+      "title": "healthInsuranceNo",
+      "dataIndex": "healthInsuranceNo",
+      "width": "60px",
+      "sorter": true,
+      "key": "healthInsuranceNo",
+      "type": "input",
+      "label": "healthInsuranceNo",
+      "placeholder": "Input healthInsuranceNo"
+    },
+    {
+      "title": "cellPhone",
+      "dataIndex": "cellPhone",
+      "width": "60px",
+      "sorter": true,
+      "key": "cellPhone",
+      "type": "input",
+      "label": "cellPhone",
+      "placeholder": "Input cellPhone"
+    },
+    {
+      "title": "preferedEmail",
+      "dataIndex": "preferedEmail",
+      "width": "60px",
+      "sorter": true,
+      "key": "preferedEmail",
+      "type": "input",
+      "label": "preferedEmail",
+      "placeholder": "Input preferedEmail"
+    },
+    {
+      "title": "companyEmail",
+      "dataIndex": "companyEmail",
+      "width": "60px",
+      "sorter": true,
+      "key": "companyEmail",
+      "type": "input",
+      "label": "companyEmail",
+      "placeholder": "Input companyEmail"
+    },
+    {
+      "title": "personalEmail",
+      "dataIndex": "personalEmail",
+      "width": "60px",
+      "sorter": true,
+      "key": "personalEmail",
+      "type": "input",
+      "label": "personalEmail",
+      "placeholder": "Input personalEmail"
+    },
+    {
+      "title": "unsubscribed",
+      "dataIndex": "unsubscribed",
+      "width": "60px",
+      "sorter": true,
+      "key": "unsubscribed",
+      "type": "input",
+      "label": "unsubscribed",
+      "placeholder": "Input unsubscribed"
+    },
+    {
+      "title": "permanentAccommodation",
+      "dataIndex": "permanentAccommodation",
+      "width": "60px",
+      "sorter": true,
+      "key": "permanentAccommodation",
+      "type": "input",
+      "label": "permanentAccommodation",
+      "placeholder": "Input permanentAccommodation"
+    },
+    {
+      "title": "permanentAddress",
+      "dataIndex": "permanentAddress",
+      "width": "60px",
+      "sorter": true,
+      "key": "permanentAddress",
+      "type": "input",
+      "label": "permanentAddress",
+      "placeholder": "Input permanentAddress"
+    },
+    {
+      "title": "currentAccomodation",
+      "dataIndex": "currentAccomodation",
+      "width": "60px",
+      "sorter": true,
+      "key": "currentAccomodation",
+      "type": "input",
+      "label": "currentAccomodation",
+      "placeholder": "Input currentAccomodation"
+    },
+    {
+      "title": "currentAddress",
+      "dataIndex": "currentAddress",
+      "width": "60px",
+      "sorter": true,
+      "key": "currentAddress",
+      "type": "input",
+      "label": "currentAddress",
+      "placeholder": "Input currentAddress"
+    },
+    {
+      "title": "bio",
+      "dataIndex": "bio",
+      "width": "60px",
+      "sorter": true,
+      "key": "bio",
+      "type": "input",
+      "label": "bio",
+      "placeholder": "Input bio"
+    },
+    {
+      "title": "passportNumber",
+      "dataIndex": "passportNumber",
+      "width": "60px",
+      "sorter": true,
+      "key": "passportNumber",
+      "type": "input",
+      "label": "passportNumber",
+      "placeholder": "Input passportNumber"
+    },
+    {
+      "title": "dateOfIssue",
+      "dataIndex": "dateOfIssue",
+      "width": "60px",
+      "sorter": true,
+      "key": "dateOfIssue",
+      "type": "date",
+      "label": "dateOfIssue",
+      "placeholder": "2019-01-01"
+    },
+    {
+      "title": "placeOfIssue",
+      "dataIndex": "placeOfIssue",
+      "width": "60px",
+      "sorter": true,
+      "key": "placeOfIssue",
+      "type": "input",
+      "label": "placeOfIssue",
+      "placeholder": "Input placeOfIssue"
+    },
+    {
+      "title": "maritalStatus",
+      "dataIndex": "maritalStatus",
+      "width": "60px",
+      "sorter": true,
+      "key": "maritalStatus",
+      "type": "input",
+      "label": "maritalStatus",
+      "placeholder": "Input maritalStatus"
+    },
+    {
+      "title": "bloodGroup",
+      "dataIndex": "bloodGroup",
+      "width": "60px",
+      "sorter": true,
+      "key": "bloodGroup",
+      "type": "input",
+      "label": "bloodGroup",
+      "placeholder": "Input bloodGroup"
+    },
+    {
+      "title": "familyBackground",
+      "dataIndex": "familyBackground",
+      "width": "60px",
+      "sorter": true,
+      "key": "familyBackground",
+      "type": "input",
+      "label": "familyBackground",
+      "placeholder": "Input familyBackground"
+    },
+    {
+      "title": "healthDetails",
+      "dataIndex": "healthDetails",
+      "width": "60px",
+      "sorter": true,
+      "key": "healthDetails",
+      "type": "input",
+      "label": "healthDetails",
+      "placeholder": "Input healthDetails"
+    },
+    {
+      "title": "educationalQualification",
+      "dataIndex": "educationalQualification",
+      "width": "60px",
+      "sorter": true,
+      "key": "educationalQualification",
+      "type": "input",
+      "label": "educationalQualification",
+      "placeholder": "Input educationalQualification"
+    },
+    {
+      "title": "previousWorkExperience",
+      "dataIndex": "previousWorkExperience",
+      "width": "60px",
+      "sorter": true,
+      "key": "previousWorkExperience",
+      "type": "input",
+      "label": "previousWorkExperience",
+      "placeholder": "Input previousWorkExperience"
+    },
+    {
+      "title": "externalWorkHistory",
+      "dataIndex": "externalWorkHistory",
+      "width": "60px",
+      "sorter": true,
+      "key": "externalWorkHistory",
+      "type": "input",
+      "label": "externalWorkHistory",
+      "placeholder": "Input externalWorkHistory"
+    },
+    {
+      "title": "historyInCompany",
+      "dataIndex": "historyInCompany",
+      "width": "60px",
+      "sorter": true,
+      "key": "historyInCompany",
+      "type": "input",
+      "label": "historyInCompany",
+      "placeholder": "Input historyInCompany"
+    },
+    {
+      "title": "relievingDate",
+      "dataIndex": "relievingDate",
+      "width": "60px",
+      "sorter": true,
+      "key": "relievingDate",
+      "type": "date",
+      "label": "relievingDate",
+      "placeholder": "2019-01-01"
+    },
+    {
+      "title": "reasonForLeaving",
+      "dataIndex": "reasonForLeaving",
+      "width": "60px",
+      "sorter": true,
+      "key": "reasonForLeaving",
+      "type": "input",
+      "label": "reasonForLeaving",
+      "placeholder": "Input reasonForLeaving"
+    },
+    {
+      "title": "leaveEncashed",
+      "dataIndex": "leaveEncashed",
+      "width": "60px",
+      "sorter": true,
+      "key": "leaveEncashed",
+      "type": "input",
+      "label": "leaveEncashed",
+      "placeholder": "Input leaveEncashed"
+    },
+    {
+      "title": "encashDate",
+      "dataIndex": "encashDate",
+      "width": "60px",
+      "sorter": true,
+      "key": "encashDate",
+      "type": "date",
+      "label": "encashDate",
+      "placeholder": "2019-01-01"
+    },
+    {
+      "title": "resiged",
+      "dataIndex": "resiged",
+      "width": "60px",
+      "sorter": true,
+      "key": "resiged",
+      "type": "input",
+      "label": "resiged",
+      "placeholder": "Input resiged"
+    },
+    {
+      "title": "reasonForResignation",
+      "dataIndex": "reasonForResignation",
+      "width": "60px",
+      "sorter": true,
+      "key": "reasonForResignation",
+      "type": "input",
+      "label": "reasonForResignation",
+      "placeholder": "Input reasonForResignation"
+    },
+    {
+      "title": "feedback",
+      "dataIndex": "feedback",
+      "width": "60px",
+      "sorter": true,
+      "key": "feedback",
+      "type": "input",
+      "label": "feedback",
+      "placeholder": "Input feedback"
+    },
+    {
+      "title": "promotions",
+      "dataIndex": "promotions",
+      "width": "60px",
+      "sorter": true,
+      "key": "promotions",
+      "type": "input",
+      "label": "promotions",
+      "placeholder": "Input promotions"
+    },
+    {
+      "title": "leaves",
+      "dataIndex": "leaves",
+      "width": "60px",
+      "sorter": true,
+      "key": "leaves",
+      "type": "input",
+      "label": "leaves",
+      "placeholder": "Input leaves"
+    }
+  ]
+}

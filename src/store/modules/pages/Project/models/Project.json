@@ -1,1 +1,234 @@
-{"columns":[{"title":"id","dataIndex":"id","width":"60px","sorter":true,"key":"id","type":"input","label":"id","placeholder":"Input id"},{"title":"title","dataIndex":"title","width":"60px","sorter":true,"key":"title","type":"input","label":"title","placeholder":"Input title"},{"title":"type","dataIndex":"type","width":"60px","sorter":true,"key":"type","type":"input","label":"type","placeholder":"Input type"},{"title":"status","dataIndex":"status","width":"60px","sorter":true,"key":"status","type":"input","label":"status","placeholder":"Input status"},{"title":"isActive","dataIndex":"isActive","width":"60px","sorter":true,"key":"isActive","type":"input","label":"isActive","placeholder":"Input isActive"},{"title":"percentComplete","dataIndex":"percentComplete","width":"60px","sorter":true,"key":"percentComplete","type":"input","label":"percentComplete","placeholder":"Input percentComplete"},{"title":"expectedStartDate","dataIndex":"expectedStartDate","width":"60px","sorter":true,"key":"expectedStartDate","type":"date","label":"expectedStartDate","placeholder":"2019-01-01"},{"title":"expectedEndDate","dataIndex":"expectedEndDate","width":"60px","sorter":true,"key":"expectedEndDate","type":"date","label":"expectedEndDate","placeholder":"2019-01-01"},{"title":"priority","dataIndex":"priority","width":"60px","sorter":true,"key":"priority","type":"input","label":"priority","placeholder":"Input priority"},{"title":"department","dataIndex":"department","width":"60px","sorter":true,"key":"department","type":"input","label":"department","placeholder":"Input department"},{"title":"notes","dataIndex":"notes","width":"60px","sorter":true,"key":"notes","type":"textarea","label":"notes","placeholder":"Input notes"},{"title":"actualStartDate","dataIndex":"actualStartDate","width":"60px","sorter":true,"key":"actualStartDate","type":"date","label":"actualStartDate","placeholder":"2019-01-01"},{"title":"actualEndDate","dataIndex":"actualEndDate","width":"60px","sorter":true,"key":"actualEndDate","type":"date","label":"actualEndDate","placeholder":"2019-01-01"},{"title":"estimatedCost","dataIndex":"estimatedCost","width":"60px","sorter":true,"key":"estimatedCost","type":"input","label":"estimatedCost","placeholder":"Input estimatedCost"},{"title":"totalCost","dataIndex":"totalCost","width":"60px","sorter":true,"key":"totalCost","type":"input","label":"totalCost","placeholder":"Input totalCost"},{"title":"ExpenseClaim","dataIndex":"ExpenseClaim","width":"60px","sorter":true,"key":"ExpenseClaim","type":"input","label":"ExpenseClaim","placeholder":"Input ExpenseClaim"},{"title":"collectProgress","dataIndex":"collectProgress","width":"60px","sorter":true,"key":"collectProgress","type":"input","label":"collectProgress","placeholder":"Input collectProgress"},{"title":"frequency","dataIndex":"frequency","width":"60px","sorter":true,"key":"frequency","type":"input","label":"frequency","placeholder":"Input frequency"},{"title":"fromTime","dataIndex":"fromTime","width":"60px","sorter":true,"key":"fromTime","type":"datetime","label":"fromTime","placeholder":"12:00:00"},{"title":"toTime","dataIndex":"toTime","width":"60px","sorter":true,"key":"toTime","type":"datetime","label":"toTime","placeholder":"12:00:00"},{"title":"tasks","dataIndex":"tasks","width":"60px","sorter":true,"key":"tasks","type":"input","label":"tasks","placeholder":"Input tasks"},{"title":"events","dataIndex":"events","width":"60px","sorter":true,"key":"events","type":"input","label":"events","placeholder":"Input events"},{"title":"board_id","dataIndex":"board_id","width":"60px","sorter":true,"key":"board_id","type":"input","label":"board_id","placeholder":"Input board_id"}]}
+{
+  "columns": [
+    {
+      "title": "id",
+      "dataIndex": "id",
+      "width": "60px",
+      "sorter": true,
+      "key": "id",
+      "type": "input",
+      "label": "id",
+      "placeholder": "Input id"
+    },
+    {
+      "title": "title",
+      "dataIndex": "title",
+      "width": "60px",
+      "sorter": true,
+      "key": "title",
+      "type": "input",
+      "label": "title",
+      "placeholder": "Input title"
+    },
+    {
+      "title": "type",
+      "dataIndex": "type",
+      "width": "60px",
+      "sorter": true,
+      "key": "type",
+      "type": "input",
+      "label": "type",
+      "placeholder": "Input type"
+    },
+    {
+      "title": "status",
+      "dataIndex": "status",
+      "width": "60px",
+      "sorter": true,
+      "key": "status",
+      "type": "input",
+      "label": "status",
+      "placeholder": "Input status"
+    },
+    {
+      "title": "isActive",
+      "dataIndex": "isActive",
+      "width": "60px",
+      "sorter": true,
+      "key": "isActive",
+      "type": "input",
+      "label": "isActive",
+      "placeholder": "Input isActive"
+    },
+    {
+      "title": "percentComplete",
+      "dataIndex": "percentComplete",
+      "width": "60px",
+      "sorter": true,
+      "key": "percentComplete",
+      "type": "input",
+      "label": "percentComplete",
+      "placeholder": "Input percentComplete"
+    },
+    {
+      "title": "expectedStartDate",
+      "dataIndex": "expectedStartDate",
+      "width": "60px",
+      "sorter": true,
+      "key": "expectedStartDate",
+      "type": "date",
+      "label": "expectedStartDate",
+      "placeholder": "2019-01-01"
+    },
+    {
+      "title": "expectedEndDate",
+      "dataIndex": "expectedEndDate",
+      "width": "60px",
+      "sorter": true,
+      "key": "expectedEndDate",
+      "type": "date",
+      "label": "expectedEndDate",
+      "placeholder": "2019-01-01"
+    },
+    {
+      "title": "priority",
+      "dataIndex": "priority",
+      "width": "60px",
+      "sorter": true,
+      "key": "priority",
+      "type": "input",
+      "label": "priority",
+      "placeholder": "Input priority"
+    },
+    {
+      "title": "department",
+      "dataIndex": "department",
+      "width": "60px",
+      "sorter": true,
+      "key": "department",
+      "type": "input",
+      "label": "department",
+      "placeholder": "Input department"
+    },
+    {
+      "title": "notes",
+      "dataIndex": "notes",
+      "width": "60px",
+      "sorter": true,
+      "key": "notes",
+      "type": "textarea",
+      "label": "notes",
+      "placeholder": "Input notes"
+    },
+    {
+      "title": "actualStartDate",
+      "dataIndex": "actualStartDate",
+      "width": "60px",
+      "sorter": true,
+      "key": "actualStartDate",
+      "type": "date",
+      "label": "actualStartDate",
+      "placeholder": "2019-01-01"
+    },
+    {
+      "title": "actualEndDate",
+      "dataIndex": "actualEndDate",
+      "width": "60px",
+      "sorter": true,
+      "key": "actualEndDate",
+      "type": "date",
+      "label": "actualEndDate",
+      "placeholder": "2019-01-01"
+    },
+    {
+      "title": "estimatedCost",
+      "dataIndex": "estimatedCost",
+      "width": "60px",
+      "sorter": true,
+      "key": "estimatedCost",
+      "type": "input",
+      "label": "estimatedCost",
+      "placeholder": "Input estimatedCost"
+    },
+    {
+      "title": "totalCost",
+      "dataIndex": "totalCost",
+      "width": "60px",
+      "sorter": true,
+      "key": "totalCost",
+      "type": "input",
+      "label": "totalCost",
+      "placeholder": "Input totalCost"
+    },
+    {
+      "title": "ExpenseClaim",
+      "dataIndex": "ExpenseClaim",
+      "width": "60px",
+      "sorter": true,
+      "key": "ExpenseClaim",
+      "type": "input",
+      "label": "ExpenseClaim",
+      "placeholder": "Input ExpenseClaim"
+    },
+    {
+      "title": "collectProgress",
+      "dataIndex": "collectProgress",
+      "width": "60px",
+      "sorter": true,
+      "key": "collectProgress",
+      "type": "input",
+      "label": "collectProgress",
+      "placeholder": "Input collectProgress"
+    },
+    {
+      "title": "frequency",
+      "dataIndex": "frequency",
+      "width": "60px",
+      "sorter": true,
+      "key": "frequency",
+      "type": "input",
+      "label": "frequency",
+      "placeholder": "Input frequency"
+    },
+    {
+      "title": "fromTime",
+      "dataIndex": "fromTime",
+      "width": "60px",
+      "sorter": true,
+      "key": "fromTime",
+      "type": "datetime",
+      "label": "fromTime",
+      "placeholder": "12:00:00"
+    },
+    {
+      "title": "toTime",
+      "dataIndex": "toTime",
+      "width": "60px",
+      "sorter": true,
+      "key": "toTime",
+      "type": "datetime",
+      "label": "toTime",
+      "placeholder": "12:00:00"
+    },
+    {
+      "title": "tasks",
+      "dataIndex": "tasks",
+      "width": "60px",
+      "sorter": true,
+      "key": "tasks",
+      "type": "input",
+      "label": "tasks",
+      "placeholder": "Input tasks"
+    },
+    {
+      "title": "events",
+      "dataIndex": "events",
+      "width": "60px",
+      "sorter": true,
+      "key": "events",
+      "type": "input",
+      "label": "events",
+      "placeholder": "Input events"
+    },
+    {
+      "title": "board_id",
+      "dataIndex": "board_id",
+      "width": "60px",
+      "sorter": true,
+      "key": "board_id",
+      "type": "input",
+      "label": "board_id",
+      "placeholder": "Input board_id"
+    }
+  ]
+}

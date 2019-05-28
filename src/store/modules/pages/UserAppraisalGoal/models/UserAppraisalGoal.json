@@ -1,1 +1,54 @@
-{"columns":[{"title":"id","dataIndex":"id","width":"60px","sorter":true,"key":"id","type":"input","label":"id","placeholder":"Input id"},{"title":"kra","dataIndex":"kra","width":"60px","sorter":true,"key":"kra","type":"input","label":"kra","placeholder":"Input kra"},{"title":"perWeightage","dataIndex":"perWeightage","width":"60px","sorter":true,"key":"perWeightage","type":"input","label":"perWeightage","placeholder":"Input perWeightage"},{"title":"score","dataIndex":"score","width":"60px","sorter":true,"key":"score","type":"input","label":"score","placeholder":"Input score"},{"title":"score_earned","dataIndex":"score_earned","width":"60px","sorter":true,"key":"score_earned","type":"input","label":"score_earned","placeholder":"Input score_earned"}]}
+{
+  "columns": [
+    {
+      "title": "id",
+      "dataIndex": "id",
+      "width": "60px",
+      "sorter": true,
+      "key": "id",
+      "type": "input",
+      "label": "id",
+      "placeholder": "Input id"
+    },
+    {
+      "title": "kra",
+      "dataIndex": "kra",
+      "width": "60px",
+      "sorter": true,
+      "key": "kra",
+      "type": "input",
+      "label": "kra",
+      "placeholder": "Input kra"
+    },
+    {
+      "title": "perWeightage",
+      "dataIndex": "perWeightage",
+      "width": "60px",
+      "sorter": true,
+      "key": "perWeightage",
+      "type": "input",
+      "label": "perWeightage",
+      "placeholder": "Input perWeightage"
+    },
+    {
+      "title": "score",
+      "dataIndex": "score",
+      "width": "60px",
+      "sorter": true,
+      "key": "score",
+      "type": "input",
+      "label": "score",
+      "placeholder": "Input score"
+    },
+    {
+      "title": "score_earned",
+      "dataIndex": "score_earned",
+      "width": "60px",
+      "sorter": true,
+      "key": "score_earned",
+      "type": "input",
+      "label": "score_earned",
+      "placeholder": "Input score_earned"
+    }
+  ]
+}

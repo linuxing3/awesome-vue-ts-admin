@@ -1,1 +1,184 @@
-{"columns":[{"title":"id","dataIndex":"id","width":"60px","sorter":true,"key":"id","type":"input","label":"id","placeholder":"Input id"},{"title":"assetName","dataIndex":"assetName","width":"60px","sorter":true,"key":"assetName","type":"input","label":"assetName","placeholder":"Input assetName"},{"title":"itemCode","dataIndex":"itemCode","width":"60px","sorter":true,"key":"itemCode","type":"input","label":"itemCode","placeholder":"Input itemCode"},{"title":"itemName","dataIndex":"itemName","width":"60px","sorter":true,"key":"itemName","type":"input","label":"itemName","placeholder":"Input itemName"},{"title":"assetCategory","dataIndex":"assetCategory","width":"60px","sorter":true,"key":"assetCategory","type":"input","label":"assetCategory","placeholder":"Input assetCategory"},{"title":"assetOwner","dataIndex":"assetOwner","width":"60px","sorter":true,"key":"assetOwner","type":"input","label":"assetOwner","placeholder":"Input assetOwner"},{"title":"assetOwnerCompany","dataIndex":"assetOwnerCompany","width":"60px","sorter":true,"key":"assetOwnerCompany","type":"input","label":"assetOwnerCompany","placeholder":"Input assetOwnerCompany"},{"title":"image","dataIndex":"image","width":"60px","sorter":true,"key":"image","type":"input","label":"image","placeholder":"Input image"},{"title":"brand","dataIndex":"brand","width":"60px","sorter":true,"key":"brand","type":"input","label":"brand","placeholder":"Input brand"},{"title":"model","dataIndex":"model","width":"60px","sorter":true,"key":"model","type":"input","label":"model","placeholder":"Input model"},{"title":"price","dataIndex":"price","width":"60px","sorter":true,"key":"price","type":"input","label":"price","placeholder":"Input price"},{"title":"producedDate","dataIndex":"producedDate","width":"60px","sorter":true,"key":"producedDate","type":"date","label":"producedDate","placeholder":"2019-01-01"},{"title":"purchasedDate","dataIndex":"purchasedDate","width":"60px","sorter":true,"key":"purchasedDate","type":"date","label":"purchasedDate","placeholder":"2019-01-01"},{"title":"descriptions","dataIndex":"descriptions","width":"60px","sorter":true,"key":"descriptions","type":"input","label":"descriptions","placeholder":"Input descriptions"},{"title":"barCode","dataIndex":"barCode","width":"60px","sorter":true,"key":"barCode","type":"input","label":"barCode","placeholder":"Input barCode"},{"title":"supplier","dataIndex":"supplier","width":"60px","sorter":true,"key":"supplier","type":"input","label":"supplier","placeholder":"Input supplier"},{"title":"location","dataIndex":"location","width":"60px","sorter":true,"key":"location","type":"input","label":"location","placeholder":"Input location"},{"title":"custodian","dataIndex":"custodian","width":"60px","sorter":true,"key":"custodian","type":"input","label":"custodian","placeholder":"Input custodian"}]}
+{
+  "columns": [
+    {
+      "title": "id",
+      "dataIndex": "id",
+      "width": "60px",
+      "sorter": true,
+      "key": "id",
+      "type": "input",
+      "label": "id",
+      "placeholder": "Input id"
+    },
+    {
+      "title": "assetName",
+      "dataIndex": "assetName",
+      "width": "60px",
+      "sorter": true,
+      "key": "assetName",
+      "type": "input",
+      "label": "assetName",
+      "placeholder": "Input assetName"
+    },
+    {
+      "title": "itemCode",
+      "dataIndex": "itemCode",
+      "width": "60px",
+      "sorter": true,
+      "key": "itemCode",
+      "type": "input",
+      "label": "itemCode",
+      "placeholder": "Input itemCode"
+    },
+    {
+      "title": "itemName",
+      "dataIndex": "itemName",
+      "width": "60px",
+      "sorter": true,
+      "key": "itemName",
+      "type": "input",
+      "label": "itemName",
+      "placeholder": "Input itemName"
+    },
+    {
+      "title": "assetCategory",
+      "dataIndex": "assetCategory",
+      "width": "60px",
+      "sorter": true,
+      "key": "assetCategory",
+      "type": "input",
+      "label": "assetCategory",
+      "placeholder": "Input assetCategory"
+    },
+    {
+      "title": "assetOwner",
+      "dataIndex": "assetOwner",
+      "width": "60px",
+      "sorter": true,
+      "key": "assetOwner",
+      "type": "input",
+      "label": "assetOwner",
+      "placeholder": "Input assetOwner"
+    },
+    {
+      "title": "assetOwnerCompany",
+      "dataIndex": "assetOwnerCompany",
+      "width": "60px",
+      "sorter": true,
+      "key": "assetOwnerCompany",
+      "type": "input",
+      "label": "assetOwnerCompany",
+      "placeholder": "Input assetOwnerCompany"
+    },
+    {
+      "title": "image",
+      "dataIndex": "image",
+      "width": "60px",
+      "sorter": true,
+      "key": "image",
+      "type": "input",
+      "label": "image",
+      "placeholder": "Input image"
+    },
+    {
+      "title": "brand",
+      "dataIndex": "brand",
+      "width": "60px",
+      "sorter": true,
+      "key": "brand",
+      "type": "input",
+      "label": "brand",
+      "placeholder": "Input brand"
+    },
+    {
+      "title": "model",
+      "dataIndex": "model",
+      "width": "60px",
+      "sorter": true,
+      "key": "model",
+      "type": "input",
+      "label": "model",
+      "placeholder": "Input model"
+    },
+    {
+      "title": "price",
+      "dataIndex": "price",
+      "width": "60px",
+      "sorter": true,
+      "key": "price",
+      "type": "input",
+      "label": "price",
+      "placeholder": "Input price"
+    },
+    {
+      "title": "producedDate",
+      "dataIndex": "producedDate",
+      "width": "60px",
+      "sorter": true,
+      "key": "producedDate",
+      "type": "date",
+      "label": "producedDate",
+      "placeholder": "2019-01-01"
+    },
+    {
+      "title": "purchasedDate",
+      "dataIndex": "purchasedDate",
+      "width": "60px",
+      "sorter": true,
+      "key": "purchasedDate",
+      "type": "date",
+      "label": "purchasedDate",
+      "placeholder": "2019-01-01"
+    },
+    {
+      "title": "descriptions",
+      "dataIndex": "descriptions",
+      "width": "60px",
+      "sorter": true,
+      "key": "descriptions",
+      "type": "input",
+      "label": "descriptions",
+      "placeholder": "Input descriptions"
+    },
+    {
+      "title": "barCode",
+      "dataIndex": "barCode",
+      "width": "60px",
+      "sorter": true,
+      "key": "barCode",
+      "type": "input",
+      "label": "barCode",
+      "placeholder": "Input barCode"
+    },
+    {
+      "title": "supplier",
+      "dataIndex": "supplier",
+      "width": "60px",
+      "sorter": true,
+      "key": "supplier",
+      "type": "input",
+      "label": "supplier",
+      "placeholder": "Input supplier"
+    },
+    {
+      "title": "location",
+      "dataIndex": "location",
+      "width": "60px",
+      "sorter": true,
+      "key": "location",
+      "type": "input",
+      "label": "location",
+      "placeholder": "Input location"
+    },
+    {
+      "title": "custodian",
+      "dataIndex": "custodian",
+      "width": "60px",
+      "sorter": true,
+      "key": "custodian",
+      "type": "input",
+      "label": "custodian",
+      "placeholder": "Input custodian"
+    }
+  ]
+}

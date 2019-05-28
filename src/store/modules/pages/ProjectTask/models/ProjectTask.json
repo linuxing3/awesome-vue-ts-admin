@@ -1,1 +1,14 @@
-{"columns":[{"title":"_id","dataIndex":"_id","width":"60px","sorter":true,"key":"_id","type":"input","label":"_id","placeholder":"Input _id"}]}
+{
+  "columns": [
+    {
+      "title": "_id",
+      "dataIndex": "_id",
+      "width": "60px",
+      "sorter": true,
+      "key": "_id",
+      "type": "input",
+      "label": "_id",
+      "placeholder": "Input _id"
+    }
+  ]
+}

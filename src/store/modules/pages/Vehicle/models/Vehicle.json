@@ -1,1 +1,204 @@
-{"columns":[{"title":"id","dataIndex":"id","width":"60px","sorter":true,"key":"id","type":"input","label":"id","placeholder":"Input id"},{"title":"licensePlate","dataIndex":"licensePlate","width":"60px","sorter":true,"key":"licensePlate","type":"input","label":"licensePlate","placeholder":"Input licensePlate"},{"title":"mark","dataIndex":"mark","width":"60px","sorter":true,"key":"mark","type":"input","label":"mark","placeholder":"Input mark"},{"title":"model","dataIndex":"model","width":"60px","sorter":true,"key":"model","type":"input","label":"model","placeholder":"Input model"},{"title":"details","dataIndex":"details","width":"60px","sorter":true,"key":"details","type":"input","label":"details","placeholder":"Input details"},{"title":"lastOdometerValue","dataIndex":"lastOdometerValue","width":"60px","sorter":true,"key":"lastOdometerValue","type":"input","label":"lastOdometerValue","placeholder":"Input lastOdometerValue"},{"title":"location","dataIndex":"location","width":"60px","sorter":true,"key":"location","type":"input","label":"location","placeholder":"Input location"},{"title":"chassisNo","dataIndex":"chassisNo","width":"60px","sorter":true,"key":"chassisNo","type":"input","label":"chassisNo","placeholder":"Input chassisNo"},{"title":"value","dataIndex":"value","width":"60px","sorter":true,"key":"value","type":"input","label":"value","placeholder":"Input value"},{"title":"insuranceDetails","dataIndex":"insuranceDetails","width":"60px","sorter":true,"key":"insuranceDetails","type":"input","label":"insuranceDetails","placeholder":"Input insuranceDetails"},{"title":"insuranceCompany","dataIndex":"insuranceCompany","width":"60px","sorter":true,"key":"insuranceCompany","type":"input","label":"insuranceCompany","placeholder":"Input insuranceCompany"},{"title":"policyNo","dataIndex":"policyNo","width":"60px","sorter":true,"key":"policyNo","type":"input","label":"policyNo","placeholder":"Input policyNo"},{"title":"startDate","dataIndex":"startDate","width":"60px","sorter":true,"key":"startDate","type":"date","label":"startDate","placeholder":"2019-01-01"},{"title":"endDate","dataIndex":"endDate","width":"60px","sorter":true,"key":"endDate","type":"date","label":"endDate","placeholder":"2019-01-01"},{"title":"additionalDetails","dataIndex":"additionalDetails","width":"60px","sorter":true,"key":"additionalDetails","type":"input","label":"additionalDetails","placeholder":"Input additionalDetails"},{"title":"fueltype","dataIndex":"fueltype","width":"60px","sorter":true,"key":"fueltype","type":"input","label":"fueltype","placeholder":"Input fueltype"},{"title":"fuelUom","dataIndex":"fuelUom","width":"60px","sorter":true,"key":"fuelUom","type":"input","label":"fuelUom","placeholder":"Input fuelUom"},{"title":"color","dataIndex":"color","width":"60px","sorter":true,"key":"color","type":"input","label":"color","placeholder":"Input color"},{"title":"wheels","dataIndex":"wheels","width":"60px","sorter":true,"key":"wheels","type":"input","label":"wheels","placeholder":"Input wheels"},{"title":"door","dataIndex":"door","width":"60px","sorter":true,"key":"door","type":"input","label":"door","placeholder":"Input door"}]}
+{
+  "columns": [
+    {
+      "title": "id",
+      "dataIndex": "id",
+      "width": "60px",
+      "sorter": true,
+      "key": "id",
+      "type": "input",
+      "label": "id",
+      "placeholder": "Input id"
+    },
+    {
+      "title": "licensePlate",
+      "dataIndex": "licensePlate",
+      "width": "60px",
+      "sorter": true,
+      "key": "licensePlate",
+      "type": "input",
+      "label": "licensePlate",
+      "placeholder": "Input licensePlate"
+    },
+    {
+      "title": "mark",
+      "dataIndex": "mark",
+      "width": "60px",
+      "sorter": true,
+      "key": "mark",
+      "type": "input",
+      "label": "mark",
+      "placeholder": "Input mark"
+    },
+    {
+      "title": "model",
+      "dataIndex": "model",
+      "width": "60px",
+      "sorter": true,
+      "key": "model",
+      "type": "input",
+      "label": "model",
+      "placeholder": "Input model"
+    },
+    {
+      "title": "details",
+      "dataIndex": "details",
+      "width": "60px",
+      "sorter": true,
+      "key": "details",
+      "type": "input",
+      "label": "details",
+      "placeholder": "Input details"
+    },
+    {
+      "title": "lastOdometerValue",
+      "dataIndex": "lastOdometerValue",
+      "width": "60px",
+      "sorter": true,
+      "key": "lastOdometerValue",
+      "type": "input",
+      "label": "lastOdometerValue",
+      "placeholder": "Input lastOdometerValue"
+    },
+    {
+      "title": "location",
+      "dataIndex": "location",
+      "width": "60px",
+      "sorter": true,
+      "key": "location",
+      "type": "input",
+      "label": "location",
+      "placeholder": "Input location"
+    },
+    {
+      "title": "chassisNo",
+      "dataIndex": "chassisNo",
+      "width": "60px",
+      "sorter": true,
+      "key": "chassisNo",
+      "type": "input",
+      "label": "chassisNo",
+      "placeholder": "Input chassisNo"
+    },
+    {
+      "title": "value",
+      "dataIndex": "value",
+      "width": "60px",
+      "sorter": true,
+      "key": "value",
+      "type": "input",
+      "label": "value",
+      "placeholder": "Input value"
+    },
+    {
+      "title": "insuranceDetails",
+      "dataIndex": "insuranceDetails",
+      "width": "60px",
+      "sorter": true,
+      "key": "insuranceDetails",
+      "type": "input",
+      "label": "insuranceDetails",
+      "placeholder": "Input insuranceDetails"
+    },
+    {
+      "title": "insuranceCompany",
+      "dataIndex": "insuranceCompany",
+      "width": "60px",
+      "sorter": true,
+      "key": "insuranceCompany",
+      "type": "input",
+      "label": "insuranceCompany",
+      "placeholder": "Input insuranceCompany"
+    },
+    {
+      "title": "policyNo",
+      "dataIndex": "policyNo",
+      "width": "60px",
+      "sorter": true,
+      "key": "policyNo",
+      "type": "input",
+      "label": "policyNo",
+      "placeholder": "Input policyNo"
+    },
+    {
+      "title": "startDate",
+      "dataIndex": "startDate",
+      "width": "60px",
+      "sorter": true,
+      "key": "startDate",
+      "type": "date",
+      "label": "startDate",
+      "placeholder": "2019-01-01"
+    },
+    {
+      "title": "endDate",
+      "dataIndex": "endDate",
+      "width": "60px",
+      "sorter": true,
+      "key": "endDate",
+      "type": "date",
+      "label": "endDate",
+      "placeholder": "2019-01-01"
+    },
+    {
+      "title": "additionalDetails",
+      "dataIndex": "additionalDetails",
+      "width": "60px",
+      "sorter": true,
+      "key": "additionalDetails",
+      "type": "input",
+      "label": "additionalDetails",
+      "placeholder": "Input additionalDetails"
+    },
+    {
+      "title": "fueltype",
+      "dataIndex": "fueltype",
+      "width": "60px",
+      "sorter": true,
+      "key": "fueltype",
+      "type": "input",
+      "label": "fueltype",
+      "placeholder": "Input fueltype"
+    },
+    {
+      "title": "fuelUom",
+      "dataIndex": "fuelUom",
+      "width": "60px",
+      "sorter": true,
+      "key": "fuelUom",
+      "type": "input",
+      "label": "fuelUom",
+      "placeholder": "Input fuelUom"
+    },
+    {
+      "title": "color",
+      "dataIndex": "color",
+      "width": "60px",
+      "sorter": true,
+      "key": "color",
+      "type": "input",
+      "label": "color",
+      "placeholder": "Input color"
+    },
+    {
+      "title": "wheels",
+      "dataIndex": "wheels",
+      "width": "60px",
+      "sorter": true,
+      "key": "wheels",
+      "type": "input",
+      "label": "wheels",
+      "placeholder": "Input wheels"
+    },
+    {
+      "title": "door",
+      "dataIndex": "door",
+      "width": "60px",
+      "sorter": true,
+      "key": "door",
+      "type": "input",
+      "label": "door",
+      "placeholder": "Input door"
+    }
+  ]
+}

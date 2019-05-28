@@ -1,1 +1,34 @@
-{"columns":[{"title":"id","dataIndex":"id","width":"60px","sorter":true,"key":"id","type":"input","label":"id","placeholder":"Input id"},{"title":"name","dataIndex":"name","width":"60px","sorter":true,"key":"name","type":"input","label":"name","placeholder":"Input name"},{"title":"users","dataIndex":"users","width":"60px","sorter":true,"key":"users","type":"input","label":"users","placeholder":"Input users"}]}
+{
+  "columns": [
+    {
+      "title": "id",
+      "dataIndex": "id",
+      "width": "60px",
+      "sorter": true,
+      "key": "id",
+      "type": "input",
+      "label": "id",
+      "placeholder": "Input id"
+    },
+    {
+      "title": "name",
+      "dataIndex": "name",
+      "width": "60px",
+      "sorter": true,
+      "key": "name",
+      "type": "input",
+      "label": "name",
+      "placeholder": "Input name"
+    },
+    {
+      "title": "users",
+      "dataIndex": "users",
+      "width": "60px",
+      "sorter": true,
+      "key": "users",
+      "type": "input",
+      "label": "users",
+      "placeholder": "Input users"
+    }
+  ]
+}
