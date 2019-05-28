@@ -56,6 +56,9 @@ class MemberForm extends Vue {
     },
   ]
 
+  reset() {
+  }
+
   render() {
     return (
       <div class="base-form-wrap">
@@ -73,7 +76,7 @@ class MemberForm extends Vue {
               </a-menu-item>
             </a-menu>
           </a-dropdown>
-          <m-form ref="MForm" item-list={this.itemList} save-btn={true} reset-btn={true} />
+          <m-form ref="MForm" item-list={this.itemList} save-btn={true} reset-btn={true} on-reset={this.reset} />
         </a-card>
       </div>
     );
