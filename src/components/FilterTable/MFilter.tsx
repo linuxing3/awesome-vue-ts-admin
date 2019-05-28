@@ -191,16 +191,18 @@ class MFilterClass extends Vue {
         itemDom = <a-date-picker
           id={item.key}
           showTime
-          format="YYYY-MM-DD HH:mm:ss"
+          format="HH:mm:ss"
           placeholder={item.placeholder}>
         </a-date-picker>;
         break;
       case 'date':
-        itemDom = <a-date-picker
-          id={item.key}
-          format="YYYY-MM-DD"
-          placeholder={item.placeholder}>
-        </a-date-picker>;
+        itemDom = (
+          <a-date-picker
+            id={item.key}
+            format="YYYY-MM-DD"
+            placeholder={item.placeholder}
+          />
+        )
         break;
       case 'datetimerange':
         itemDom = <a-range-picker
@@ -349,14 +351,14 @@ class MFilterClass extends Vue {
   btnElement(isNormal: boolean): JSX.Element {
     return (
       <div>
-        <a-button type="primary" on-click={this.onSearch} id="tableSearch" icon="search">Search</a-button>
-        <a-button type="primary" on-click={this.reset} id="tableReset" icon="reload">Refresh</a-button>
+        <a-button on-click={this.onSearch} id="tableSearch" icon="search">Search</a-button>
+        <a-button type="danger" on-click={this.reset} id="tableReset" icon="reload">Refresh</a-button>
         {
           this.filterGrade.length ? <a on-click={() => this.gradeSwitch(isNormal)} class="grade-btn">{isNormal ? 'Common' : 'Senior'} Search{isNormal ? <i class="iconfont-down"></i> : <i class="iconfont-up"></i>}</a> : null
         }
         <div class="right-btn">
           {
-            this.addBtn ? <a-button on-click={this.addFun} id={isNormal ? 'tableAdd' : 'tableAdd2'} icon="plus">Add</a-button> : null
+            this.addBtn ? <a-button type="primary" on-click={this.addFun} id={isNormal ? 'tableAdd' : 'tableAdd2'} icon="plus">Add</a-button> : null
           }
           {
             this.exportBtn ? <a-button on-click={this.exportFun} id={isNormal ? 'tableExport' : 'tableExport2'} icon="download" shape="circle"></a-button> : null

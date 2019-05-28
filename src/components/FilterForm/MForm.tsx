@@ -5,6 +5,7 @@ import {
   Input, Select, Form, TimePicker, DatePicker, Cascader, Row, Col, Button, Modal, Checkbox, Radio, Card,
 } from 'ant-design-vue';
 import { FilterFormList } from '@/interface';
+import moment from 'moment';
 import lfService from '@/utils/request.localforage';
 
 import './MForm.less';
@@ -169,7 +170,7 @@ class MFormClass extends Vue {
       method: 'get',
       data: { id: this.id }
     });
-    params.columns && this.$emit('setForm', params.columns)
+    this.$emit('setForm', params.columns)
   }
 
   @Emit()
@@ -262,10 +263,10 @@ class MFormClass extends Vue {
           <a-date-picker
             id={item.key}
             label={item.label}
-            format="YYYY-MM-DD"
+            format="YYYY-MM-DD HH:mm:ss"
             placeholder={item.placeholder}
           />
-        );
+        )
         break;
       case 'datetimerange':
         itemDom = (
