@@ -1,16 +1,8 @@
 import { FilterFormList } from '@/interface';
 
-export interface ATableColumnConfig {
-  dataIndex: string;
-  title: string;
-  width?: string;
-  sorter?: boolean;
-  scopedSlots?: any;
-}
-
 export const genAFormData = (field: string): FilterFormList => {
   // /.*$/.test(field)
-  if (field.match(new RegExp(/(c|C|n|N)o(te|ntent)/))) {
+  if (field.match(new RegExp(/(content|note|memo)/))) {
     return {
       key: field,
       type: 'textarea',
@@ -56,9 +48,8 @@ export const genAFormData = (field: string): FilterFormList => {
   };
 };
 
-
-export const AGenTableColumns = (fields: string[]): ATableColumnConfig[] => fields.reduce((columnsConfig: ATableColumnConfig[], field: string): ATableColumnConfig[] => {
-  const config: ATableColumnConfig = {
+export const AGenTableColumns = (fields: string[]): FilterFormList[] => fields.reduce((columnsConfig: FilterFormList[], field: string): FilterFormList[] => {
+  const config: FilterFormList = {
     title: field,
     dataIndex: field,
     width: '60px',

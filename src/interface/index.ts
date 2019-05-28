@@ -21,6 +21,8 @@ export interface FilterFormList {
   label: string;
   title?: string;
   dataIndex?: string;
+  width?: string;
+  sorter?: boolean;
   placeholder?: string | string[];
   value?: string[];
   fieldNames?: any;
