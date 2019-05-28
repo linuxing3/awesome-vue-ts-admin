@@ -92,11 +92,11 @@ class MFormClass extends Vue {
 
   mounted() {
     this.$nextTick(() => {
-      this.handleGetInfo();
+      this.getInfo();
     });
   }
 
-  saveFun(e: HTMLFormElement) {
+  save(e: HTMLFormElement) {
     e.preventDefault();
     this.Form.validateFields((err: any, values: object) => {
       if (!err) {
@@ -104,7 +104,7 @@ class MFormClass extends Vue {
           title: '表单数据',
           content: JSON.stringify(values),
           onOk: () => {
-            this.handleAddOrEdit(values);
+            this.addOrEdit(values);
           },
           onCancel: () => {
             this.reset();
@@ -114,7 +114,7 @@ class MFormClass extends Vue {
     });
   }
 
-  handleAddOrEdit(data) {
+  addOrEdit(data) {
     if (this.id === -1) {
       this.$log.suc('Creating...');
       lfService.request({
@@ -132,7 +132,8 @@ class MFormClass extends Vue {
     }
   }
 
-  handleGetInfo() {
+  @Emit()
+  getInfo() {
     this.$log.suc('getting edit info...');
     if (this.id === -1) return;
     lfService.request({
@@ -145,6 +146,7 @@ class MFormClass extends Vue {
     });
   }
 
+  @Emit()
   loadEditInfo(data) {
     this.$log.suc(`编辑记录 ${this.id}`);
     new Promise((resolve) => {
@@ -156,6 +158,16 @@ class MFormClass extends Vue {
   }
 
   // methods
+  @Emit()
+  setForm(): void {
+    const { params } = lfService.validateUrl({
+      url: `/${this.modelName}`,
+      method: 'get',
+      data: { id: this.id }
+    });
+    params.columns && this.$emit('setForm', params.columns)
+  }
+
   @Emit()
   reset(): void {
     this.Form.setFieldsValue({});
@@ -292,7 +304,7 @@ class MFormClass extends Vue {
         <div class="right-btn">
           {this.saveBtn ? (
             <a-button
-              on-click={this.saveFun}
+              on-click={this.save}
               id={isNormal ? 'formAdd' : 'formAdd2'}
               icon="plus"
               type="primary"

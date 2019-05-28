@@ -1,7 +1,7 @@
 
 import { Component, Vue } from 'vue-property-decorator';
 import {
-  Form, Card, Dropdown, Menu, Icon,
+  Form, Card, Dropdown, Menu, Icon, Modal
 } from 'ant-design-vue';
 import { FilterFormList, Opreat } from '@/interface';
 import MForm from '@/components/FilterForm/MForm';
@@ -25,7 +25,9 @@ import './index.less';
 class MemberForm extends Vue {
   modelName: string = 'member'
 
-  itemList: FilterFormList[] = [
+  itemList: FilterFormList[] = []
+
+  defaultItemList: FilterFormList[] = [
     {
       key: 'name',
       label: 'name',
@@ -56,7 +58,26 @@ class MemberForm extends Vue {
     },
   ]
 
-  reset() {
+  created () {
+    this.itemList = this.defaultItemList;
+  }
+
+  setForm (itemList: FilterFormList[]) {
+    this.itemList = itemList;
+  }
+
+  reset () {
+    Modal.info({
+      title: 'Go to list',
+      onOk: () => {
+        this.$router.replace({
+          name: 'MemberList'
+        })
+      },
+      onCancel: () => {
+        this.setForm(this.itemList);
+      },
+    })
   }
 
   render() {
@@ -76,7 +97,7 @@ class MemberForm extends Vue {
               </a-menu-item>
             </a-menu>
           </a-dropdown>
-          <m-form ref="MForm" item-list={this.itemList} save-btn={true} reset-btn={true} on-reset={this.reset} />
+          <m-form ref="MForm" item-list={this.itemList} save-btn={true} reset-btn={true} on-set-form={this.setForm} on-reset={this.reset} />
         </a-card>
       </div>
     );

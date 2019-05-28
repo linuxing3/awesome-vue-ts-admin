@@ -137,7 +137,7 @@ export default class MTable extends Vue {
         this.tableData = getValue(this.backParams.data, res);
         this.$log.suc('MTable table data:', this.tableData);
         // table list and columns
-        this.tableList = getValue(this.backParams.columns, res);
+        // this.tableList = getValue(this.backParams.columns, res);
         // table total
         this.dataTotal = getValue(this.backParams.total, res)
           ? getValue(this.backParams.total, res) : 0;
