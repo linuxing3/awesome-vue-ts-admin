@@ -1,13 +1,31 @@
 /**
  * ORM插件将vuex状态持久化
  */
-import * as Vuex from 'vuex';
 import VuexORM, { Database, Model } from '@vuex-orm/core';
 import localForagePlugin from 'vuex-orm-localforage';
 
 import models, { Models } from '@/models';
 import modules, { Modules } from '@/store/modules/page';
+import { AGenTableColumns } from '@/utils/genFormData';
+import { writeFile } from 'fs';
+import { resolve } from 'path';
+import { upperFirst } from 'lodash';
 
+
+export const persistentSchema = (Entity: typeof Model) => {
+  const entity = Entity.fields();
+  const modelName = upperFirst(Entity.entity);
+  const columns = AGenTableColumns(Object.keys(entity));
+  const schemaFilePath = resolve(
+    `src/store/modules/pages/${modelName}/models/${modelName}.json`,
+  );
+  console.log(`Writing json file : ${schemaFilePath}`)
+  writeFile(schemaFilePath, JSON.stringify({ columns }), (error) => {
+    if (!error) {
+      console.log(`Write json file done!`);
+    }
+  });
+};
 /**
  * 在数据库中注册模型和模块
  */
@@ -20,10 +38,8 @@ export const registerDatabase = (models: Models, modules: Modules): Database => 
     const model = models[modelName];
     const module = modules[modelName] || {};
 
-    /**
-     * Register a model and a module to Database.
-     */
     database.register(model, module);
+    // persistentSchema(model);
   });
 
   return database;

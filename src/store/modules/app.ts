@@ -1,6 +1,7 @@
 import { menuItem, routerItem } from '@/interface';
 import { routeToArray } from '@/utils';
 import router from '@/router';
+import models from '@/models';
 // 循环匹配当前路由数据
 function findMenu(
   data: any,

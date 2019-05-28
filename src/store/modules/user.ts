@@ -1,9 +1,9 @@
-import config, { adminUsers, noAuthList } from '@/utils/config';
-import router, { asyncRouterMap, constantRouterMap } from '@/router';
+import { adminUsers } from '@/utils/config';
+import router, { asyncRouterMap } from '@/router';
 import bcrypt from 'bcryptjs';
 import { routerItem } from '@/interface';
 import { builder, baseData } from '@/utils/builder';
-import User from '@/store/modules/pages/User/models/User';
+import models from '@/models';
 
 interface UserData {
   username: string;
@@ -12,7 +12,7 @@ interface UserData {
   email: string;
 }
 
-const Entity: any = User;
+const Entity: any = models.user;
 
 function filterAsyncRouter(AsyncRouterMap: routerItem[], permission: string[]): routerItem[] {
   const routerMap = AsyncRouterMap.filter((item) => {
@@ -55,8 +55,11 @@ const user = {
     SAVEROLES: (state: any, roles: Array<any>) => {
       state.roles = roles;
     },
-    SAVEUSER: (state: any, userData: UserData) => {
+    SAVEUSER: (state: any, user: UserData) => {
       state.user = user;
+    },
+    SAVEROUTERS: (state: any, routers: Array<any>) => {
+      state.permission_routers = routers;
     },
     LOADING: (state: any, loading: boolean) => {
       state.spinning = loading;
@@ -108,16 +111,21 @@ const user = {
       const error = baseData('fail', '登录失败');
       return Promise.reject(builder(error, 'No matched username'));
     },
-    logout: (context: any, loginParams: any) => {
+    logout: (context: any) => {
       window.localStorage.clear();
+      context.commit('SAVEUSER', {});
+      context.commit('SAVEROLES', []);
+      context.commit('SAVEROUTERS', []);
       const data = baseData('success', '登出成功');
       return Promise.resolve(builder(data, 'OK'));
     },
     getUserLocalInfo: async (context: any) => {
+      context.commit('LOADING', false);
       const token = JSON.parse(window.localStorage.getItem('token'));
       console.log('token:', token);
       const entity = Entity.find(token.id);
       console.log('User Entity:', entity);
+      context.commit('LOADING', true);
       return new Promise((resolve, reject) => {
         if (entity) {
           const userData: UserData = {
@@ -132,11 +140,12 @@ const user = {
           context.dispatch('GetMenuData', getRouter);
           resolve(entity);
         } else {
+          context.commit('LOADING', true);
           reject('获取用户信息失败');
         }
       });
     },
-    getUserInfo: (context: any) => new Promise((resolve, reject) => {
+    getUserAjaxInfo: (context: any) => new Promise((resolve, reject) => {
       const params = {
         token: localStorage.getItem('token'),
       };

@@ -1,7 +1,7 @@
 
 import { Component, Vue } from 'vue-property-decorator';
 import {
-  Form, Card, Dropdown, Menu, Icon, Modal
+  Form, Card, Dropdown, Menu, Icon, Modal,
 } from 'ant-design-vue';
 import { FilterFormList, Opreat } from '@/interface';
 import MForm from '@/components/FilterForm/MForm';
@@ -58,26 +58,26 @@ class MemberForm extends Vue {
     },
   ]
 
-  created () {
-    this.itemList = [ ...this.defaultItemList ];
+  created() {
+    this.itemList = [...this.defaultItemList];
   }
 
-  setForm (itemList: FilterFormList[]) {
-    this.itemList = [ ...itemList ];
+  setForm(itemList: FilterFormList[]) {
+    this.itemList = [...itemList];
   }
 
-  reset () {
+  reset() {
     Modal.info({
       title: 'Go to list',
       onOk: () => {
         this.$router.replace({
-          name: 'MemberList'
-        })
+          name: 'MemberList',
+        });
       },
       onCancel: () => {
         this.setForm(this.itemList);
       },
-    })
+    });
   }
 
   render() {

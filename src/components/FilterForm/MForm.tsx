@@ -138,7 +138,7 @@ class MFormClass extends Vue {
     if (this.id === -1) {
       // this.setForm();
       return;
-    };
+    }
     lfService.request({
       url: `/${this.modelName}`,
       method: 'get',
@@ -167,9 +167,9 @@ class MFormClass extends Vue {
     const { params } = lfService.validateUrl({
       url: `/${this.modelName}`,
       method: 'get',
-      data: { id: this.id }
+      data: { id: this.id },
     });
-    params.columns && this.$emit('setForm', params.columns)
+    this.$emit('setForm', params.columns);
   }
 
   @Emit()
