@@ -59,11 +59,11 @@ class MemberForm extends Vue {
   ]
 
   created () {
-    this.itemList = this.defaultItemList;
+    this.itemList = [ ...this.defaultItemList ];
   }
 
   setForm (itemList: FilterFormList[]) {
-    this.itemList = itemList;
+    this.itemList = [ ...itemList ];
   }
 
   reset () {

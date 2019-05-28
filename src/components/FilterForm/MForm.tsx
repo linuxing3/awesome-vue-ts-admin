@@ -134,14 +134,18 @@ class MFormClass extends Vue {
 
   @Emit()
   getInfo() {
-    this.$log.suc('getting edit info...');
-    if (this.id === -1) return;
+    this.$log.info('getting edit info...');
+    if (this.id === -1) {
+      // this.setForm();
+      return;
+    };
     lfService.request({
       url: `/${this.modelName}`,
       method: 'get',
       data: { id: this.id },
-    }).then(({ data }) => {
-      this.$log.suc('Get Data:', data.entity);
+    }).then(({ data, config }) => {
+      this.$log.info('Get Data:', data.entity);
+      // config.params.columns && this.$emit('setForm', config.params.columns);
       this.loadEditInfo(data.entity);
     });
   }
