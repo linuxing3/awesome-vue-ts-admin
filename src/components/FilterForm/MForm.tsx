@@ -9,6 +9,7 @@ import moment from 'moment';
 import lfService from '@/utils/request.localforage';
 
 import './MForm.less';
+import titleCase from 'title-case';
 
 @Component({
   components: {
@@ -29,11 +30,11 @@ import './MForm.less';
     'a-radio-group': Radio.Group,
     'a-radio-button': Radio.Button,
     'a-checkbox-group': Checkbox.Group,
-    'a-checkbox': Checkbox,
+    'a-checkbox': Checkbox
   },
   props: {
-    Form,
-  },
+    Form
+  }
 })
 class MFormClass extends Vue {
   @Prop({ default: 'member' })
@@ -53,7 +54,7 @@ class MFormClass extends Vue {
   @Prop({ default: () => {} }) private exportFun!: Function
 
   get id() {
-    return this.$route.params.id || -1;
+    return this.$route.params.id || -1
   }
 
   btnXl: number = 24 - this.itemList.length * 3
@@ -71,7 +72,7 @@ class MFormClass extends Vue {
     lg: 8,
     md: 12,
     sm: 12,
-    xs: 24,
+    xs: 24
   }
 
   formItrenderFmLayout = {
@@ -80,86 +81,88 @@ class MFormClass extends Vue {
       sm: { span: 8 },
       md: { span: 8 },
       lg: { span: 6 },
-      xl: { span: 6 },
+      xl: { span: 6 }
     },
     wrapperCol: {
       xs: { span: 24 },
       sm: { span: 16 },
       md: { span: 16 },
       lg: { span: 18 },
-      xl: { span: 18 },
-    },
+      xl: { span: 18 }
+    }
   }
 
   mounted() {
     this.$nextTick(() => {
-      this.getInfo();
-    });
+      this.getInfo()
+    })
   }
 
   save(e: HTMLFormElement) {
-    e.preventDefault();
+    e.preventDefault()
     this.Form.validateFields((err: any, values: object) => {
       if (!err) {
         Modal.info({
           title: '表单数据',
           content: JSON.stringify(values),
           onOk: () => {
-            this.addOrEdit(values);
+            this.addOrEdit(values)
           },
           onCancel: () => {
-            this.reset();
-          },
-        });
+            this.reset()
+          }
+        })
       }
-    });
+    })
   }
 
   addOrEdit(data) {
     if (this.id === -1) {
-      this.$log.suc('Creating...');
+      this.$log.suc('Creating...')
       lfService.request({
         url: `/${this.modelName}`,
         method: 'post',
-        data,
-      });
+        data
+      })
     } else {
-      this.$log.suc('updating...');
+      this.$log.suc('updating...')
       lfService.request({
         url: `/${this.modelName}`,
         method: 'patch',
-        data,
-      });
+        data
+      })
     }
   }
 
   @Emit()
   getInfo() {
-    this.$log.info('getting edit info...');
+    this.$log.info('getting edit info...')
     if (this.id === -1) {
       // this.setForm();
-      return;
+      return
     }
-    lfService.request({
-      url: `/${this.modelName}`,
-      method: 'get',
-      data: { id: this.id },
-    }).then(({ data, config }) => {
-      this.$log.info('Get Data:', data.entity);
-      // config.params.columns && this.$emit('setForm', config.params.columns);
-      this.loadEditInfo(data.entity);
-    });
+    lfService
+      .request({
+        url: `/${this.modelName}`,
+        method: 'get',
+        data: { id: this.id }
+      })
+      .then(({ data, config }) => {
+        this.$log.info('Get Data:', data.entity)
+        // config.params.columns && this.$emit('setForm', config.params.columns);
+        this.loadEditInfo(data.entity)
+      })
   }
 
   @Emit()
   loadEditInfo(data) {
-    this.$log.suc(`编辑记录 ${this.id}`);
-    new Promise((resolve) => {
-      setTimeout(resolve, 500);
+    this.$log.suc(`编辑记录 ${this.id}`)
+    new Promise(resolve => {
+      setTimeout(resolve, 500)
     }).then(() => {
-      this.$log.suc('formData:', data);
-      this.Form.setFieldsValue(data);
-    });
+      this.$log.suc('formData:', data)
+      this.Form.setFieldsValue(data)
+    })
   }
 
   // methods
@@ -168,42 +171,50 @@ class MFormClass extends Vue {
     const { params } = lfService.validateUrl({
       url: `/${this.modelName}`,
       method: 'get',
-      data: { id: this.id },
-    });
-<<<<<<< HEAD
+      data: { id: this.id }
+    })
     this.$emit('setForm', params.columns)
-=======
-    this.$emit('setForm', params.columns);
->>>>>>> f3b649fdde541225f48939e184caf87433246a5d
   }
 
   @Emit()
   reset(): void {
-    this.Form.setFieldsValue({});
-    this.$emit('reset');
+    this.Form.setFieldsValue({})
+    this.$emit('reset')
   }
 
   @Emit()
   levelcodeChange(val: any, key: string): void {
-    const value = JSON.parse(JSON.stringify(val));
+    const value = JSON.parse(JSON.stringify(val))
   }
 
   @Emit()
   openModal(): void {
-    this.setModal = true;
+    this.setModal = true
   }
 
   @Emit()
   closeModal(): void {
-    this.setModal = false;
+    this.setModal = false
+  }
+
+  renderFormInput(getFieldDecorator: any, item: FilterFormList, index: number) {
+    const key = item.key;
+    const label = this.$t(item.key);
+    const placeholder = 'Input ' + titleCase(item.key);
+    const itemDom = <a-input id={key} label={label} placeholder={placeholder} />
+    return (
+      <a-col {...{ props: this.nomalLayout }} key={index}>
+        <a-form-item label={label}>{getFieldDecorator(key)(itemDom)}</a-form-item>
+      </a-col>
+    )
   }
 
   renderFormItem(getFieldDecorator: any, item: FilterFormList, index: number) {
-    let itemDom = null;
+    let itemDom = null
     switch (item.type) {
       case 'input':
-        itemDom = <a-input id={item.key} label={item.label} placeholder={item.placeholder} />;
-        break;
+        itemDom = <a-input id={item.key} label={item.label} placeholder={item.placeholder} />
+        break
       case 'select':
         itemDom = (
           <a-select
@@ -212,15 +223,15 @@ class MFormClass extends Vue {
             label={item.label}
             placeholder={item.placeholder}
           >
-            {item.options
-              && item.options.map((items: any, indexs: number) => (
+            {item.options &&
+              item.options.map((items: any, indexs: number) => (
                 <a-option key={indexs} value={items.value}>
                   {items.label}
                 </a-option>
               ))}
           </a-select>
-        );
-        break;
+        )
+        break
       case 'cascader':
         itemDom = (
           <a-cascader
@@ -234,8 +245,8 @@ class MFormClass extends Vue {
             placeholder={item.placeholder}
             on-change={item.change}
           />
-        );
-        break;
+        )
+        break
       case 'levelcode':
         itemDom = (
           <a-cascader
@@ -249,8 +260,8 @@ class MFormClass extends Vue {
             placeholder={item.placeholder}
             on-change={(e: Array<string>) => this.levelcodeChange(e, item.key)}
           />
-        );
-        break;
+        )
+        break
       case 'datetime':
         itemDom = (
           <a-date-picker
@@ -260,18 +271,18 @@ class MFormClass extends Vue {
             format="YYYY-MM-DD HH:mm:ss"
             placeholder={item.placeholder}
           />
-        );
-        break;
+        )
+        break
       case 'date':
         itemDom = (
           <a-date-picker
             id={item.key}
             label={item.label}
-            format="YYYY-MM-DD HH:mm:ss"
+            format="YYYY-MM-DD"
             placeholder={item.placeholder}
           />
         )
-        break;
+        break
       case 'datetimerange':
         itemDom = (
           <a-range-picker
@@ -279,32 +290,32 @@ class MFormClass extends Vue {
             id={item.key}
             label={item.label}
             showTime
-            format="YYYY-MM-DD HH:mm:ss"
+            format="YYYY-MM-DD"
             disabledTime={item.disabledTime}
             placeholder={item.placeholder}
           />
-        );
-        break;
+        )
+        break
       case 'checkboxButton':
         itemDom = (
           <el-radio-group on-change={item.change} label={item.label} size="small">
-            {item.options
-              && item.options.map((items, indexs: number) => (
+            {item.options &&
+              item.options.map((items, indexs: number) => (
                 <a-radio-button value={items.value} key={indexs}>
                   {items.label}
                 </a-radio-button>
               ))}
           </el-radio-group>
-        );
-        break;
+        )
+        break
       default:
-        break;
+        break
     }
     return (
       <a-col {...{ props: this.nomalLayout }} key={index}>
         <a-form-item label={item.label}>{getFieldDecorator(item.key)(itemDom)}</a-form-item>
       </a-col>
-    );
+    )
   }
 
   renderActionBtn(isNormal: boolean): JSX.Element {
@@ -332,11 +343,11 @@ class MFormClass extends Vue {
           ) : null}
         </div>
       </div>
-    );
+    )
   }
 
   render() {
-    const { getFieldDecorator } = this.Form as any;
+    const { getFieldDecorator } = this.Form as any
     return (
       <div class="base-form-wrap">
         <a-card title={`Edited Item :${this.id}`}>
@@ -356,12 +367,14 @@ class MFormClass extends Vue {
             </a-row>
             {/* render form items with label and input */}
             <a-row gutter={20}>
-              {this.itemList.map((item, index) => this.renderFormItem(getFieldDecorator, item, index))}
+              {this.itemList.map((item, index) =>
+                this.renderFormInput(getFieldDecorator, item, index)
+              )}
             </a-row>
           </a-form>
         </a-card>
       </div>
-    );
+    )
   }
 }
 const MForm = Form.create({

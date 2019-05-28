@@ -17,8 +17,8 @@ import { ScopedSlot } from 'vue/types/vnode';
 export type FilterType = 'input' | 'textarea' | 'select' | 'cascader' | 'levelcode' | 'datetime' | 'date' | 'datetimerange' | 'checkboxButton';
 export interface FilterFormList {
   key: string;
-  type: FilterType;
-  label: string;
+  type?: FilterType;
+  label?: string;
   title?: string;
   dataIndex?: string;
   width?: string;

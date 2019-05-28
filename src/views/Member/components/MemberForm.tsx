@@ -5,6 +5,7 @@ import {
 } from 'ant-design-vue';
 import { FilterFormList, Opreat } from '@/interface';
 import MForm from '@/components/FilterForm/MForm';
+import lfService from '@/utils/request.localforage'
 
 import './index.less';
 
@@ -16,23 +17,29 @@ import './index.less';
     'a-dropdown': Dropdown,
     'a-menu': Menu,
     'a-menu-item': Menu.Item,
-    'a-icon': Icon,
+    'a-icon': Icon
   },
   props: {
-    Form,
-  },
+    Form
+  }
 })
 class MemberForm extends Vue {
   modelName: string = 'member'
 
-  itemList: FilterFormList[] = []
+  itemList: any[] = []
 
   defaultItemList: FilterFormList[] = [
+    {
+      key: 'department',
+      label: 'department',
+      type: 'input',
+      placeholder: 'Input department'
+    },
     {
       key: 'name',
       label: 'name',
       type: 'input',
-      placeholder: 'Input Name',
+      placeholder: 'Input Name'
     },
     {
       key: 'gender',
@@ -42,31 +49,60 @@ class MemberForm extends Vue {
       options: [
         {
           label: 'male',
-          value: 'male',
+          value: 'male'
         },
         {
           label: 'female',
-          value: 'female',
-        },
-      ],
+          value: 'female'
+        }
+      ]
+    },
+    {
+      key: 'etnia',
+      label: 'etnia',
+      type: 'input',
+      placeholder: 'Input etnia'
+    },
+    {
+      key: 'academicBackground',
+      label: 'Academic Background',
+      type: 'input',
+      placeholder: 'Input Academic Background'
+    },
+    {
+      key: 'foreignLanguage',
+      label: 'Foreign Language',
+      type: 'input',
+      placeholder: 'Input Foreign Language'
+    },
+    {
+      key: 'politicalRole',
+      label: 'Political Role',
+      type: 'input',
+      placeholder: 'politicalRole'
     },
     {
       key: 'arrivingDate',
       label: 'arriving Date',
       type: 'date',
-      placeholder: '2019-01-01',
-    },
+      placeholder: '2019-01-01'
+    }
   ]
 
-  created () {
-    this.itemList = [ ...this.defaultItemList ];
+  created() {
+    // const { params: { model } } = lfService.validateUrl({
+    //   url: `/${this.modelName}`,
+    //   method: 'get'
+    // });
+    // this.itemList = model.fieldsKeys();
+    this.itemList = [...this.defaultItemList ];
   }
 
-  setForm (itemList: FilterFormList[]) {
-    this.itemList = [ ...itemList ];
+  setForm(itemList: FilterFormList[]) {
+    this.itemList = [...itemList]
   }
 
-  reset () {
+  reset() {
     Modal.info({
       title: 'Go to list',
       onOk: () => {
@@ -75,8 +111,8 @@ class MemberForm extends Vue {
         })
       },
       onCancel: () => {
-        this.setForm(this.itemList);
-      },
+        this.setForm(this.itemList)
+      }
     })
   }
 
@@ -97,10 +133,17 @@ class MemberForm extends Vue {
               </a-menu-item>
             </a-menu>
           </a-dropdown>
-          <m-form ref="MForm" item-list={this.itemList} save-btn={true} reset-btn={true} on-set-form={this.setForm} on-reset={this.reset} />
+          <m-form
+            ref="MForm"
+            item-list={this.itemList}
+            save-btn={true}
+            reset-btn={true}
+            on-set-form={this.setForm}
+            on-reset={this.reset}
+          />
         </a-card>
       </div>
-    );
+    )
   }
 }
 
