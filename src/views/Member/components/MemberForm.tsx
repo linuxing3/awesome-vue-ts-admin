@@ -30,62 +30,70 @@ class MemberForm extends Vue {
 
   defaultItemList: FilterFormList[] = [
     {
-      key: 'department',
-      label: 'department',
-      type: 'input',
-      placeholder: 'Input department',
+      key: 'department', type: 'input', label: 'department', placeholder: 'Input department',
     },
     {
-      key: 'name',
-      label: 'name',
-      type: 'input',
-      placeholder: 'Input Name',
+      key: 'name', type: 'input', label: 'name', placeholder: 'Input name',
     },
     {
-      key: 'gender',
-      label: 'gender',
-      type: 'select',
-      placeholder: 'male',
-      options: [
-        {
-          label: 'male',
-          value: 'male',
-        },
-        {
-          label: 'female',
-          value: 'female',
-        },
-      ],
+      key: 'gender', type: 'input', label: 'gender', placeholder: 'Input gender',
     },
     {
-      key: 'etnia',
-      label: 'etnia',
-      type: 'input',
-      placeholder: 'Input etnia',
+      key: 'birthday', type: 'input', label: 'birthday', placeholder: 'Input birthday',
     },
     {
-      key: 'academicBackground',
-      label: 'Academic Background',
-      type: 'input',
-      placeholder: 'Input Academic Background',
+      key: 'etnia', type: 'input', label: 'etnia', placeholder: 'Input etnia',
     },
     {
-      key: 'foreignLanguage',
-      label: 'Foreign Language',
-      type: 'input',
-      placeholder: 'Input Foreign Language',
+      key: 'academicBackground', type: 'input', label: 'academicBackground', placeholder: 'Input academicBackground',
     },
     {
-      key: 'politicalRole',
-      label: 'Political Role',
-      type: 'input',
-      placeholder: 'politicalRole',
+      key: 'foreignLanguage', type: 'input', label: 'foreignLanguage', placeholder: 'Input foreignLanguage',
     },
     {
-      key: 'arrivingDate',
-      label: 'arriving Date',
-      type: 'date',
-      placeholder: '2019-01-01',
+      key: 'politicalRole', type: 'input', label: 'politicalRole', placeholder: 'Input politicalRole',
+    },
+    {
+      key: 'positionAndRank', type: 'input', label: 'positionAndRank', placeholder: 'Input positionAndRank',
+    },
+    {
+      key: 'militantRole', type: 'input', label: 'militantRole', placeholder: 'Input militantRole',
+    },
+    {
+      key: 'duty', type: 'input', label: 'duty', placeholder: 'Input duty',
+    },
+    {
+      key: 'fromEntity', type: 'input', label: 'fromEntity', placeholder: 'Input fromEntity',
+    },
+    {
+      key: 'arrivingDate', type: 'input', label: 'arrivingDate', placeholder: 'Input arrivingDate',
+    },
+    {
+      key: 'rotatingDate', type: 'input', label: 'rotatingDate', placeholder: 'Input rotatingDate',
+    },
+    {
+      key: 'sendingEntity', type: 'input', label: 'sendingEntity', placeholder: 'Input sendingEntity',
+    },
+    {
+      key: 'conyugeName', type: 'input', label: 'conyugeName', placeholder: 'Input conyugeName',
+    },
+    {
+      key: 'conyugeEntity', type: 'input', label: 'conyugeEntity', placeholder: 'Input conyugeEntity',
+    },
+    {
+      key: 'conyugeBonus', type: 'input', label: 'conyugeBonus', placeholder: 'Input conyugeBonus',
+    },
+    {
+      key: 'memo', type: 'input', label: 'memo', placeholder: 'Input memo',
+    },
+    {
+      key: 'protocolId', type: 'input', label: 'protocolId', placeholder: 'Input protocolId',
+    },
+    {
+      key: 'isActive', type: 'input', label: 'isActive', placeholder: 'Input isActive',
+    },
+    {
+      key: 'militant', type: 'input', label: 'string', placeholder: 'Input string',
     },
   ]
 

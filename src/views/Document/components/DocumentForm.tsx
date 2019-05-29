@@ -27,10 +27,49 @@ class DocumentForm extends Vue {
 
   itemList: FilterFormList[] = [
     {
-      key: 'name',
-      label: 'name',
-      type: 'input',
-      placeholder: 'Input Name',
+      key: 'year', type: 'input', label: 'year', placeholder: 'Input year',
+    },
+    {
+      key: 'date', type: 'input', label: 'date', placeholder: 'Input date',
+    },
+    {
+      key: 'classiLevel', type: 'input', label: 'classiLevel', placeholder: 'Input classiLevel',
+    },
+    {
+      key: 'category', type: 'input', label: 'category', placeholder: 'Input category',
+    },
+    {
+      key: 'inOrOut', type: 'input', label: 'inOrOut', placeholder: 'Input inOrOut',
+    },
+    {
+      key: 'sendingCode', type: 'input', label: 'sendingCode', placeholder: 'Input sendingCode',
+    },
+    {
+      key: 'orderedNumber', type: 'input', label: 'orderedNumber', placeholder: 'Input orderedNumber',
+    },
+    {
+      key: 'title', type: 'input', label: 'title', placeholder: 'Input title',
+    },
+    {
+      key: 'content', type: 'input', label: 'content', placeholder: 'Input content',
+    },
+    {
+      key: 'toEntity', type: 'input', label: 'toEntity', placeholder: 'Input toEntity',
+    },
+    {
+      key: 'copyEntity', type: 'input', label: 'copyEntity', placeholder: 'Input copyEntity',
+    },
+    {
+      key: 'attachment', type: 'input', label: 'attachment', placeholder: 'Input attachment',
+    },
+    {
+      key: 'keyword', type: 'input', label: 'keyword', placeholder: 'Input keyword',
+    },
+    {
+      key: 'workEntity', type: 'input', label: 'workEntity', placeholder: 'Input workEntity',
+    },
+    {
+      key: 'author', type: 'input', label: 'author', placeholder: 'Input author',
     },
   ];
 
