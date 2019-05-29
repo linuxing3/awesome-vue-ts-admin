@@ -33,7 +33,24 @@ class DocumentForm extends Vue {
       key: 'date', type: 'input', label: 'date', placeholder: 'Input date',
     },
     {
-      key: 'classiLevel', type: 'input', label: 'classiLevel', placeholder: 'Input classiLevel',
+      key: 'classiLevel',
+      type: 'select',
+      label: 'classiLevel',
+      placeholder: 'Input classiLevel',
+      options: [
+        {
+          label: '机密',
+          value: '机密',
+        },
+        {
+          label: '秘密',
+          value: '秘密',
+        },
+        {
+          label: '内部',
+          value: '内部',
+        },
+      ],
     },
     {
       key: 'category', type: 'input', label: 'category', placeholder: 'Input category',
@@ -51,7 +68,7 @@ class DocumentForm extends Vue {
       key: 'title', type: 'input', label: 'title', placeholder: 'Input title',
     },
     {
-      key: 'content', type: 'input', label: 'content', placeholder: 'Input content',
+      key: 'content', type: 'textarea', label: 'content', placeholder: 'Input content',
     },
     {
       key: 'toEntity', type: 'input', label: 'toEntity', placeholder: 'Input toEntity',

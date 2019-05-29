@@ -5,7 +5,7 @@ import {
 } from 'ant-design-vue';
 import { FilterFormList, Opreat } from '@/interface';
 import MForm from '@/components/FilterForm/MForm';
-import lfService from '@/utils/request.localforage';
+import { etnia, gender } from '@/utils/constant';
 
 import './index.less';
 
@@ -30,70 +30,164 @@ class MemberForm extends Vue {
 
   defaultItemList: FilterFormList[] = [
     {
-      key: 'department', type: 'input', label: 'department', placeholder: 'Input department',
+      key: 'department',
+      type: 'select',
+      label: 'department',
+      placeholder: 'Input department',
+      options: [
+        {
+          label: '单位领导',
+          value: '1',
+        },
+        {
+          label: '政新处',
+          value: '1',
+        },
+        {
+          label: '经商处',
+          value: '2',
+        },
+        {
+          label: '武官处',
+          value: '3',
+        },
+        {
+          label: '领侨处',
+          value: '4',
+        },
+        {
+          label: '办公室',
+          value: '5',
+        },
+      ],
     },
     {
-      key: 'name', type: 'input', label: 'name', placeholder: 'Input name',
+      key: 'name',
+      type: 'input',
+      label: 'name',
+      placeholder: 'Input name',
     },
     {
-      key: 'gender', type: 'input', label: 'gender', placeholder: 'Input gender',
+      key: 'gender',
+      type: 'select',
+      label: 'gender',
+      placeholder: 'Input gender',
+      options: [...gender],
     },
     {
-      key: 'birthday', type: 'input', label: 'birthday', placeholder: 'Input birthday',
+      key: 'birthday',
+      type: 'input',
+      label: 'birthday',
+      placeholder: 'Input birthday',
     },
     {
-      key: 'etnia', type: 'input', label: 'etnia', placeholder: 'Input etnia',
+      key: 'etnia',
+      type: 'select',
+      label: 'etnia',
+      placeholder: 'Input etnia',
+      options: [...etnia],
     },
     {
-      key: 'academicBackground', type: 'input', label: 'academicBackground', placeholder: 'Input academicBackground',
+      key: 'academicBackground',
+      type: 'input',
+      label: 'academicBackground',
+      placeholder: 'Input academicBackground',
     },
     {
-      key: 'foreignLanguage', type: 'input', label: 'foreignLanguage', placeholder: 'Input foreignLanguage',
+      key: 'foreignLanguage',
+      type: 'input',
+      label: 'foreignLanguage',
+      placeholder: 'Input foreignLanguage',
     },
     {
-      key: 'politicalRole', type: 'input', label: 'politicalRole', placeholder: 'Input politicalRole',
+      key: 'politicalRole',
+      type: 'input',
+      label: 'politicalRole',
+      placeholder: 'Input politicalRole',
     },
     {
-      key: 'positionAndRank', type: 'input', label: 'positionAndRank', placeholder: 'Input positionAndRank',
+      key: 'positionAndRank',
+      type: 'input',
+      label: 'positionAndRank',
+      placeholder: 'Input positionAndRank',
     },
     {
-      key: 'militantRole', type: 'input', label: 'militantRole', placeholder: 'Input militantRole',
+      key: 'militantRole',
+      type: 'input',
+      label: 'militantRole',
+      placeholder: 'Input militantRole',
     },
     {
-      key: 'duty', type: 'input', label: 'duty', placeholder: 'Input duty',
+      key: 'duty',
+      type: 'input',
+      label: 'duty',
+      placeholder: 'Input duty',
     },
     {
-      key: 'fromEntity', type: 'input', label: 'fromEntity', placeholder: 'Input fromEntity',
+      key: 'fromEntity',
+      type: 'input',
+      label: 'fromEntity',
+      placeholder: 'Input fromEntity',
     },
     {
-      key: 'arrivingDate', type: 'input', label: 'arrivingDate', placeholder: 'Input arrivingDate',
+      key: 'arrivingDate',
+      type: 'input',
+      label: 'arrivingDate',
+      placeholder: 'Input arrivingDate',
     },
     {
-      key: 'rotatingDate', type: 'input', label: 'rotatingDate', placeholder: 'Input rotatingDate',
+      key: 'rotatingDate',
+      type: 'input',
+      label: 'rotatingDate',
+      placeholder: 'Input rotatingDate',
     },
     {
-      key: 'sendingEntity', type: 'input', label: 'sendingEntity', placeholder: 'Input sendingEntity',
+      key: 'sendingEntity',
+      type: 'input',
+      label: 'sendingEntity',
+      placeholder: 'Input sendingEntity',
     },
     {
-      key: 'conyugeName', type: 'input', label: 'conyugeName', placeholder: 'Input conyugeName',
+      key: 'conyugeName',
+      type: 'input',
+      label: 'conyugeName',
+      placeholder: 'Input conyugeName',
     },
     {
-      key: 'conyugeEntity', type: 'input', label: 'conyugeEntity', placeholder: 'Input conyugeEntity',
+      key: 'conyugeEntity',
+      type: 'input',
+      label: 'conyugeEntity',
+      placeholder: 'Input conyugeEntity',
     },
     {
-      key: 'conyugeBonus', type: 'input', label: 'conyugeBonus', placeholder: 'Input conyugeBonus',
+      key: 'conyugeBonus',
+      type: 'input',
+      label: 'conyugeBonus',
+      placeholder: 'Input conyugeBonus',
     },
     {
-      key: 'memo', type: 'input', label: 'memo', placeholder: 'Input memo',
+      key: 'note',
+      type: 'textarea',
+      label: 'note',
+      placeholder: 'Input note',
     },
     {
-      key: 'protocolId', type: 'input', label: 'protocolId', placeholder: 'Input protocolId',
+      key: 'protocolId',
+      type: 'input',
+      label: 'protocolId',
+      placeholder: 'Input protocolId',
     },
     {
-      key: 'isActive', type: 'input', label: 'isActive', placeholder: 'Input isActive',
+      key: 'isActive',
+      type: 'input',
+      label: 'isActive',
+      placeholder: 'Input isActive',
     },
     {
-      key: 'militant', type: 'input', label: 'string', placeholder: 'Input string',
+      key: 'militant',
+      type: 'input',
+      label: 'string',
+      placeholder: 'Input militant',
     },
   ]
 

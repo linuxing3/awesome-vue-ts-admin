@@ -49,7 +49,7 @@ class EventForm extends Vue {
       key: 'guests', type: 'input', label: 'guests', placeholder: 'Input guests',
     },
     {
-      key: 'content', type: 'input', label: 'content', placeholder: 'Input content',
+      key: 'content', type: 'textarea', label: 'content', placeholder: 'Input content',
     },
     {
       key: 'currentDate', type: 'input', label: 'currentDate', placeholder: 'Input currentDate',
@@ -58,13 +58,13 @@ class EventForm extends Vue {
       key: 'reportDate', type: 'input', label: 'reportDate', placeholder: 'Input reportDate',
     },
     {
-      key: 'reportContent', type: 'input', label: 'reportContent', placeholder: 'Input reportContent',
+      key: 'reportContent', type: 'textarea', label: 'reportContent', placeholder: 'Input reportContent',
     },
     {
       key: 'instructionDate', type: 'input', label: 'instructionDate', placeholder: 'Input instructionDate',
     },
     {
-      key: 'instruction', type: 'input', label: 'instruction', placeholder: 'Input instruction',
+      key: 'instruction', type: 'textarea', label: 'instruction', placeholder: 'Input instruction',
     },
     {
       key: 'priority', type: 'input', label: 'priority', placeholder: 'Input priority',

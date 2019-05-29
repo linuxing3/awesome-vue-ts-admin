@@ -15,6 +15,7 @@ import titleCase from 'title-case';
   components: {
     'a-card': Card,
     'a-input': Input,
+    'a-textarea': Input.TextArea,
     'a-option': Select.Option,
     'a-select': Select,
     'a-form': Form,
@@ -107,6 +108,13 @@ class MFormClass extends Vue {
           content: JSON.stringify(values),
           onOk: () => {
             this.addOrEdit(values);
+            new Promise((resolve) => {
+              setTimeout(resolve, 500);
+            }).then(() => {
+              this.$router.push({
+                name: `${this.modelName}List`,
+              });
+            });
           },
           onCancel: () => {
             this.reset();
@@ -214,6 +222,9 @@ class MFormClass extends Vue {
     switch (item.type) {
       case 'input':
         itemDom = <a-input id={item.key} label={item.label} placeholder={item.placeholder} />;
+        break;
+      case 'textarea':
+        itemDom = <a-textarea id={item.key} label={item.label} placeholder={item.placeholder} />;
         break;
       case 'select':
         itemDom = (
