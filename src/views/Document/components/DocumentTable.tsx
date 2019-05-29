@@ -3,6 +3,7 @@ import { Tag } from 'ant-design-vue';
 import moment from 'moment';
 import { tableList, FilterFormList, Opreat } from '@/interface';
 import city from '@/utils/city';
+import lfService from '@/utils/request.localforage';
 import './index.less';
 
 @Component({
@@ -17,7 +18,7 @@ export default class DocumentTable extends Vue {
   pageParams: object = {
     pageNum: 1,
     pageSize: 100,
-    page: true
+    page: true,
   }
 
   filterParams: any = {
@@ -68,7 +69,7 @@ export default class DocumentTable extends Vue {
     {
       title: 'Address',
       dataIndex: 'address',
-    }
+    },
   ];
 
   opreat: Opreat[] = [
@@ -97,41 +98,41 @@ export default class DocumentTable extends Vue {
 
   editData: object = {};
 
-  async handleDelete (row) {
-    console.log('Deleting ... ')
+  async handleDelete(row) {
+    console.log('Deleting ... ');
     await lfService.request({
       url: `/${this.modelName}`,
       method: 'delete',
-      data: row.id
-    })
-    setTimeout(() => this.success(), 1000)
+      data: row.id,
+    });
+    setTimeout(() => this.success(), 1000);
   }
 
-  handleEdit (row) {
-    console.log('Editing ... ')
+  handleEdit(row) {
+    console.log('Editing ... ');
     this.$router.replace({
       name: 'DocumentForm',
       params: {
-        id: row.id
-      }
-    })
+        id: row.id,
+      },
+    });
   }
 
-  handleCreate () {
-    console.log('Creating ... ')
+  handleCreate() {
+    console.log('Creating ... ');
     this.$router.replace({
-      name: 'DocumentForm'
-    })
+      name: 'DocumentForm',
+    });
   }
 
-  handleExport () {
-    console.log('Exporting ... ')
+  handleExport() {
+    console.log('Exporting ... ');
     this.$router.replace({
-      name: 'ExportHelper'
-    })
+      name: 'ExportHelper',
+    });
   }
 
-  handleRemove (row) {
+  handleRemove(row) {
     this.$confirm({
       title: '警告',
       content: `真的要删除 ${row.id} 吗?`,
@@ -139,16 +140,16 @@ export default class DocumentTable extends Vue {
       okType: 'danger',
       cancelText: '取消',
       onOk: () => {
-        console.log('OK')
-        this.handleDelete(row)
+        console.log('OK');
+        this.handleDelete(row);
         return new Promise((resolve, reject) => {
-          setTimeout(Math.random() > 0.5 ? resolve : reject, 1000)
-        }).catch(() => console.log('Oops errors!'))
+          setTimeout(Math.random() > 0.5 ? resolve : reject, 1000);
+        }).catch(() => console.log('Oops errors!'));
       },
       onCancel: () => {
-        console.log('Cancel')
-      }
-    })
+        console.log('Cancel');
+      },
+    });
   }
 
   genderRender(text: any) {
@@ -172,8 +173,8 @@ export default class DocumentTable extends Vue {
     this.visible = true;
     this.editData = {};
     this.$router.replace({
-      name: 'MemberForm'
-    })
+      name: 'MemberForm',
+    });
   }
 
   closeModal() {

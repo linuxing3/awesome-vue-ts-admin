@@ -57,22 +57,22 @@ export const asyncRouterMap: routerItem[] = [
     name: 'Helper',
     component: getComponent('helpers/index'),
     permission: true,
-    meta: { key: 'Export' },
+    meta: { key: 'helper' },
     children: [
       {
         path: 'export-helper',
         name: 'ExportHelper',
-        component: getComponent('helpers/ExportHelper'),
+        component: getComponent('helpers/components/ExportHelper'),
         permission: true,
         meta: { key: 'ExportHelper' },
-      }
-    ]
+      },
+    ],
   },
   // insert more route below
   // event
   {
     path: '/event',
-    icon: 'team',
+    icon: 'calendar',
     name: 'Event',
     component: getComponent('Event/index'),
     permission: true,
@@ -92,19 +92,12 @@ export const asyncRouterMap: routerItem[] = [
         permission: true,
         meta: { key: 'EventTable' },
       },
-      {
-        path: 'event-list',
-        name: 'EventList',
-        component: getComponent('Event/components/EventList'),
-        permission: true,
-        meta: { key: 'EventList' },
-      },
     ],
   },
   // document
   {
     path: '/document',
-    icon: 'team',
+    icon: 'folder',
     name: 'Document',
     component: getComponent('Document/index'),
     permission: true,
@@ -123,13 +116,6 @@ export const asyncRouterMap: routerItem[] = [
         component: getComponent('Document/components/DocumentTable'),
         permission: true,
         meta: { key: 'DocumentTable' },
-      },
-      {
-        path: 'document-list',
-        name: 'DocumentList',
-        component: getComponent('Document/components/DocumentList'),
-        permission: true,
-        meta: { key: 'DocumentList' },
       },
     ],
   },

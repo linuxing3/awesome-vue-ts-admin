@@ -11,6 +11,8 @@ import { Component, Vue } from 'vue-property-decorator';
 import {
   Form, Input, Select, Radio, Card, Dropdown, Menu, Icon, DatePicker, Button, Modal,
 } from 'ant-design-vue';
+import MForm from '@/components/FilterForm/MForm'
+import { FilterFormList, Opreat } from '@/interface'
 import lfService from '@/utils/request.localforage';
 import './index.less';
 
@@ -87,10 +89,10 @@ class <%= modelFormName %> extends Vue {
             </a>
             <a-menu slot="overlay">
               <a-menu-item>
-                <a on-click="importOrExport">Import/Export</a>
+                <a on-click={this.importOrExport}>Import/Export</a>
               </a-menu-item>
               <a-menu-item>
-                <a on-click="statistic">Statistic</a>
+                <a on-click={this.statistic}>Statistic</a>
               </a-menu-item>
             </a-menu>
           </a-dropdown>

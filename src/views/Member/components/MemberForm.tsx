@@ -1,7 +1,7 @@
 
 import { Component, Vue } from 'vue-property-decorator';
 import {
-  Form, Card, Dropdown, Menu, Icon, Modal
+  Form, Card, Dropdown, Menu, Icon, Modal,
 } from 'ant-design-vue';
 import { FilterFormList, Opreat } from '@/interface';
 import MForm from '@/components/FilterForm/MForm';
@@ -17,11 +17,11 @@ import './index.less';
     'a-dropdown': Dropdown,
     'a-menu': Menu,
     'a-menu-item': Menu.Item,
-    'a-icon': Icon
+    'a-icon': Icon,
   },
   props: {
-    Form
-  }
+    Form,
+  },
 })
 class MemberForm extends Vue {
   modelName: string = 'member'
@@ -33,13 +33,13 @@ class MemberForm extends Vue {
       key: 'department',
       label: 'department',
       type: 'input',
-      placeholder: 'Input department'
+      placeholder: 'Input department',
     },
     {
       key: 'name',
       label: 'name',
       type: 'input',
-      placeholder: 'Input Name'
+      placeholder: 'Input Name',
     },
     {
       key: 'gender',
@@ -49,44 +49,44 @@ class MemberForm extends Vue {
       options: [
         {
           label: 'male',
-          value: 'male'
+          value: 'male',
         },
         {
           label: 'female',
-          value: 'female'
-        }
-      ]
+          value: 'female',
+        },
+      ],
     },
     {
       key: 'etnia',
       label: 'etnia',
       type: 'input',
-      placeholder: 'Input etnia'
+      placeholder: 'Input etnia',
     },
     {
       key: 'academicBackground',
       label: 'Academic Background',
       type: 'input',
-      placeholder: 'Input Academic Background'
+      placeholder: 'Input Academic Background',
     },
     {
       key: 'foreignLanguage',
       label: 'Foreign Language',
       type: 'input',
-      placeholder: 'Input Foreign Language'
+      placeholder: 'Input Foreign Language',
     },
     {
       key: 'politicalRole',
       label: 'Political Role',
       type: 'input',
-      placeholder: 'politicalRole'
+      placeholder: 'politicalRole',
     },
     {
       key: 'arrivingDate',
       label: 'arriving Date',
       type: 'date',
-      placeholder: '2019-01-01'
-    }
+      placeholder: '2019-01-01',
+    },
   ]
 
   created() {
@@ -95,11 +95,11 @@ class MemberForm extends Vue {
     //   method: 'get'
     // });
     // this.itemList = model.fieldsKeys();
-    this.itemList = [...this.defaultItemList]
+    this.itemList = [...this.defaultItemList];
   }
 
   setForm(itemList: FilterFormList[]) {
-    this.itemList = [...itemList]
+    this.itemList = [...itemList];
   }
 
   reset() {
@@ -107,10 +107,10 @@ class MemberForm extends Vue {
       title: 'Go to datatable',
       onOk: () => {
         this.$router.replace({
-          name: '<%= modelListName %>'
-        })
-      }
-    })
+          name: '<%= modelListName %>',
+        });
+      },
+    });
   }
 
   importOrExport() {
@@ -120,9 +120,9 @@ class MemberForm extends Vue {
       onOk: () => {
         this.$router.replace({
           name: 'ExportHelper',
-        })
-      }
-    })
+        });
+      },
+    });
   }
 
   statistic() {
@@ -130,10 +130,10 @@ class MemberForm extends Vue {
       title: 'Statistic Charts',
       onOk: () => {
         this.$router.replace({
-          name: 'Statistic'
-        })
-      }
-    })
+          name: 'Statistic',
+        });
+      },
+    });
   }
 
   render() {
@@ -146,10 +146,10 @@ class MemberForm extends Vue {
             </a>
             <a-menu slot="overlay">
               <a-menu-item>
-                <a on-click="importOrExport">Import/Export</a>
+                <a on-click={this.importOrExport}>Import/Export</a>
               </a-menu-item>
               <a-menu-item>
-                <a on-click="statistic">Statistic</a>
+                <a on-click={this.statistic}>Statistic</a>
               </a-menu-item>
             </a-menu>
           </a-dropdown>
@@ -163,7 +163,7 @@ class MemberForm extends Vue {
           />
         </a-card>
       </div>
-    )
+    );
   }
 }
 

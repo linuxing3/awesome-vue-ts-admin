@@ -19,10 +19,10 @@ export const persistentSchema = (Entity: typeof Model) => {
   const schemaFilePath = resolve(
     `src/store/modules/pages/${modelName}/models/${modelName}.json`,
   );
-  console.log(`Writing json file : ${schemaFilePath}`)
+  console.log(`Writing json file : ${schemaFilePath}`);
   writeFile(schemaFilePath, JSON.stringify({ columns }, null, 2), (error) => {
     if (!error) {
-      console.log(`Write json file done!`);
+      console.log('Write json file done!');
     }
   });
 };

@@ -3,6 +3,9 @@ import { Component, Vue } from 'vue-property-decorator';
 import {
   Form, Input, Select, Radio, Card, Dropdown, Menu, Icon, DatePicker, Button, Modal,
 } from 'ant-design-vue';
+import MForm from '@/components/FilterForm/MForm';
+import { FilterFormList, Opreat } from '@/interface';
+
 import lfService from '@/utils/request.localforage';
 import './index.less';
 
@@ -14,62 +17,62 @@ import './index.less';
     'a-dropdown': Dropdown,
     'a-menu': Menu,
     'a-menu-item': Menu.Item,
-    'a-icon': Icon
+    'a-icon': Icon,
   },
   props: {
-    Form
-  }
+    Form,
+  },
 })
 class EventForm extends Vue {
   modelName: string = 'event'
-  
+
   itemList: FilterFormList[] = [
     {
       key: 'name',
       label: 'name',
       type: 'input',
-      placeholder: 'Input Name'
+      placeholder: 'Input Name',
     },
   ];
 
   setForm(itemList: FilterFormList[]) {
-    this.itemList = [...itemList]
+    this.itemList = [...itemList];
   }
 
-  reset () {
+  reset() {
     Modal.info({
       title: 'Go to datatable',
       onOk: () => {
         this.$router.replace({
-          name: 'EventList'
-        })
-      }
-    })
+          name: 'EventList',
+        });
+      },
+    });
   }
 
-  importOrExport () {
+  importOrExport() {
     Modal.info({
       title: 'Import or Export',
       onOk: () => {
         this.$router.replace({
-          name: 'ExportHelper'
-        })
-      }
-    })
+          name: 'ExportHelper',
+        });
+      },
+    });
   }
 
-  statistic () {
+  statistic() {
     Modal.info({
       title: 'Statistic Charts',
       onOk: () => {
         this.$router.replace({
-          name: 'Statistic'
-        })
-      }
-    })
+          name: 'Statistic',
+        });
+      },
+    });
   }
 
-  render () {
+  render() {
     return (
       <div class="base-form-wrap">
         <a-card title="EventList Form">
@@ -79,10 +82,10 @@ class EventForm extends Vue {
             </a>
             <a-menu slot="overlay">
               <a-menu-item>
-                <a on-click="importOrExport">Import/Export</a>
+                <a on-click={this.importOrExport}>Import/Export</a>
               </a-menu-item>
               <a-menu-item>
-                <a on-click="statistic">Statistic</a>
+                <a on-click={this.statistic}>Statistic</a>
               </a-menu-item>
             </a-menu>
           </a-dropdown>
@@ -96,7 +99,7 @@ class EventForm extends Vue {
           />
         </a-card>
       </div>
-    )
+    );
   }
 }
 

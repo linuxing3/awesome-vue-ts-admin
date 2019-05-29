@@ -202,7 +202,7 @@ class MFilterClass extends Vue {
             format="YYYY-MM-DD"
             placeholder={item.placeholder}
           />
-        )
+        );
         break;
       case 'datetimerange':
         itemDom = <a-range-picker

@@ -33,12 +33,5 @@ const modelFormName = ModelName + 'Form'
         permission: true,
         meta: { key: '<%= modelTableName %>' },
       },
-      {
-        path: '<%= EntityName %>-list',
-        name: '<%= modelListName %>',
-        component: getComponent('<%= ModelName %>/components/<%= modelListName %>'),
-        permission: true,
-        meta: { key: '<%= modelListName %>' },
-      },
     ],
   },
