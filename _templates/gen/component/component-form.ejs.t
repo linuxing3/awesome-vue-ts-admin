@@ -12,11 +12,7 @@ import {
   Form, Input, Select, Radio, Card, Dropdown, Menu, Icon, DatePicker, Button, Modal,
 } from 'ant-design-vue';
 import lfService from '@/utils/request.localforage';
-import models from '@/models';
 import './index.less';
-
-const Entity = models['<%= EntityName %>'];
-const defaultItemList = Entity.fieldsKeys();
 
 @Component({
   name: '<%= modelFormName %>',
@@ -35,27 +31,53 @@ const defaultItemList = Entity.fieldsKeys();
 class <%= modelFormName %> extends Vue {
   modelName: string = '<%= EntityName %>'
   
-  itemList: FilterFormList[] = defaultItemList;
+  itemList: FilterFormList[] = [
+    {
+      key: 'name',
+      label: 'name',
+      type: 'input',
+      placeholder: 'Input Name'
+    },
+  ];
 
   setForm(itemList: FilterFormList[]) {
     this.itemList = [...itemList]
   }
 
-  reset() {
+  reset () {
     Modal.info({
-      title: 'Go to list',
+      title: 'Go to datatable',
       onOk: () => {
         this.$router.replace({
           name: '<%= modelListName %>'
         })
-      },
-      onCancel: () => {
-        this.setForm(this.itemList)
       }
     })
   }
 
-  render() {
+  importOrExport () {
+    Modal.info({
+      title: 'Import or Export',
+      onOk: () => {
+        this.$router.replace({
+          name: 'ExportHelper'
+        })
+      }
+    })
+  }
+
+  statistic () {
+    Modal.info({
+      title: 'Statistic Charts',
+      onOk: () => {
+        this.$router.replace({
+          name: 'Statistic'
+        })
+      }
+    })
+  }
+
+  render () {
     return (
       <div class="base-form-wrap">
         <a-card title="<%= modelListName %> Form">
@@ -65,10 +87,10 @@ class <%= modelFormName %> extends Vue {
             </a>
             <a-menu slot="overlay">
               <a-menu-item>
-                <a to={'/import'}>Import</a>
+                <a on-click="importOrExport">Import/Export</a>
               </a-menu-item>
               <a-menu-item>
-                <a to={'/export'}>Export</a>
+                <a on-click="statistic">Statistic</a>
               </a-menu-item>
             </a-menu>
           </a-dropdown>

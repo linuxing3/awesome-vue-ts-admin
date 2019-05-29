@@ -117,20 +117,20 @@ export default class MTable extends Vue {
    * @method 获取表格数据
    */
   getData() {
-    this.$log.suc('Fetching ...');
+    this.$log.info('Fetching ...');
     this.loading = true;
     const params = {
       pageParams: { ...this.pageParams },
       filter: { ...this.tableParams },
       out: { ...this.outParams },
     };
-    this.$log.suc('Mtable get Data Params:', params);
+    this.$log.info('Mtable get Data Params:', params);
     window.ajax.request({
       url: this.url,
       method: this.fetchType,
       params,
     }).then((res: any) => {
-      this.$log.suc('Table Fetch response:', res);
+      this.$log.info('Table Fetch response:', res);
       this.loading = false;
       const code = getValue(this.backParams.code, res);
       if (code === this.backParams.codeOK) {

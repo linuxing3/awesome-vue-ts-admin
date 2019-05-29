@@ -11,12 +11,7 @@ import { Tag } from 'ant-design-vue';
 import moment from 'moment';
 import { tableList, FilterFormList, Opreat } from '@/interface';
 import city from '@/utils/city';
-import lfService from '@/utils/request.localforage';
-import models from '@/models';
 import './index.less';
-
-const Entity = models['<%= EntityName %>'];
-const defaultItemList = Entity.fieldsKeys();
 
 @Component({
   name: '<%= modelTableName %>',
@@ -26,8 +21,6 @@ const defaultItemList = Entity.fieldsKeys();
 })
 export default class <%= modelTableName %> extends Vue {
   modelName: string = '<%= EntityName %>'
-
-  data: any[] = []
 
   pageParams: object = {
     pageNum: 1,
@@ -79,6 +72,10 @@ export default class <%= modelTableName %> extends Vue {
     {
       title: 'Name',
       dataIndex: 'name',
+    },
+    {
+      title: 'Address',
+      dataIndex: 'address',
     }
   ];
 
