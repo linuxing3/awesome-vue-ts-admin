@@ -52,14 +52,87 @@ export const asyncRouterMap: routerItem[] = [
     meta: { key: 'Dashboard' },
   },
   {
-    path: '/export-helper',
+    path: '/helper',
     icon: 'dashboard',
-    name: 'ExportHelper',
-    component: getComponent('helpers/ExportHelper'),
+    name: 'Helper',
+    component: getComponent('helpers/index'),
     permission: true,
     meta: { key: 'Export' },
+    children: [
+      {
+        path: 'export-helper',
+        name: 'ExportHelper',
+        component: getComponent('helpers/ExportHelper'),
+        permission: true,
+        meta: { key: 'ExportHelper' },
+      }
+    ]
   },
   // insert more route below
+  // event
+  {
+    path: '/event',
+    icon: 'team',
+    name: 'Event',
+    component: getComponent('Event/index'),
+    permission: true,
+    meta: { key: 'event' },
+    children: [
+      {
+        path: 'event-form',
+        name: 'EventForm',
+        component: getComponent('Event/components/EventForm'),
+        permission: true,
+        meta: { key: 'EventForm' },
+      },
+      {
+        path: 'event-table',
+        name: 'EventTable',
+        component: getComponent('Event/components/EventTable'),
+        permission: true,
+        meta: { key: 'EventTable' },
+      },
+      {
+        path: 'event-list',
+        name: 'EventList',
+        component: getComponent('Event/components/EventList'),
+        permission: true,
+        meta: { key: 'EventList' },
+      },
+    ],
+  },
+  // document
+  {
+    path: '/document',
+    icon: 'team',
+    name: 'Document',
+    component: getComponent('Document/index'),
+    permission: true,
+    meta: { key: 'document' },
+    children: [
+      {
+        path: 'document-form',
+        name: 'DocumentForm',
+        component: getComponent('Document/components/DocumentForm'),
+        permission: true,
+        meta: { key: 'DocumentForm' },
+      },
+      {
+        path: 'document-table',
+        name: 'DocumentTable',
+        component: getComponent('Document/components/DocumentTable'),
+        permission: true,
+        meta: { key: 'DocumentTable' },
+      },
+      {
+        path: 'document-list',
+        name: 'DocumentList',
+        component: getComponent('Document/components/DocumentList'),
+        permission: true,
+        meta: { key: 'DocumentList' },
+      },
+    ],
+  },
   // member
   {
     path: '/member',

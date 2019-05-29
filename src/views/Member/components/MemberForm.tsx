@@ -5,7 +5,7 @@ import {
 } from 'ant-design-vue';
 import { FilterFormList, Opreat } from '@/interface';
 import MForm from '@/components/FilterForm/MForm';
-import lfService from '@/utils/request.localforage'
+import lfService from '@/utils/request.localforage';
 
 import './index.less';
 
@@ -95,7 +95,7 @@ class MemberForm extends Vue {
     //   method: 'get'
     // });
     // this.itemList = model.fieldsKeys();
-    this.itemList = [...this.defaultItemList ];
+    this.itemList = [...this.defaultItemList]
   }
 
   setForm(itemList: FilterFormList[]) {
@@ -104,14 +104,34 @@ class MemberForm extends Vue {
 
   reset() {
     Modal.info({
-      title: 'Go to list',
+      title: 'Go to datatable',
       onOk: () => {
         this.$router.replace({
-          name: 'MemberList'
+          name: '<%= modelListName %>'
         })
-      },
-      onCancel: () => {
-        this.setForm(this.itemList)
+      }
+    })
+  }
+
+  importOrExport() {
+    const data = [];
+    Modal.info({
+      title: 'Import or Export',
+      onOk: () => {
+        this.$router.replace({
+          name: 'ExportHelper',
+        })
+      }
+    })
+  }
+
+  statistic() {
+    Modal.info({
+      title: 'Statistic Charts',
+      onOk: () => {
+        this.$router.replace({
+          name: 'Statistic'
+        })
       }
     })
   }
@@ -126,10 +146,10 @@ class MemberForm extends Vue {
             </a>
             <a-menu slot="overlay">
               <a-menu-item>
-                <a to={'/import'}>Import</a>
+                <a on-click="importOrExport">Import/Export</a>
               </a-menu-item>
               <a-menu-item>
-                <a to={'/export'}>Export</a>
+                <a on-click="statistic">Statistic</a>
               </a-menu-item>
             </a-menu>
           </a-dropdown>
