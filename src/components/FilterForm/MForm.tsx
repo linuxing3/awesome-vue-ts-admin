@@ -99,6 +99,7 @@ class MFormClass extends Vue {
     });
   }
 
+  @Emit()
   save(e: HTMLFormElement) {
     e.preventDefault();
     this.Form.validateFields((err: any, values: object) => {
@@ -112,7 +113,7 @@ class MFormClass extends Vue {
               setTimeout(resolve, 500);
             }).then(() => {
               this.$router.push({
-                name: `${this.modelName}List`,
+                name: `${this.modelName}Table`,
               });
             });
           },
@@ -124,6 +125,7 @@ class MFormClass extends Vue {
     });
   }
 
+  @Emit()
   addOrEdit(data) {
     if (this.id === -1) {
       this.$log.suc('Creating...');
@@ -164,6 +166,7 @@ class MFormClass extends Vue {
 
   @Emit()
   loadEditInfo(data) {
+    this.$emit('loadEditInfo', data);
     this.$log.suc(`编辑记录 ${this.id}`);
     new Promise((resolve) => {
       setTimeout(resolve, 500);
@@ -398,6 +401,7 @@ const MForm = Form.create({
     saveBtn: Boolean,
     resetBtn: Boolean,
     exportFun: Function,
+    Form: Object
   },
 })(MFormClass);
 export default MForm;

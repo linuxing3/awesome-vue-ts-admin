@@ -141,10 +141,14 @@ export default class MemberTable extends Vue {
     });
   }
 
-  handleExport() {
+  handleExport(ids) {
     this.$log.suc('Exporting from MemberTable ... ');
     this.$router.replace({
       name: 'ExportHelper',
+      params: {
+        modelName: this.modelName,
+        data: JSON.stringify({ ids }),
+      },
     });
   }
 

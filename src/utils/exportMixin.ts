@@ -39,10 +39,9 @@ interface IExportHelper {
 
 @Component({})
 export default class exportMixin extends Vue {
-  @Prop({ default: 'member' })
-  modelName: string;
+  data: any[]
 
-  importFileMeta: any = {};
+  importFileMeta: any = {}
 
   fileFormat: string = 'xlsx'
 
@@ -68,8 +67,13 @@ export default class exportMixin extends Vue {
     return join(this.templateDir, `${fileName}.${fileExt}`);
   }
 
-  get id() {
-    return this.$route.params.id || -1;
+  get modelName() {
+    return this.$route.params.modelName || 'member';
+  }
+
+  get recordIds() {
+    const { ids } = JSON.parse(this.$route.params.data);
+    return ids;
   }
 
   get Entity(): any {
@@ -134,6 +138,14 @@ export default class exportMixin extends Vue {
     if (!existsSync(this.realDataDir)) {
       mkdirSync(this.realDataDir);
     }
+  }
+
+  getData() {
+    this.Entity.$fetch().then(() => {
+      this.data = this.Entity.query()
+        .whereIdIn(this.recordIds)
+        .get();
+    });
   }
 
   /**
@@ -328,19 +340,24 @@ export default class exportMixin extends Vue {
   /**
    * 将数据项目导出到Excel文件
    */
-  exportExcel(item) {
+  exportExcel(data) {
     /* show a file-open dialog and read the first selected file */
     const workbook = this.workbook;
-    const filename = this.importFileMeta.path;
+    const filename = this.modelDatasource;
     const sheetName = this.modelName;
     try {
       this.writeExcelFile({
         workbook,
         filename,
-        data: item,
+        data,
         sheetName,
         options: {},
       });
+      // 打开文件所在目录并定位到文件
+      setTimeout(() => {
+        shell.showItemInFolder(this.modelDatasource);
+        console.log(`导出${this.modelDatasource}文件成功`);
+      }, 5000);
     } catch (error) {
       throw new Error(error);
     }
@@ -421,7 +438,7 @@ export default class exportMixin extends Vue {
   ensureAttachFile() {
     const uuid = uniqueId(`${this.modelName}_attach_`);
 
-    const fileIdRef = this.id.toString() || uniqueId().toString();
+    const fileIdRef = uniqueId().toString();
     const moduleAttachDir = join(this.attachDir, this.modelName);
     const moduleAttachDirWithId = join(this.attachDir, this.modelName, fileIdRef);
     if (!existsSync(moduleAttachDir)) {

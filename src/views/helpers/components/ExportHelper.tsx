@@ -2,7 +2,7 @@ import {
   Component, Vue, Mixins, Emit,
 } from 'vue-property-decorator';
 import {
-  Tag, Card, Row, Col, Button, Modal, Select,
+  Tag, Icon, Card, Row, Col, Button, Modal, Select, List, Upload
 } from 'ant-design-vue';
 import exportMixin from '@/utils/exportMixin';
 
@@ -11,6 +11,7 @@ import './index.less';
 @Component({
   name: 'MemberTable',
   components: {
+    'a-icon': Icon,
     'a-row': Row,
     'a-col': Col,
     'a-button': Button,
@@ -18,14 +19,28 @@ import './index.less';
     'a-select': Select,
     'a-tag': Tag,
     'a-card': Card,
+    'a-upload-dragger': Upload,
+    'a-list': List,
+    'a-list-item': List.Item,
   },
 })
 export default class ExportHelper extends Mixins(exportMixin) {
-  get modelName() {
-    return this.$route.params.modelName || 'member';
+  nomalLayout = {
+    span: 4,
+    xl: 12,
+    lg: 12,
+    md: 12,
+    sm: 12,
+    xs: 24,
   }
 
-  data: any[] = [];
+  content = [
+    'Racing car sprays burning fuel into crowd.',
+    'Japanese princess to wed commoner.',
+    'Australian walks 100km after outback crash.',
+    'Man charged over missing wedding girl.',
+    'Los Angeles battles huge wildfires.',
+  ]
 
   import(e: Event) {
     this.getImportFile(e)
@@ -42,10 +57,20 @@ export default class ExportHelper extends Mixins(exportMixin) {
     this.attemptExport(this.data);
   }
 
+  upload(info) {
+    const { uid, name } = info.file;
+    this.$log.info(name);
+    return Promise.resolve(info.file);
+  }
+
+  uploadChange(info) {
+    this.$log.info(name);
+    return Promise.resolve(info.file);
+  }
+
   @Emit()
   setData(data) {
     this.$log.info('Setting export data: ', data);
-    this.data = data;
   }
 
   renderActionBtn(): JSX.Element {
@@ -63,14 +88,57 @@ export default class ExportHelper extends Mixins(exportMixin) {
     );
   }
 
+  renderUpload(): JSX.Element {
+    return (
+      <div>
+        <a-upload-dragger
+          name="file"
+          multiple={false}
+          action={this.upload}
+          change={this.uploadChange}
+        >
+          <p class="ant-upload-drag-icon">
+            <a-icon type="inbox" />
+          </p>
+          <p class="ant-upload-text">点击或拖拽上次</p>
+          <p class="ant-upload-hint">请确保文件格式和数据列标题的一致性</p>
+        </a-upload-dragger>
+      </div>
+    );
+  }
+
   renderContent(): JSX.Element {
-    return <div>Contents goes here</div>;
+    return (
+      <div>
+        <a-list size="large" bordered>
+          {this.content.map(item => (
+            <a-list-item>{item}</a-list-item>
+          ))}
+          <div slot="header">
+            <h3 style="{ margin: '16px 0' }">操作说明</h3>
+          </div>
+        </a-list>
+      </div>
+    );
   }
 
   renderTarget(): JSX.Element {
-    return <div>{
-      this.data.map(item => item.id)
-    }</div>;
+    if (Array.isArray(this.data)) {
+      return <div>{this.data.map(item => item.id)}</div>;
+    }
+    return <div>this.data</div>;
+  }
+
+  renderSelect(modelName, list): JSX.Element {
+    return (
+      <a-select style="width: 100%;" id={modelName} label={modelName}>
+        {list.map((items: any, indexs: number) => (
+          <a-option key={indexs} value={items.value}>
+            {items.label}
+          </a-option>
+        ))}
+      </a-select>
+    );
   }
 
   render() {
@@ -78,29 +146,16 @@ export default class ExportHelper extends Mixins(exportMixin) {
     return (
       <div class="export-helper-wrap" on-set-data={this.setData}>
         <a-card title={`Import and Export [${modelName}]`}>
-        <a-select
-            style="width: 100%;"
-            id={modelName}
-            label={modelName}
-          >
-          {[{ label: 'member', value: 'member' }, { label: 'member', value: 'member' }].map((items: any, indexs: number) => (
-              <a-option key={indexs} value={items.value}>
-                {items.label}
-              </a-option>
-          ))}
-          </a-select>
           <a-row>
-            <a-col>
-              {this.renderContent()}
-            </a-col>
+            <a-col {...{ props: this.nomalLayout }}>{this.renderUpload()}</a-col>
+            <a-col {...{ props: this.nomalLayout }}>{this.renderTarget()}</a-col>
           </a-row>
           <a-row>
-            <a-col>
-              {this.renderTarget()}
-            </a-col>
+            <a-col {...{ props: this.nomalLayout }}>{this.renderSelect(this.modelName, [])}</a-col>
+            <a-col {...{ props: this.nomalLayout }}>{this.renderContent()}</a-col>
           </a-row>
           <a-row slot="actions">
-            <a-col>
+            <a-col {...{ props: this.nomalLayout }}>
               <div>
                 <div class="right-btn">
                   <a-button on-click={this.import} id={'import'} icon="plus" type="primary">

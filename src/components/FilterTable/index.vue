@@ -172,8 +172,13 @@ export default class FilterTable extends Vue {
 
   @Emit()
   exportBack() {
+    const table: any = this.$refs.MTable;
     this.$log.suc('Emit exporting from FilterTable...');
-    this.$emit('export');
+    const ids = table.tableData.reduce((ids, i) => {
+      ids.push(i.id);
+      return ids;
+    }, []);
+    this.$emit('export', ids);
   }
 
   @Emit()
