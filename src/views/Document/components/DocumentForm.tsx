@@ -36,7 +36,7 @@ class DocumentForm extends Vue {
       key: 'classiLevel',
       type: 'select',
       label: 'classiLevel',
-      placeholder: 'Input classiLevel',
+      placeholder: '',
       options: [
         {
           label: '机密',
@@ -99,7 +99,7 @@ class DocumentForm extends Vue {
       title: 'Go to datatable',
       onOk: () => {
         this.$router.replace({
-          name: 'DocumentList',
+          name: 'DocumentTable',
         });
       },
     });
@@ -146,6 +146,7 @@ class DocumentForm extends Vue {
           </a-dropdown>
           <m-form
             ref="MForm"
+            modelName={this.modelName}
             item-list={this.itemList}
             save-btn={true}
             reset-btn={true}

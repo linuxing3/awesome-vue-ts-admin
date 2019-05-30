@@ -1,4 +1,4 @@
-const etnia = [
+export const etnia = [
   { key: 1, value: '汉族', label: '汉族' },
   { key: 2, value: '蒙古族', label: '蒙古族' },
   { key: 3, value: '回族', label: '回族' },
@@ -60,7 +60,7 @@ const etnia = [
   { key: 93, value: '外国民族', label: '外国民族' },
 ];
 
-const gender = [
+export const gender = [
   {
     key: '男',
     label: '男',
@@ -72,8 +72,3 @@ const gender = [
     value: '女',
   },
 ];
-
-export default {
-  gender,
-  etnia,
-};

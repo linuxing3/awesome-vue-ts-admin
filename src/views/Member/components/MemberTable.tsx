@@ -2,6 +2,7 @@ import { Component, Vue } from 'vue-property-decorator';
 import { Tag } from 'ant-design-vue';
 import { tableList, FilterFormList, Opreat } from '@/interface';
 import lfService from '@/utils/request.localforage';
+import { etnia, gender } from '@/utils/constant';
 
 import './index.less';
 
@@ -53,16 +54,7 @@ export default class MemberTable extends Vue {
       label: 'gender',
       type: 'checkboxButton',
       placeholder: 'male',
-      options: [
-        {
-          label: 'male',
-          value: 'male',
-        },
-        {
-          label: 'female',
-          value: 'female',
-        },
-      ],
+      options: [...gender],
     },
     {
       key: 'arrivingDate',

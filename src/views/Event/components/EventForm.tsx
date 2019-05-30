@@ -86,7 +86,7 @@ class EventForm extends Vue {
       title: 'Go to datatable',
       onOk: () => {
         this.$router.replace({
-          name: 'EventList',
+          name: 'EventTable',
         });
       },
     });
@@ -133,6 +133,7 @@ class EventForm extends Vue {
           </a-dropdown>
           <m-form
             ref="MForm"
+            modelName={this.modelName}
             item-list={this.itemList}
             save-btn={true}
             reset-btn={true}

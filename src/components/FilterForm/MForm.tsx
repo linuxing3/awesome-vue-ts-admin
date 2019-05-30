@@ -378,7 +378,7 @@ class MFormClass extends Vue {
             </a-row>
             {/* render form items with label and input */}
             <a-row gutter={20}>
-              {this.itemList.map((item, index) => this.renderFormInput(getFieldDecorator, item, index))}
+              {this.itemList.map((item, index) => this.renderFormItem(getFieldDecorator, item, index))}
             </a-row>
           </a-form>
         </a-card>

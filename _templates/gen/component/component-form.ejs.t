@@ -51,7 +51,7 @@ class <%= modelFormName %> extends Vue {
       title: 'Go to datatable',
       onOk: () => {
         this.$router.replace({
-          name: '<%= modelListName %>'
+          name: '<%= modelTableName %>'
         })
       }
     })
@@ -98,6 +98,7 @@ class <%= modelFormName %> extends Vue {
           </a-dropdown>
           <m-form
             ref="MForm"
+            modelName={this.modelName}
             item-list={this.itemList}
             save-btn={true}
             reset-btn={true}

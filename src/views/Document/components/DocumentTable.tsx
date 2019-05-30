@@ -40,35 +40,37 @@ export default class DocumentTable extends Vue {
 
   filterList: FilterFormList[] = [
     {
-      key: 'name',
-      label: 'name',
+      key: 'year',
+      label: 'Year',
       type: 'input',
-      placeholder: 'Seach Name',
+      placeholder: 'Seach year',
     },
     {
-      key: 'address',
-      label: 'address',
-      type: 'cascader',
-      placeholder: 'Seach address',
-      options: city,
+      key: 'date',
+      label: 'Date',
+      type: 'input',
+      placeholder: 'Seach date',
     },
     {
-      key: 'createtime',
-      label: 'Createtime',
-      type: 'datetimerange',
-      placeholder: ['start date', 'end date'],
-      value: ['startTime', 'endTime'],
+      key: 'title',
+      label: 'Title',
+      type: 'input',
+      placeholder: 'Seach title',
     },
   ];
 
   tableList: tableList[] = [
     {
-      title: 'Name',
-      dataIndex: 'name',
+      title: 'Title',
+      dataIndex: 'title',
     },
     {
-      title: 'Address',
-      dataIndex: 'address',
+      title: 'Date',
+      dataIndex: 'date',
+    },
+    {
+      title: 'Year',
+      dataIndex: 'year',
     },
   ];
 
