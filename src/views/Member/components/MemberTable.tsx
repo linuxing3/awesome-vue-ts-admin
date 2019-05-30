@@ -114,6 +114,10 @@ export default class MemberTable extends Vue {
 
   editData: object = {}
 
+  activated () {
+    this.$nextTick(() => setTimeout(() => this.success(), 500))
+  }
+
   async handleDelete(row) {
     this.$log.suc('Deleting ... ');
     await lfService.request({
@@ -121,7 +125,7 @@ export default class MemberTable extends Vue {
       method: 'delete',
       data: row.id,
     });
-    setTimeout(() => this.success(), 1000);
+    setTimeout(() => this.success(), 500);
   }
 
   handleEdit(row) {

@@ -2,7 +2,7 @@ import {
   Component, Vue, Mixins, Emit,
 } from 'vue-property-decorator';
 import {
-  Tag, Icon, Card, Row, Col, Button, Modal, Select, List, Upload
+  Tag, Icon, Card, Row, Col, Button, Modal, Select, List, Upload,
 } from 'ant-design-vue';
 import exportMixin from '@/utils/exportMixin';
 
@@ -144,7 +144,7 @@ export default class ExportHelper extends Mixins(exportMixin) {
   render() {
     const { modelName } = this;
     return (
-      <div class="export-helper-wrap" on-set-data={this.setData}>
+      <div class="export-helper-wrap">
         <a-card title={`Import and Export [${modelName}]`}>
           <a-row>
             <a-col {...{ props: this.nomalLayout }}>{this.renderUpload()}</a-col>

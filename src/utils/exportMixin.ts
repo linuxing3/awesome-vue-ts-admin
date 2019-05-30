@@ -1,11 +1,11 @@
 
 import {
-  Component, Vue, Mixins, Prop,
+  Component, Vue, Emit,
 } from 'vue-property-decorator';
 import { join } from 'path';
 import { last, uniqueId } from 'lodash';
 import {
-  copyFileSync, existsSync, writeFileSync, mkdirSync,
+  copyFileSync, existsSync, writeFileSync, mkdirSync, readFileSync
 } from 'fs';
 import { remote, shell } from 'electron';
 import XLSX from 'xlsx';
@@ -110,12 +110,12 @@ export default class exportMixin extends Vue {
 
   // 获取模板目录下的当前模型对应csv文件
   get modelDatasource(): string {
-    return this.resolvePath(this.modelName, 'csv');
+    return this.resolvePath(this.modelName, 'xlsx');
   }
 
   // 获取模板目录下的默认csv文件
   get defaultDatasource(): string {
-    return this.resolvePath('db', 'csv');
+    return this.resolvePath('db', 'xlsx');
   }
 
   // 获取模板目录下默认Word模板
@@ -138,8 +138,11 @@ export default class exportMixin extends Vue {
     if (!existsSync(this.realDataDir)) {
       mkdirSync(this.realDataDir);
     }
+    // get Data
+    this.getData();
   }
 
+  @Emit()
   getData() {
     this.Entity.$fetch().then(() => {
       this.data = this.Entity.query()
@@ -153,7 +156,7 @@ export default class exportMixin extends Vue {
    * @param e 事件
    */
   getImportFile(e) {
-    if (e.target.files) {
+    if (e.target && e.target.files) {
       this.importFileMeta = e.target.files[0];
     } else {
       const openedFiles = remote.dialog.showOpenDialog({ properties: ['openFile'] });
@@ -342,17 +345,20 @@ export default class exportMixin extends Vue {
    */
   exportExcel(data) {
     /* show a file-open dialog and read the first selected file */
-    const workbook = this.workbook;
-    const filename = this.modelDatasource;
-    const sheetName = this.modelName;
+    if (!existsSync(this.modelDatasource)) {
+      this.getImportFile({}).then(path => {
+        this.workbook = XLSX.readFile(path)
+      })
+    }
+    this.workbook = XLSX.readFile(this.modelDatasource);
     try {
       this.writeExcelFile({
-        workbook,
-        filename,
+        workbook: this.workbook,
+        filename: this.modelDatasource,
+        sheetName: this.modelName,
         data,
-        sheetName,
-        options: {},
-      });
+        options: {}
+      })
       // 打开文件所在目录并定位到文件
       setTimeout(() => {
         shell.showItemInFolder(this.modelDatasource);
@@ -411,28 +417,6 @@ export default class exportMixin extends Vue {
       });
     }
     return output;
-  }
-
-  /**
-   * 拖放导入
-   */
-  async handleDrop(e) {
-    e.stopPropagation();
-    e.preventDefault();
-    const reader = (window as any).reader;
-    const rABS = true;
-    const files = e.dataTransfer.files;
-    this.importFileMeta = files[0];
-    reader.onload = async (e) => {
-      let data = e.target.result;
-      if (!rABS) data = new Uint8Array(data);
-      const workbook = XLSX.read(data, { type: rABS ? 'binary' : 'array' });
-      console.log('打开了Excel文件');
-      /* DO SOMETHING WITH workbook HERE */
-      return workbook;
-    };
-    if (rABS) reader.readAsBinaryString(this.importFileMeta.path);
-    else reader.readAsArrayBuffer(this.importFileMeta.path);
   }
 
   ensureAttachFile() {

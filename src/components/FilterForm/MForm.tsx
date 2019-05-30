@@ -5,7 +5,7 @@ import {
   Input, Select, Form, TimePicker, DatePicker, Cascader, Row, Col, Button, Modal, Checkbox, Radio, Card,
 } from 'ant-design-vue';
 import { FilterFormList } from '@/interface';
-import moment from 'moment';
+import { upperFirst } from 'lodash';
 import lfService from '@/utils/request.localforage';
 
 import './MForm.less';
@@ -112,8 +112,9 @@ class MFormClass extends Vue {
             new Promise((resolve) => {
               setTimeout(resolve, 500);
             }).then(() => {
+              const tableRouter = upperFirst(this.modelName) + 'Table';
               this.$router.push({
-                name: `${this.modelName}Table`,
+                name: tableRouter,
               });
             });
           },
@@ -244,7 +245,7 @@ class MFormClass extends Vue {
           >
             {options
               && options.map((items: any, indexs: number) => (
-                <a-option key={indexs} value={items.value}>
+                <a-option key={items.label} value={items.value}>
                   {items.label}
                 </a-option>
               ))}
@@ -401,7 +402,7 @@ const MForm = Form.create({
     saveBtn: Boolean,
     resetBtn: Boolean,
     exportFun: Function,
-    Form: Object
+    Form: Object,
   },
 })(MFormClass);
 export default MForm;
