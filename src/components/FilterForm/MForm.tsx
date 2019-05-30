@@ -219,23 +219,28 @@ class MFormClass extends Vue {
 
   renderFormItem(getFieldDecorator: any, item: FilterFormList, index: number) {
     let itemDom = null;
+    const {
+      key, value, options, change, fieldNames, disabledTime,
+    } = item;
+    const label = this.$t(item.key);
+    const placeholder = `Input ${titleCase(item.key)}`;
     switch (item.type) {
       case 'input':
-        itemDom = <a-input id={item.key} label={item.label} placeholder={item.placeholder} />;
+        itemDom = <a-input id={key} label={label} placeholder={placeholder} />;
         break;
       case 'textarea':
-        itemDom = <a-textarea id={item.key} label={item.label} placeholder={item.placeholder} />;
+        itemDom = <a-textarea id={key} label={label} placeholder={placeholder} />;
         break;
       case 'select':
         itemDom = (
           <a-select
             style="width: 100%;"
-            id={item.key}
-            label={item.label}
-            placeholder={item.placeholder}
+            id={key}
+            label={label}
+            placeholder={placeholder}
           >
-            {item.options
-              && item.options.map((items: any, indexs: number) => (
+            {options
+              && options.map((items: any, indexs: number) => (
                 <a-option key={indexs} value={items.value}>
                   {items.label}
                 </a-option>
@@ -246,15 +251,15 @@ class MFormClass extends Vue {
       case 'cascader':
         itemDom = (
           <a-cascader
-            style="width: 100%;"
-            label={item.label}
-            id={item.key}
             allowClear
             changeOnSelect
-            fieldNames={item.fieldNames}
-            options={item.options}
-            placeholder={item.placeholder}
-            on-change={item.change}
+            style="width: 100%;"
+            label={label}
+            id={key}
+            options={options}
+            placeholder={placeholder}
+            fieldNames={fieldNames}
+            on-change={change}
           />
         );
         break;
@@ -262,35 +267,35 @@ class MFormClass extends Vue {
         itemDom = (
           <a-cascader
             style="width: 100%;"
-            id={item.key}
-            label={item.label}
+            id={key}
+            label={label}
             allowClear
             changeOnSelect
-            fieldNames={item.fieldNames}
-            options={item.options}
-            placeholder={item.placeholder}
-            on-change={(e: Array<string>) => this.levelcodeChange(e, item.key)}
+            fieldNames={fieldNames}
+            options={options}
+            placeholder={placeholder}
+            on-change={(e: Array<string>) => this.levelcodeChange(e, key)}
           />
         );
         break;
       case 'datetime':
         itemDom = (
           <a-date-picker
-            id={item.key}
-            label={item.label}
+            id={key}
+            label={label}
             showTime
             format="YYYY-MM-DD HH:mm:ss"
-            placeholder={item.placeholder}
+            placeholder={placeholder}
           />
         );
         break;
       case 'date':
         itemDom = (
           <a-date-picker
-            id={item.key}
-            label={item.label}
+            id={key}
+            label={label}
             format="YYYY-MM-DD"
-            placeholder={item.placeholder}
+            placeholder={placeholder}
           />
         );
         break;
@@ -298,22 +303,22 @@ class MFormClass extends Vue {
         itemDom = (
           <a-range-picker
             style="width: 100%"
-            id={item.key}
-            label={item.label}
+            id={key}
+            label={label}
             showTime
             format="YYYY-MM-DD"
-            disabledTime={item.disabledTime}
-            placeholder={item.placeholder}
+            disabledTime={disabledTime}
+            placeholder={placeholder}
           />
         );
         break;
       case 'checkboxButton':
         itemDom = (
-          <el-radio-group on-change={item.change} label={item.label} size="small">
-            {item.options
-              && item.options.map((items, indexs: number) => (
-                <a-radio-button value={items.value} key={indexs}>
-                  {items.label}
+          <el-radio-group on-change={change} label={label} size="small">
+            {options
+              && options.map((items, indexs: number) => (
+                <a-radio-button value={value} key={indexs}>
+                  {label}
                 </a-radio-button>
               ))}
           </el-radio-group>
@@ -324,7 +329,7 @@ class MFormClass extends Vue {
     }
     return (
       <a-col {...{ props: this.nomalLayout }} key={index}>
-        <a-form-item label={item.label}>{getFieldDecorator(item.key)(itemDom)}</a-form-item>
+        <a-form-item label={label}>{getFieldDecorator(key)(itemDom)}</a-form-item>
       </a-col>
     );
   }

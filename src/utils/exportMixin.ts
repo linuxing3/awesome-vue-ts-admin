@@ -39,10 +39,10 @@ interface IExportHelper {
 
 @Component({})
 export default class exportMixin extends Vue {
-  @Prop()
+  @Prop({ default: 'member' })
   modelName: string;
 
-  importFileMeta: any;
+  importFileMeta: any = {};
 
   fileFormat: string = 'xlsx'
 
@@ -332,7 +332,7 @@ export default class exportMixin extends Vue {
     /* show a file-open dialog and read the first selected file */
     const workbook = this.workbook;
     const filename = this.importFileMeta.path;
-    const sheetName = 'data';
+    const sheetName = this.modelName;
     try {
       this.writeExcelFile({
         workbook,
@@ -356,7 +356,8 @@ export default class exportMixin extends Vue {
       const sheetName = this.workbook.SheetNames[0];
       const worksheet = this.workbook.Sheets[sheetName];
       const data = XLSX.utils.sheet_to_json(worksheet);
-      console.table(data);
+      this.$log.info(data);
+      this.$emit('setData', data);
       if (data.length) this.persistData(data);
     } catch (error) {
       throw new Error(error);

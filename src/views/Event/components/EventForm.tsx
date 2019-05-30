@@ -98,6 +98,9 @@ class EventForm extends Vue {
       onOk: () => {
         this.$router.replace({
           name: 'ExportHelper',
+          params: {
+            modelName: this.modelName,
+          },
         });
       },
     });

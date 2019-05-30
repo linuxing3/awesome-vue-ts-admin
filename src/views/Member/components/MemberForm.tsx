@@ -222,6 +222,9 @@ class MemberForm extends Vue {
       onOk: () => {
         this.$router.replace({
           name: 'ExportHelper',
+          params: {
+            modelName: this.modelName,
+          },
         });
       },
     });

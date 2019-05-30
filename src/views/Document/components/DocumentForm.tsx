@@ -36,7 +36,6 @@ class DocumentForm extends Vue {
       key: 'classiLevel',
       type: 'select',
       label: 'classiLevel',
-      placeholder: '',
       options: [
         {
           label: '机密',
@@ -111,6 +110,9 @@ class DocumentForm extends Vue {
       onOk: () => {
         this.$router.replace({
           name: 'ExportHelper',
+          params: {
+            modelName: this.modelName,
+          },
         });
       },
     });

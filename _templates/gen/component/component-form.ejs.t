@@ -59,10 +59,13 @@ class <%= modelFormName %> extends Vue {
 
   importOrExport () {
     Modal.info({
-      title: 'Import or Export',
+      title: `Import or Export [${this.modelName}]`,
       onOk: () => {
         this.$router.replace({
-          name: 'ExportHelper'
+          name: 'ExportHelper',
+          params: {
+            modelName: this.modelName
+          }
         })
       }
     })
