@@ -178,7 +178,6 @@ export const tableFieldsList: tableList[] = [
   {
     title: 'Gender',
     dataIndex: 'gender',
-    customRender: this.genderRender,
   },
   {
     title: 'Department',
