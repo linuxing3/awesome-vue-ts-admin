@@ -5,6 +5,7 @@ import { tableList, FilterFormList, Opreat } from '@/interface';
 import city from '@/utils/city';
 
 import './index.less';
+import lfService from '@/utils/request.localforage';
 
 @Component({
   name: 'DocumentTable',
@@ -102,7 +103,7 @@ export default class DocumentTable extends Vue {
 
   async handleDelete(row) {
     console.log('Deleting ... ');
-    await this.$http({
+    await lfService.request({
       url: `/${this.modelName}`,
       method: 'delete',
       data: row.id,

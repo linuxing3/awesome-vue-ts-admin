@@ -5,7 +5,7 @@ import {
 import { join } from 'path';
 import { last, uniqueId } from 'lodash';
 import {
-  copyFileSync, existsSync, writeFileSync, mkdirSync, readFileSync
+  copyFileSync, existsSync, writeFileSync, mkdirSync, readFileSync,
 } from 'fs';
 import { remote, shell } from 'electron';
 import XLSX from 'xlsx';
@@ -346,9 +346,9 @@ export default class exportMixin extends Vue {
   exportExcel(data) {
     /* show a file-open dialog and read the first selected file */
     if (!existsSync(this.modelDatasource)) {
-      this.getImportFile({}).then(path => {
-        this.workbook = XLSX.readFile(path)
-      })
+      this.getImportFile({}).then((path) => {
+        this.workbook = XLSX.readFile(path);
+      });
     }
     this.workbook = XLSX.readFile(this.modelDatasource);
     try {
@@ -357,8 +357,8 @@ export default class exportMixin extends Vue {
         filename: this.modelDatasource,
         sheetName: this.modelName,
         data,
-        options: {}
-      })
+        options: {},
+      });
       // 打开文件所在目录并定位到文件
       setTimeout(() => {
         shell.showItemInFolder(this.modelDatasource);
