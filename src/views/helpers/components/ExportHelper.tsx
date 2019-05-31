@@ -25,7 +25,16 @@ import './index.less';
   },
 })
 export default class ExportHelper extends Mixins(exportMixin) {
-  nomalLayout = {
+  normalLayout = {
+    span: 8,
+    xl: 24,
+    lg: 24,
+    md: 24,
+    sm: 24,
+    xs: 24,
+  }
+
+  halfLayout = {
     span: 4,
     xl: 12,
     lg: 12,
@@ -144,28 +153,24 @@ export default class ExportHelper extends Mixins(exportMixin) {
   render() {
     const { modelName } = this;
     return (
-      <div class="export-helper-wrap">
+      <div style="width: 100%;" class="helper-wrap">
         <a-card title={`Import and Export [${modelName}]`}>
-          <a-row>
-            <a-col {...{ props: this.nomalLayout }}>{this.renderUpload()}</a-col>
-            <a-col {...{ props: this.nomalLayout }}>{this.renderTarget()}</a-col>
+          <a-row slot="header">
+            <a-col {...{ props: this.normalLayout }}>{this.renderContent()}</a-col>
           </a-row>
-          <a-row>
-            <a-col {...{ props: this.nomalLayout }}>{this.renderSelect(this.modelName, [])}</a-col>
-            <a-col {...{ props: this.nomalLayout }}>{this.renderContent()}</a-col>
+          <a-row slot="content">
+            <a-col {...{ props: this.normalLayout }}>{this.renderUpload()}</a-col>
           </a-row>
           <a-row slot="actions">
-            <a-col {...{ props: this.nomalLayout }}>
-              <div>
-                <div class="right-btn">
-                  <a-button on-click={this.import} id={'import'} icon="plus" type="primary">
-                    Import
-                  </a-button>
-                  <a-button on-click={this.export} id={'export'} icon="cloud">
-                    Export
-                  </a-button>
-                </div>
-              </div>
+            <a-col {...{ props: this.halfLayout }}>
+              <a-button on-click={this.import} id={'import'} icon="plus" type="primary">
+                Import
+              </a-button>
+            </a-col>
+            <a-col {...{ props: this.halfLayout }}>
+              <a-button on-click={this.export} id={'export'} icon="cloud">
+                Export
+              </a-button>
             </a-col>
           </a-row>
         </a-card>
