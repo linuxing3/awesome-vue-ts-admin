@@ -1,4 +1,4 @@
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue, Emit } from 'vue-property-decorator';
 import { Tag } from 'ant-design-vue';
 import { tableList, FilterFormList, Opreat } from '@/interface';
 import lfService from '@/utils/request.localforage';
@@ -114,10 +114,11 @@ export default class MemberTable extends Vue {
 
   editData: object = {}
 
-  activated () {
-    this.$nextTick(() => setTimeout(() => this.success(), 500))
+  activated() {
+    this.$nextTick(() => setTimeout(() => this.success(), 500));
   }
 
+  @Emit()
   async handleDelete(row) {
     this.$log.suc('Deleting ... ');
     await lfService.request({
@@ -128,6 +129,7 @@ export default class MemberTable extends Vue {
     setTimeout(() => this.success(), 500);
   }
 
+  @Emit()
   handleEdit(row) {
     this.$log.suc('Editing ... ');
     this.$router.replace({
@@ -138,6 +140,7 @@ export default class MemberTable extends Vue {
     });
   }
 
+  @Emit()
   handleCreate() {
     this.$log.suc('Creating ... ');
     this.$router.replace({
@@ -156,10 +159,12 @@ export default class MemberTable extends Vue {
     });
   }
 
+  @Emit()
   handleSearch(params) {
     this.$log.suc('Searching from MemberTable ... ', params);
   }
 
+  @Emit()
   handleRemove(row) {
     this.$confirm({
       title: '警告',
@@ -184,6 +189,7 @@ export default class MemberTable extends Vue {
     return <a-tag color={text ? 'blue' : 'purple'}>{text ? 'Male' : 'Female'}</a-tag>;
   }
 
+  @Emit()
   tableClick(key: string, row: any) {
     switch (key) {
       case 'edit':
@@ -195,6 +201,7 @@ export default class MemberTable extends Vue {
     }
   }
 
+  @Emit()
   addWithModal() {
     this.title = 'Add Member';
     this.modelType = 'add';
@@ -205,11 +212,13 @@ export default class MemberTable extends Vue {
     });
   }
 
+  @Emit()
   closeModal() {
     this.visible = false;
     this.editData = {};
   }
 
+  @Emit()
   success() {
     this.visible = false;
     const Table: any = this.$refs.MemberInfoTable;
