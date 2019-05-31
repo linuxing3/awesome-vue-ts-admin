@@ -9,7 +9,7 @@ import exportMixin from '@/utils/exportMixin';
 import './index.less';
 
 @Component({
-  name: 'MemberTable',
+  name: 'ExportHelper',
   components: {
     'a-icon': Icon,
     'a-row': Row,
