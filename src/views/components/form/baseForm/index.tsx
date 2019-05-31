@@ -2,7 +2,7 @@ import { Component, Vue } from 'vue-property-decorator';
 import {
   Form, Input, Select, Radio, Card, Dropdown, Menu, Icon, DatePicker, Button, Modal,
 } from 'ant-design-vue';
-
+import lfService from '@/utils/request.localforage';
 import './index.less';
 
 @Component({
@@ -72,14 +72,14 @@ class BaseForm extends Vue {
   handleAddOrEdit(data) {
     if (this.id === -1) {
       this.$log.suc('Creating...');
-      this.$http({
+      lfService.request({
         url: `/${this.modelName}`,
         method: 'post',
         data,
       });
     } else {
       this.$log.suc('updating...');
-      this.$http({
+      lfService.request({
         url: `/${this.modelName}`,
         method: 'patch',
         data,
@@ -92,7 +92,7 @@ class BaseForm extends Vue {
     if (this.id === -1) return;
     const {
       data: { entity },
-    } = await this.$http({
+    } = await lfService.request({
       url: `/${this.modelName}`,
       method: 'get',
       data: { id: this.id },

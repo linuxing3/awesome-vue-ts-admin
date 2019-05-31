@@ -274,7 +274,6 @@ class MemberForm extends Vue {
             save-btn={true}
             reset-btn={true}
             on-set-form={this.setForm}
-            on-reset={this.reset}
           />
         </a-card>
       </div>

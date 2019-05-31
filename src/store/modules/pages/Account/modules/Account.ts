@@ -3,7 +3,7 @@ import {
 } from 'vuex';
 import { make } from 'vuex-pathify';
 import bcrypt from 'bcryptjs';
-
+import lfService from '@/utils/request.localforage';
 import { IAccount } from '../models/Account';
 
 export interface IAccountState {
@@ -104,7 +104,7 @@ const AccountActions: IAccountActions = {
 
     console.log('检查默认账户是否存在');
     // TODO Fetch from localforage to vuex
-    await this.$http({
+    await lfService.request({
       url: 'account',
       method: 'get',
     });
@@ -124,7 +124,7 @@ const AccountActions: IAccountActions = {
         avatar,
       };
       // Create new account and save to localforage
-      await this.$http({
+      await lfService.request({
         url: 'account',
         method: 'post',
         data: accountInfo,
@@ -138,7 +138,7 @@ const AccountActions: IAccountActions = {
     // 按姓名查找账户
     const {
       data: { entity },
-    } = await this.$http({
+    } = await lfService.request({
       url: 'account',
       method: 'get',
     });
@@ -159,7 +159,7 @@ const AccountActions: IAccountActions = {
         };
 
         // 2 保存用户名和加密密码
-        await this.$http({
+        await lfService.request({
           url: 'account',
           method: 'post',
           data: accountInfo,

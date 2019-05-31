@@ -3,7 +3,7 @@ import { Tag } from 'ant-design-vue';
 import moment from 'moment';
 import { tableList, FilterFormList, Opreat } from '@/interface';
 import city from '@/utils/city';
-
+import lfService from '@/utils/request.localforage';
 import InfoModal from './infoModal';
 
 import './index.less';

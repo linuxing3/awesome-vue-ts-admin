@@ -108,7 +108,7 @@ export default class <%= modelTableName %> extends Vue {
 
   async handleDelete (row) {
     console.log('Deleting ... ')
-    await this.$http({
+    await lfService.request({
       url: `/${this.modelName}`,
       method: 'delete',
       data: row.id
