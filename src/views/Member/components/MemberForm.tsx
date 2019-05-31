@@ -18,11 +18,11 @@ import './index.less';
     'a-dropdown': Dropdown,
     'a-menu': Menu,
     'a-menu-item': Menu.Item,
-    'a-icon': Icon
+    'a-icon': Icon,
   },
   props: {
-    Form
-  }
+    Form,
+  },
 })
 class MemberForm extends Vue {
   modelName: string = 'member'
@@ -33,12 +33,12 @@ class MemberForm extends Vue {
 
   @Emit()
   setForm(itemList: FilterFormList[]) {
-    this.itemList = [...itemList]
+    this.itemList = [...itemList];
   }
 
   @Emit()
   loadEditInfo(data) {
-    this.formValues = data
+    this.formValues = data;
   }
 
   @Emit()
@@ -46,17 +46,17 @@ class MemberForm extends Vue {
     Modal.info({
       title: 'Go to datatable',
       onOk: () => {
-        const tableRouter = `${upperFirst(this.modelName)}Table`
+        const tableRouter = `${upperFirst(this.modelName)}Table`;
         this.$router.push({
-          name: tableRouter
-        })
-      }
-    })
+          name: tableRouter,
+        });
+      },
+    });
   }
 
   @Emit()
   importOrExport() {
-    const values = this.formValues
+    const values = this.formValues;
     Modal.info({
       title: `Import or Export ${this.modelName}`,
       onOk: () => {
@@ -64,11 +64,11 @@ class MemberForm extends Vue {
           name: 'ExportHelper',
           params: {
             modelName: this.modelName,
-            data: JSON.stringify({ ids: [values.id] })
-          }
-        })
-      }
-    })
+            data: JSON.stringify({ ids: [values.id] }),
+          },
+        });
+      },
+    });
   }
 
   @Emit()
@@ -77,10 +77,10 @@ class MemberForm extends Vue {
       title: 'Statistic Charts',
       onOk: () => {
         this.$router.replace({
-          name: 'Statistic'
-        })
-      }
-    })
+          name: 'Statistic',
+        });
+      },
+    });
   }
 
   render() {
@@ -111,7 +111,7 @@ class MemberForm extends Vue {
           />
         </a-card>
       </div>
-    )
+    );
   }
 }
 
