@@ -232,7 +232,7 @@ class MFormClass extends Vue {
     const placeholder = `Input ${titleCase(item.key)}`;
     switch (item.type) {
       case 'input':
-        itemDom = <a-input id={key} label={label} placeholder={placeholder} />;
+        itemDom = <a-input id={key} label={label} placeholder={placeholder} disabled={key === 'id'} />;
         break;
       case 'textarea':
         itemDom = <a-textarea id={key} label={label} placeholder={placeholder} />;

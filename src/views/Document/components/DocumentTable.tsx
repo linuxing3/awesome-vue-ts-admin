@@ -1,11 +1,12 @@
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue, Emit } from 'vue-property-decorator';
 import { Tag } from 'ant-design-vue';
-import moment from 'moment';
 import { tableList, FilterFormList, operate } from '@/interface';
-import city from '@/utils/city';
-
-import './index.less';
 import lfService from '@/utils/request.localforage';
+
+import {
+  BackParams, operateBtn, tableFieldsList, filterFormItemList,
+} from './config';
+import './index.less';
 
 @Component({
   name: 'DocumentTable',
@@ -16,6 +17,8 @@ import lfService from '@/utils/request.localforage';
 export default class DocumentTable extends Vue {
   modelName: string = 'document'
 
+  data: any[] = []
+
   pageParams: object = {
     pageNum: 1,
     pageSize: 100,
@@ -24,95 +27,81 @@ export default class DocumentTable extends Vue {
 
   filterParams: any = {
     name: '',
-    address: [],
-    createtime: [],
-  };
+    gender: '',
+    department: '',
+    fromEntity: '',
+    arrivingDate: '',
+  }
 
-  BackParams: any = {
-    code: 'data.result.resultCode',
-    codeOK: 0,
-    message: 'data.result.resultMessage',
-    data: 'data.entity',
-    columns: 'config.params.columns',
-    total: 'config.params.pageParams.total',
-  };
+  BackParams: any = BackParams
 
-  outParams: any = {};
+  outParams: any = {}
 
-  filterList: FilterFormList[] = [
-    {
-      key: 'year',
-      label: 'Year',
-      type: 'input',
-      placeholder: 'Seach year',
-    },
-    {
-      key: 'date',
-      label: 'Date',
-      type: 'input',
-      placeholder: 'Seach date',
-    },
-    {
-      key: 'title',
-      label: 'Title',
-      type: 'input',
-      placeholder: 'Seach title',
-    },
-  ];
+  filterList: FilterFormList[] = filterFormItemList
 
-  tableList: tableList[] = [
-    {
-      title: 'Title',
-      dataIndex: 'title',
-    },
-    {
-      title: 'Date',
-      dataIndex: 'date',
-    },
-    {
-      title: 'Year',
-      dataIndex: 'year',
-    },
-  ];
+  tableList: tableList[] = tableFieldsList
 
-  operate: operate[] = [
-    {
-      key: 'edit',
-      rowKey: 'id',
-      color: 'blue',
-      text: '编辑',
-      roles: true,
-    },
-    {
-      key: 'delete',
-      rowKey: 'id',
-      color: 'red',
-      text: '删除',
-      roles: true,
-      msg: '确定删除？',
-    },
-  ];
+  operate: operate[] = operateBtn
 
-  title: string = 'Add Document';
+  title: string = 'Add Document'
 
-  visible: boolean = false;
+  visible: boolean = false
 
-  modelType: string = 'add';
+  modelType: string = 'add'
 
-  editData: object = {};
+  editData: object = {}
 
+  activated() {
+    this.success();
+  }
+
+  @Emit()
+  add() {
+    this.$log.suc('Creating ... ');
+    this.$router.replace({
+      name: 'DocumentForm',
+    });
+  }
+
+  @Emit()
+  export(ids) {
+    this.$log.suc('Exporting from DocumentTable ... ');
+    this.$router.replace({
+      name: 'ExportHelper',
+      params: {
+        modelName: this.modelName,
+        data: JSON.stringify({ ids }),
+      },
+    });
+  }
+
+  genderRender(text: any) {
+    return <a-tag color={text ? 'blue' : 'purple'}>{text ? '男' : '女'}</a-tag>;
+  }
+
+  @Emit()
+  selectChange() {}
+
+  @Emit()
+  currentChange() {}
+
+  @Emit()
+  clearOutParams() {}
+
+  @Emit()
   async handleDelete(row) {
-    console.log('Deleting ... ');
-    await lfService.request({
+    this.$log.suc('Deleting ... ');
+    const response = await lfService.request({
       url: `/${this.modelName}`,
       method: 'delete',
       data: row.id,
     });
-    setTimeout(() => this.success(), 1000);
+    Promise.resolve(response);
   }
 
+  @Emit()
   handleEdit(row) {
-    console.log('Editing ... ');
+    this.$log.suc('Editing ... ');
     this.$router.replace({
       name: 'DocumentForm',
       params: {
@@ -121,74 +110,23 @@ export default class DocumentTable extends Vue {
     });
   }
 
-  handleCreate() {
-    console.log('Creating ... ');
-    this.$router.replace({
-      name: 'DocumentForm',
-    });
-  }
-
-  handleExport() {
-    console.log('Exporting ... ');
-    this.$router.replace({
-      name: 'ExportHelper',
-    });
-  }
-
-  handleRemove(row) {
-    this.$confirm({
-      title: '警告',
-      content: `真的要删除 ${row.id} 吗?`,
-      okText: '删除',
-      okType: 'danger',
-      cancelText: '取消',
-      onOk: () => {
-        console.log('OK');
-        this.handleDelete(row);
-        return new Promise((resolve, reject) => {
-          setTimeout(Math.random() > 0.5 ? resolve : reject, 1000);
-        }).catch(() => console.log('Oops errors!'));
-      },
-      onCancel: () => {
-        console.log('Cancel');
-      },
-    });
-  }
-
-  genderRender(text: any) {
-    return <a-tag color={text ? 'blue' : 'purple'}>{text ? 'Male' : 'Female'}</a-tag>;
-  }
-
+  @Emit()
   tableClick(key: string, row: any) {
     switch (key) {
       case 'edit':
         this.handleEdit(row);
         break;
+      case 'export':
+        this.export([row.id]);
+        break;
       default:
-        this.handleDelete(row);
+        this.handleDelete(row).then(() => this.success());
         break;
     }
   }
 
-  addWithModal() {
-    this.title = 'Add Member';
-    this.modelType = 'add';
-    this.visible = true;
-    this.editData = {};
-    this.$router.replace({
-      name: 'MemberForm',
-    });
-  }
-
-  closeModal() {
-    this.visible = false;
-    this.editData = {};
-  }
-
   success() {
-    this.visible = false;
-    const Table: any = this.$refs.DocumentInfoTable;
-    this.editData = {};
+    const Table: any = this.$refs.MemberInfoTable;
     Table.reloadTable();
   }
 
@@ -196,7 +134,7 @@ export default class DocumentTable extends Vue {
     return (
       <div class="baseInfo-wrap">
         <filter-table
-          ref="DocumentInfoTable"
+          ref="MemberInfoTable"
           tableList={this.tableList}
           filterList={this.filterList}
           filterGrade={[]}
@@ -212,8 +150,8 @@ export default class DocumentTable extends Vue {
           fetchType={'get'}
           backParams={this.BackParams}
           on-menuClick={this.tableClick}
-          on-add={this.handleCreate}
-          on-export={this.handleExport}
+          on-add={this.add}
+          on-export={this.export}
         />
       </div>
     );

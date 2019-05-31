@@ -7,13 +7,15 @@ const ModelName = h.changeCase.pascal(model)
 const modelListName = ModelName + 'List'
 const modelFormName = ModelName + 'Form'
 %>
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue, Emit } from 'vue-property-decorator';
 import {
-  Form, Input, Select, Radio, Card, Dropdown, Menu, Icon, DatePicker, Button, Modal,
+  Form, Card, Dropdown, Menu, Icon, Modal,
 } from 'ant-design-vue';
-import MForm from '@/components/FilterForm/MForm'
-import { FilterFormList, operate } from '@/interface'
+import { upperFirst } from 'lodash';
+import { FilterFormList, operate } from '@/interface';
+import MForm from '@/components/FilterForm/MForm';
 
+import { defaultItemList } from './config'
 import './index.less';
 
 @Component({
@@ -24,35 +26,22 @@ import './index.less';
     'a-dropdown': Dropdown,
     'a-menu': Menu,
     'a-menu-item': Menu.Item,
-    'a-icon': Icon
+    'a-icon': Icon,
   },
   props: {
-    Form
-  }
+    Form,
+  },
 })
 class <%= modelFormName %> extends Vue {
   modelName: string = '<%= EntityName %>'
 
   formValues: any = {}
 
-  itemList: FilterFormList[] = []
-  
-  defaultItemList: FilterFormList[] = [
-    {
-      key: 'name',
-      label: 'name',
-      type: 'input',
-      placeholder: 'Input Name'
-    },
-  ];
-
-  created() {
-    this.itemList = [...this.defaultItemList];
-  }
+  itemList: any[] = defaultItemList
 
   @Emit()
   setForm(itemList: FilterFormList[]) {
-    this.itemList = [...itemList]
+    this.itemList = [...itemList];
   }
 
   @Emit()
@@ -61,15 +50,16 @@ class <%= modelFormName %> extends Vue {
   }
 
   @Emit()
-  reset () {
+  showDataTable() {
     Modal.info({
       title: 'Go to datatable',
       onOk: () => {
-        this.$router.replace({
-          name: '<%= modelTableName %>'
-        })
-      }
-    })
+        const tableRouter = `${upperFirst(this.modelName)}Table`;
+        this.$router.push({
+          name: tableRouter,
+        });
+      },
+    });
   }
 
   @Emit()
@@ -90,21 +80,21 @@ class <%= modelFormName %> extends Vue {
   }
 
   @Emit()
-  statistic () {
+  statistic() {
     Modal.info({
       title: 'Statistic Charts',
       onOk: () => {
         this.$router.replace({
-          name: 'Statistic'
-        })
-      }
-    })
+          name: 'Statistic',
+        });
+      },
+    });
   }
 
-  render () {
+  render() {
     return (
       <div class="base-form-wrap">
-        <a-card title="<%= modelListName %> Form">
+        <a-card title="<%= ModelName %> Form">
           <a-dropdown slot="extra">
             <a class="ant-dropdown-link">
               <a-icon type="ellipsis" style="font-size: 22px" />
@@ -120,15 +110,16 @@ class <%= modelFormName %> extends Vue {
           </a-dropdown>
           <m-form
             ref="MForm"
+            modelName={this.modelName}
             item-list={this.itemList}
             save-btn={true}
             reset-btn={true}
-            on-set-form={this.setForm}
-            on-reset={this.reset}
+            on-setForm={this.setForm}
+            on-showDataTable={this.showDataTable}
           />
         </a-card>
       </div>
-    )
+    );
   }
 }
 

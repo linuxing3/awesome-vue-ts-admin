@@ -6,10 +6,12 @@ const EntityName = h.changeCase.camel(model)
 const ModelName = h.changeCase.pascal(model)
 const modelTableName = ModelName + 'Table'
 const modelFormName = ModelName + 'Form'
-%>import { Component, Vue } from 'vue-property-decorator';
+%>import { Component, Vue, Emit } from 'vue-property-decorator';
 import { Tag } from 'ant-design-vue';
 import { tableList, FilterFormList, operate } from '@/interface';
-import city from '@/utils/city';
+import lfService from '@/utils/request.localforage';
+
+import { BackParams, operateBtn, tableFieldsList, filterFormItemList } from './config'
 import './index.less';
 
 @Component({
@@ -20,188 +22,117 @@ import './index.less';
 })
 export default class <%= modelTableName %> extends Vue {
   modelName: string = '<%= EntityName %>'
-  
+
   data: any[] = []
 
   pageParams: object = {
     pageNum: 1,
     pageSize: 100,
-    page: true
+    page: true,
   }
 
   filterParams: any = {
     name: '',
-    address: [],
-    createtime: [],
-  };
-
-  BackParams: any = {
-    code: 'data.result.resultCode',
-    codeOK: 0,
-    message: 'data.result.resultMessage',
-    data: 'data.entity',
-    columns: 'config.params.columns',
-    total: 'config.params.pageParams.total',
-  };
-
-  outParams: any = {};
-
-  filterList: FilterFormList[] = [
-    {
-      key: 'name',
-      label: 'name',
-      type: 'input',
-      placeholder: 'Seach Name',
-    },
-    {
-      key: 'address',
-      label: 'address',
-      type: 'cascader',
-      placeholder: 'Seach address',
-      options: city,
-    },
-    {
-      key: 'createtime',
-      label: 'Createtime',
-      type: 'datetimerange',
-      placeholder: ['start date', 'end date'],
-      value: ['startTime', 'endTime'],
-    },
-  ];
-
-  tableList: tableList[] = [
-    {
-      title: 'Name',
-      dataIndex: 'name',
-    },
-    {
-      title: 'Address',
-      dataIndex: 'address',
-    }
-  ];
-
-  operate: operate[] = [
-    {
-      key: 'edit',
-      rowKey: 'id',
-      color: 'blue',
-      text: '编辑',
-      roles: true,
-    },
-    {
-      key: 'delete',
-      rowKey: 'id',
-      color: 'red',
-      text: '删除',
-      roles: true,
-      msg: '确定删除？',
-    },
-  ];
-
-  title: string = 'Add <%= ModelName %>';
-
-  visible: boolean = false;
-
-  modelType: string = 'add';
-
-  editData: object = {};
-
-  async handleDelete (row) {
-    console.log('Deleting ... ')
-    await lfService.request({
-      url: `/${this.modelName}`,
-      method: 'delete',
-      data: row.id
-    })
-    setTimeout(() => this.success(), 500)
+    gender: '',
+    department: '',
+    fromEntity: '',
+    arrivingDate: '',
   }
 
-  handleEdit (row) {
-    this.$log.suc('Editing ... ');
-    this.$router.replace({
-      name: '<%= modelFormName %>',
-      params: {
-        id: row.id
-      }
-    })
+  BackParams: any = BackParams
+
+  outParams: any = {}
+
+  filterList: FilterFormList[] = filterFormItemList
+
+  tableList: tableList[] = tableFieldsList
+
+  operate: operate[] = operateBtn
+
+  title: string = 'Add <%= ModelName %>'
+
+  visible: boolean = false
+
+  modelType: string = 'add'
+
+  editData: object = {}
+
+  activated() {
+    this.success();
   }
 
-  handleCreate () {
+  @Emit()
+  add() {
     this.$log.suc('Creating ... ');
     this.$router.replace({
-      name: '<%= modelFormName %>'
-    })
+      name: '<%= modelFormName %>',
+    });
   }
 
-  handleExport () {
-    this.$log.suc('Exporting ... ')
+  @Emit()
+  export(ids) {
+    this.$log.suc('Exporting from <%= modelTableName %> ... ');
     this.$router.replace({
       name: 'ExportHelper',
       params: {
         modelName: this.modelName,
         data: JSON.stringify({ ids }),
       },
-    })
-  }
-
-  handleSearch(params) {
-    this.$log.suc('Searching from MemberTable ... ', params);
-  }
-
-  handleRemove (row) {
-    this.$confirm({
-      title: '警告',
-      content: `真的要删除 ${row.id} 吗?`,
-      okText: '删除',
-      okType: 'danger',
-      cancelText: '取消',
-      onOk: () => {
-        this.$log.suc('OK');
-        this.handleDelete(row);
-        return new Promise((resolve, reject) => {
-          setTimeout(Math.random() > 0.5 ? resolve : reject, 1000)
-        }).catch(() => console.log('Oops errors!'))
-      },
-      onCancel: () => {
-        console.log('Cancel')
-      }
-    })
+    });
   }
 
   genderRender(text: any) {
-    return <a-tag color={text ? 'blue' : 'purple'}>{text ? 'Male' : 'Female'}</a-tag>;
+    return <a-tag color={text ? 'blue' : 'purple'}>{text ? '男' : '女'}</a-tag>;
   }
 
+  @Emit()
+  selectChange() {}
+
+  @Emit()
+  currentChange() {}
+
+  @Emit()
+  clearOutParams() {}
+
+  @Emit()
+  async handleDelete(row) {
+    this.$log.suc('Deleting ... ');
+    const response = await lfService.request({
+      url: `/${this.modelName}`,
+      method: 'delete',
+      data: row.id,
+    });
+    Promise.resolve(response);
+  }
+
+  @Emit()
+  handleEdit(row) {
+    this.$log.suc('Editing ... ');
+    this.$router.replace({
+      name: '<%= modelFormName %>',
+      params: {
+        id: row.id,
+      },
+    });
+  }
+
+  @Emit()
   tableClick(key: string, row: any) {
     switch (key) {
       case 'edit':
         this.handleEdit(row);
         break;
+      case 'export':
+        this.export([row.id]);
+        break;
       default:
-        this.handleDelete(row);
+        this.handleDelete(row).then(() => this.success());
         break;
     }
   }
 
-  addWithModal() {
-    this.title = 'Add Member';
-    this.modelType = 'add';
-    this.visible = true;
-    this.editData = {};
-    this.$router.replace({
-      name: '<%= modelFormName %>'
-    })
-  }
-
-  closeModal() {
-    this.visible = false;
-    this.editData = {};
-  }
-
   success() {
-    this.visible = false;
-    const Table: any = this.$refs.<%= ModelName %>InfoTable;
-    this.editData = {};
+    const Table: any = this.$refs.MemberInfoTable;
     Table.reloadTable();
   }
 
@@ -209,7 +140,7 @@ export default class <%= modelTableName %> extends Vue {
     return (
       <div class="baseInfo-wrap">
         <filter-table
-          ref="<%= ModelName %>InfoTable"
+          ref="MemberInfoTable"
           tableList={this.tableList}
           filterList={this.filterList}
           filterGrade={[]}
@@ -225,9 +156,8 @@ export default class <%= modelTableName %> extends Vue {
           fetchType={'get'}
           backParams={this.BackParams}
           on-menuClick={this.tableClick}
-          on-add={this.handleCreate}
-          on-export={this.handleExport}
-          on-search={this.handleSearch}
+          on-add={this.add}
+          on-export={this.export}
         />
       </div>
     );

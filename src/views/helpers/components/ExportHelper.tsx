@@ -131,11 +131,25 @@ export default class ExportHelper extends Mixins(exportMixin) {
     );
   }
 
-  renderTarget(): JSX.Element {
-    if (Array.isArray(this.data)) {
-      return <div>{this.data.map(item => item.id)}</div>;
+  renderSampleData(): JSX.Element {
+    const firstRecord = this.data[0];
+    if (firstRecord) {
+      return (
+        <div>
+          <a-list size="large" bordered>
+            {Object.keys(firstRecord).map(key => <a-list-item>{key}|{firstRecord[key]}</a-list-item>)}
+            <div slot="header">
+              <h3 style="{ margin: '16px 0' }">数据样本</h3>
+            </div>
+          </a-list>
+        </div>
+      );
     }
-    return <div>this.data</div>;
+    return (
+        <div>
+          <h3 style="{ margin: '16px 0' }">无数据样本</h3>
+        </div>
+    );
   }
 
   renderSelect(modelName, list): JSX.Element {
@@ -155,10 +169,13 @@ export default class ExportHelper extends Mixins(exportMixin) {
     return (
       <div style="width: 100%;" class="helper-wrap">
         <a-card title={`Import and Export [${modelName}]`}>
-          <a-row slot="header">
+          <a-row>
             <a-col {...{ props: this.normalLayout }}>{this.renderContent()}</a-col>
           </a-row>
-          <a-row slot="content">
+          <a-row hidden>
+            <a-col {...{ props: this.normalLayout }}>{this.renderSampleData()}</a-col>
+          </a-row>
+          <a-row hidden>
             <a-col {...{ props: this.normalLayout }}>{this.renderUpload()}</a-col>
           </a-row>
           <a-row slot="actions">

@@ -36,6 +36,7 @@ module.exports = {
     'import/no-unresolved': 'off',
     'import/no-extraneous-dependencies': 'off',
     'import/no-cycle': 'off',
+    'import/named': 'off',
     'import/newline-after-import': 'off',
     'import/extensions': 'off',
     'no-param-reassign': 'off',

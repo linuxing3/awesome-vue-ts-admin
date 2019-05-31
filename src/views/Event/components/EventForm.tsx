@@ -1,12 +1,13 @@
 
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue, Emit } from 'vue-property-decorator';
 import {
-  Form, Input, Select, Radio, Card, Dropdown, Menu, Icon, DatePicker, Button, Modal,
+  Form, Card, Dropdown, Menu, Icon, Modal,
 } from 'ant-design-vue';
-import MForm from '@/components/FilterForm/MForm';
+import { upperFirst } from 'lodash';
 import { FilterFormList, operate } from '@/interface';
+import MForm from '@/components/FilterForm/MForm';
 
-
+import { defaultItemList } from './config';
 import './index.less';
 
 @Component({
@@ -28,125 +29,32 @@ class EventForm extends Vue {
 
   formValues: any = {}
 
-  itemList: FilterFormList[] = [
-    {
-      key: 'id',
-      type: 'input',
-      label: 'id',
-    },
-    {
-      key: 'title',
-      type: 'input',
-      label: 'title',
-      placeholder: 'Input title',
-    },
-    {
-      key: 'date',
-      type: 'input',
-      label: 'date',
-      placeholder: 'Input date',
-    },
-    {
-      key: 'startTime',
-      type: 'input',
-      label: 'startTime',
-      placeholder: 'Input startTime',
-    },
-    {
-      key: 'duration',
-      type: 'input',
-      label: 'duration',
-      placeholder: 'Input duration',
-    },
-    {
-      key: 'applicant',
-      type: 'input',
-      label: 'applicant',
-      placeholder: 'Input applicant',
-    },
-    {
-      key: 'participants',
-      type: 'input',
-      label: 'participants',
-      placeholder: 'Input participants',
-    },
-    {
-      key: 'guests',
-      type: 'input',
-      label: 'guests',
-      placeholder: 'Input guests',
-    },
-    {
-      key: 'content',
-      type: 'textarea',
-      label: 'content',
-      placeholder: 'Input content',
-    },
-    {
-      key: 'currentDate',
-      type: 'input',
-      label: 'currentDate',
-      placeholder: 'Input currentDate',
-    },
-    {
-      key: 'reportDate',
-      type: 'input',
-      label: 'reportDate',
-      placeholder: 'Input reportDate',
-    },
-    {
-      key: 'reportContent',
-      type: 'textarea',
-      label: 'reportContent',
-      placeholder: 'Input reportContent',
-    },
-    {
-      key: 'instructionDate',
-      type: 'input',
-      label: 'instructionDate',
-      placeholder: 'Input instructionDate',
-    },
-    {
-      key: 'instruction',
-      type: 'textarea',
-      label: 'instruction',
-      placeholder: 'Input instruction',
-    },
-    {
-      key: 'priority',
-      type: 'input',
-      label: 'priority',
-      placeholder: 'Input priority',
-    },
-    {
-      key: 'userId',
-      type: 'input',
-      label: 'userId',
-      placeholder: 'Input userId',
-    },
-    {
-      key: 'projectId',
-      type: 'input',
-      label: 'projectId',
-      placeholder: 'Input projectId',
-    },
-  ]
+  itemList: any[] = defaultItemList
 
+  @Emit()
   setForm(itemList: FilterFormList[]) {
     this.itemList = [...itemList];
   }
 
-  reset() {
+  @Emit()
+  loadEditInfo(data) {
+    this.formValues = data;
+  }
+
+  @Emit()
+  showDataTable() {
     Modal.info({
       title: 'Go to datatable',
       onOk: () => {
-        this.$router.replace({
-          name: 'EventTable',
+        const tableRouter = `${upperFirst(this.modelName)}Table`;
+        this.$router.push({
+          name: tableRouter,
         });
       },
     });
   }
 
+  @Emit()
   importOrExport() {
     const values = this.formValues;
     Modal.info({
@@ -163,6 +71,7 @@ class EventForm extends Vue {
     });
   }
 
+  @Emit()
   statistic() {
     Modal.info({
       title: 'Statistic Charts',
@@ -177,7 +86,7 @@ class EventForm extends Vue {
   render() {
     return (
       <div class="base-form-wrap">
-        <a-card title="EventList Form">
+        <a-card title="Event Form">
           <a-dropdown slot="extra">
             <a class="ant-dropdown-link">
               <a-icon type="ellipsis" style="font-size: 22px" />
@@ -197,8 +106,8 @@ class EventForm extends Vue {
             item-list={this.itemList}
             save-btn={true}
             reset-btn={true}
-            on-set-form={this.setForm}
-            on-reset={this.reset}
+            on-setForm={this.setForm}
+            on-showDataTable={this.showDataTable}
           />
         </a-card>
       </div>

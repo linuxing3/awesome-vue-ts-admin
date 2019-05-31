@@ -121,28 +121,25 @@ const lfService: LfService = {
       ...options,
     };
 
-    // Sync localforage with vuex state
-    Entity.$fetch();
-
     // response api
     switch (method) {
       case 'post':
         const createdItems = await Entity.$create({ data });
         requestedData = baseData('success', '创建成功');
         requestedData.entity = createdItems;
-        if (createdItems) Entity.$fetch();
+        if (createdItems !== undefined) Entity.$fetch();
         break;
       case 'delete':
         const deletedItems = await Entity.$delete(data.id || data);
         requestedData = baseData('success', '删除成功');
         requestedData.entity = deletedItems;
-        if (deletedItems) Entity.$fetch();
+        if (deletedItems !== undefined) Entity.$fetch();
         break;
       case 'patch':
         const patchedItems = await Entity.$update({ data });
         requestedData = baseData('success', '更新成功');
         requestedData.entity = patchedItems;
-        if (patchedItems) Entity.$fetch();
+        if (patchedItems !== undefined) Entity.$fetch();
         break;
       case 'get':
         if (!data) {

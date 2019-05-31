@@ -7,7 +7,7 @@ import {
 import { tableList, operate, Directives } from '@/interface';
 import Spin from '@/components/Spin';
 import './MTable.less';
-import { createNamespacedHelpers } from 'vuex';
+import lfService from '@/utils/request.localforage';
 import { getValue } from '@/utils/helper';
 
 @Component({
@@ -136,7 +136,7 @@ export default class MTable extends Vue {
       out: { ...this.outParams },
     };
     this.$log.info('Mtable get Data Params:', params);
-    window.ajax.request({
+    lfService.request({
       url: this.url,
       method: this.fetchType,
       params,

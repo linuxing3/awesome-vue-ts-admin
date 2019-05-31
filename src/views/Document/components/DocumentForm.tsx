@@ -1,11 +1,13 @@
 
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue, Emit } from 'vue-property-decorator';
 import {
-  Form, Input, Select, Radio, Card, Dropdown, Menu, Icon, DatePicker, Button, Modal,
+  Form, Card, Dropdown, Menu, Icon, Modal,
 } from 'ant-design-vue';
-import MForm from '@/components/FilterForm/MForm';
+import { upperFirst } from 'lodash';
 import { FilterFormList, operate } from '@/interface';
+import MForm from '@/components/FilterForm/MForm';
 
+import { defaultItemList } from './config';
 import './index.less';
 
 @Component({
@@ -25,146 +27,51 @@ import './index.less';
 class DocumentForm extends Vue {
   modelName: string = 'document'
 
-  itemList: FilterFormList[] = [
-    {
-      key: 'id',
-      type: 'input',
-      label: 'id',
-    },
-    {
-      key: 'year',
-      type: 'input',
-      label: 'year',
-      placeholder: 'Input year',
-    },
-    {
-      key: 'date',
-      type: 'input',
-      label: 'date',
-      placeholder: 'Input date',
-    },
-    {
-      key: 'classiLevel',
-      type: 'select',
-      label: 'classiLevel',
-      options: [
-        {
-          label: '机密',
-          value: '机密',
-        },
-        {
-          label: '秘密',
-          value: '秘密',
-        },
-        {
-          label: '内部',
-          value: '内部',
-        },
-      ],
-    },
-    {
-      key: 'category',
-      type: 'input',
-      label: 'category',
-      placeholder: 'Input category',
-    },
-    {
-      key: 'inOrOut',
-      type: 'input',
-      label: 'inOrOut',
-      placeholder: 'Input inOrOut',
-    },
-    {
-      key: 'sendingCode',
-      type: 'input',
-      label: 'sendingCode',
-      placeholder: 'Input sendingCode',
-    },
-    {
-      key: 'orderedNumber',
-      type: 'input',
-      label: 'orderedNumber',
-      placeholder: 'Input orderedNumber',
-    },
-    {
-      key: 'title',
-      type: 'input',
-      label: 'title',
-      placeholder: 'Input title',
-    },
-    {
-      key: 'content',
-      type: 'textarea',
-      label: 'content',
-      placeholder: 'Input content',
-    },
-    {
-      key: 'toEntity',
-      type: 'input',
-      label: 'toEntity',
-      placeholder: 'Input toEntity',
-    },
-    {
-      key: 'copyEntity',
-      type: 'input',
-      label: 'copyEntity',
-      placeholder: 'Input copyEntity',
-    },
-    {
-      key: 'attachment',
-      type: 'input',
-      label: 'attachment',
-      placeholder: 'Input attachment',
-    },
-    {
-      key: 'keyword',
-      type: 'input',
-      label: 'keyword',
-      placeholder: 'Input keyword',
-    },
-    {
-      key: 'workEntity',
-      type: 'input',
-      label: 'workEntity',
-      placeholder: 'Input workEntity',
-    },
-    {
-      key: 'author',
-      type: 'input',
-      label: 'author',
-      placeholder: 'Input author',
-    },
-  ]
+  formValues: any = {}
 
+  itemList: any[] = defaultItemList
+
+  @Emit()
   setForm(itemList: FilterFormList[]) {
     this.itemList = [...itemList];
   }
 
-  reset() {
+  @Emit()
+  loadEditInfo(data) {
+    this.formValues = data;
+  }
+
+  @Emit()
+  showDataTable() {
     Modal.info({
       title: 'Go to datatable',
       onOk: () => {
-        this.$router.replace({
-          name: 'DocumentTable',
+        const tableRouter = `${upperFirst(this.modelName)}Table`;
+        this.$router.push({
+          name: tableRouter,
         });
       },
     });
   }
 
+  @Emit()
   importOrExport() {
+    const values = this.formValues;
     Modal.info({
-      title: 'Import or Export',
+      title: `Import or Export ${this.modelName}`,
       onOk: () => {
         this.$router.replace({
           name: 'ExportHelper',
           params: {
             modelName: this.modelName,
+            data: JSON.stringify({ ids: [values.id] }),
           },
         });
       },
     });
   }
 
+  @Emit()
   statistic() {
     Modal.info({
       title: 'Statistic Charts',
@@ -179,7 +86,7 @@ class DocumentForm extends Vue {
   render() {
     return (
       <div class="base-form-wrap">
-        <a-card title="DocumentList Form">
+        <a-card title="Document Form">
           <a-dropdown slot="extra">
             <a class="ant-dropdown-link">
               <a-icon type="ellipsis" style="font-size: 22px" />
@@ -199,8 +106,8 @@ class DocumentForm extends Vue {
             item-list={this.itemList}
             save-btn={true}
             reset-btn={true}
-            on-set-form={this.setForm}
-            on-reset={this.reset}
+            on-setForm={this.setForm}
+            on-showDataTable={this.showDataTable}
           />
         </a-card>
       </div>

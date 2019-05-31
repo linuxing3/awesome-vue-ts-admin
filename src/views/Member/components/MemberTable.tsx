@@ -2,8 +2,10 @@ import { Component, Vue, Emit } from 'vue-property-decorator';
 import { Tag } from 'ant-design-vue';
 import { tableList, FilterFormList, operate } from '@/interface';
 import lfService from '@/utils/request.localforage';
-import { etnia, gender } from '@/utils/constant';
 
+import {
+  BackParams, operateBtn, tableFieldsList, filterFormItemList,
+} from './config';
 import './index.less';
 
 @Component({
@@ -31,87 +33,15 @@ export default class MemberTable extends Vue {
     arrivingDate: '',
   }
 
-  BackParams: any = {
-    code: 'data.result.resultCode',
-    codeOK: 0,
-    message: 'data.result.resultMessage',
-    data: 'data.entity',
-    columns: 'config.params.columns',
-    total: 'config.params.pageParams.total',
-  }
+  BackParams: any = BackParams
 
   outParams: any = {}
 
-  filterList: FilterFormList[] = [
-    {
-      key: 'name',
-      label: 'name',
-      type: 'input',
-      placeholder: 'Seach Name',
-    },
-    {
-      key: 'gender',
-      label: 'gender',
-      type: 'checkboxButton',
-      placeholder: 'male',
-      options: [...gender],
-    },
-    {
-      key: 'arrivingDate',
-      label: 'arriving Date',
-      type: 'date',
-      placeholder: '2019-01-01',
-    },
-  ]
+  filterList: FilterFormList[] = filterFormItemList
 
-  tableList: tableList[] = [
-    {
-      title: 'Name',
-      dataIndex: 'name',
-    },
-    {
-      title: 'Gender',
-      dataIndex: 'gender',
-      customRender: this.genderRender,
-    },
-    {
-      title: 'Department',
-      dataIndex: 'department',
-    },
-    {
-      title: 'From Entity',
-      dataIndex: 'fromEntity',
-    },
-    {
-      title: 'Arriving Date',
-      dataIndex: 'arrivingDate',
-    },
-  ]
+  tableList: tableList[] = tableFieldsList
 
-  operate: operate[] = [
-    {
-      key: 'edit',
-      rowKey: 'id',
-      color: 'blue',
-      text: '编辑',
-      roles: true,
-    },
-    {
-      key: 'delete',
-      rowKey: 'id',
-      color: 'red',
-      text: '删除',
-      roles: true,
-      msg: '确定删除？',
-    },
-    {
-      key: 'export',
-      rowKey: 'id',
-      color: 'orange',
-      text: '导出',
-      roles: true,
-    },
-  ]
+  operate: operate[] = operateBtn
 
   title: string = 'Add Member'
 
@@ -190,12 +120,11 @@ export default class MemberTable extends Vue {
         this.export([row.id]);
         break;
       default:
-        this.handleDelete(row).then(() => this.success);
+        this.handleDelete(row).then(() => this.success());
         break;
     }
   }
 
-  @Emit()
   success() {
     const Table: any = this.$refs.MemberInfoTable;
     Table.reloadTable();

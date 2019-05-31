@@ -92,7 +92,7 @@ export default class FilterTable extends Vue {
   @Prop({ default: [] }) private operate!: operate[];
 
   // 操作栏width
-  @Prop({ default: '100px' }) private operateWidth!: string;
+  @Prop({ default: '150px' }) private operateWidth!: string;
 
   // 本地存储字段名
   @Prop({ default: 'filterTable' }) private localName!: string;
@@ -134,12 +134,12 @@ export default class FilterTable extends Vue {
   }
 
   reloadTable() {
-    this.$log.suc('Reloading...');
     const table: any = this.$refs.MTable;
     // 延迟500ms加载数据
     setTimeout(() => {
+      this.$log.suc('Reloading...');
       table.reload();
-    }, 500);
+    }, 1000);
   }
 
   @Emit()

@@ -39,7 +39,7 @@ interface IExportHelper {
 
 @Component({})
 export default class exportMixin extends Vue {
-  data: any[]
+  data: any[] = []
 
   importFileMeta: any = {}
 
@@ -177,9 +177,8 @@ export default class exportMixin extends Vue {
    */
   attemptImport(path: string) {
     if (this.fileFormat === 'csv') {
-      // this.importCSV()
-      this.importExcel(path);
-    } else if (this.fileFormat === 'xls' || this.fileFormat === 'xlsx') {
+      this.importCSV();
+    } else if (this.fileFormat === 'xlsx' || this.fileFormat === 'xls') {
       this.importExcel(path);
     }
   }
@@ -355,9 +354,10 @@ export default class exportMixin extends Vue {
       this.writeExcelFile({
         workbook: this.workbook,
         filename: this.modelDatasource,
-        sheetName: this.modelName,
         data,
-        options: {},
+        options: {
+          bookType: 'xlsx',
+        },
       });
       // 打开文件所在目录并定位到文件
       setTimeout(() => {
@@ -372,16 +372,15 @@ export default class exportMixin extends Vue {
   /**
    * 导入Excel文件，从用户选取的文件中
    */
-  importExcel(path) {
+  importExcel(path: string, sheetName?: string) {
     // 电子表对象
     try {
       this.workbook = XLSX.readFile(path);
-      const sheetName = this.workbook.SheetNames[0];
-      const worksheet = this.workbook.Sheets[sheetName];
-      const data = XLSX.utils.sheet_to_json(worksheet);
-      this.$log.info(data);
-      this.$emit('setData', data);
-      if (data.length) this.persistData(data);
+      const worksheet = this.workbook.Sheets[sheetName || 'Sheet1' || this.modelName];
+      this.data = XLSX.utils.sheet_to_json(worksheet);
+      this.$log.info('worksheet data:', this.data);
+      this.$emit('setData', this.data);
+      if (this.data.length > 0) this.persistData(this.data);
     } catch (error) {
       throw new Error(error);
     }
@@ -393,12 +392,12 @@ export default class exportMixin extends Vue {
    * @param param0 Excel文件的参数
    */
   writeExcelFile({
-    workbook, filename, sheetName, data, options,
+    workbook, filename, data, options,
   }) {
     // 创建新的电子表格
     const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(data);
     // 添加电子表格到文件中
-    XLSX.utils.book_append_sheet(workbook, worksheet, sheetName);
+    XLSX.utils.book_append_sheet(workbook, worksheet);
     // 写入文件
     XLSX.writeFile(workbook, filename, options);
   }
