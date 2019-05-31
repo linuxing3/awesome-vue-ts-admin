@@ -6,7 +6,7 @@ import {
 import MForm from '@/components/FilterForm/MForm';
 import { FilterFormList, Opreat } from '@/interface';
 
-import lfService from '@/utils/request.localforage';
+
 import './index.less';
 
 @Component({
@@ -25,6 +25,8 @@ import './index.less';
 })
 class EventForm extends Vue {
   modelName: string = 'event'
+
+  formValues: any = {}
 
   itemList: FilterFormList[] = [
     {
@@ -93,13 +95,15 @@ class EventForm extends Vue {
   }
 
   importOrExport() {
+    const values = this.formValues;
     Modal.info({
-      title: 'Import or Export',
+      title: `Import or Export ${this.modelName}`,
       onOk: () => {
         this.$router.replace({
           name: 'ExportHelper',
           params: {
             modelName: this.modelName,
+            data: JSON.stringify({ ids: [values.id] }),
           },
         });
       },

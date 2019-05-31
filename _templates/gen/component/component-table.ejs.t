@@ -8,10 +8,8 @@ const modelTableName = ModelName + 'Table'
 const modelFormName = ModelName + 'Form'
 %>import { Component, Vue } from 'vue-property-decorator';
 import { Tag } from 'ant-design-vue';
-import moment from 'moment';
 import { tableList, FilterFormList, Opreat } from '@/interface';
 import city from '@/utils/city';
-import lfService from '@/utils/request.localforage'
 import './index.less';
 
 @Component({
@@ -22,6 +20,8 @@ import './index.less';
 })
 export default class <%= modelTableName %> extends Vue {
   modelName: string = '<%= EntityName %>'
+  
+  data: any[] = []
 
   pageParams: object = {
     pageNum: 1,
@@ -108,16 +108,16 @@ export default class <%= modelTableName %> extends Vue {
 
   async handleDelete (row) {
     console.log('Deleting ... ')
-    await lfService.request({
+    await this.$http({
       url: `/${this.modelName}`,
       method: 'delete',
       data: row.id
     })
-    setTimeout(() => this.success(), 1000)
+    setTimeout(() => this.success(), 500)
   }
 
   handleEdit (row) {
-    console.log('Editing ... ')
+    this.$log.suc('Editing ... ');
     this.$router.replace({
       name: '<%= modelFormName %>',
       params: {
@@ -127,17 +127,25 @@ export default class <%= modelTableName %> extends Vue {
   }
 
   handleCreate () {
-    console.log('Creating ... ')
+    this.$log.suc('Creating ... ');
     this.$router.replace({
       name: '<%= modelFormName %>'
     })
   }
 
   handleExport () {
-    console.log('Exporting ... ')
+    this.$log.suc('Exporting ... ')
     this.$router.replace({
-      name: 'ExportHelper'
+      name: 'ExportHelper',
+      params: {
+        modelName: this.modelName,
+        data: JSON.stringify({ ids }),
+      },
     })
+  }
+
+  handleSearch(params) {
+    this.$log.suc('Searching from MemberTable ... ', params);
   }
 
   handleRemove (row) {
@@ -148,8 +156,8 @@ export default class <%= modelTableName %> extends Vue {
       okType: 'danger',
       cancelText: '取消',
       onOk: () => {
-        console.log('OK')
-        this.handleDelete(row)
+        this.$log.suc('OK');
+        this.handleDelete(row);
         return new Promise((resolve, reject) => {
           setTimeout(Math.random() > 0.5 ? resolve : reject, 1000)
         }).catch(() => console.log('Oops errors!'))
@@ -181,7 +189,7 @@ export default class <%= modelTableName %> extends Vue {
     this.visible = true;
     this.editData = {};
     this.$router.replace({
-      name: 'MemberForm'
+      name: '<%= modelFormName %>'
     })
   }
 
@@ -219,6 +227,7 @@ export default class <%= modelTableName %> extends Vue {
           on-menuClick={this.tableClick}
           on-add={this.handleCreate}
           on-export={this.handleExport}
+          on-search={this.handleSearch}
         />
       </div>
     );

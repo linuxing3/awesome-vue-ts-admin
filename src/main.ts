@@ -8,6 +8,7 @@ import config from '@/utils/config';
 import Api from '@/api/api.lf';
 import i18n from './utils/i18n';
 import { log } from './utils/helper';
+import lfService from './utils/request.localforage';
 
 import './styles/global.less';
 import './components';
@@ -26,8 +27,10 @@ const options = {
   height: '3px',
 };
 
+// tools
 Vue.prototype.$message = message;
 Vue.prototype.$log = log;
+Vue.prototype.$http= lfService.request;
 
 Vue.config.productionTip = false;
 

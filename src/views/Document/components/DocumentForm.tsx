@@ -5,7 +5,7 @@ import {
 } from 'ant-design-vue';
 import MForm from '@/components/FilterForm/MForm';
 import { FilterFormList, Opreat } from '@/interface';
-import lfService from '@/utils/request.localforage';
+
 import './index.less';
 
 @Component({

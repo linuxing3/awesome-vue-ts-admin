@@ -3,7 +3,7 @@ import { Tag } from 'ant-design-vue';
 import moment from 'moment';
 import { tableList, FilterFormList, Opreat } from '@/interface';
 import city from '@/utils/city';
-import lfService from '@/utils/request.localforage';
+
 import './index.less';
 
 @Component({
@@ -102,7 +102,7 @@ export default class DocumentTable extends Vue {
 
   async handleDelete(row) {
     console.log('Deleting ... ');
-    await lfService.request({
+    await this.$http({
       url: `/${this.modelName}`,
       method: 'delete',
       data: row.id,

@@ -3,6 +3,7 @@ import { Component, Vue, Emit } from 'vue-property-decorator';
 import {
   Form, Card, Dropdown, Menu, Icon, Modal,
 } from 'ant-design-vue';
+import { upperFirst } from 'lodash';
 import { FilterFormList, Opreat } from '@/interface';
 import MForm from '@/components/FilterForm/MForm';
 import { etnia, gender } from '@/utils/constant';
@@ -208,12 +209,13 @@ class MemberForm extends Vue {
   }
 
   @Emit()
-  reset() {
+  showDataTable() {
     Modal.info({
       title: 'Go to datatable',
       onOk: () => {
-        this.$router.replace({
-          name: 'MemberTable',
+        const tableRouter = `${upperFirst(this.modelName)}Table`;
+        this.$router.push({
+          name: tableRouter,
         });
       },
     });
@@ -267,6 +269,7 @@ class MemberForm extends Vue {
           </a-dropdown>
           <m-form
             ref="MForm"
+            modelName={this.modelName}
             item-list={this.itemList}
             save-btn={true}
             reset-btn={true}

@@ -3,7 +3,7 @@ import {
 } from 'vuex';
 import { make } from 'vuex-pathify';
 import bcrypt from 'bcryptjs';
-import lfService from '@/utils/request.localforage';
+
 
 export interface IMemberState {
   name: string;
@@ -82,7 +82,7 @@ const MemberActions: IMemberActions = {
     const defaultMember = { ...ctx.state.defaultMember };
     const hash = await bcrypt.hash(defaultMember.password, 10);
     defaultMember.hash = hash;
-    await lfService.request({
+    await this.$http({
       url: '/member',
       method: 'post',
       data: defaultMember,
@@ -94,7 +94,7 @@ const MemberActions: IMemberActions = {
     console.log('Signup');
     const {
       config: { params: { model } },
-    } = await lfService.request({
+    } = await this.$http({
       url: '/member',
       method: 'get',
       pageParams: {
@@ -119,7 +119,7 @@ const MemberActions: IMemberActions = {
         roles,
       };
       // 2 保存用户名和加密密码
-      await lfService.request({
+      await this.$http({
         url: '/member',
         method: 'post',
         data: memberInfo,
@@ -154,7 +154,7 @@ const MemberActions: IMemberActions = {
   async getMemberInfo(ctx, loginParams) {
     const {
       config: { params: { model } },
-    } = await lfService.request({
+    } = await this.$http({
       url: '/member',
       method: 'get',
       pageParams: {

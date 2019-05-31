@@ -62,7 +62,7 @@ import { lfService } from '@/utils/request.localforage'
  * @returns {Promise<any>}
  */
 function crud ({ url, method, data }) {
-  return lfService.request({
+  return this.$http({
     url,
     method,
     data
@@ -70,7 +70,7 @@ function crud ({ url, method, data }) {
 }
 
 function createItem ({ url, data }) {
-  return lfService.request({
+  return this.$http({
     url,
     method: 'post',
     data
@@ -78,7 +78,7 @@ function createItem ({ url, data }) {
 }
 
 function updateItem ({ url, data }) {
-  return lfService.request({
+  return this.$http({
     url,
     method: 'patch',
     data
@@ -86,7 +86,7 @@ function updateItem ({ url, data }) {
 }
 
 function deleteItem ({ url, data }) {
-  return lfService.request({
+  return this.$http({
     url,
     method: 'delete',
     data
@@ -94,7 +94,7 @@ function deleteItem ({ url, data }) {
 }
 
 function fetchItem ({ url, data }) {
-  return lfService.request({
+  return this.$http({
     url,
     method: 'get',
     data
@@ -102,7 +102,7 @@ function fetchItem ({ url, data }) {
 }
 
 function fetchItems ({ url, data }) {
-  return lfService.request({
+  return this.$http({
     url,
     method: 'get'
   })

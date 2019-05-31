@@ -13,7 +13,7 @@ import {
 } from 'ant-design-vue';
 import MForm from '@/components/FilterForm/MForm'
 import { FilterFormList, Opreat } from '@/interface'
-import lfService from '@/utils/request.localforage';
+
 import './index.less';
 
 @Component({
@@ -32,8 +32,12 @@ import './index.less';
 })
 class <%= modelFormName %> extends Vue {
   modelName: string = '<%= EntityName %>'
+
+  formValues: any = {}
+
+  itemList: FilterFormList[] = []
   
-  itemList: FilterFormList[] = [
+  defaultItemList: FilterFormList[] = [
     {
       key: 'name',
       label: 'name',
@@ -42,10 +46,21 @@ class <%= modelFormName %> extends Vue {
     },
   ];
 
+  created() {
+    this.itemList = [...this.defaultItemList];
+  }
+
+  @Emit()
   setForm(itemList: FilterFormList[]) {
     this.itemList = [...itemList]
   }
 
+  @Emit()
+  loadEditInfo(data) {
+    this.formValues = data;
+  }
+
+  @Emit()
   reset () {
     Modal.info({
       title: 'Go to datatable',
@@ -57,20 +72,24 @@ class <%= modelFormName %> extends Vue {
     })
   }
 
-  importOrExport () {
+  @Emit()
+  importOrExport() {
+    const values = this.formValues;
     Modal.info({
-      title: `Import or Export [${this.modelName}]`,
+      title: `Import or Export ${this.modelName}`,
       onOk: () => {
         this.$router.replace({
           name: 'ExportHelper',
           params: {
-            modelName: this.modelName
-          }
-        })
-      }
-    })
+            modelName: this.modelName,
+            data: JSON.stringify({ ids: [values.id] }),
+          },
+        });
+      },
+    });
   }
 
+  @Emit()
   statistic () {
     Modal.info({
       title: 'Statistic Charts',
@@ -101,7 +120,6 @@ class <%= modelFormName %> extends Vue {
           </a-dropdown>
           <m-form
             ref="MForm"
-            modelName={this.modelName}
             item-list={this.itemList}
             save-btn={true}
             reset-btn={true}

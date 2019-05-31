@@ -5,9 +5,7 @@ import {
   Input, Select, Form, TimePicker, DatePicker, Cascader, Row, Col, Button, Modal, Checkbox, Radio, Card,
 } from 'ant-design-vue';
 import { FilterFormList } from '@/interface';
-import { upperFirst } from 'lodash';
 import lfService from '@/utils/request.localforage';
-
 import './MForm.less';
 import titleCase from 'title-case';
 
@@ -104,22 +102,21 @@ class MFormClass extends Vue {
     e.preventDefault();
     this.Form.validateFields((err: any, values: object) => {
       if (!err) {
-        Modal.info({
+        Modal.confirm({
           title: '表单数据',
-          content: JSON.stringify(values),
+          okText: 'Next Record',
+          cancelText: 'Data Table',
+          maskClosable: true,
           onOk: () => {
             this.addOrEdit(values);
-            new Promise((resolve) => {
-              setTimeout(resolve, 500);
-            }).then(() => {
-              const tableRouter = upperFirst(this.modelName) + 'Table';
-              this.$router.push({
-                name: tableRouter,
-              });
-            });
+            setTimeout(() => {
+              this.Form.setFieldsValue({});
+            }, 500);
           },
           onCancel: () => {
-            this.reset();
+            setTimeout(() => {
+              this.reset();
+            }, 500);
           },
         });
       }
@@ -191,7 +188,7 @@ class MFormClass extends Vue {
   @Emit()
   reset(): void {
     this.Form.setFieldsValue({});
-    this.$emit('reset');
+    this.$emit('showDataTable');
   }
 
   @Emit()
