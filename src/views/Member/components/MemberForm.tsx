@@ -4,7 +4,7 @@ import {
   Form, Card, Dropdown, Menu, Icon, Modal,
 } from 'ant-design-vue';
 import { upperFirst } from 'lodash';
-import { FilterFormList, Opreat } from '@/interface';
+import { FilterFormList, operate } from '@/interface';
 import MForm from '@/components/FilterForm/MForm';
 import { etnia, gender } from '@/utils/constant';
 
@@ -32,6 +32,11 @@ class MemberForm extends Vue {
   itemList: any[] = []
 
   defaultItemList: FilterFormList[] = [
+    {
+      key: 'id',
+      type: 'input',
+      label: 'id',
+    },
     {
       key: 'department',
       type: 'select',
@@ -273,7 +278,8 @@ class MemberForm extends Vue {
             item-list={this.itemList}
             save-btn={true}
             reset-btn={true}
-            on-set-form={this.setForm}
+            on-setForm={this.setForm}
+            on-showDataTable={this.showDataTable}
           />
         </a-card>
       </div>

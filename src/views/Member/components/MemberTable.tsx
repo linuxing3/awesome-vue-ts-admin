@@ -1,6 +1,6 @@
 import { Component, Vue, Emit } from 'vue-property-decorator';
 import { Tag } from 'ant-design-vue';
-import { tableList, FilterFormList, Opreat } from '@/interface';
+import { tableList, FilterFormList, operate } from '@/interface';
 import lfService from '@/utils/request.localforage';
 import { etnia, gender } from '@/utils/constant';
 
@@ -72,6 +72,7 @@ export default class MemberTable extends Vue {
     {
       title: 'Gender',
       dataIndex: 'gender',
+      customRender: this.genderRender,
     },
     {
       title: 'Department',
@@ -84,11 +85,10 @@ export default class MemberTable extends Vue {
     {
       title: 'Arriving Date',
       dataIndex: 'arrivingDate',
-      // customRender: this.genderRender,
     },
   ]
 
-  opreat: Opreat[] = [
+  operate: operate[] = [
     {
       key: 'edit',
       rowKey: 'id',
@@ -104,6 +104,13 @@ export default class MemberTable extends Vue {
       roles: true,
       msg: '确定删除？',
     },
+    {
+      key: 'export',
+      rowKey: 'id',
+      color: 'orange',
+      text: '导出',
+      roles: true,
+    },
   ]
 
   title: string = 'Add Member'
@@ -115,18 +122,51 @@ export default class MemberTable extends Vue {
   editData: object = {}
 
   activated() {
-    this.$nextTick(() => setTimeout(() => this.success(), 500));
+    this.success();
   }
+
+  @Emit()
+  add() {
+    this.$log.suc('Creating ... ');
+    this.$router.replace({
+      name: 'MemberForm',
+    });
+  }
+
+  @Emit()
+  export(ids) {
+    this.$log.suc('Exporting from MemberTable ... ');
+    this.$router.replace({
+      name: 'ExportHelper',
+      params: {
+        modelName: this.modelName,
+        data: JSON.stringify({ ids }),
+      },
+    });
+  }
+
+  genderRender(text: any) {
+    return <a-tag color={text ? 'blue' : 'purple'}>{text ? '男' : '女'}</a-tag>;
+  }
+
+  @Emit()
+  selectChange() {}
+
+  @Emit()
+  currentChange() {}
+
+  @Emit()
+  clearOutParams() {}
 
   @Emit()
   async handleDelete(row) {
     this.$log.suc('Deleting ... ');
-    await lfService.request({
+    const response = await lfService.request({
       url: `/${this.modelName}`,
       method: 'delete',
       data: row.id,
     });
-    setTimeout(() => this.success(), 500);
+    Promise.resolve(response);
   }
 
   @Emit()
@@ -141,88 +181,23 @@ export default class MemberTable extends Vue {
   }
 
   @Emit()
-  handleCreate() {
-    this.$log.suc('Creating ... ');
-    this.$router.replace({
-      name: 'MemberForm',
-    });
-  }
-
-  handleExport(ids) {
-    this.$log.suc('Exporting from MemberTable ... ');
-    this.$router.replace({
-      name: 'ExportHelper',
-      params: {
-        modelName: this.modelName,
-        data: JSON.stringify({ ids }),
-      },
-    });
-  }
-
-  @Emit()
-  handleSearch(params) {
-    this.$log.suc('Searching from MemberTable ... ', params);
-  }
-
-  @Emit()
-  handleRemove(row) {
-    this.$confirm({
-      title: '警告',
-      content: `真的要删除 ${row.id} 吗?`,
-      okText: '删除',
-      okType: 'danger',
-      cancelText: '取消',
-      onOk: () => {
-        this.$log.suc('OK');
-        this.handleDelete(row);
-        return new Promise((resolve, reject) => {
-          setTimeout(Math.random() > 0.5 ? resolve : reject, 1000);
-        }).catch(() => this.$log.suc('Oops errors!'));
-      },
-      onCancel: () => {
-        this.$log.suc('Cancel');
-      },
-    });
-  }
-
-  genderRender(text: any) {
-    return <a-tag color={text ? 'blue' : 'purple'}>{text ? 'Male' : 'Female'}</a-tag>;
-  }
-
-  @Emit()
   tableClick(key: string, row: any) {
     switch (key) {
       case 'edit':
         this.handleEdit(row);
         break;
+      case 'export':
+        this.export([row.id]);
+        break;
       default:
-        this.handleDelete(row);
+        this.handleDelete(row).then(() => this.success);
         break;
     }
   }
 
   @Emit()
-  addWithModal() {
-    this.title = 'Add Member';
-    this.modelType = 'add';
-    this.visible = true;
-    this.editData = {};
-    this.$router.replace({
-      name: 'MemberForm',
-    });
-  }
-
-  @Emit()
-  closeModal() {
-    this.visible = false;
-    this.editData = {};
-  }
-
-  @Emit()
   success() {
-    this.visible = false;
     const Table: any = this.$refs.MemberInfoTable;
-    this.editData = {};
     Table.reloadTable();
   }
 
@@ -242,13 +217,12 @@ export default class MemberTable extends Vue {
           exportBtn={true}
           dataType={'json'}
           rowKey={'id'}
-          opreat={this.opreat}
+          operate={this.operate}
           fetchType={'get'}
           backParams={this.BackParams}
           on-menuClick={this.tableClick}
-          on-add={this.handleCreate}
-          on-export={this.handleExport}
-          on-search={this.handleSearch}
+          on-add={this.add}
+          on-export={this.export}
         />
       </div>
     );

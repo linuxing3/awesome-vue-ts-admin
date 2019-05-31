@@ -20,7 +20,7 @@
 import {
   Prop, Emit, Vue, Component,
 } from 'vue-property-decorator';
-import { FilterFormList, tableList, Opreat } from '@/interface/index';
+import { FilterFormList, tableList, operate } from '@/interface/index';
 import MForm from './MForm';
 
 @Component({
@@ -67,10 +67,10 @@ export default class FilterForm extends Vue {
   @Prop({ default: 'id' }) private recordId!: string;
 
   // 操作参数
-  @Prop() private opreat!: Opreat[];
+  @Prop() private operate!: operate[];
 
   // 操作栏width
-  @Prop({ default: '100px' }) private opreatWidth!: string;
+  @Prop({ default: '100px' }) private operateWidth!: string;
 
   // 本地存储字段名
   @Prop({ default: 'MForm' }) private localName!: string;

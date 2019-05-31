@@ -4,7 +4,7 @@ import {
   Form, Input, Select, Radio, Card, Dropdown, Menu, Icon, DatePicker, Button, Modal,
 } from 'ant-design-vue';
 import MForm from '@/components/FilterForm/MForm';
-import { FilterFormList, Opreat } from '@/interface';
+import { FilterFormList, operate } from '@/interface';
 
 
 import './index.less';
@@ -30,54 +30,107 @@ class EventForm extends Vue {
 
   itemList: FilterFormList[] = [
     {
-      key: 'title', type: 'input', label: 'title', placeholder: 'Input title',
+      key: 'id',
+      type: 'input',
+      label: 'id',
     },
     {
-      key: 'date', type: 'input', label: 'date', placeholder: 'Input date',
+      key: 'title',
+      type: 'input',
+      label: 'title',
+      placeholder: 'Input title',
     },
     {
-      key: 'startTime', type: 'input', label: 'startTime', placeholder: 'Input startTime',
+      key: 'date',
+      type: 'input',
+      label: 'date',
+      placeholder: 'Input date',
     },
     {
-      key: 'duration', type: 'input', label: 'duration', placeholder: 'Input duration',
+      key: 'startTime',
+      type: 'input',
+      label: 'startTime',
+      placeholder: 'Input startTime',
     },
     {
-      key: 'applicant', type: 'input', label: 'applicant', placeholder: 'Input applicant',
+      key: 'duration',
+      type: 'input',
+      label: 'duration',
+      placeholder: 'Input duration',
     },
     {
-      key: 'participants', type: 'input', label: 'participants', placeholder: 'Input participants',
+      key: 'applicant',
+      type: 'input',
+      label: 'applicant',
+      placeholder: 'Input applicant',
     },
     {
-      key: 'guests', type: 'input', label: 'guests', placeholder: 'Input guests',
+      key: 'participants',
+      type: 'input',
+      label: 'participants',
+      placeholder: 'Input participants',
     },
     {
-      key: 'content', type: 'textarea', label: 'content', placeholder: 'Input content',
+      key: 'guests',
+      type: 'input',
+      label: 'guests',
+      placeholder: 'Input guests',
     },
     {
-      key: 'currentDate', type: 'input', label: 'currentDate', placeholder: 'Input currentDate',
+      key: 'content',
+      type: 'textarea',
+      label: 'content',
+      placeholder: 'Input content',
     },
     {
-      key: 'reportDate', type: 'input', label: 'reportDate', placeholder: 'Input reportDate',
+      key: 'currentDate',
+      type: 'input',
+      label: 'currentDate',
+      placeholder: 'Input currentDate',
     },
     {
-      key: 'reportContent', type: 'textarea', label: 'reportContent', placeholder: 'Input reportContent',
+      key: 'reportDate',
+      type: 'input',
+      label: 'reportDate',
+      placeholder: 'Input reportDate',
     },
     {
-      key: 'instructionDate', type: 'input', label: 'instructionDate', placeholder: 'Input instructionDate',
+      key: 'reportContent',
+      type: 'textarea',
+      label: 'reportContent',
+      placeholder: 'Input reportContent',
     },
     {
-      key: 'instruction', type: 'textarea', label: 'instruction', placeholder: 'Input instruction',
+      key: 'instructionDate',
+      type: 'input',
+      label: 'instructionDate',
+      placeholder: 'Input instructionDate',
     },
     {
-      key: 'priority', type: 'input', label: 'priority', placeholder: 'Input priority',
+      key: 'instruction',
+      type: 'textarea',
+      label: 'instruction',
+      placeholder: 'Input instruction',
     },
     {
-      key: 'userId', type: 'input', label: 'userId', placeholder: 'Input userId',
+      key: 'priority',
+      type: 'input',
+      label: 'priority',
+      placeholder: 'Input priority',
     },
     {
-      key: 'projectId', type: 'input', label: 'projectId', placeholder: 'Input projectId',
+      key: 'userId',
+      type: 'input',
+      label: 'userId',
+      placeholder: 'Input userId',
     },
-  ];
+    {
+      key: 'projectId',
+      type: 'input',
+      label: 'projectId',
+      placeholder: 'Input projectId',
+    },
+  ]
 
   setForm(itemList: FilterFormList[]) {
     this.itemList = [...itemList];

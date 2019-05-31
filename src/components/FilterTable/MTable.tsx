@@ -4,7 +4,7 @@ import {
 import {
   Popconfirm, Table, Dropdown, Menu, Button, Icon,
 } from 'ant-design-vue';
-import { tableList, Opreat, Directives } from '@/interface';
+import { tableList, operate, Directives } from '@/interface';
 import Spin from '@/components/Spin';
 import './MTable.less';
 import { createNamespacedHelpers } from 'vuex';
@@ -55,10 +55,10 @@ export default class MTable extends Vue {
   @Prop({ default: 'id' }) private rowKey!: string;
 
   // 操作栏数据
-  @Prop({ default: () => [] }) private opreat!: Opreat[];
+  @Prop({ default: () => [] }) private operate!: operate[];
 
   // 操作栏width
-  @Prop({ default: '100px' }) private opreatWidth!: string;
+  @Prop({ default: '150px' }) private operateWidth!: string;
 
   // 本地存储名称
   @Prop({ default: 'filter-table' }) private localName!: string;
@@ -99,12 +99,23 @@ export default class MTable extends Vue {
   // 数据总数
   dataTotal: number = 0;
 
+  get ids() {
+    return this.tableData.reduce((ids, i) => {
+      ids.push(i.id);
+      return ids;
+    }, []);
+  }
+
   constructor(props: any) {
     super(props);
     const self = this;
   }
 
   created() {
+    this.getData();
+  }
+
+  activated() {
     this.getData();
   }
 
@@ -186,12 +197,12 @@ export default class MTable extends Vue {
 
   render() {
     // Generate table list/ columns
-    if (this.opreat.length && this.tableList[this.tableList.length -1].title !== '操作') {
+    if (this.operate.length && this.tableList[this.tableList.length -1].title !== '操作') {
       this.tableList.push({
         title: '操作',
         dataIndex: 'action',
-        width: this.opreatWidth,
-        customRender: this.opreatJSX,
+        width: this.operateWidth,
+        customRender: this.renderOperate,
       });
     }
     return (
@@ -225,16 +236,16 @@ export default class MTable extends Vue {
    * @param {object} record 当前行的值
    * @param {number} index 当前列的序列号
    */
-  opreatJSX(text: any, record: any, index: number) {
+  renderOperate(text: any, record: any, index: number) {
     // 操作超过4个，就用下拉菜单方式
-    if (this.opreat.length > 4) {
+    if (this.operate.length > 4) {
       return <a-dropdown on-command={(command: string) => this.menuClick(command, record)}>
         <a-button type="dashed" size="small" style="margin-left: 8px">
           操作栏 <a-icon type="down" />
         </a-button>
         <a-menu slot="overlay">
           {
-            this.opreat.map((item, indexs) => <a-menu-item
+            this.operate.map((item, indexs) => <a-menu-item
               key={indexs}
               command={item.key}
               disabled={item.disabled && item.disabled(record)}
@@ -246,9 +257,9 @@ export default class MTable extends Vue {
       </a-dropdown>;
     }
     // 普通模式
-    return <div class="table-opreat">
+    return <div class="table-operate">
       {
-        this.opreat.map((item, indexs) => {
+        this.operate.map((item, indexs) => {
           const whiteList = ['red', 'orange'];
           if (item.disabled && item.disabled(record)) {
             return <a id={`${item.key}-${record[item.rowKey]}`} key={indexs} class="btn disabled">
@@ -269,12 +280,14 @@ export default class MTable extends Vue {
     </div>;
   }
 
+  // page, filter, sorter changed
   tableChange(pagination: any, filters: any, sorter: any) {
     this.pageParams.pageSize = pagination.pageSize;
     this.pageParams.pageNum = pagination.current;
     this.getData();
   }
 
+  // when action menu clicked
   menuClick(key: string, row: any) {
     this.$emit('tableClick', key, row);
   }

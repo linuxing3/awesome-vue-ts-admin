@@ -1,7 +1,7 @@
 import { Component, Vue } from 'vue-property-decorator';
 import { Tag } from 'ant-design-vue';
 import moment from 'moment';
-import { tableList, FilterFormList, Opreat } from '@/interface';
+import { tableList, FilterFormList, operate } from '@/interface';
 import city from '@/utils/city';
 
 import './index.less';
@@ -73,7 +73,7 @@ export default class EventTable extends Vue {
     },
   ];
 
-  opreat: Opreat[] = [
+  operate: operate[] = [
     {
       key: 'edit',
       rowKey: 'id',
@@ -206,7 +206,7 @@ export default class EventTable extends Vue {
           exportBtn={true}
           dataType={'json'}
           rowKey={'id'}
-          opreat={this.opreat}
+          operate={this.operate}
           fetchType={'get'}
           backParams={this.BackParams}
           on-menuClick={this.tableClick}

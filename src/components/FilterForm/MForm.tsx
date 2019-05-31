@@ -36,7 +36,7 @@ import titleCase from 'title-case';
   },
 })
 class MFormClass extends Vue {
-  @Prop({ default: 'member' })
+  @Prop()
   private modelName!: string
 
   // 筛选表单生成参数
@@ -109,14 +109,19 @@ class MFormClass extends Vue {
           maskClosable: true,
           onOk: () => {
             this.addOrEdit(values);
-            setTimeout(() => {
-              this.Form.setFieldsValue({});
-            }, 500);
+            new Promise((resolve) => {
+              setTimeout(resolve, 500);
+            }).then(() => {
+              this.reset();
+            });
           },
           onCancel: () => {
-            setTimeout(() => {
-              this.reset();
-            }, 500);
+            this.addOrEdit(values);
+            new Promise((resolve) => {
+              setTimeout(resolve, 500);
+            }).then(() => {
+              this.reset('showDataTable');
+            });
           },
         });
       }
@@ -186,9 +191,9 @@ class MFormClass extends Vue {
   }
 
   @Emit()
-  reset(): void {
-    this.Form.setFieldsValue({});
-    this.$emit('showDataTable');
+  reset(event?): void {
+    this.Form.resetFields();
+    if (event) this.$emit(event);
   }
 
   @Emit()

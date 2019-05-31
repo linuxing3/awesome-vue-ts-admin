@@ -12,7 +12,7 @@ import {
   Form, Input, Select, Radio, Card, Dropdown, Menu, Icon, DatePicker, Button, Modal,
 } from 'ant-design-vue';
 import MForm from '@/components/FilterForm/MForm'
-import { FilterFormList, Opreat } from '@/interface'
+import { FilterFormList, operate } from '@/interface'
 
 import './index.less';
 

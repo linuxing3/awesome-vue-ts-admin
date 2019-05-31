@@ -4,7 +4,7 @@ import {
   Form, Input, Select, Radio, Card, Dropdown, Menu, Icon, DatePicker, Button, Modal,
 } from 'ant-design-vue';
 import MForm from '@/components/FilterForm/MForm';
-import { FilterFormList, Opreat } from '@/interface';
+import { FilterFormList, operate } from '@/interface';
 
 import './index.less';
 
@@ -27,10 +27,21 @@ class DocumentForm extends Vue {
 
   itemList: FilterFormList[] = [
     {
-      key: 'year', type: 'input', label: 'year', placeholder: 'Input year',
+      key: 'id',
+      type: 'input',
+      label: 'id',
     },
     {
-      key: 'date', type: 'input', label: 'date', placeholder: 'Input date',
+      key: 'year',
+      type: 'input',
+      label: 'year',
+      placeholder: 'Input year',
+    },
+    {
+      key: 'date',
+      type: 'input',
+      label: 'date',
+      placeholder: 'Input date',
     },
     {
       key: 'classiLevel',
@@ -52,42 +63,78 @@ class DocumentForm extends Vue {
       ],
     },
     {
-      key: 'category', type: 'input', label: 'category', placeholder: 'Input category',
+      key: 'category',
+      type: 'input',
+      label: 'category',
+      placeholder: 'Input category',
     },
     {
-      key: 'inOrOut', type: 'input', label: 'inOrOut', placeholder: 'Input inOrOut',
+      key: 'inOrOut',
+      type: 'input',
+      label: 'inOrOut',
+      placeholder: 'Input inOrOut',
     },
     {
-      key: 'sendingCode', type: 'input', label: 'sendingCode', placeholder: 'Input sendingCode',
+      key: 'sendingCode',
+      type: 'input',
+      label: 'sendingCode',
+      placeholder: 'Input sendingCode',
     },
     {
-      key: 'orderedNumber', type: 'input', label: 'orderedNumber', placeholder: 'Input orderedNumber',
+      key: 'orderedNumber',
+      type: 'input',
+      label: 'orderedNumber',
+      placeholder: 'Input orderedNumber',
     },
     {
-      key: 'title', type: 'input', label: 'title', placeholder: 'Input title',
+      key: 'title',
+      type: 'input',
+      label: 'title',
+      placeholder: 'Input title',
     },
     {
-      key: 'content', type: 'textarea', label: 'content', placeholder: 'Input content',
+      key: 'content',
+      type: 'textarea',
+      label: 'content',
+      placeholder: 'Input content',
     },
     {
-      key: 'toEntity', type: 'input', label: 'toEntity', placeholder: 'Input toEntity',
+      key: 'toEntity',
+      type: 'input',
+      label: 'toEntity',
+      placeholder: 'Input toEntity',
     },
     {
-      key: 'copyEntity', type: 'input', label: 'copyEntity', placeholder: 'Input copyEntity',
+      key: 'copyEntity',
+      type: 'input',
+      label: 'copyEntity',
+      placeholder: 'Input copyEntity',
     },
     {
-      key: 'attachment', type: 'input', label: 'attachment', placeholder: 'Input attachment',
+      key: 'attachment',
+      type: 'input',
+      label: 'attachment',
+      placeholder: 'Input attachment',
     },
     {
-      key: 'keyword', type: 'input', label: 'keyword', placeholder: 'Input keyword',
+      key: 'keyword',
+      type: 'input',
+      label: 'keyword',
+      placeholder: 'Input keyword',
     },
     {
-      key: 'workEntity', type: 'input', label: 'workEntity', placeholder: 'Input workEntity',
+      key: 'workEntity',
+      type: 'input',
+      label: 'workEntity',
+      placeholder: 'Input workEntity',
     },
     {
-      key: 'author', type: 'input', label: 'author', placeholder: 'Input author',
+      key: 'author',
+      type: 'input',
+      label: 'author',
+      placeholder: 'Input author',
     },
-  ];
+  ]
 
   setForm(itemList: FilterFormList[]) {
     this.itemList = [...itemList];

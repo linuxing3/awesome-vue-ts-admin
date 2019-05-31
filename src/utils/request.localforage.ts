@@ -100,7 +100,7 @@ const lfService: LfService = {
    */
   async request(params: LfRequestConfig) {
     const newParams = this.validateUrl(params);
-    console.log('New params', newParams);
+    // console.log('New params', newParams);
     const result = await this.handleRequest(newParams);
     return result;
   },
@@ -130,29 +130,33 @@ const lfService: LfService = {
         const createdItems = await Entity.$create({ data });
         requestedData = baseData('success', '创建成功');
         requestedData.entity = createdItems;
+        if (createdItems) Entity.$fetch();
         break;
       case 'delete':
         const deletedItems = await Entity.$delete(data.id || data);
         requestedData = baseData('success', '删除成功');
         requestedData.entity = deletedItems;
+        if (deletedItems) Entity.$fetch();
         break;
       case 'patch':
         const patchedItems = await Entity.$update({ data });
         requestedData = baseData('success', '更新成功');
         requestedData.entity = patchedItems;
+        if (patchedItems) Entity.$fetch();
         break;
       case 'get':
         if (!data) {
+          Entity.$fetch();
           // query with pageParams, header, columns
           if (pageParams.page) {
-            console.log('Get pagination information');
+            // console.log('Get pagination information');
             const paginationConfig = Entity.pageConfig(pageParams);
             query = Entity.pageQuery(paginationConfig, query);
             requestedConfig.params.pageParams = paginationConfig;
           }
           // query with filter
           if (filter) {
-            console.log('Get fitlered information');
+            // console.log('Get fitlered information');
             query = Entity.searchQuery(filter, query);
             requestedConfig.params.filter = filter;
           }

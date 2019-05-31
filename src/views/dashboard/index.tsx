@@ -250,7 +250,7 @@ export default class Dashboard extends Vue {
           </a-col>
           <a-col span={14} xxl={14} xl={14} lg={12} md={24} sm={24} xs={24}>
             <a-card loading={this.loading} class="dash-box dash-bar-chart">
-              <a-icon class="opreat" type="ellipsis"></a-icon>
+              <a-icon class="operate" type="ellipsis"></a-icon>
               <h2 class="title">PROJECTIONS VS ACTUALS</h2>
               <div style="height: 263px;" class="chartjs-chart">
                 <canvas height="86px" id="BarChart"></canvas>
@@ -262,7 +262,7 @@ export default class Dashboard extends Vue {
           <a-col span={16} xxl={16} xl={16} lg={24} md={24} sm={24} xs={24}>
             <a-card loading={this.loading} class="dash-box revenue-chart">
               <h2 class="title">REVENUE</h2>
-              <a-icon class="opreat" type="ellipsis"></a-icon>
+              <a-icon class="operate" type="ellipsis"></a-icon>
               <div class="week-data">
                 <div class="item">
                   <h4 class="item-title">Current Week</h4>
@@ -288,7 +288,7 @@ export default class Dashboard extends Vue {
           <a-col span={8} xxl={8} xl={8} lg={24} md={24} sm={24} xs={24}>
             <a-card loading={this.loading} class="dash-box total-wrap">
               <h2 class="title">Total Sales</h2>
-              <a-icon class="opreat" type="ellipsis"></a-icon>
+              <a-icon class="operate" type="ellipsis"></a-icon>
               <div class="filter-wrap">
                 <a-radio-group defaultValue="a" buttonStyle="solid">
                   <a-radio-button value="a">Today</a-radio-button>

@@ -5,7 +5,7 @@
       :filter-list="filterList"
       :filter-grade="filterGrade"
       :filter-params="filterParams"
-      :table-list="defalutTableList"
+      :table-list="defaultTableList"
       :add-btn="addBtn"
       :export-btn="exportBtn"
       :export-fun="exportBack"
@@ -22,9 +22,9 @@
       :url="url"
       :data-type="dataType"
       :row-key="rowKey"
-      :opreat="opreat"
+      :operate="operate"
       :out-params="outParams"
-      :opreat-width="opreatWidth"
+      :operate-width="operateWidth"
       :back-params="backParams"
       :local-name="localName"
       :fetch-type="fetchType"
@@ -44,7 +44,7 @@
 import {
   Prop, Emit, Vue, Component,
 } from 'vue-property-decorator';
-import { FilterFormList, tableList, Opreat } from '@/interface/index';
+import { FilterFormList, tableList, operate } from '@/interface/index';
 import MFilter from './MFilter';
 import MTable from './MTable';
 
@@ -89,10 +89,10 @@ export default class FilterTable extends Vue {
   @Prop({ default: 'id' }) private rowKey!: string;
 
   // 操作参数
-  @Prop({ default: [] }) private opreat!: Opreat[];
+  @Prop({ default: [] }) private operate!: operate[];
 
   // 操作栏width
-  @Prop({ default: '100px' }) private opreatWidth!: string;
+  @Prop({ default: '100px' }) private operateWidth!: string;
 
   // 本地存储字段名
   @Prop({ default: 'filterTable' }) private localName!: string;
@@ -116,7 +116,7 @@ export default class FilterTable extends Vue {
   // 初始化请求参数
   tableParams: any = Object.assign(this.filterParams, this.outParams);
 
-  defalutTableList: tableList[] = this.tableList.filter(item => true);
+  defaultTableList: tableList[] = this.tableList.filter(item => true);
 
   changeTableList: tableList[];
 
@@ -126,36 +126,34 @@ export default class FilterTable extends Vue {
     const saveList = window.localStorage.getItem(this.localName);
     if (saveList) {
       const checkList = saveList.split(',');
-      const filterList = this.defalutTableList.filter((item, index) => checkList.indexOf(item.dataIndex) > -1);
+      const filterList = this.defaultTableList.filter((item, index) => checkList.indexOf(item.dataIndex) > -1);
       this.changeTableList = filterList;
     } else {
       this.changeTableList = this.tableList.filter(item => true);
     }
   }
 
+  reloadTable() {
+    this.$log.suc('Reloading...');
+    const table: any = this.$refs.MTable;
+    // 延迟500ms加载数据
+    setTimeout(() => {
+      table.reload();
+    }, 500);
+  }
+
   @Emit()
   clearFun() {
     this.$emit('clearOutParams');
-  }
-
-  reloadTable() {
-    const table: any = this.$refs.MTable;
-    // 延迟100ms加载数据
-    setTimeout(() => {
-      table.reload();
-    }, 100);
+    this.reloadTable();
   }
 
   @Emit()
   searchFun(params: any) {
     this.$log.suc('Emit searching from FilterTable...');
-    this.$emit('search', params);
+    // tableParams is filter
     this.tableParams = params;
-    const table: any = this.$refs.MTable;
-    // 延迟100ms加载数据
-    setTimeout(() => {
-      table.reload();
-    }, 100);
+    this.reloadTable();
   }
 
   @Emit()
@@ -172,18 +170,14 @@ export default class FilterTable extends Vue {
 
   @Emit()
   exportBack() {
-    const table: any = this.$refs.MTable;
     this.$log.suc('Emit exporting from FilterTable...');
-    const ids = table.tableData.reduce((ids, i) => {
-      ids.push(i.id);
-      return ids;
-    }, []);
-    this.$emit('export', ids);
+    const table: any = this.$refs.MTable;
+    this.$emit('export', table.ids);
   }
 
   @Emit()
   setTable(list: Array<string>) {
-    const filterList = this.defalutTableList.filter((item, index) => list.indexOf(item.dataIndex) > -1);
+    const filterList = this.defaultTableList.filter((item, index) => list.indexOf(item.dataIndex) > -1);
     this.changeTableList = filterList;
   }
 

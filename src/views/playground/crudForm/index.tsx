@@ -1,5 +1,5 @@
 import { Component, Vue } from 'vue-property-decorator';
-import { FilterFormList, Opreat } from '@/interface';
+import { FilterFormList, operate } from '@/interface';
 
 import './index.less';
 import { getValue } from '@/utils/helper';

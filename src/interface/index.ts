@@ -232,7 +232,7 @@ export interface tableList {
  * @param {Function} disabled 可以根据当前数据动态返回状态
  * @param {Function/string} roles 可以动态返回权限，控制是否展示
  */
-export interface Opreat {
+export interface operate {
   key: string,
   rowKey: string,
   color: Function | string,

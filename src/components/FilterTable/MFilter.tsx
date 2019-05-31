@@ -115,8 +115,6 @@ class MFilterClass extends Vue {
   reset(): void {
     this.Form.resetFields();
     this.$emit('clearOut');
-    this.params = JSON.parse(JSON.stringify(this.initParams));
-    this.$emit('search', this.Form.resetFields());
   }
 
   @Emit()
@@ -306,7 +304,7 @@ class MFilterClass extends Vue {
                 this.filterList.map((item, index) => this.formItem(getFieldDecorator, item, index))
               }
               <a-col class="btn-wrap" xl={this.btnXl} lg={this.btnlg} md={this.btnmd ? this.btnmd : 24} sm={24} xs={24}>
-                {this.btnElement(true)}
+                {this.renderButtons(true)}
               </a-col>
             </a-row>
           </a-form>
@@ -320,7 +318,7 @@ class MFilterClass extends Vue {
                     this.filterGrade.map((item, index) => this.formItem(getFieldDecorator, item, index, true))
                   }
                   <a-col class="btn-wrap" span={24} sm={24} xs={24}>
-                    {this.btnElement(false)}
+                    {this.renderButtons(false)}
                   </a-col>
                 </a-row>
               </a-form>
@@ -348,7 +346,7 @@ class MFilterClass extends Vue {
     }
   }
 
-  btnElement(isNormal: boolean): JSX.Element {
+  renderButtons(isNormal: boolean): JSX.Element {
     return (
       <div>
         <a-button on-click={this.onSearch} id="tableSearch" icon="search">Search</a-button>
