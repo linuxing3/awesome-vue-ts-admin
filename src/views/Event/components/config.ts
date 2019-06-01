@@ -1,5 +1,4 @@
 import { tableList, FilterFormList, operate } from '@/interface';
-import { etnia, gender } from '@/utils/constant';
 
 export const defaultItemList: FilterFormList[] = [
   {
@@ -91,33 +90,45 @@ export const defaultItemList: FilterFormList[] = [
     label: 'priority',
     placeholder: 'Input priority',
   },
-  {
-    key: 'userId',
-    type: 'input',
-    label: 'userId',
-    placeholder: 'Input userId',
-  },
-  {
-    key: 'projectId',
-    type: 'input',
-    label: 'projectId',
-    placeholder: 'Input projectId',
-  },
 ];
 
 export const tableFieldsList: tableList[] = [
   {
-    title: 'Name',
-    dataIndex: 'name',
+    title: 'Title',
+    dataIndex: 'title',
+  },
+  {
+    title: 'Date',
+    dataIndex: 'date',
+  },
+  {
+    title: 'Guests',
+    dataIndex: 'guest',
+  },
+  {
+    title: 'Participants',
+    dataIndex: 'participants',
   },
 ];
 
 export const filterFormItemList: FilterFormList[] = [
   {
-    key: 'name',
-    label: 'name',
+    key: 'guests',
+    label: 'Guests',
     type: 'input',
-    placeholder: 'Seach Name',
+    placeholder: 'Seach Guests',
+  },
+  {
+    key: 'participants',
+    label: 'Participants',
+    type: 'input',
+    placeholder: 'Seach Participants',
+  },
+  {
+    key: 'date',
+    label: 'Date',
+    type: 'date',
+    placeholder: 'Seach Date',
   },
 ];
 

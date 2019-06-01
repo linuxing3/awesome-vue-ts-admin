@@ -1,6 +1,8 @@
 'use strict';
 
-import { app, protocol, BrowserWindow } from 'electron';
+import {
+  app, protocol, BrowserWindow, ipcMain, globalShortcut,
+} from 'electron';
 import { createProtocol, installVueDevtools } from 'vue-cli-plugin-electron-builder/lib';
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
@@ -36,6 +38,12 @@ function createWindow() {
   });
 }
 
+function registerShortcuts(win: BrowserWindow) {
+  globalShortcut.register('CommandOrControl+Shift+X', () => {
+    if (!process.env.IS_TEST) win.webContents.openDevTools();
+  });
+}
+
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {
   // On macOS it is common for applications and their menu bar
@@ -66,6 +74,7 @@ app.on('ready', async () => {
     }
   }
   createWindow();
+  registerShortcuts(win);
 });
 
 // Exit cleanly on request from parent process in development mode.
@@ -82,3 +91,9 @@ if (isDevelopment) {
     });
   }
 }
+
+ipcMain.on('dev', ({ openDevTools }) => {
+  if (openDevTools) {
+    win.webContents.openDevTools();
+  }
+});

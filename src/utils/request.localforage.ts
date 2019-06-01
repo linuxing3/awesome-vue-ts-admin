@@ -96,12 +96,11 @@ const lfService: LfService = {
   },
   /**
    * 从请求参数中获取model等，包装返回类axios的内容
-   * @param {any} params 请求参数
+   * @param {any} options 请求参数
    */
-  async request(params: LfRequestConfig) {
-    const newParams = this.validateUrl(params);
-    // console.log('New params', newParams);
-    const result = await this.handleRequest(newParams);
+  async request(options: LfRequestConfig) {
+    const newOpitons = this.validateUrl(options);
+    const result = await this.handleRequest(newOpitons);
     return result;
   },
   handleRequest: async (options: LfRequestConfig) => new Promise(async (resolve, reject) => {
