@@ -1,7 +1,6 @@
 import { menuItem, routerItem } from '@/interface';
 import { routeToArray } from '@/utils';
 import router from '@/router';
-import { ipcRenderer } from 'electron';
 // 循环匹配当前路由数据
 function findMenu(
   data: any,
@@ -47,12 +46,8 @@ const app = {
     tabActiveKey: '', // 当前激活tab页面
     keepList: [], // 需要缓存的页面name
     isMobile: false, // 是否为移动设备，条件width <= 768px
-    devTools: false,
   },
   mutations: {
-    TOGGLE_DEVTOOLS: (state: any) => {
-      state.devTools = !state.devTools;
-    },
     TOGGLE_SIDEBAR: (state: any) => {
       localStorage.setItem('sidebarStatus', state.sidebar.opened ? '1' : '0');
       state.sidebar.opened = !state.sidebar.opened;
@@ -141,10 +136,6 @@ const app = {
       const { tabList } = context.state;
       const resultData = { tabList, tabActiveKey: name };
       context.commit('TAB_CHANGE', resultData);
-    },
-    OpenDevtools: (context: any, openDevtools = true) => {
-      if (openDevtools) ipcRenderer.send('dev', openDevtools);
-      context.commit('TOGGLE_DEVTOOLS');
     },
   },
 };

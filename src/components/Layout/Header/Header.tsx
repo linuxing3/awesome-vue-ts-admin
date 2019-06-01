@@ -89,7 +89,7 @@ export default class Header extends Vue {
         break;
       case '2':
         this.$router.push({
-          name: 'Dashboard',
+          name: 'ProfileBaseForm',
           params: {
             id: self.id,
           },
@@ -110,64 +110,20 @@ export default class Header extends Vue {
   @Emit()
   notificationClick(): void {
     this.$router.push({
-      name: 'Dashboard',
+      name: 'ProfileBaseForm',
     });
   }
 
   @Emit()
-  alarmClick(): void {
-    this.$store.dispatch('OpenDevtools', true);
+  bellClick(): void {
+    this.$router.push({
+      name: 'ProfileBaseForm',
+    });
   }
 
   @Emit()
   switchSidebar(): void {
     this.$store.dispatch('ToggleSideBar');
-  }
-
-  renderEmail(): JSX.Element {
-    const emails = [
-      {
-        key: 1,
-        writer: 'xingwenju',
-        title: 'ant design vue',
-      },
-      {
-        key: 2,
-        writer: 'wanglulu',
-        title: 'ant vue',
-      },
-    ];
-    return (
-      <a-dropdown>
-        <span class="ant-dropdown-link">
-          <a-badge count={2} class="item">
-            <a-icon type="email" on-click={this.notificationClick} />
-          </a-badge>
-        </span>
-        <a-menu slot="overlay" on-click={this.$router.push('/')}>
-          {emails.map(email => <a-menu-item key={email.key}><font color="red">{email.title}</font></a-menu-item>)}
-        </a-menu>
-      </a-dropdown>
-    );
-  }
-
-  renderUserMenu(): JSX.Element {
-    return (
-      <a-dropdown>
-      <span class="ant-dropdown-link">
-        <a-icon type="user" />
-        <span class="name">{ this.username }</span>
-      </span>
-      <a-menu slot="overlay" on-click={this.menuClick}>
-        <a-menu-item key="1">个人设置</a-menu-item>
-        <a-menu-item key="2">系统设置</a-menu-item>
-        <a-menu-divider />
-        <a-menu-item key="3">
-          <font color="red">退出</font>
-        </a-menu-item>
-      </a-menu>
-    </a-dropdown>
-    );
   }
 
   render() {
@@ -183,8 +139,8 @@ export default class Header extends Vue {
               <i class="menu-btn iconfont-listMenu" />
             </a-popover>
           ) : (
-            <a-icon
-              type={opened ? 'indent': 'outdent'}
+            <i
+              class={`menu-btn iconfont-${opened ? 'indent' : 'outdent'}`}
               on-click={this.switchSidebar}
             />
           )}
@@ -199,14 +155,29 @@ export default class Header extends Vue {
           )}
         </div>
         <ul class="header-menu">
-          <li class="email">
-            {this.renderEmail()}
+          <li>
+            <a-badge count={12} class="item">
+              <i class="iconfont-email" on-click={this.notificationClick} />
+            </a-badge>
           </li>
-          <li class="alarm">
-            <i-icon type="bell" on-click={this.alarmClick} />
+          <li>
+            <i class="iconfont-bell" on-click={this.bellClick} />
           </li>
           <li class="user">
-            {this.renderUserMenu()}
+            <a-dropdown>
+              <span class="ant-dropdown-link">
+                <a-icon type="user" />
+                <span class="name">{ this.username }</span>
+              </span>
+              <a-menu slot="overlay" on-click={this.menuClick}>
+                <a-menu-item key="1">个人中心</a-menu-item>
+                <a-menu-item key="2">修改密码</a-menu-item>
+                <a-menu-divider />
+                <a-menu-item key="3">
+                  <font color="red">退出登录</font>
+                </a-menu-item>
+              </a-menu>
+            </a-dropdown>
           </li>
         </ul>
       </header>

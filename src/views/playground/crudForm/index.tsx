@@ -1,6 +1,6 @@
 import { Component, Vue } from 'vue-property-decorator';
 import { FilterFormList, operate } from '@/interface';
-import { update, getMany } from '@/api/api.lf';
+
 import './index.less';
 import { getValue } from '@/utils/helper';
 
@@ -93,9 +93,9 @@ class CrudForm extends Vue {
    * @method 获取表格数据
    */
   getFormParams() {
-    getMany({
+    window.ajax.request({
       url: `/${this.modelName}`,
-      params: {},
+      method: 'get',
     }).then((res) => {
       this.$log.suc('Form Fetch response:', res);
       const code = getValue(this.backParams.code, res);
@@ -112,9 +112,9 @@ class CrudForm extends Vue {
     this.$log.suc('getting edit data...');
     // For add new record
     if (this.id === -1) {
-      getMany({
+      window.ajax.request({
         url: `/${this.modelName}`,
-        params: {},
+        method: 'get',
       }).then((res) => {
         this.$log.suc(res);
         const Entity = res.config.params.model;
@@ -124,8 +124,9 @@ class CrudForm extends Vue {
       });
     } else {
       // for edit a exiting record
-      update({
+      window.ajax.request({
         url: `/${this.modelName}`,
+        method: 'get',
         data: { id: this.id },
       }).then((res) => {
         this.editData = res.data.entity;

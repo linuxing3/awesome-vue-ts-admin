@@ -145,7 +145,7 @@ export const filterFormItemList: FilterFormList[] = [
   },
   {
     key: 'content',
-    type: 'textarea',
+    type: 'input',
     label: 'content',
     placeholder: 'Search content',
   },
