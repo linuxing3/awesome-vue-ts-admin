@@ -156,12 +156,12 @@ export default class Header extends Vue {
         </div>
         <ul class="header-menu">
           <li>
-            <a-badge count={12} class="item">
-              <i class="iconfont-email" on-click={this.notificationClick} />
+            <a-badge count={2} class="item">
+              <a-icon type="inbox" size="large" on-click={this.notificationClick} />
             </a-badge>
           </li>
           <li>
-            <i class="iconfont-bell" on-click={this.bellClick} />
+            <a-icon type="appstore" on-click={this.bellClick} />
           </li>
           <li class="user">
             <a-dropdown>
