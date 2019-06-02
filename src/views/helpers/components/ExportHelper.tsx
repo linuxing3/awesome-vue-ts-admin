@@ -44,11 +44,13 @@ export default class ExportHelper extends Mixins(exportMixin) {
   }
 
   content = [
-    'Racing car sprays burning fuel into crowd.',
-    'Japanese princess to wed commoner.',
-    'Australian walks 100km after outback crash.',
-    'Man charged over missing wedding girl.',
-    'Los Angeles battles huge wildfires.',
+    '导出流程：',
+    '第一步：将数据导出为Excel文件',
+    '第二步：将Excel文件数据合并到Word',
+    '',
+    '导入流程：',
+    '第一步：将数据输入到Excel文件的Sheet1，确认英文列标题',
+    '第二步：将Excel文件导出到系统',
   ]
 
   import(e: Event) {
@@ -85,14 +87,12 @@ export default class ExportHelper extends Mixins(exportMixin) {
   renderActionBtn(): JSX.Element {
     return (
       <div>
-        <div class="right-btn">
-          <a-button on-click={this.import} id={'import'} icon="cloud" type="primary">
-            Import
-          </a-button>
-          <a-button on-click={this.export} id={'export'} icon="download">
-            Export
-          </a-button>
-        </div>
+        <a-button on-click={this.import} id={'import'} icon="cloud" type="primary">
+          Import
+        </a-button>
+        <a-button on-click={this.export} id={'export'} icon="download">
+          Export
+        </a-button>
       </div>
     );
   }
@@ -125,6 +125,7 @@ export default class ExportHelper extends Mixins(exportMixin) {
           ))}
           <div slot="header">
             <h3 style="{ margin: '16px 0' }">操作说明</h3>
+            {this.renderActionBtn()}
           </div>
         </a-list>
       </div>
@@ -172,7 +173,7 @@ export default class ExportHelper extends Mixins(exportMixin) {
           <a-row>
             <a-col {...{ props: this.normalLayout }}>{this.renderContent()}</a-col>
           </a-row>
-          <a-row hidden>
+          <a-row>
             <a-col {...{ props: this.normalLayout }}>{this.renderSampleData()}</a-col>
           </a-row>
           <a-row hidden>

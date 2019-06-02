@@ -58,6 +58,48 @@ export const defaultApiList: ApiList = {
     fetchType: 'jsonp',
   },
   // insert more api below
+  // UserMilitant
+  userMilitantDelete: {
+    url: '/userMilitant/delete',
+    method: 'delete',
+    fetchType: 'json',
+  },
+  userMilitantUpdate: {
+    url: '/userMilitant/update',
+    method: 'patch',
+    fetchType: 'json',
+  },
+  userMilitantCreate: {
+    url: '/userMilitant/create',
+    method: 'post',
+    fetchType: 'json',
+  },
+  userMilitantFetch: {
+    url: '/userMilitant/fetch',
+    method: 'get',
+    fetchType: 'json',
+  },
+  // Militant
+  militantDelete: {
+    url: '/militant/delete',
+    method: 'delete',
+    fetchType: 'json',
+  },
+  militantUpdate: {
+    url: '/militant/update',
+    method: 'patch',
+    fetchType: 'json',
+  },
+  militantCreate: {
+    url: '/militant/create',
+    method: 'post',
+    fetchType: 'json',
+  },
+  militantFetch: {
+    url: '/militant/fetch',
+    method: 'get',
+    fetchType: 'json',
+  },
   // Document
   documentDelete: {
     url: '/document/delete',

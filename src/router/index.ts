@@ -69,6 +69,31 @@ export const asyncRouterMap: routerItem[] = [
     ],
   },
   // insert more route below
+  // userMilitant
+  {
+    path: '/userMilitant',
+    icon: 'team',
+    name: 'UserMilitant',
+    component: getComponent('UserMilitant/index'),
+    permission: true,
+    meta: { key: 'userMilitant' },
+    children: [
+      {
+        path: 'userMilitant-form',
+        name: 'UserMilitantForm',
+        component: getComponent('UserMilitant/components/UserMilitantForm'),
+        permission: true,
+        meta: { key: 'UserMilitantForm' },
+      },
+      {
+        path: 'userMilitant-table',
+        name: 'UserMilitantTable',
+        component: getComponent('UserMilitant/components/UserMilitantTable'),
+        permission: true,
+        meta: { key: 'UserMilitantTable' },
+      },
+    ],
+  },
   // event
   {
     path: '/event',
