@@ -22,7 +22,15 @@ import {
 import {
   keys, pullAll, uniq, map,
 } from 'lodash';
-import { baseFilter, checkStringMatch } from '@/utils/helper';
+import { checkStringMatch } from '@/utils/helper';
+
+interface StatisticInfo {
+  field?: string;
+  max?: number;
+  min?: number;
+  sum?: number;
+  statistic?: {};
+}
 
 export class BaseModel extends Model {
   static primaryKey = 'id';
@@ -33,6 +41,10 @@ export class BaseModel extends Model {
 
   static fieldsKeys(): string[] {
     return keys(this.fields());
+  }
+
+  static ids(): any[] {
+    return map(this.fields(), 'id');
   }
 
   /**
@@ -99,6 +111,11 @@ export class BaseModel extends Model {
     };
   }
 
+  /**
+   * 在链式查询中加入页面设置，并返回结果
+   * @param paginationConfig 页面设置
+   * @param query 链式查询
+   */
   static pageQuery(paginationConfig: any, query?: Query): Query {
     if (!query) query = this.query();
     return query
@@ -107,7 +124,7 @@ export class BaseModel extends Model {
   }
 
   /**
-   * 使用一个过滤器对象，返回符合条件的数组
+   * 在链式查询中加入过滤器，并返回结果
    * @param filter filter in format { name: 'xx', age: ''}, or 'xx'
    */
   static searchQuery(filter = {}, query?: Query): Query {
@@ -119,7 +136,7 @@ export class BaseModel extends Model {
         // lazy search
         const filterValue = typeof filter[key] === 'string' ? filter[key] : '';
         const matchResult = checkStringMatch(record[key])(filterValue);
-        console.log(`filter key ${key} matched: `, matchResult);
+        // console.log(`filter key ${key} matched: `, matchResult);
         return matchResult;
         // exact match search
         // (filter[key] === undefined || '') ? true : record[key] === filter[key]
@@ -148,17 +165,17 @@ export class BaseModel extends Model {
   }
 
   /**
-   * Generate statistic from unique value of a field
-   * As the max, min, sum in Query
+   * 从每个字段值中的唯一值，获取数量
+   * 获取最大值，最小值，总和
    * @param fieldName string
    * @returns 某一字段的全部值的计数
    */
-  static aggregateValuesOfField(fieldName: string): any {
+  static aggregateValuesOfField(fieldName: string): StatisticInfo {
     const uniqueValues = this.uniqueValuesOfField(fieldName);
     const max = this.query().max(fieldName);
     const min = this.query().min(fieldName);
     const sum = this.query().sum(fieldName);
-    const statisticInfo = {
+    const statisticInfo: StatisticInfo = {
       field: fieldName,
       max,
       min,
@@ -173,10 +190,9 @@ export class BaseModel extends Model {
   }
 
   /**
-   * Generate statistic from unique value of all fields
-   * As the max, min, sum in Query
+   * 生成全部统计数据
    */
-  static aggregateValuesOfAllFields(): any {
+  static aggregateValuesOfAllFields(): { [ name: string ]: StatisticInfo} {
     return this.fieldsKeys().reduce((statistic, field) => {
       statistic[field] = this.aggregateValuesOfField(field);
       return statistic;
@@ -228,29 +244,5 @@ export class BaseModel extends Model {
       || field instanceof MorphToMany
       || field instanceof MorphedByMany
     );
-  }
-
-  /**
-   * Find unique value of a field
-   * As the max, min, sum in Query
-   * @param fieldName string
-   */
-  $uniqueValuesOfField(fieldName: string): any[] {
-    const records: any[] = this.$query().get();
-    return uniq(map(records, fieldName));
-  }
-
-  /**
-   * Generate statistic from unique value of a field
-   * As the max, min, sum in Query
-   * @param fieldName string
-   */
-  $aggregateValuesOfField(fieldName: string): any[] {
-    const uniqueValues = this.$uniqueValuesOfField(fieldName);
-    uniqueValues.reduce((statistic, value) => {
-      statistic[value] = this.$query().where(fieldName, value).count();
-      return statistic;
-    }, {});
-    return [];
   }
 }

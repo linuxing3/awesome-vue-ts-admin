@@ -6,8 +6,7 @@ const EntityName = h.changeCase.camel(model)
 const ModelName = h.changeCase.pascal(model)
 const modelListName = ModelName + 'List'
 const modelFormName = ModelName + 'Form'
-%>
-import { Component, Vue, Emit } from 'vue-property-decorator';
+%>import { Component, Vue, Emit } from 'vue-property-decorator';
 import {
   Form, Card, Dropdown, Menu, Icon, Modal,
 } from 'ant-design-vue';
