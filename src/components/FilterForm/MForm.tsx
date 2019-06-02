@@ -213,7 +213,7 @@ class MFormClass extends Vue {
 
   renderFormInput(getFieldDecorator: any, item: FilterFormList, index: number) {
     const key = item.key;
-    const label = this.$t(item.key);
+    const label = `${this.$t(item.key)} / ${item.key}`;
     const placeholder = `Input ${titleCase(item.key)}`;
     const itemDom = <a-input id={key} label={label} placeholder={placeholder} />;
     return (
@@ -228,7 +228,7 @@ class MFormClass extends Vue {
     const {
       key, value, options, change, fieldNames, disabledTime,
     } = item;
-    const label = this.$t(item.key);
+    const label = `${this.$t(item.key)} / ${titleCase(item.key)}`;
     const placeholder = `Input ${titleCase(item.key)}`;
     switch (item.type) {
       case 'input':

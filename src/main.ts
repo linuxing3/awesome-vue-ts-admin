@@ -5,7 +5,7 @@ import App from '@/App';
 import router from '@/router';
 import store from '@/store';
 import config from '@/utils/config';
-import Api from '@/api/api';
+import Api from '@/api/api.lf';
 import i18n from './utils/i18n';
 import { log } from './utils/helper';
 import lfService from './utils/request.localforage';

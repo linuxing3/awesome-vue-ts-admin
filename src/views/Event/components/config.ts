@@ -103,7 +103,7 @@ export const tableFieldsList: tableList[] = [
   },
   {
     title: 'Guests',
-    dataIndex: 'guest',
+    dataIndex: 'guests',
   },
   {
     title: 'Participants',

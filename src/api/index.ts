@@ -8,9 +8,8 @@ export interface ApiList {
 }
 
 export interface Apis<T> {
-  [key: string]: (data: object) => Promise<T>;
+  [key: string]: (data?: object, params?: object) => Promise<T>;
 }
-
 
 export const defaultApiList: ApiList = {
   login: {
@@ -25,6 +24,11 @@ export const defaultApiList: ApiList = {
   },
   getUserInfo: {
     url: '/user/getUserInfo',
+    fetchType: 'json',
+    method: 'post',
+  },
+  getLocalUserInfo: {
+    url: '/user/getLocalUserInfo',
     fetchType: 'json',
     method: 'post',
   },
@@ -52,6 +56,28 @@ export const defaultApiList: ApiList = {
     url: 'https://api.map.baidu.com/geocoder/v2/',
     method: 'get',
     fetchType: 'jsonp',
+  },
+  // insert more api below
+  // Document
+  documentDelete: {
+    url: '/document/delete',
+    method: 'delete',
+    fetchType: 'json',
+  },
+  documentUpdate: {
+    url: '/document/update',
+    method: 'patch',
+    fetchType: 'json',
+  },
+  documentCreate: {
+    url: '/document/create',
+    method: 'post',
+    fetchType: 'json',
+  },
+  documentFetch: {
+    url: '/document/fetch',
+    method: 'get',
+    fetchType: 'json',
   },
 };
 

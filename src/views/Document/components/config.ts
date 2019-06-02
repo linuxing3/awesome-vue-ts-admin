@@ -132,12 +132,6 @@ export const tableFieldsList: tableList[] = [
 
 export const filterFormItemList: FilterFormList[] = [
   {
-    key: 'name',
-    label: 'name',
-    type: 'input',
-    placeholder: 'Seach Name',
-  },
-  {
     key: 'title',
     type: 'input',
     label: 'title',

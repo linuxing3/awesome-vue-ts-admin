@@ -1,15 +1,5 @@
-import { message } from 'ant-design-vue';
-import lfServce, { LfService, LfResponse } from '@/utils/request.localforage';
 import { ApiList, Apis, defaultApiList } from './index';
-
-interface Options {
-  url: string;
-  method?: string;
-  params?: string;
-  data: any;
-  fetchType?: string;
-  headers?: any;
-}
+import lfServce, { LfService, LfRequestConfig } from '@/utils/request.localforage';
 
 export default class Api {
   // hack here with special service
@@ -21,57 +11,33 @@ export default class Api {
   // 对外暴露方法
   api: Apis<any> = {};
 
-  constructor(options: { baseUrl: string }) {
+  constructor(options: { baseUrl }) {
     // hack here with custom service
     this.service = lfServce;
 
     for (const i in this.apiList) {
-      this.api[i] = (data: any) => {
-        const { url } = this.apiList[i];
-        return this.request({
-          method: this.apiList[i].method,
-          data,
-          fetchType: this.apiList[i].fetchType,
+      this.api[i] = (data?: any, params?: any) => {
+        const { url, method, fetchType } = this.apiList[i];
+        return this.fetch({
           url,
-          headers: this.apiList[i].headers,
+          method,
+          data,
+          params,
+          fetchType,
         });
       };
     }
   }
 
-  request = (options: Options) => this.fetch(options)
-    .then((response: any) => {
-      console.log('Api Lf fetch response:', response);
-      const { statusText, status } = response;
-      const { data } = response;
-      const finalResponse: LfResponse = {
-        success: true,
-        message: statusText,
-        statusCode: status,
-        ...response,
-      };
-      return Promise.resolve(finalResponse);
-    })
-    .catch((error: any) => {
-      const { response } = error;
-      let msg;
-      let statusCode;
-      if (response && response instanceof Object) {
-        const { data, statusText } = response;
-        statusCode = response.status;
-        msg = data.message || statusText;
-      } else {
-        statusCode = 600;
-        msg = error.message || 'Network Error';
-      }
-      message.error(msg);
-      return Promise.reject({ success: false, statusCode, message: msg });
-    });
-
   // fetch methods
-  fetch = async (options: Options) => {
+  fetch = async (options: LfRequestConfig) => {
     console.log('Api Lf:', options);
     return this.service.request(options);
+  };
+
+  validateUrl = (options: LfRequestConfig) => {
+    console.log('Api Lf:', options);
+    return this.service.validateUrl(options);
   };
   // end fetch
 }

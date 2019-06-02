@@ -64,7 +64,7 @@ export interface LfService {
 
   patch?(model: any, data: any): Promise<LfResponse>;
 
-  handleRequest: (options: LfRequestConfig) => Promise<LfResponse>;
+  fetch: (options: LfRequestConfig) => Promise<LfResponse>;
 
   response(params: any): Promise<LfResponse>;
 }
@@ -100,10 +100,10 @@ const lfService: LfService = {
    */
   async request(options: LfRequestConfig) {
     const newOpitons = this.validateUrl(options);
-    const result = await this.handleRequest(newOpitons);
+    const result = await this.fetch(newOpitons);
     return result;
   },
-  handleRequest: async (options: LfRequestConfig) => new Promise(async (resolve, reject) => {
+  fetch: async (options: LfRequestConfig) => new Promise(async (resolve, reject) => {
     const {
       method,
       data,

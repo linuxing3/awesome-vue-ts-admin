@@ -1,5 +1,7 @@
+import { map } from 'lodash';
+import titleCase from 'title-case';
 import {
-  Component, Prop, Emit, Vue, Inject, Provide,
+  Component, Prop, Watch, Vue, Inject, Provide,
 } from 'vue-property-decorator';
 import {
   Popconfirm, Table, Dropdown, Menu, Button, Icon,
@@ -100,10 +102,17 @@ export default class MTable extends Vue {
   dataTotal: number = 0;
 
   get ids() {
-    return this.tableData.reduce((ids, i) => {
-      ids.push(i.id);
-      return ids;
-    }, []);
+    return map(this.tableData, 'id');
+  }
+
+  @Watch('ids')
+  idsChanged(newValue: any[]) {
+    this.$log.info('New ids: ', newValue);
+  }
+
+  @Watch('tableData')
+  tableDataChanged(newValue: any[]) {
+    this.$log.info('Data counts: ', newValue.length);
   }
 
   constructor(props: any) {
@@ -205,6 +214,14 @@ export default class MTable extends Vue {
         customRender: this.renderOperate,
       });
     }
+    const tableList = this.tableList.reduce((list: tableList[], item: tableList) => {
+      const title = `${this.$t(item.dataIndex).toString()} / ${titleCase(item.dataIndex)}`;
+      list.push({
+        ...item,
+        title,
+      });
+      return list;
+    }, []);
     return (
       <div class="m-table" >
         <a-table
@@ -222,7 +239,7 @@ export default class MTable extends Vue {
             showSizeChanger: true,
             total: this.dataTotal,
           }}
-          columns={this.tableList}
+          columns={tableList}
           on-change={this.tableChange}
         >
         </a-table>
