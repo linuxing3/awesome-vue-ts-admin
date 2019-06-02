@@ -124,6 +124,20 @@ export class BaseModel extends Model {
   }
 
   /**
+   * 在链式查询中加入页面设置，并返回结果
+   * @param query 链式查询
+   */
+  static monthlySummary(fieldName: string, query?: Query): any[] {
+    if (!query) query = this.query();
+    return ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
+      .reduce((result, month) => {
+        const monthlyCount = query.where(fieldName, `-${month}-`).count();
+        result.push(monthlyCount);
+        return result;
+      }, []);
+  }
+
+  /**
    * 在链式查询中加入过滤器，并返回结果
    * @param filter filter in format { name: 'xx', age: ''}, or 'xx'
    */
