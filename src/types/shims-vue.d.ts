@@ -7,5 +7,7 @@ declare module 'vue/types/vue' {
   interface Vue {
     Form: any;
     $log: any;
+    $http: any;
+    $app: any;
   }
 }

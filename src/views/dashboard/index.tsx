@@ -1,5 +1,9 @@
 import { Component, Vue, Emit } from 'vue-property-decorator';
 import {
+  keys, values, mapKeys, pullAll, uniq, map, countBy,
+} from 'lodash';
+import { months, weekdays } from 'moment';
+import {
   Button, DatePicker, Modal, Row, Col, Card, Icon, Radio,
 } from 'ant-design-vue';
 import Chart from 'chart.js';
@@ -11,6 +15,7 @@ import Member from '@/store/modules/pages/Member/models/Member';
 import Document from '@/store/modules/pages/Document/models/Document';
 import UserMilitant from '@/store/modules/pages/UserMilitant/models/UserMilitant';
 import Event from '@/store/modules/pages/Event/models/Event';
+import { fillAllMonth } from '@/utils/datetime';
 
 @Component({
   name: 'Dashboard',
@@ -32,8 +37,13 @@ export default class Dashboard extends Vue {
   pageData: any = null;
 
   created() {
-    this.loadMock();
-    // this.loadReal();
+    // this.loadMock();
+    this.loadData();
+  }
+
+  activated() {
+    // this.loadMock();
+    this.loadData();
   }
 
   loadMock() {
@@ -57,26 +67,37 @@ export default class Dashboard extends Vue {
       {
         name: 'member',
         value: MemberTotal,
-        number: Math.random()
+        number: Math.random(),
       },
       {
         name: 'document',
         value: DocumentTotal,
-        number: Math.random()
+        number: Math.random(),
       },
       {
         name: 'userMilitant',
         value: MilitantTotal,
-        number: Math.random()
+        number: Math.random(),
       },
       {
         name: 'event',
         value: EventTotal,
-        number: Math.random()
+        number: Math.random(),
       },
-    ]
+    ];
     // counting documents sending by month
-    this.pageData.projections = Document.monthlySummary('sendingDate');
+    const countByMonth = Document.countByMonth('sendingDate', true);
+    const projections = fillAllMonth(countByMonth, 0);
+    const actuals = fillAllMonth(countByMonth, 1);
+    this.pageData.projections = projections;
+    this.pageData.actuals = actuals;
+    this.pageData.lineData = {
+      Current: map(projections, o => o * 10),
+      Previous: map(projections, o => o * 8),
+    };
+    this.pageData.doughnut = map(projections, o => o * 20);
+    this.pageData.CurrentWeek = '16666';
+    this.pageData.PreviousWeek = '23333';
     this.loading = false;
     setTimeout(() => {
       this.init();
@@ -105,16 +126,16 @@ export default class Dashboard extends Vue {
     const config: any = {
       type: 'bar',
       data: {
-        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        labels: months(),
         datasets: [{
-          label: 'projections',
+          label: 'Document In',
           backgroundColor: a,
           borderColor: a,
           hoverBackgroundColor: a,
           hoverBorderColor: a,
           data: this.pageData.projections,
         }, {
-          label: 'actuals',
+          label: 'Document Out',
           backgroundColor: '#e3eaef',
           borderColor: '#e3eaef',
           hoverBackgroundColor: '#e3eaef',
@@ -156,7 +177,7 @@ export default class Dashboard extends Vue {
     const config: any = {
       type: 'line',
       data: {
-        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        labels: weekdays(),
         datasets: [{
           label: 'Current Week',
           backgroundColor: 'transparent',
@@ -259,6 +280,7 @@ export default class Dashboard extends Vue {
         <a-row gutter={{ xs: 8, md: 12, xl: 20 }} class="dash-col">
           <a-col span={10} xxl={10} xl={10} lg={12} md={24} sm={24} xs={24}>
             <a-row gutter={{ xs: 8, md: 12, xl: 20 }}>
+              {/* datalist with cards */}
               {
                 this.pageData && this.pageData.dataList.map((item: any, index: number) => <a-col {...{ props: this.ColLayout }} class="sub-item">
                   <a-card loading={this.loading} class="dash-card">
@@ -285,9 +307,10 @@ export default class Dashboard extends Vue {
             </a-row>
           </a-col>
           <a-col span={14} xxl={14} xl={14} lg={12} md={24} sm={24} xs={24}>
+            {/* Document statistic chart */}
             <a-card loading={this.loading} class="dash-box dash-bar-chart">
               <a-icon class="operate" type="ellipsis"></a-icon>
-              <h2 class="title">PROJECTIONS VS ACTUALS</h2>
+              <h2 class="title">Documents Statistic</h2>
               <div style="height: 263px;" class="chartjs-chart">
                 <canvas height="86px" id="BarChart"></canvas>
               </div>
@@ -296,6 +319,7 @@ export default class Dashboard extends Vue {
         </a-row>
         <a-row gutter={{ xs: 8, md: 12, xl: 20 }}>
           <a-col span={16} xxl={16} xl={16} lg={24} md={24} sm={24} xs={24}>
+            {/* Weekly Statistic chart */}
             <a-card loading={this.loading} class="dash-box revenue-chart">
               <h2 class="title">REVENUE</h2>
               <a-icon class="operate" type="ellipsis"></a-icon>
@@ -322,6 +346,7 @@ export default class Dashboard extends Vue {
             </a-card>
           </a-col>
           <a-col span={8} xxl={8} xl={8} lg={24} md={24} sm={24} xs={24}>
+            {/* donut chart */}
             <a-card loading={this.loading} class="dash-box total-wrap">
               <h2 class="title">Total Sales</h2>
               <a-icon class="operate" type="ellipsis"></a-icon>

@@ -20,9 +20,13 @@ import {
   Attribute,
 } from '@vuex-orm/core';
 import {
-  keys, pullAll, uniq, map,
+  keys, pullAll, uniq, map, countBy,
 } from 'lodash';
+import moment, { months } from 'moment';
 import { checkStringMatch } from '@/utils/helper';
+import {
+  dateToMonth, dateToMonthIndex, dateToMonthName, countAllByMonth,
+} from '@/utils/datetime';
 
 interface StatisticInfo {
   field?: string;
@@ -125,16 +129,11 @@ export class BaseModel extends Model {
 
   /**
    * 在链式查询中加入页面设置，并返回结果
+   * 使用lodash.values()获取值构成数组
    * @param query 链式查询
    */
-  static monthlySummary(fieldName: string, query?: Query): any[] {
-    if (!query) query = this.query();
-    return ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
-      .reduce((result, month) => {
-        const monthlyCount = query.where(fieldName, `-${month}-`).count();
-        result.push(monthlyCount);
-        return result;
-      }, []);
+  static countByMonth(fieldName: string, withName: boolean, format: string = 'YYYY-MM-DD'): {[name: string]: number } {
+    return countAllByMonth(this.all(), fieldName, withName);
   }
 
   /**
