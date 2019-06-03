@@ -25,7 +25,7 @@ import {
 import moment, { months } from 'moment';
 import { checkStringMatch } from '@/utils/helper';
 import {
-  dateToMonth, dateToMonthIndex, dateToMonthName, countAllByMonth,
+  countAllByMonth,
 } from '@/utils/datetime';
 
 interface StatisticInfo {
