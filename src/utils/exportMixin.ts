@@ -3,18 +3,22 @@ import {
   Component, Vue, Emit,
 } from 'vue-property-decorator';
 import { join } from 'path';
-import { last, uniqueId } from 'lodash';
 import {
-  copyFileSync, existsSync, writeFileSync, mkdirSync, readFileSync,
+  pick, keys, last, uniqueId,
+} from 'lodash';
+import {
+  copyFileSync, existsSync, writeFileSync, mkdirSync, unlinkSync,
 } from 'fs';
 import { remote, shell } from 'electron';
 import XLSX from 'xlsx';
 import {
-  Document, Paragraph, TextRun, Table, Packer,
+  Document, Paragraph, Packer,
 } from 'docx';
+import createReport from 'docx-template';
 
 import models from '@/models';
 import keysDef from '@/locales/cn.json';
+import { convertDate } from '@/utils/datetime';
 
 import {
   getFilesByExtentionInDir,
@@ -22,6 +26,7 @@ import {
   ImportCSV,
   changeHeaderOfCSV,
 } from '@/utils/helper';
+import { FilterFormList } from '@/interface';
 
 interface IExportHelper {
   importFileMeta?: any;
@@ -35,6 +40,12 @@ interface IExportHelper {
   reverseTranslate?: boolean;
   onlyKeepStringValue?: boolean;
   needMergeWord?: boolean;
+}
+
+interface ReportOptions {
+  template: string
+  output: string
+  data: any
 }
 
 @Component({})
@@ -63,6 +74,8 @@ export default class exportMixin extends Vue {
 
   needMergeWord: boolean = false
 
+  loading: boolean = true
+
   resolvePath(fileName, fileExt): string {
     return join(this.templateDir, `${fileName}.${fileExt}`);
   }
@@ -74,6 +87,11 @@ export default class exportMixin extends Vue {
   get recordIds() {
     const { ids } = JSON.parse(this.$route.params.data);
     return ids;
+  }
+
+  get itemList(): FilterFormList[] {
+    const { itemList } = JSON.parse(this.$route.params.data);
+    return itemList;
   }
 
   get Entity(): any {
@@ -115,7 +133,7 @@ export default class exportMixin extends Vue {
 
   // 获取模板目录下的默认csv文件
   get defaultDatasource(): string {
-    return this.resolvePath('db', 'xlsx');
+    return this.resolvePath('db', 'csv');
   }
 
   // 获取模板目录下默认Word模板
@@ -142,15 +160,43 @@ export default class exportMixin extends Vue {
     this.getData();
   }
 
-  @Emit()
-  getData() {
-    this.Entity.$fetch().then(() => {
-      this.data = this.Entity.query()
-        .whereIdIn(this.recordIds)
-        .get();
-    });
+  /**--------------------------------------------------------------------
+  | 主要接口
+  |--------------------------------------------------------------------*/
+
+  /**
+   * 根据文件扩展名，导入数据
+   */
+  attemptImport(path: string) {
+    if (this.fileFormat === 'csv') {
+      this.importCSV();
+    } else if (this.fileFormat === 'xlsx' || this.fileFormat === 'xls') {
+      this.importExcel(path, this.modelName);
+    }
   }
 
+  /**
+   * 根据文件格式，尝试导出数据
+   */
+  attemptExport(items) {
+    // 准备数据
+    const data = convertDate(this.itemList, items, 'l');
+    // 插入标题翻译定义
+    const translateObj = pick(keysDef, keys(items[0]));
+    data.unshift(translateObj);
+    // 导出数据
+    if (this.fileFormat === 'csv') {
+      this.exportCSV(data);
+    } else if (this.fileFormat === 'xlsx' || this.fileFormat === 'xls') {
+      this.exportExcel(data);
+    } else if (this.fileFormat === 'docx') {
+      this.exportDocx(data);
+    }
+  }
+
+  /**--------------------------------------------------------------------
+  | 辅助函数
+  |--------------------------------------------------------------------*/
   /**
    * 获取导入文件的宏信息，设置当前文件格式
    * @param e 事件
@@ -172,28 +218,13 @@ export default class exportMixin extends Vue {
     return Promise.reject('No file Selected');
   }
 
-  /**
-   * 根据文件扩展名，导入数据
-   */
-  attemptImport(path: string) {
-    if (this.fileFormat === 'csv') {
-      this.importCSV();
-    } else if (this.fileFormat === 'xlsx' || this.fileFormat === 'xls') {
-      this.importExcel(path);
-    }
-  }
-
-  /**
-   * 导入csv文件的数据，并执行持久化
-   */
-  async importCSV() {
-    console.log(`导入${this.modelName}.csv文件...`);
-    const data: any[] = await ImportCSV({
-      file: this.importFileMeta,
-      keysDef,
+  @Emit()
+  getData() {
+    this.Entity.$fetch().then(() => {
+      this.data = this.Entity.query()
+        .whereIdIn(this.recordIds)
+        .get();
     });
-    console.table(data);
-    if (data.length) this.persistData(data);
   }
 
   /**
@@ -236,23 +267,213 @@ export default class exportMixin extends Vue {
     }
   }
 
+  ensureAttachFile() {
+    const uuid = uniqueId(`${this.modelName}_attach_`);
+
+    const fileIdRef = uniqueId().toString();
+    const moduleAttachDir = join(this.attachDir, this.modelName);
+    const moduleAttachDirWithId = join(this.attachDir, this.modelName, fileIdRef);
+    if (!existsSync(moduleAttachDir)) {
+      mkdirSync(moduleAttachDir);
+    }
+    if (!existsSync(moduleAttachDirWithId)) {
+      mkdirSync(moduleAttachDirWithId);
+    }
+
+    if (this.importFileMeta.path !== undefined) {
+      this.attachFile = this.importFileMeta.path;
+    } else {
+      this.attachFile = join(moduleAttachDir, `${uuid}.docx`);
+    }
+    console.log(this.attachFile);
+  }
+
+  /**--------------------------------------------------------------------
+  | 主要Excel工具函数
+  |--------------------------------------------------------------------*/
   /**
-   * 根据文件格式，尝试导出数据
+   * 导入Excel文件，从用户选取的文件中
    */
-  attemptExport(item) {
-    const data = this.checkItem(item);
-    if (this.fileFormat === 'csv') {
-      this.exportCSV(data);
-    } else if (this.fileFormat === 'xls' || this.fileFormat === 'xlsx') {
-      this.exportExcel(data);
-    } else if (this.fileFormat === 'docx') {
-      this.exportDocx(data);
+  importExcel(path: string, sheetName?: string) {
+    // 电子表对象
+    try {
+      this.workbook = XLSX.readFile(path);
+      const worksheet = this.workbook.Sheets[sheetName || 'Sheet1' || this.modelName];
+      this.data = XLSX.utils.sheet_to_json(worksheet);
+      this.$log.info('worksheet data:', this.data);
+      this.$emit('setData', this.data);
+      if (this.data.length > 0) this.persistData(this.data);
+    } catch (error) {
+      throw new Error(error);
+    }
+    console.log('打开Excel文件，已读取数据');
+  }
+
+  /**
+   * 将数据项目导出到Excel文件
+   */
+  exportExcel(data) {
+    const { modelName, modelDatasource } = this;
+    if (existsSync(modelDatasource)) {
+      unlinkSync(modelDatasource);
+      this.workbook = XLSX.utils.book_new();
+    }
+    try {
+      this.loading = true;
+      this.writeExcelFile({
+        workbook: this.workbook,
+        filename: modelDatasource,
+        name: modelName,
+        data,
+        options: {
+          bookType: 'xlsx',
+          // sheet: this.modelName // single sheet format
+        },
+      });
+      this.loading = false;
+      // 打开文件所在目录并定位到文件
+      this.$confirm({
+        title: '是否打开导出文件？',
+        onOk: () => {
+          setTimeout(() => {
+            shell.showItemInFolder(modelDatasource);
+            console.log(`导出${modelDatasource}文件成功`);
+          }, 2000);
+        },
+      });
+    } catch (error) {
+      throw new Error(error);
     }
   }
 
-  checkItem(item) {
-    if (Array.isArray(item)) return item;
-    return [item];
+  /**
+   * 写入Excel文件
+   * @param param0 Excel文件的参数
+   */
+  writeExcelFile({
+    workbook, filename, data, options, name = 'Sheet1',
+  }) {
+    // 创建新的电子表格
+    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(data);
+    // 添加电子表格到文件中
+    XLSX.utils.book_append_sheet(workbook, worksheet, name);
+    // 写入文件
+    XLSX.writeFile(workbook, filename, options);
+  }
+
+  /**
+   * 保存Excel文件为csv, txt, html
+   * @param worksheet 电子试算表
+   * @param type 文件类型
+   */
+  saveExcelAs(worksheet: XLSX.WorkSheet, type = 'csv') {
+    let output;
+    if (type === 'csv') {
+      output = XLSX.utils.sheet_to_csv(worksheet, {
+        FS: ',',
+        blankrows: false,
+      });
+      writeFileSync(`${this.modelDatasource}.csv`, output);
+    }
+    if (type === 'txt') {
+      output = XLSX.utils.sheet_to_txt(worksheet, {
+        FS: ',',
+        blankrows: false,
+      });
+      writeFileSync(`${this.modelDatasource}.txt`, output);
+    }
+    if (type === 'html') {
+      output = XLSX.utils.sheet_to_html(worksheet);
+      writeFileSync(`${this.modelDatasource}.html`, output);
+    }
+  }
+
+  /**--------------------------------------------------------------------
+  | 主要word工具函数
+  |--------------------------------------------------------------------*/
+
+  /**
+   * 使用word自动生成报告附件
+   * @param data string 写入附件的内容
+   */
+  exportDocx(content) {
+    this.ensureAttachFile();
+
+    try {
+      // 创建新的文档或使用默认文档
+      this.document = new Document({
+        creator: 'cnve',
+        description: `Attachment of model ${this.modelName}`,
+        title: this.modelName,
+      });
+
+      // 添加数据到正文
+      Object.keys(content).map((key) => {
+        this.document.addParagraph(new Paragraph(key).heading3());
+        this.document.addParagraph(new Paragraph(content[key]).heading3());
+      });
+
+      console.log(this.document);
+      // 写入文件
+      const packer = new Packer();
+      packer
+        .toBuffer(this.document)
+        .then((buffer) => {
+          writeFileSync(this.attachFile, buffer);
+          this.attachFile = '';
+          this.document = null;
+        })
+        .catch((error) => {
+          throw new Error(error);
+        });
+      shell.showItemInFolder(this.attachFile);
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  /**
+   * 使用word模板功能，自动生成报告
+   * @param data string 写入附件的内容
+   */
+  exportDocTemplate(data: any[], template: string) {
+    this.ensureAttachFile();
+    const options: ReportOptions = {
+      template,
+      data,
+      output: this.attachFile,
+    };
+    createReport(options);
+  }
+
+  /**
+   * 导出文件到Word，打印合并
+   */
+  async mergeWordApp() {
+    this.copyModelNameCSV();
+    if (existsSync(this.modelTemplate)) {
+      shell.showItemInFolder(this.modelTemplate);
+      // shell.openItem(this.modelTemplate)
+    } else {
+      throw new Error('无法找到Word模板文件，请查看手册。');
+    }
+  }
+
+  /**--------------------------------------------------------------------
+  | 主要csv工具函数
+  |--------------------------------------------------------------------*/
+
+  /**
+   * 导入csv文件的数据，并执行持久化
+   */
+  async importCSV() {
+    console.log(`导入${this.modelName}.csv文件...`);
+    const data: any[] = await ImportCSV({
+      file: this.importFileMeta,
+      keysDef,
+    });
+    console.table(data);
+    if (data.length) this.persistData(data);
   }
 
   /**
@@ -262,6 +483,7 @@ export default class exportMixin extends Vue {
   exportCSV(item) {
     console.log(`导出到${this.modelDatasource}文件...`);
     try {
+      this.loading = true;
       GenerateCSV({
         data: item,
         targetFilePath: this.modelDatasource,
@@ -269,24 +491,20 @@ export default class exportMixin extends Vue {
         needTranslateHeader: this.needChangeCSVHeader, // 这里不转换，待生成CSV文件后，更改CSV文件
         onlyKeepStringValue: this.onlyKeepStringValue, // 这里转换[对象类]键值为[字符串类]键值
       });
+      this.loading = false;
       // 选择是否保留原有标题
       if (this.keepOriginalHeader) {
-        setTimeout(async () => {
-          const r = confirm(
+        this.$confirm({
+          title: '',
+          content:
             '请选择是否保留原有标题。\n因为数据标题行为外文，需要添加中文对应标题。\n你可以随意删除无用标题',
-          );
-          if (r) {
-            this.changeCSVHeader();
-          } else {
-            alert('跳过...');
-          }
-        }, 3000);
+          onOk: () => {
+            setTimeout(() => this.changeCSVHeader(), 3000);
+            // 打开文件所在目录并定位到文件
+            setTimeout(() => shell.showItemInFolder(this.modelDatasource), 5000);
+          },
+        });
       }
-      // 打开文件所在目录并定位到文件
-      setTimeout(() => {
-        shell.showItemInFolder(this.modelDatasource);
-        console.log(`导出${this.modelDatasource}文件成功`);
-      }, 5000);
     } catch (error) {
       throw new Error(error);
     }
@@ -323,159 +541,6 @@ export default class exportMixin extends Vue {
       } catch (error) {
         throw new Error(error);
       }
-    }
-  }
-
-  /**
-   * 导出文件到Word，打印合并
-   */
-  async mergeWordApp() {
-    this.copyModelNameCSV();
-    if (existsSync(this.modelTemplate)) {
-      shell.showItemInFolder(this.modelTemplate);
-      // shell.openItem(this.modelTemplate)
-    } else {
-      throw new Error('无法找到Word模板文件，请查看手册。');
-    }
-  }
-
-  /**
-   * 将数据项目导出到Excel文件
-   */
-  exportExcel(data) {
-    /* show a file-open dialog and read the first selected file */
-    if (!existsSync(this.modelDatasource)) {
-      this.getImportFile({}).then((path) => {
-        this.workbook = XLSX.readFile(path);
-      });
-    }
-    this.workbook = XLSX.readFile(this.modelDatasource);
-    try {
-      this.writeExcelFile({
-        workbook: this.workbook,
-        filename: this.modelDatasource,
-        data,
-        options: {
-          bookType: 'xlsx',
-        },
-      });
-      // 打开文件所在目录并定位到文件
-      setTimeout(() => {
-        shell.showItemInFolder(this.modelDatasource);
-        console.log(`导出${this.modelDatasource}文件成功`);
-      }, 5000);
-    } catch (error) {
-      throw new Error(error);
-    }
-  }
-
-  /**
-   * 导入Excel文件，从用户选取的文件中
-   */
-  importExcel(path: string, sheetName?: string) {
-    // 电子表对象
-    try {
-      this.workbook = XLSX.readFile(path);
-      const worksheet = this.workbook.Sheets[sheetName || 'Sheet1' || this.modelName];
-      this.data = XLSX.utils.sheet_to_json(worksheet);
-      this.$log.info('worksheet data:', this.data);
-      this.$emit('setData', this.data);
-      if (this.data.length > 0) this.persistData(this.data);
-    } catch (error) {
-      throw new Error(error);
-    }
-    console.log('打开Excel文件，已读取数据');
-  }
-
-  /**
-   * 写入Excel文件
-   * @param param0 Excel文件的参数
-   */
-  writeExcelFile({
-    workbook, filename, data, options,
-  }) {
-    // 创建新的电子表格
-    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(data);
-    // 添加电子表格到文件中
-    XLSX.utils.book_append_sheet(workbook, worksheet);
-    // 写入文件
-    XLSX.writeFile(workbook, filename, options);
-  }
-
-  /**
-   * 保存Excel文件为csv
-   * @param worksheet 电子试算表
-   * @param type 文件类型
-   */
-  saveExcelAs(worksheet: XLSX.WorkSheet, type = 'csv') {
-    let output;
-    if (type === 'csv') {
-      output = XLSX.utils.sheet_to_csv(worksheet, {
-        FS: ',',
-        blankrows: false,
-      });
-    }
-    return output;
-  }
-
-  ensureAttachFile() {
-    const uuid = uniqueId(`${this.modelName}_attach_`);
-
-    const fileIdRef = uniqueId().toString();
-    const moduleAttachDir = join(this.attachDir, this.modelName);
-    const moduleAttachDirWithId = join(this.attachDir, this.modelName, fileIdRef);
-    if (!existsSync(moduleAttachDir)) {
-      mkdirSync(moduleAttachDir);
-    }
-    if (!existsSync(moduleAttachDirWithId)) {
-      mkdirSync(moduleAttachDirWithId);
-    }
-
-    if (this.importFileMeta.path !== undefined) {
-      this.attachFile = this.importFileMeta.path;
-    } else {
-      this.attachFile = join(moduleAttachDir, `${uuid}.docx`);
-    }
-    console.log(this.attachFile);
-  }
-
-  /**
-   * 自动生成附件
-   * @param data string 写入附件的内容
-   */
-  exportDocx(content) {
-    this.ensureAttachFile();
-
-    try {
-      // 创建新的文档或使用默认文档
-      this.document = new Document({
-        creator: 'cnve',
-        description: `Attachment of model ${this.modelName}`,
-        title: this.modelName,
-      });
-
-      // 添加数据到正文
-      Object.keys(content).map((key) => {
-        this.document.addParagraph(new Paragraph(key).heading3());
-        this.document.addParagraph(new Paragraph(content[key]).heading3());
-      });
-
-      console.log(this.document);
-      // 写入文件
-      const packer = new Packer();
-      packer
-        .toBuffer(this.document)
-        .then((buffer) => {
-          writeFileSync(this.attachFile, buffer);
-          this.attachFile = '';
-          this.document = null;
-        })
-        .catch((error) => {
-          throw new Error(error);
-        });
-      shell.showItemInFolder(this.attachFile);
-    } catch (error) {
-      throw new Error(error);
     }
   }
 }

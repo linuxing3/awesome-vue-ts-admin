@@ -84,6 +84,10 @@ export default class <%= modelTableName %> extends Vue {
   genderRender(text: any) {
     return <a-tag color={text ? 'blue' : 'purple'}>{text ? '男' : '女'}</a-tag>;
   }
+  
+  dateRender(value: string) {
+    return <a-tag color='blue'>{moment(parseInt(value)).format('LL')}</a-tag>
+  }
 
   @Emit()
   selectChange() {}

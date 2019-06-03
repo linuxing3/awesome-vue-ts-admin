@@ -41,36 +41,19 @@ This project includes generators to speed up common development tasks. Commands 
 
 ```bash
 # Generate a new Vuex/orm model with adjacent unit test
-yarn new model
+yarn gen model
 
 # Generate a new table component with adjacent unit test
-yarn new component-table
 # Generate a new form component with adjacent unit test
-yarn new component-form
-# Generate a new tsx component with adjacent unit test
-yarn new component-ts
+yarn gen component
 
-# Generate a new view component with adjacent unit test
-yarn new view
-
-# Generate a new layout component with adjacent unit test
-yarn new layout
-
-# Generate a new Vuex module with adjacent unit test
-yarn new module
-
-# Generate a new utility function with adjacent unit test
-yarn new util
-
-# Generate a new end-to-end spec
-yarn new e2e
 ```
 
 Update existing or create new generators in the `_templates` folder, with help from the [Hygen docs](http://www.hygen.io/).
 
 ## Aliases
 
-To simplify referencing local modules and refactoring, you can set aliases to be shared between dev and unit tests in `aliases.config.js`. As a convention, this project uses an `@` prefix to denote aliases.
+As a convention, this project uses an `@` prefix to denote aliases.
 
 ## Globals
 

@@ -214,7 +214,7 @@ class MFilterClass extends Vue {
         </a-range-picker>;
         break;
       case 'checkboxButton':
-        itemDom = <el-radio-group
+        itemDom = <a-radio-group
           on-change={item.change}
           size="small">
           {
@@ -227,7 +227,7 @@ class MFilterClass extends Vue {
                 {items.label}
               </a-radio-button>)
           }
-        </el-radio-group>;
+        </a-radio-group>;
         break;
       default: break;
     }

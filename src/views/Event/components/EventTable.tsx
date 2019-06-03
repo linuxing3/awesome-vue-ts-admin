@@ -4,7 +4,7 @@ import { tableList, FilterFormList, operate } from '@/interface';
 import lfService from '@/utils/request.localforage';
 
 import {
-  BackParams, operateBtn, tableFieldsList, filterFormItemList,
+  BackParams, operateBtn, tableFieldsList, filterFormItemList, defaultItemList,
 } from './config';
 import './index.less';
 
@@ -35,7 +35,9 @@ export default class EventTable extends Vue {
 
   BackParams: any = BackParams
 
-  outParams: any = {}
+  outParams: any = {
+    itemList: defaultItemList,
+  }
 
   filterList: FilterFormList[] = filterFormItemList
 
@@ -66,11 +68,12 @@ export default class EventTable extends Vue {
   @Emit()
   export(ids) {
     this.$log.suc('Exporting from EventTable ... ');
+    const { outParams: { itemList } } = this;
     this.$router.replace({
       name: 'ExportHelper',
       params: {
         modelName: this.modelName,
-        data: JSON.stringify({ ids }),
+        data: JSON.stringify({ ids, itemList }),
       },
     });
   }

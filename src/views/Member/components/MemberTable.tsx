@@ -2,9 +2,10 @@ import { Component, Vue, Emit } from 'vue-property-decorator';
 import { Tag } from 'ant-design-vue';
 import { tableList, FilterFormList, operate } from '@/interface';
 import lfService from '@/utils/request.localforage';
+import moment from 'moment';
 
 import {
-  BackParams, operateBtn, tableFieldsList, filterFormItemList,
+  BackParams, operateBtn, tableFieldsList, filterFormItemList, defaultItemList,
 } from './config';
 import './index.less';
 
@@ -35,7 +36,10 @@ export default class MemberTable extends Vue {
 
   BackParams: any = BackParams
 
-  outParams: any = {}
+  outParams: any = {
+    itemList: defaultItemList,
+  }
+
 
   filterList: FilterFormList[] = filterFormItemList
 
@@ -51,8 +55,19 @@ export default class MemberTable extends Vue {
 
   editData: object = {}
 
-  activated() {
+  mounted() {
+    this.customRender();
     this.success();
+  }
+
+  activated() {
+    this.customRender();
+    this.success();
+  }
+
+  customRender() {
+    this.tableList[1].customRender = this.genderRender;
+    this.tableList[4].customRender = this.dateRender;
   }
 
   @Emit()
@@ -66,17 +81,22 @@ export default class MemberTable extends Vue {
   @Emit()
   export(ids) {
     this.$log.suc('Exporting from MemberTable ... ');
+    const { outParams: { itemList } } = this;
     this.$router.replace({
       name: 'ExportHelper',
       params: {
         modelName: this.modelName,
-        data: JSON.stringify({ ids }),
+        data: JSON.stringify({ ids, itemList }),
       },
     });
   }
 
   genderRender(text: any) {
     return <a-tag color={text ? 'blue' : 'purple'}>{text ? '男' : '女'}</a-tag>;
+  }
+
+  dateRender(value: string) {
+    return <a-tag color="blue">{moment(parseInt(value)).format('LL')}</a-tag>;
   }
 
   @Emit()

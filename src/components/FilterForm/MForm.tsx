@@ -228,15 +228,24 @@ class MFormClass extends Vue {
     const {
       key, value, options, change, fieldNames, disabledTime,
     } = item;
+    /**
+     * 翻译标签和占位符
+     */
     const label = `${this.$t(item.key)} / ${titleCase(item.key)}`;
     const placeholder = `Input ${titleCase(item.key)}`;
+    /**
+     * 根据项目类型，动态生成不同的表单控件
+     */
     switch (item.type) {
+      // 文本框
       case 'input':
         itemDom = <a-input id={key} label={label} placeholder={placeholder} disabled={key === 'id'} />;
         break;
+      // 段落框
       case 'textarea':
         itemDom = <a-textarea id={key} label={label} placeholder={placeholder} />;
         break;
+      // 选择器
       case 'select':
         itemDom = (
           <a-select
@@ -254,6 +263,7 @@ class MFormClass extends Vue {
           </a-select>
         );
         break;
+      // 级联选择器
       case 'cascader':
         itemDom = (
           <a-cascader
@@ -269,6 +279,7 @@ class MFormClass extends Vue {
           />
         );
         break;
+      // 级别类的级联选择器
       case 'levelcode':
         itemDom = (
           <a-cascader
@@ -284,6 +295,7 @@ class MFormClass extends Vue {
           />
         );
         break;
+      // 日期时间
       case 'datetime':
         itemDom = (
           <a-date-picker
@@ -295,6 +307,7 @@ class MFormClass extends Vue {
           />
         );
         break;
+      // 日期
       case 'date':
         itemDom = (
           <a-date-picker
@@ -305,6 +318,7 @@ class MFormClass extends Vue {
           />
         );
         break;
+      // 日期区间
       case 'datetimerange':
         itemDom = (
           <a-range-picker
@@ -312,22 +326,23 @@ class MFormClass extends Vue {
             id={key}
             label={label}
             showTime
-            format="YYYY-MM-DD"
+            format="YYYY-MM-DD HH:mm:ss"
             disabledTime={disabledTime}
             placeholder={placeholder}
           />
         );
         break;
+      // 选择按钮
       case 'checkboxButton':
         itemDom = (
-          <el-radio-group on-change={change} label={label} size="small">
+          <a-radio-group on-change={change} label={label} size="small">
             {options
               && options.map((items, indexs: number) => (
                 <a-radio-button value={value} key={indexs}>
                   {label}
                 </a-radio-button>
               ))}
-          </el-radio-group>
+          </a-radio-group>
         );
         break;
       default:
@@ -372,7 +387,7 @@ class MFormClass extends Vue {
     const { getFieldDecorator } = this.Form as any;
     return (
       <div class="base-form-wrap">
-        <a-card title={`Edited Item :${this.id}`}>
+        <a-card title={`编辑数据: ${this.id}`}>
           <a-form>
             {/* Render action buttons */}
             <a-row gutter={20}>

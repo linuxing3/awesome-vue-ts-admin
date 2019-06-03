@@ -7,15 +7,18 @@ import {
   Button, DatePicker, Modal, Row, Col, Card, Icon, Radio,
 } from 'ant-design-vue';
 import Chart from 'chart.js';
+
 import { numFormat } from '@/utils/index';
+import { fillAllMonth } from '@/utils/datetime';
 import { entity } from '@/mock/dashboard';
 
-import './index.less';
+
 import Member from '@/store/modules/pages/Member/models/Member';
 import Document from '@/store/modules/pages/Document/models/Document';
 import UserMilitant from '@/store/modules/pages/UserMilitant/models/UserMilitant';
 import Event from '@/store/modules/pages/Event/models/Event';
-import { fillAllMonth } from '@/utils/datetime';
+
+import './index.less';
 
 @Component({
   name: 'Dashboard',
@@ -274,7 +277,7 @@ export default class Dashboard extends Vue {
 
   loading: boolean = true;
 
-  renderMOck(): JSX.Element {
+  renderMock(): JSX.Element {
     return (
       <div class="container">
         <a-row gutter={{ xs: 8, md: 12, xl: 20 }} class="dash-col">
@@ -421,7 +424,7 @@ export default class Dashboard extends Vue {
           <a-col span={14} xxl={14} xl={14} lg={12} md={24} sm={24} xs={24}>
             <a-card loading={this.loading} class="dash-box dash-bar-chart">
               <a-icon class="operate" type="ellipsis"></a-icon>
-              <h2 class="title">PROJECTIONS VS ACTUALS</h2>
+              <h2 class="title">Document by month</h2>
               <div style="height: 263px;" class="chartjs-chart">
                 <canvas height="86px" id="BarChart"></canvas>
               </div>

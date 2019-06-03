@@ -14,13 +14,13 @@ export const defaultItemList: FilterFormList[] = [
   },
   {
     key: 'date',
-    type: 'input',
+    type: 'date',
     label: 'date',
     placeholder: 'Input date',
   },
   {
     key: 'startTime',
-    type: 'input',
+    type: 'datetime',
     label: 'startTime',
     placeholder: 'Input startTime',
   },
@@ -56,13 +56,13 @@ export const defaultItemList: FilterFormList[] = [
   },
   {
     key: 'currentDate',
-    type: 'input',
+    type: 'date',
     label: 'currentDate',
     placeholder: 'Input currentDate',
   },
   {
     key: 'reportDate',
-    type: 'input',
+    type: 'date',
     label: 'reportDate',
     placeholder: 'Input reportDate',
   },
@@ -74,7 +74,7 @@ export const defaultItemList: FilterFormList[] = [
   },
   {
     key: 'instructionDate',
-    type: 'input',
+    type: 'date',
     label: 'instructionDate',
     placeholder: 'Input instructionDate',
   },
@@ -86,9 +86,23 @@ export const defaultItemList: FilterFormList[] = [
   },
   {
     key: 'priority',
-    type: 'input',
+    type: 'select',
     label: 'priority',
     placeholder: 'Input priority',
+    options: [
+      {
+        label: '特提',
+        value: '特提',
+      },
+      {
+        label: '特急',
+        value: '特急',
+      },
+      {
+        label: '加急',
+        value: '加急',
+      },
+    ],
   },
 ];
 

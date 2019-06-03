@@ -1,5 +1,5 @@
 import {
-  map, countBy,
+  map, countBy, find,
 } from 'lodash';
 import moment, { months } from 'moment';
 
@@ -91,4 +91,31 @@ export const countAllByMonth = (data: any[], fieldName: string, withName: boolea
     dateToMonth = dateToMonthIndex(data, fieldName);
   }
   return countBy(dateToMonth, v => v);
+};
+
+/**
+ * 整理数据
+ * 如果items是对象，包裹为数组
+ * 如果items是数组，不用包裹
+ * 如果对象中存在日期类字段，转化为人类阅读格式
+ * @param itemList 列属性定义
+ * @param items 待处理数据对象或数据对象数组
+ * @param typeKey 对象中标记日期类型的键
+ * @param typeValue 对象中标记日期类型的值
+ * @param uniKey 对象中唯一标识符
+ */
+export const convertDate = (itemList, items, format = 'l', typeKey = 'type', typeValue = 'date', uniKey = 'key') => {
+  const dateFields = map(itemList.filter(o => o[typeKey] === typeValue), uniKey);
+  if (Array.isArray(items)) {
+    return map(items, (item) => {
+      dateFields.map((field) => {
+        item[field] = moment(item[field]).format(format);
+      });
+      return item;
+    });
+  }
+  dateFields.map((field) => {
+    items[field] = moment(items[field]).format(format);
+  });
+  return [items];
 };

@@ -1,5 +1,9 @@
+import { map } from 'lodash';
+
 import { tableList, FilterFormList, operate } from '@/interface';
-import { etnia, gender } from '@/utils/constant';
+import {
+  department, etnia, gender, academicBackground, militantRole, politicalRole,
+} from '@/utils/constant';
 
 export const defaultItemList: FilterFormList[] = [
   {
@@ -13,32 +17,7 @@ export const defaultItemList: FilterFormList[] = [
     type: 'select',
     label: 'department',
     placeholder: 'Input department',
-    options: [
-      {
-        label: '单位领导',
-        value: '0',
-      },
-      {
-        label: '政新处',
-        value: '1',
-      },
-      {
-        label: '经商处',
-        value: '2',
-      },
-      {
-        label: '武官处',
-        value: '3',
-      },
-      {
-        label: '领侨处',
-        value: '4',
-      },
-      {
-        label: '办公室',
-        value: '5',
-      },
-    ],
+    options: [...department],
   },
   {
     key: 'name',
@@ -55,7 +34,7 @@ export const defaultItemList: FilterFormList[] = [
   },
   {
     key: 'birthday',
-    type: 'input',
+    type: 'date',
     label: 'birthday',
     placeholder: 'Input birthday',
   },
@@ -68,9 +47,10 @@ export const defaultItemList: FilterFormList[] = [
   },
   {
     key: 'academicBackground',
-    type: 'input',
+    type: 'select',
     label: 'academicBackground',
     placeholder: 'Input academicBackground',
+    options: [...academicBackground],
   },
   {
     key: 'foreignLanguage',
@@ -80,9 +60,10 @@ export const defaultItemList: FilterFormList[] = [
   },
   {
     key: 'politicalRole',
-    type: 'input',
+    type: 'select',
     label: 'politicalRole',
     placeholder: 'Input politicalRole',
+    options: [...politicalRole],
   },
   {
     key: 'positionAndRank',
@@ -95,6 +76,7 @@ export const defaultItemList: FilterFormList[] = [
     type: 'input',
     label: 'militantRole',
     placeholder: 'Input militantRole',
+    options: [...militantRole],
   },
   {
     key: 'duty',
@@ -110,13 +92,13 @@ export const defaultItemList: FilterFormList[] = [
   },
   {
     key: 'arrivingDate',
-    type: 'input',
+    type: 'date',
     label: 'arrivingDate',
     placeholder: 'Input arrivingDate',
   },
   {
     key: 'rotatingDate',
-    type: 'input',
+    type: 'date',
     label: 'rotatingDate',
     placeholder: 'Input rotatingDate',
   },
@@ -158,9 +140,19 @@ export const defaultItemList: FilterFormList[] = [
   },
   {
     key: 'isActive',
-    type: 'input',
+    type: 'checkboxButton',
     label: 'isActive',
     placeholder: 'Input isActive',
+    options: [
+      {
+        label: '在馆',
+        value: '在馆',
+      },
+      {
+        label: '离馆',
+        value: '离馆',
+      },
+    ],
   },
   {
     key: 'militant',

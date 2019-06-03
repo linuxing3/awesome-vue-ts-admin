@@ -14,7 +14,7 @@ export const defaultItemList: FilterFormList[] = [
   },
   {
     key: 'date',
-    type: 'input',
+    type: 'date',
     label: 'date',
     placeholder: 'Input date',
   },
