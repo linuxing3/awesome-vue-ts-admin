@@ -86,9 +86,9 @@ export default class Dashboard extends Vue {
       },
     ];
     // counting documents sending by month
-    const countByMonth = Document.countByMonth('sendingDate', true);
-    const projections = fillAllMonth(countByMonth, 0);
-    const actuals = fillAllMonth(countByMonth, 1);
+    const countByMonth = Document.countByMonth('date', true);
+    const projections = fillAllMonth(countByMonth, 15);
+    const actuals = fillAllMonth(countByMonth, 10);
     this.pageData.projections = projections;
     this.pageData.actuals = actuals;
     this.pageData.lineData = {
