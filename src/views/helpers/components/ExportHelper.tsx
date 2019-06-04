@@ -1,16 +1,20 @@
 import {
-  Component, Vue, Mixins, Emit,
+  Component, Mixins, Emit,
 } from 'vue-property-decorator';
 import {
-  Tag, Icon, Card, Row, Col, Button, Modal, Select, List, Upload,
+  Tag, Icon, Card, Row, Col, Button, Modal, Select, List, Upload, Table, Tree,
 } from 'ant-design-vue';
 import exportMixin from '@/utils/exportMixin';
-
+import { getFilesByExtentionInDir } from '@/utils/helper';
 import './index.less';
 
 @Component({
   name: 'ExportHelper',
   components: {
+    'a-table': Table,
+    'a-tree': Tree,
+    'a-directory-tree': Tree.DirectoryTree,
+    'a-tree-node': Tree.TreeNode,
     'a-icon': Icon,
     'a-row': Row,
     'a-col': Col,
@@ -65,7 +69,19 @@ export default class ExportHelper extends Mixins(exportMixin) {
   }
 
   export() {
-    this.attemptExport(this.data);
+    Modal.confirm({
+      title: 'Export',
+      okText: 'Export Excel/CSV Data',
+      cancelText: 'Export Word Doc/Docx',
+      onOk: () => {
+        this.fileFormat = 'xlsx';
+        this.attemptExport(this.data);
+      },
+      onCancel: () => {
+        this.fileFormat = 'docx';
+        this.attemptExport(this.data);
+      },
+    });
   }
 
   upload(info) {
@@ -86,7 +102,7 @@ export default class ExportHelper extends Mixins(exportMixin) {
 
   renderActionBtn(): JSX.Element {
     return (
-      <div>
+      <div style="{ margin: '16px' }">
         <a-button on-click={this.import} id={'import'} icon="cloud" type="primary">
           Import
         </a-button>
@@ -124,7 +140,7 @@ export default class ExportHelper extends Mixins(exportMixin) {
             <a-list-item>{item}</a-list-item>
           ))}
           <div slot="header">
-            <h3 style="{ margin: '16px 0' }">操作说明</h3>
+            <h3 style="{ margin: '16px' }">操作说明</h3>
             {this.renderActionBtn()}
           </div>
         </a-list>
@@ -133,36 +149,58 @@ export default class ExportHelper extends Mixins(exportMixin) {
   }
 
   renderSampleData(): JSX.Element {
-    const firstRecord = this.data[0];
-    if (firstRecord) {
-      return (
-        <div>
-          <a-list size="large" bordered>
-            {Object.keys(firstRecord).map(key => <a-list-item>{key}|{firstRecord[key]}</a-list-item>)}
-            <div slot="header">
-              <h3 style="{ margin: '16px 0' }">数据样本</h3>
-            </div>
-          </a-list>
-        </div>
-      );
-    }
+    const dataSrouce = this.data.slice(0, 3);
+    const columns = this.itemList.slice(0, 6).reduce((list, item) => {
+      list.push({
+        title: this.$t(item.key),
+        dateIndex: item.key,
+      });
+      return list;
+    }, []);
     return (
-        <div>
-          <h3 style="{ margin: '16px 0' }">无数据样本</h3>
-        </div>
+      <div style="{ margin: '16px' }">
+        <a-table bordered rowKey={'id'} dataSource={dataSrouce} columns={columns} />
+      </div>
     );
   }
 
-  renderSelect(modelName, list): JSX.Element {
+  renderSelect(): JSX.Element {
+    const files = getFilesByExtentionInDir({
+      path: this.templateDir,
+      ext: 'docx',
+    });
+    const { modelName } = this;
     return (
-      <a-select style="width: 100%;" id={modelName} label={modelName}>
-        {list.map((items: any, indexs: number) => (
-          <a-option key={indexs} value={items.value}>
-            {items.label}
+      <a-select style="width: 100%;" id={modelName} label={modelName} change={this.setOutputfile}>
+        {files.map((file: string, indexs: number) => (
+          <a-option key={indexs} value={file}>
+            {file}
           </a-option>
         ))}
       </a-select>
     );
+  }
+
+  renderFileTree(): JSX.Element {
+    const files = getFilesByExtentionInDir({
+      path: this.templateDir,
+      ext: 'docx',
+    });
+    const selectFile = (files) => {
+      this.outputDocFile = files[0];
+      this.$log.info('Current Template file: ', this.modelTemplate);
+    };
+    return (
+      <a-directory-tree on-select={selectFile}>
+        <a-tree-node title={this.templateDir} key="template">
+          {files.map(file => <a-tree-node title={file} key={file} isLeaf />)}
+        </a-tree-node>
+      </a-directory-tree>
+    );
+  }
+
+  setOutputfile(e) {
+    this.outputDocFile = e.target.value;
   }
 
   render() {
@@ -171,28 +209,19 @@ export default class ExportHelper extends Mixins(exportMixin) {
       <div style="width: 100%;" class="helper-wrap">
         <a-card title={`Import and Export [${modelName}]`}>
           <a-row>
-            <a-col {...{ props: this.normalLayout }}>{this.renderContent()}</a-col>
+            <a-col {...{ props: this.halfLayout }}>{this.renderContent()}</a-col>
+            <a-col {...{ props: this.halfLayout }}>
+              <div style="{ margin: '16px' }">
+                <h3 style="{ color: 'blue' }">选择word模板: {this.modelTemplate}</h3>
+              </div>
+              {this.renderFileTree()}
+            </a-col>
           </a-row>
           <a-row>
             <a-col {...{ props: this.normalLayout }}>{this.renderSampleData()}</a-col>
           </a-row>
-          <a-row hidden>
-            <a-col {...{ props: this.normalLayout }}>{this.renderUpload()}</a-col>
-          </a-row>
-          <a-row slot="actions">
-            <a-col {...{ props: this.halfLayout }}>
-              <a-button on-click={this.import} id={'import'} icon="plus" type="primary">
-                Import
-              </a-button>
-            </a-col>
-            <a-col {...{ props: this.halfLayout }}>
-              <a-button on-click={this.export} id={'export'} icon="cloud">
-                Export
-              </a-button>
-            </a-col>
-          </a-row>
         </a-card>
       </div>
-    );
+    )
   }
 }

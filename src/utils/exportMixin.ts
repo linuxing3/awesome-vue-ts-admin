@@ -15,7 +15,7 @@ import XLSX from 'xlsx';
 import {
   Document, Paragraph, Packer,
 } from 'docx';
-import createReport from 'docx-template';
+import createReport from 'docx-templates'
 
 import models from '@/models';
 import keysDef from '@/locales/cn.json';
@@ -143,7 +143,7 @@ export default class exportMixin extends Vue {
 
   // 获取模板目录下自选Word模板
   get modelTemplate(): string {
-    return this.resolvePath(this.outputDocFile, 'doc');
+    return this.resolvePath(this.outputDocFile, 'docx');
   }
 
   mounted() {
@@ -190,7 +190,10 @@ export default class exportMixin extends Vue {
     } else if (this.fileFormat === 'xlsx' || this.fileFormat === 'xls') {
       this.exportExcel(data);
     } else if (this.fileFormat === 'docx') {
-      this.exportDocx(data);
+      this.exportDocTemplate(data, this.modelTemplate)
+    } else if (this.fileFormat === 'doc') {
+      // this.exportDocx(data);
+      this.exportDocTemplate(data, this.modelTemplate)
     }
   }
 
@@ -280,12 +283,8 @@ export default class exportMixin extends Vue {
       mkdirSync(moduleAttachDirWithId);
     }
 
-    if (this.importFileMeta.path !== undefined) {
-      this.attachFile = this.importFileMeta.path;
-    } else {
-      this.attachFile = join(moduleAttachDir, `${uuid}.docx`);
-    }
-    console.log(this.attachFile);
+    this.attachFile = join(moduleAttachDirWithId, `${uuid}.docx`)
+    this.$log.info('Ensure the attach files exists...', this.attachFile);
   }
 
   /**--------------------------------------------------------------------
@@ -436,13 +435,26 @@ export default class exportMixin extends Vue {
    * @param data string 写入附件的内容
    */
   exportDocTemplate(data: any[], template: string) {
+    this.$log.info('Exporting with word template...');
     this.ensureAttachFile();
     const options: ReportOptions = {
       template,
-      data,
+      data: {
+        title: this.modelName,
+        data
+      },
       output: this.attachFile,
     };
-    createReport(options);
+    try {
+      createReport(options);
+    } catch (error) {
+      this.$log.error(error);
+    }
+    this.$log.suc('Done!');
+    // docxTemplate.parse(template).then(varDoc => {
+    //   let staticDocx = varDoc.assemble({ name: 'foo', data: data })
+    //   staticDocx.save(this.attachFile)
+    // })
   }
 
   /**
