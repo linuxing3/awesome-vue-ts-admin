@@ -2,7 +2,6 @@ import { Component, Vue, Emit } from 'vue-property-decorator';
 import { Tag } from 'ant-design-vue';
 import { tableList, FilterFormList, operate } from '@/interface';
 import lfService from '@/utils/request.localforage';
-import moment from 'moment';
 
 import {
   BackParams, operateBtn, tableFieldsList, filterFormItemList, defaultItemList,
@@ -96,7 +95,7 @@ export default class MemberTable extends Vue {
   }
 
   dateRender(value: string) {
-    return <a-tag color="blue">{moment(parseInt(value)).format('LL')}</a-tag>;
+    return <a-tag color="blue">{value}</a-tag>;
   }
 
   @Emit()

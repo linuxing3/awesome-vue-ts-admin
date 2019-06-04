@@ -2,6 +2,7 @@
 import {
   Component, Vue, Emit,
 } from 'vue-property-decorator';
+import { Modal } from 'ant-design-vue';
 import { join } from 'path';
 import {
   pick, keys, last, uniqueId,
@@ -18,7 +19,6 @@ import createReport from 'docx-template';
 
 import models from '@/models';
 import keysDef from '@/locales/cn.json';
-import { convertDate } from '@/utils/datetime';
 
 import {
   getFilesByExtentionInDir,
@@ -180,7 +180,7 @@ export default class exportMixin extends Vue {
    */
   attemptExport(items) {
     // 准备数据
-    const data = convertDate(this.itemList, items, 'l');
+    const data = Array.isArray(items)? items : [items];
     // 插入标题翻译定义
     const translateObj = pick(keysDef, keys(items[0]));
     data.unshift(translateObj);
@@ -316,34 +316,30 @@ export default class exportMixin extends Vue {
     const { modelName, modelDatasource } = this;
     if (existsSync(modelDatasource)) {
       unlinkSync(modelDatasource);
-      this.workbook = XLSX.utils.book_new();
     }
-    try {
-      this.loading = true;
-      this.writeExcelFile({
-        workbook: this.workbook,
-        filename: modelDatasource,
-        name: modelName,
-        data,
-        options: {
-          bookType: 'xlsx',
-          // sheet: this.modelName // single sheet format
-        },
-      });
-      this.loading = false;
-      // 打开文件所在目录并定位到文件
-      this.$confirm({
-        title: '是否打开导出文件？',
-        onOk: () => {
-          setTimeout(() => {
-            shell.showItemInFolder(modelDatasource);
-            console.log(`导出${modelDatasource}文件成功`);
-          }, 2000);
-        },
-      });
-    } catch (error) {
-      throw new Error(error);
-    }
+    this.workbook = XLSX.utils.book_new();
+    this.loading = true;
+    this.writeExcelFile({
+      workbook: this.workbook,
+      filename: modelDatasource,
+      name: modelName,
+      data,
+      options: {
+        bookType: 'xlsx',
+        // sheet: this.modelName // single sheet format
+      },
+    });
+    this.loading = false;
+    // 打开文件所在目录并定位到文件
+    Modal.confirm({
+      title: '是否打开导出文件？',
+      onOk: () => {
+        setTimeout(() => {
+          shell.showItemInFolder(modelDatasource);
+          console.log(`导出${modelDatasource}文件成功`);
+        }, 2000);
+      },
+    });
   }
 
   /**
@@ -494,7 +490,7 @@ export default class exportMixin extends Vue {
       this.loading = false;
       // 选择是否保留原有标题
       if (this.keepOriginalHeader) {
-        this.$confirm({
+        Modal.confirm({
           title: '',
           content:
             '请选择是否保留原有标题。\n因为数据标题行为外文，需要添加中文对应标题。\n你可以随意删除无用标题',

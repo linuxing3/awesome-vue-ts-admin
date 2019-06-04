@@ -82,6 +82,10 @@ export default class EventTable extends Vue {
     return <a-tag color={text ? 'blue' : 'purple'}>{text ? '男' : '女'}</a-tag>;
   }
 
+  dateRender(value: string) {
+    return <a-tag color="blue">{value}</a-tag>;
+  }
+
   @Emit()
   selectChange() {}
 

@@ -4,10 +4,12 @@ import {
 import {
   Input, Select, Form, TimePicker, DatePicker, Cascader, Row, Col, Button, Modal, Checkbox, Radio, Card,
 } from 'ant-design-vue';
+import titleCase from 'title-case';
 import { FilterFormList } from '@/interface';
 import lfService from '@/utils/request.localforage';
+import { convertDate } from '@/utils/datetime';
+
 import './MForm.less';
-import titleCase from 'title-case';
 
 @Component({
   components: {
@@ -102,13 +104,16 @@ class MFormClass extends Vue {
     e.preventDefault();
     this.Form.validateFields((err: any, values: object) => {
       if (!err) {
+        console.log('Form Values:', values);
+        const data = convertDate(this.itemList, values)[0];
+        console.log('Converted Form Values:', data);
         Modal.confirm({
           title: '表单数据',
           okText: 'Next Record',
           cancelText: 'Data Table',
           maskClosable: true,
           onOk: () => {
-            this.addOrEdit(values);
+            this.addOrEdit(data);
             new Promise((resolve) => {
               setTimeout(resolve, 500);
             }).then(() => {
@@ -116,7 +121,7 @@ class MFormClass extends Vue {
             });
           },
           onCancel: () => {
-            this.addOrEdit(values);
+            this.addOrEdit(data);
             new Promise((resolve) => {
               setTimeout(resolve, 500);
             }).then(() => {
@@ -162,8 +167,7 @@ class MFormClass extends Vue {
       })
       .then(({ data, config }) => {
         this.$log.info('Get Data:', data.entity);
-        // config.params.columns && this.$emit('setForm', config.params.columns);
-        this.loadEditInfo(data.entity);
+        this.loadEditInfo(convertDate(this.itemList, data.entity, false)[0]);
       });
   }
 
@@ -302,7 +306,7 @@ class MFormClass extends Vue {
             id={key}
             label={label}
             showTime
-            format="YYYY-MM-DD HH:mm:ss"
+            format="YYYY/M/D HH:mm:ss"
             placeholder={placeholder}
           />
         );
@@ -313,7 +317,7 @@ class MFormClass extends Vue {
           <a-date-picker
             id={key}
             label={label}
-            format="YYYY-MM-DD"
+            format="YYYY/M/D"
             placeholder={placeholder}
           />
         );
@@ -326,7 +330,7 @@ class MFormClass extends Vue {
             id={key}
             label={label}
             showTime
-            format="YYYY-MM-DD HH:mm:ss"
+            format="YYYY/M/D HH:mm:ss"
             disabledTime={disabledTime}
             placeholder={placeholder}
           />

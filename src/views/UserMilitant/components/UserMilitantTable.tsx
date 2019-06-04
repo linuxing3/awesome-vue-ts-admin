@@ -95,7 +95,7 @@ export default class UserMilitantTable extends Vue {
   }
 
   dateRender(value: string) {
-    return <a-tag color="blue">{moment(parseInt(value)).format('LL')}</a-tag>;
+    return <a-tag color="blue">{value}</a-tag>;
   }
 
   @Emit()

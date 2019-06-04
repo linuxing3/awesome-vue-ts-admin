@@ -1,7 +1,7 @@
 import {
   map, countBy, find,
 } from 'lodash';
-import moment, { months } from 'moment';
+import moment, { months, MomentInput, Moment } from 'moment';
 
 export const testMonthData = [
   {
@@ -100,22 +100,39 @@ export const countAllByMonth = (data: any[], fieldName: string, withName: boolea
  * 如果对象中存在日期类字段，转化为人类阅读格式
  * @param itemList 列属性定义
  * @param items 待处理数据对象或数据对象数组
+ * @param normal 从日期对象到字符串，反之为从字符串到日期对象
  * @param typeKey 对象中标记日期类型的键
  * @param typeValue 对象中标记日期类型的值
  * @param uniKey 对象中唯一标识符
  */
-export const convertDate = (itemList, items, format = 'l', typeKey = 'type', typeValue = 'date', uniKey = 'key') => {
+export const convertDate = (itemList: any[], items: object[]|object, normal = true, format1 = 'l', format2 = 'YYYY/M/D', typeKey = 'type', typeValue = 'date', uniKey = 'key') => {
+  // helper convert and reconvert functions
+  const func = (v: MomentInput, f: string): string => moment(v).format(f);
+  const refunc = (v: MomentInput, f: string): Moment => moment(v, f);
+  const hfunc = (item: any, fields: any[], callback: Function, format = 'l') => {
+    fields.map((f) => {
+      item[f] = callback(item[f], format);
+    });
+  };
   const dateFields = map(itemList.filter(o => o[typeKey] === typeValue), uniKey);
+  // if items is array
   if (Array.isArray(items)) {
-    return map(items, (item) => {
-      dateFields.map((field) => {
-        item[field] = moment(item[field]).format(format);
+    if (normal) {
+      return map(items, (item) => {
+        hfunc(item, dateFields, func, format1);
+        return item;
       });
+    }
+    return map(items, (item) => {
+      hfunc(item, dateFields, refunc, format2);
       return item;
     });
   }
-  dateFields.map((field) => {
-    items[field] = moment(items[field]).format(format);
-  });
+  // if items is object
+  if (normal) {
+    hfunc(items, dateFields, func, format1);
+    return [items];
+  }
+  hfunc(items, dateFields, refunc, format2);
   return [items];
 };
