@@ -134,13 +134,32 @@ export const defaultItemList: FilterFormList[] = [
     placeholder: 'Input transferDate',
   },
 ];
-export const tableFieldsList: tableList[] = fields.reduce((list, field) => {
-  list.push({
-    title: titleCase(field),
-    dataIndex: field,
-  });
-  return list;
-}, []);
+export const tableFieldsList: tableList[] = [
+  {
+    dataIndex: 'id',
+    title: 'id',
+  },
+  {
+    dataIndex: 'name',
+    title: 'name',
+  },
+  {
+    dataIndex: 'gender',
+    title: 'gender',
+  },
+  {
+    dataIndex: 'etnia',
+    title: 'etnia',
+  },
+  {
+    dataIndex: 'militantAdmissionDate',
+    title: 'militantAdmissionDate',
+  },
+  {
+    dataIndex: 'militantRole',
+    title: 'militantRole',
+  },
+];
 
 export const filterFormItemList: FilterFormList[] = fields.reduce((list, field) => {
   list.push({

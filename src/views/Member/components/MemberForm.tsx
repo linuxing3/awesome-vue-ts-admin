@@ -1,11 +1,10 @@
-
-import { Component, Vue, Emit } from 'vue-property-decorator';
+import { Component, Mixins } from 'vue-property-decorator';
 import {
-  Form, Card, Dropdown, Menu, Icon, Modal,
+  Form, Card, Dropdown, Menu, Icon,
 } from 'ant-design-vue';
-import { upperFirst } from 'lodash';
-import { FilterFormList, operate } from '@/interface';
+import { FilterFormList } from '@/interface';
 import MForm from '@/components/FilterForm/MForm';
+import FormMixin from '@/utils/formMixin';
 
 import { defaultItemList } from './config';
 import './index.less';
@@ -24,63 +23,15 @@ import './index.less';
     Form,
   },
 })
-class MemberForm extends Vue {
+class MemberForm extends Mixins(FormMixin) {
   modelName: string = 'member'
 
   formValues: any = {}
 
   itemList: FilterFormList[] = defaultItemList
 
-  @Emit()
-  setForm(itemList: FilterFormList[]) {
-    this.itemList = [...itemList];
-  }
-
-  @Emit()
-  loadEditInfo(data) {
-    this.formValues = data;
-  }
-
-  @Emit()
-  showDataTable() {
-    Modal.info({
-      title: 'Go to datatable',
-      onOk: () => {
-        const tableRouter = `${upperFirst(this.modelName)}Table`;
-        this.$router.push({
-          name: tableRouter,
-        });
-      },
-    });
-  }
-
-  @Emit()
-  importOrExport() {
-    const values = this.formValues;
-    Modal.info({
-      title: `Import or Export ${this.modelName}`,
-      onOk: () => {
-        this.$router.replace({
-          name: 'ExportHelper',
-          params: {
-            modelName: this.modelName,
-            data: JSON.stringify({ ids: [values.id] }),
-          },
-        });
-      },
-    });
-  }
-
-  @Emit()
-  statistic() {
-    Modal.info({
-      title: 'Statistic Charts',
-      onOk: () => {
-        this.$router.replace({
-          name: 'Statistic',
-        });
-      },
-    });
+  outParams: any = {
+    itemList: defaultItemList,
   }
 
   render() {
@@ -93,10 +44,10 @@ class MemberForm extends Vue {
             </a>
             <a-menu slot="overlay">
               <a-menu-item>
-                <a on-click={this.importOrExport}>Import/Export</a>
+                <a on-click={this.importOrExport}>导入导出</a>
               </a-menu-item>
               <a-menu-item>
-                <a on-click={this.statistic}>Statistic</a>
+                <a on-click={this.statistic}>统计图表</a>
               </a-menu-item>
             </a-menu>
           </a-dropdown>

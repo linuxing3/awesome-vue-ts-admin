@@ -162,7 +162,7 @@ const lfService: LfService = {
           }
           requestedData = baseData('success', '查询成功');
           // using query builder get real data
-          requestedData.entity = query.get();
+          requestedData.entity = query.orderBy('id', 'desc').get();
         } else {
           await Entity.$fetch();
           const entities = await Entity.$get(data.id.toString());

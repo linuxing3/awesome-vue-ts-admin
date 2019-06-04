@@ -355,6 +355,9 @@ export default class exportMixin extends Vue {
     XLSX.utils.book_append_sheet(workbook, worksheet, name);
     // 写入文件
     XLSX.writeFile(workbook, filename, options);
+    // 同样导出csv和txt文件
+    this.saveExcelAs(worksheet, 'csv');
+    this.saveExcelAs(worksheet, 'txt');
   }
 
   /**
@@ -363,7 +366,7 @@ export default class exportMixin extends Vue {
    * @param type 文件类型
    */
   saveExcelAs(worksheet: XLSX.WorkSheet, type = 'csv') {
-    let output;
+    let output: string;
     if (type === 'csv') {
       output = XLSX.utils.sheet_to_csv(worksheet, {
         FS: ',',

@@ -7,39 +7,31 @@ const ModelName = h.changeCase.pascal(model)
 const modelListName = ModelName + 'List'
 const modelFormName = ModelName + 'Form'
 %>import { tableList, FilterFormList, operate } from '@/interface';
-import titleCase from 'title-case';
-import models from '@/models';
 
-const Entity: any = models['<%= EntityName %>'];
-const fields: string[] = Entity.fieldsKeys();
-
-export const defaultItemList: FilterFormList[] = fields.reduce((list, field) => {
-  list.push({
-    key: field,
+export const defaultItemList: FilterFormList[] = [
+  {
+    key: 'id',
     type: 'input',
-    label: titleCase(field),
-    placeholder: 'Input ' + titleCase(field)
-  })
-  return list;
-}, []);
+    label: 'id',
+    placeholder: 'Leave it untouched!',
+  },
+];
 
-export const tableFieldsList: tableList[] = fields.reduce((list, field) => {
-  list.push({
-    title: titleCase(field),
-    dataIndex: field,
-  })
-  return list;
-}, []);
+export const tableFieldsList: tableList[] = [
+  {
+    title: 'Name',
+    dataIndex: 'name',
+  },
+];
 
-export const filterFormItemList: FilterFormList[] = fields.reduce((list, field) => {
-  list.push({
-    key: field,
+export const filterFormItemList: FilterFormList[] = [
+  {
+    key: 'id',
     type: 'input',
-    label: titleCase(field),
-    placeholder: 'Search' + titleCase(field)
-  })
-  return list;
-}, []);
+    label: 'id',
+    placeholder: 'Leave it untouched!',
+  },
+]
 
 export const BackParams: any = {
   code: 'data.result.resultCode',

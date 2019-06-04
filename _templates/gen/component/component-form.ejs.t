@@ -6,16 +6,17 @@ const EntityName = h.changeCase.camel(model)
 const ModelName = h.changeCase.pascal(model)
 const modelListName = ModelName + 'List'
 const modelFormName = ModelName + 'Form'
-%>import { Component, Vue, Emit } from 'vue-property-decorator';
+%>import { Component, Mixins } from 'vue-property-decorator';
 import {
-  Form, Card, Dropdown, Menu, Icon, Modal,
+  Form, Card, Dropdown, Menu, Icon,
 } from 'ant-design-vue';
-import { upperFirst } from 'lodash';
-import { FilterFormList, operate } from '@/interface';
+import { FilterFormList } from '@/interface';
 import MForm from '@/components/FilterForm/MForm';
+import FormMixin from '@/utils/formMixin';
 
-import { defaultItemList } from './config'
+import { defaultItemList } from './config';
 import './index.less';
+
 
 @Component({
   name: '<%= modelFormName %>',
@@ -31,65 +32,17 @@ import './index.less';
     Form,
   },
 })
-class <%= modelFormName %> extends Vue {
+class <%= modelFormName %> extends Mixins(FormMixin) {
   modelName: string = '<%= EntityName %>'
 
   formValues: any = {}
 
   itemList: any[] = defaultItemList
 
-  @Emit()
-  setForm(itemList: FilterFormList[]) {
-    this.itemList = [...itemList];
+  outParams: any = {
+    itemList: defaultItemList
   }
-
-  @Emit()
-  loadEditInfo(data) {
-    this.formValues = data;
-  }
-
-  @Emit()
-  showDataTable() {
-    Modal.info({
-      title: 'Go to datatable',
-      onOk: () => {
-        const tableRouter = `${upperFirst(this.modelName)}Table`;
-        this.$router.push({
-          name: tableRouter,
-        });
-      },
-    });
-  }
-
-  @Emit()
-  importOrExport() {
-    const values = this.formValues;
-    Modal.info({
-      title: `Import or Export ${this.modelName}`,
-      onOk: () => {
-        this.$router.replace({
-          name: 'ExportHelper',
-          params: {
-            modelName: this.modelName,
-            data: JSON.stringify({ ids: [values.id] }),
-          },
-        });
-      },
-    });
-  }
-
-  @Emit()
-  statistic() {
-    Modal.info({
-      title: 'Statistic Charts',
-      onOk: () => {
-        this.$router.replace({
-          name: 'Statistic',
-        });
-      },
-    });
-  }
-
+  
   render() {
     return (
       <div class="base-form-wrap">

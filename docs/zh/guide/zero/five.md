@@ -1,12 +1,13 @@
 # Linting & formatting
 
-- [Languages](#languages)
-- [Scripts](#scripts)
-  - [Terminal](#terminal)
-  - [Pre-commit](#pre-commit)
-  - [Editor](#editor)
-- [Configuration](#configuration)
-- [FAQ](#faq)
+- [Linting & formatting](#linting--formatting)
+  - [Languages](#languages)
+  - [Scripts](#scripts)
+    - [Terminal](#terminal)
+    - [Pre-commit](#pre-commit)
+    - [Editor](#editor)
+  - [Configuration](#configuration)
+  - [FAQ](#faq)
 
 This project uses ESLint and Prettier to catch errors and avoid bikeshedding by enforcing a common code style.
 Of course if you prefer Stylelint, Markdownlint, you may install them.

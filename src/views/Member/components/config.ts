@@ -1,5 +1,3 @@
-import { map } from 'lodash';
-
 import { tableList, FilterFormList, operate } from '@/interface';
 import {
   department, etnia, gender, academicBackground, militantRole, politicalRole,

@@ -6,12 +6,14 @@ const EntityName = h.changeCase.camel(model)
 const ModelName = h.changeCase.pascal(model)
 const modelTableName = ModelName + 'Table'
 const modelFormName = ModelName + 'Form'
-%>import { Component, Vue, Emit } from 'vue-property-decorator';
+%>import { Component, Mixins } from 'vue-property-decorator';
 import { Tag } from 'ant-design-vue';
 import { tableList, FilterFormList, operate } from '@/interface';
-import lfService from '@/utils/request.localforage';
+import TableMixin from '@/utils/tableMixin';
+import {
+  BackParams, operateBtn, tableFieldsList, filterFormItemList, defaultItemList,
+} from './config';
 
-import { BackParams, operateBtn, tableFieldsList, filterFormItemList } from './config'
 import './index.less';
 
 @Component({
@@ -20,7 +22,7 @@ import './index.less';
     'a-tag': Tag,
   },
 })
-export default class <%= modelTableName %> extends Vue {
+export default class <%= modelTableName %> extends Mixins(TableMixin) {
   modelName: string = '<%= EntityName %>'
 
   data: any[] = []
@@ -33,10 +35,6 @@ export default class <%= modelTableName %> extends Vue {
 
   filterParams: any = {
     name: '',
-    gender: '',
-    department: '',
-    fromEntity: '',
-    arrivingDate: '',
   }
 
   BackParams: any = BackParams
@@ -49,36 +47,15 @@ export default class <%= modelTableName %> extends Vue {
 
   operate: operate[] = operateBtn
 
-  title: string = 'Add <%= ModelName %>'
-
   visible: boolean = false
 
   modelType: string = 'add'
 
   editData: object = {}
 
-  activated() {
-    this.success();
-  }
-
-  @Emit()
-  add() {
-    this.$log.suc('Creating ... ');
-    this.$router.replace({
-      name: '<%= modelFormName %>',
-    });
-  }
-
-  @Emit()
-  export(ids) {
-    this.$log.suc('Exporting from <%= modelTableName %> ... ');
-    this.$router.replace({
-      name: 'ExportHelper',
-      params: {
-        modelName: this.modelName,
-        data: JSON.stringify({ ids }),
-      },
-    });
+  customRender() {
+    this.tableList[1].customRender = this.genderRender;
+    this.tableList[4].customRender = this.dateRender;
   }
 
   genderRender(text: any) {
@@ -86,65 +63,14 @@ export default class <%= modelTableName %> extends Vue {
   }
   
   dateRender(value: string) {
-    return <a-tag color='blue'>{moment(parseInt(value)).format('LL')}</a-tag>
-  }
-
-  @Emit()
-  selectChange() {}
-
-  @Emit()
-  currentChange() {}
-
-  @Emit()
-  clearOutParams() {}
-
-  @Emit()
-  async handleDelete(row) {
-    this.$log.suc('Deleting ... ');
-    const response = await lfService.request({
-      url: `/${this.modelName}`,
-      method: 'delete',
-      data: row.id,
-    });
-    Promise.resolve(response);
-  }
-
-  @Emit()
-  handleEdit(row) {
-    this.$log.suc('Editing ... ');
-    this.$router.replace({
-      name: '<%= modelFormName %>',
-      params: {
-        id: row.id,
-      },
-    });
-  }
-
-  @Emit()
-  tableClick(key: string, row: any) {
-    switch (key) {
-      case 'edit':
-        this.handleEdit(row);
-        break;
-      case 'export':
-        this.export([row.id]);
-        break;
-      default:
-        this.handleDelete(row).then(() => this.success());
-        break;
-    }
-  }
-
-  success() {
-    const Table: any = this.$refs.MemberInfoTable;
-    Table.reloadTable();
+    return <a-tag color="blue">{value}</a-tag>;
   }
 
   render() {
     return (
       <div class="baseInfo-wrap">
         <filter-table
-          ref="MemberInfoTable"
+          ref="InfoTable"
           tableList={this.tableList}
           filterList={this.filterList}
           filterGrade={[]}

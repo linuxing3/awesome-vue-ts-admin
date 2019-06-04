@@ -1,3 +1,6 @@
+/* -------------------------------------------------------------
+| Parse params in url
+|-------------------------------------------------------------*/
 export function param2Obj(url: string): { token?: string } {
   const search = url.split('?')[1];
   if (!search) {
@@ -6,6 +9,9 @@ export function param2Obj(url: string): { token?: string } {
   return JSON.parse(`{"${decodeURIComponent(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"')}"}`);
 }
 
+/* -------------------------------------------------------------
+| Export route to array
+|-------------------------------------------------------------*/
 export function routeToArray(route: string): { routeArr: string[], params: string } {
   if (!route) {
     return {
@@ -47,6 +53,9 @@ export function numFormat(num: number) {
   return num.toString().replace(/(\d{1,3})(?=(\d{3})+$)/g, '$1,');
 }
 
+/* -------------------------------------------------------------
+| Load ApexCharts
+|-------------------------------------------------------------*/
 export const loadApexCharts = () => new Promise(((resolve, reject) => {
   if (window.ApexCharts) {
     resolve(window.ApexCharts);
@@ -69,6 +78,36 @@ export const loadApexCharts = () => new Promise(((resolve, reject) => {
   script.onreadystatechange = script.onload;
 }));
 
+
+/* -------------------------------------------------------------
+| Load Antv DataSet
+|-------------------------------------------------------------*/
+export const loadAntvDataSet = () => new Promise(((resolve, reject) => {
+  if (window.AntvDataSet) {
+    resolve(window.AntvDataSet);
+  }
+  const script: any = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src = '/data-set.min.js';
+  script.onerror = reject;
+  const { head } = document;
+  if (head) {
+    head.appendChild(script);
+  }
+  script.onload = function onload() {
+    if (!this.readyState || this.readyState === 'loaded' || this.readyState === 'complete') {
+      resolve(window.AntvDataSet);
+    }
+    script.onload = null;
+    script.onreadystatechange = null;
+  };
+  script.onreadystatechange = script.onload;
+}));
+
+
+/* -------------------------------------------------------------
+| Load Baidu Map
+|-------------------------------------------------------------*/
 export const loadBmap = () => new Promise(((resolve, reject) => {
   if (!window.BMap) {
     const script: any = document.createElement('script');
@@ -92,6 +131,10 @@ export const loadBmap = () => new Promise(((resolve, reject) => {
   }
 }));
 
+
+/* -------------------------------------------------------------
+| Load Canvas Layer
+|-------------------------------------------------------------*/
 export const loadCanvasLayer = () => new Promise(((resolve, reject) => {
   const script: any = document.createElement('script');
   script.type = 'text/javascript';
@@ -111,6 +154,10 @@ export const loadCanvasLayer = () => new Promise(((resolve, reject) => {
   script.onreadystatechange = script.onload;
 }));
 
+
+/* -------------------------------------------------------------
+| Load Map Infobox
+|-------------------------------------------------------------*/
 export const loadMapInfoBox = () => new Promise(((resolve, reject) => {
   const script: any = document.createElement('script');
   script.type = 'text/javascript';

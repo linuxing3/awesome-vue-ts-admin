@@ -10,6 +10,11 @@ export const constantRouterMap: routerItem[] & RouterOptions['routes'] = [
     redirect: '/dashboard',
   },
   {
+    path: '/statistic',
+    name: 'Statistic',
+    redirect: '/charts',
+  },
+  {
     path: '/login',
     name: 'login',
     component: getComponent('login/index'),

@@ -1,10 +1,11 @@
-import { Component, Vue, Emit } from 'vue-property-decorator';
+import {
+  Component, Vue, Emit, Mixins,
+} from 'vue-property-decorator';
 import {
   Form, Card, Dropdown, Menu, Icon, Modal,
 } from 'ant-design-vue';
-import { upperFirst } from 'lodash';
-import { FilterFormList, operate } from '@/interface';
 import MForm from '@/components/FilterForm/MForm';
+import FormMixin from '@/utils/formMixin';
 
 import { defaultItemList } from './config';
 import './index.less';
@@ -23,63 +24,15 @@ import './index.less';
     Form,
   },
 })
-class UserMilitantForm extends Vue {
+class UserMilitantForm extends Mixins(FormMixin) {
   modelName: string = 'userMilitant'
 
   formValues: any = {}
 
   itemList: any[] = defaultItemList
 
-  @Emit()
-  setForm(itemList: FilterFormList[]) {
-    this.itemList = [...itemList];
-  }
-
-  @Emit()
-  loadEditInfo(data) {
-    this.formValues = data;
-  }
-
-  @Emit()
-  showDataTable() {
-    Modal.info({
-      title: 'Go to datatable',
-      onOk: () => {
-        const tableRouter = `${upperFirst(this.modelName)}Table`;
-        this.$router.push({
-          name: tableRouter,
-        });
-      },
-    });
-  }
-
-  @Emit()
-  importOrExport() {
-    const values = this.formValues;
-    Modal.info({
-      title: `Import or Export ${this.modelName}`,
-      onOk: () => {
-        this.$router.replace({
-          name: 'ExportHelper',
-          params: {
-            modelName: this.modelName,
-            data: JSON.stringify({ ids: [values.id] }),
-          },
-        });
-      },
-    });
-  }
-
-  @Emit()
-  statistic() {
-    Modal.info({
-      title: 'Statistic Charts',
-      onOk: () => {
-        this.$router.replace({
-          name: 'Statistic',
-        });
-      },
-    });
+  outParams: any = {
+    itemList: defaultItemList,
   }
 
   render() {
