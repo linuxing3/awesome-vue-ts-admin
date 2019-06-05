@@ -115,13 +115,6 @@ export default class Header extends Vue {
   }
 
   @Emit()
-  bellClick(): void {
-    this.$router.push({
-      name: 'ProfileBaseForm',
-    });
-  }
-
-  @Emit()
   switchSidebar(): void {
     this.$store.dispatch('ToggleSideBar');
   }
@@ -161,7 +154,9 @@ export default class Header extends Vue {
             </a-badge>
           </li>
           <li>
-            <a-icon type="appstore" on-click={this.bellClick} />
+            <a href="https://github.com/linuxing3/awesome-vue-ts-admin" target="_blank">
+              <a-icon type="github" />
+            </a>
           </li>
           <li class="user">
             <a-dropdown>

@@ -434,23 +434,23 @@ export default class Dashboard extends Vue {
         <a-row gutter={{ xs: 8, md: 12, xl: 20 }}>
           <a-col span={16} xxl={16} xl={16} lg={24} md={24} sm={24} xs={24}>
             <a-card loading={this.loading} class="dash-box revenue-chart">
-              <h2 class="title">REVENUE</h2>
+              <h2 class="title">文档</h2>
               <a-icon class="operate" type="ellipsis"></a-icon>
               <div class="week-data">
                 <div class="item">
-                  <h4 class="item-title">Current Week</h4>
-                  <p class="number">${this.pageData && numFormat(this.pageData.CurrentWeek)}</p>
+                  <h4 class="item-title">本周</h4>
+                  <p class="number">{this.pageData && numFormat(this.pageData.CurrentWeek)}件</p>
                 </div>
                 <div class="item">
-                  <h4 class="item-title">Previous Week</h4>
-                  <p class="number number2">${this.pageData && numFormat(this.pageData.PreviousWeek)}</p>
+                  <h4 class="item-title">上周</h4>
+                  <p class="number number2">{this.pageData && numFormat(this.pageData.PreviousWeek)}件</p>
                 </div>
               </div>
               <div class="float-text">
-                <p class="txt">Today's Earning: $2,562.30</p>
-                <p class="tips">Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus...</p>
+                <p class="txt">本周统计：555</p>
+                <p class="tips">...</p>
                 <a-button type="dashed">
-                  View Statements <a-icon type="arrow-right"></a-icon>
+                  看图说话 <a-icon type="arrow-right"></a-icon>
                 </a-button>
               </div>
               <div style="height: 364px; margin-top: 40px" class="chartjs-chart">
@@ -460,36 +460,30 @@ export default class Dashboard extends Vue {
           </a-col>
           <a-col span={8} xxl={8} xl={8} lg={24} md={24} sm={24} xs={24}>
             <a-card loading={this.loading} class="dash-box total-wrap">
-              <h2 class="title">Total Sales</h2>
+              <h2 class="title">休假统计</h2>
               <a-icon class="operate" type="ellipsis"></a-icon>
               <div class="filter-wrap">
                 <a-radio-group defaultValue="a" buttonStyle="solid">
-                  <a-radio-button value="a">Today</a-radio-button>
-                  <a-radio-button value="b">Yesterday</a-radio-button>
-                  <a-radio-button value="c">A Week</a-radio-button>
-                  <a-radio-button value="d">A Month</a-radio-button>
+                  <a-radio-button value="a">路线</a-radio-button>
+                  <a-radio-button value="b">月份</a-radio-button>
                 </a-radio-group>
-                <span class="tips">Please select filter time</span>
+                <span class="tips">选择分类</span>
               </div>
               <div style="height: 225px; margin-top: 40px" class="chartjs-chart">
                 <canvas height="100px" id="Doughnut"></canvas>
               </div>
               <div class="chart-widget-list">
                 <p>
-                  <i class="mdi mdi-square text-primary"></i> Direct
-                  <span class="fr">$300.56</span>
+                  <i class="mdi mdi-square text-primary"></i> 其他
+                  <span class="fr">300.56</span>
                 </p>
                 <p>
-                  <i class="mdi mdi-square text-danger"></i> Affilliate
-                  <span class="fr">$135.18</span>
-                </p>
-                <p>
-                  <i class="mdi mdi-square text-success"></i> Sponsored
-                  <span class="fr">$48.96</span>
+                  <i class="mdi mdi-square text-success"></i> 美国
+                  <span class="fr">48.96</span>
                 </p>
                 <p class="mb-0">
-                  <i class="mdi mdi-square"></i> E-mail
-                  <span class="fr">$154.02</span>
+                  <i class="mdi mdi-square"></i> 欧洲
+                  <span class="fr">154.02</span>
                 </p>
               </div>
             </a-card>
