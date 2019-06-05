@@ -8,6 +8,9 @@ const modelListName = ModelName + 'List'
 const modelFormName = ModelName + 'Form'
 %>import { tableList, FilterFormList, operate } from '@/interface';
 
+/* -------------------------------------------------------------
+| Item list for forms in m-form
+|-------------------------------------------------------------*/
 export const defaultItemList: FilterFormList[] = [
   {
     key: 'id',
@@ -17,6 +20,9 @@ export const defaultItemList: FilterFormList[] = [
   },
 ];
 
+/* -------------------------------------------------------------
+| Field list for tables in filter-table
+|-------------------------------------------------------------*/
 export const tableFieldsList: tableList[] = [
   {
     title: 'Name',
@@ -24,6 +30,9 @@ export const tableFieldsList: tableList[] = [
   },
 ];
 
+/* -------------------------------------------------------------
+| Item list for filter forms in filter-table
+|-------------------------------------------------------------*/
 export const filterFormItemList: FilterFormList[] = [
   {
     key: 'id',
@@ -33,6 +42,9 @@ export const filterFormItemList: FilterFormList[] = [
   },
 ]
 
+/* -------------------------------------------------------------
+| Backend params to find path of http response
+|-------------------------------------------------------------*/
 export const BackParams: any = {
   code: 'data.result.resultCode',
   codeOK: 0,
@@ -42,6 +54,9 @@ export const BackParams: any = {
   total: 'config.params.pageParams.total'
 }
 
+/* -------------------------------------------------------------
+| Buttons for operations in filter-table
+|-------------------------------------------------------------*/
 export const operateBtn: operate[] = [
   {
     key: 'edit',

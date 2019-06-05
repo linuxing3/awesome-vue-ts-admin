@@ -13,10 +13,8 @@ import {
 import { FilterFormList } from '@/interface';
 import MForm from '@/components/FilterForm/MForm';
 import FormMixin from '@/utils/formMixin';
-
 import { defaultItemList } from './config';
 import './index.less';
-
 
 @Component({
   name: '<%= modelFormName %>',
@@ -33,6 +31,7 @@ import './index.less';
   },
 })
 class <%= modelFormName %> extends Mixins(FormMixin) {
+
   modelName: string = '<%= EntityName %>'
 
   formValues: any = {}

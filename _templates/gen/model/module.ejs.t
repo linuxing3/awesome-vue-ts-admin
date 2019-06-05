@@ -8,6 +8,10 @@ const ModelName = h.changeCase.pascal(model)
 import { make } from 'vuex-pathify'
 import { I<%= ModelName %> } from '../models/<%= ModelName %>'
 
+/* -------------------------------------------------------------
+| Interfaces
+|-------------------------------------------------------------*/
+
 interface I<%= ModelName %>State {
   name: string
   items: I<%= ModelName %>[],
@@ -26,6 +30,9 @@ export interface I<%= ModelName %>Actions {
   defaultAction(context: ActionContext<I<%= ModelName %>State, any>, payload: I<%= ModelName %>): Promise<any>
 }
 
+/* -------------------------------------------------------------
+| Vuex state/mutations/actions/getters, auto made with `vuex-pathify`
+|-------------------------------------------------------------*/
 const state: I<%= ModelName %>State = {
   name: '<%= EntityName %>',
   items: [],
@@ -44,6 +51,9 @@ const getters: GetterTree<I<%= ModelName %>State, any > = {
   ...make.getters(state)
 }
 
+/* -------------------------------------------------------------
+| Vuex module namespaced
+|-------------------------------------------------------------*/
 const <%= ModelName %>Module: Module<I<%= ModelName %>State, any> = {
   namespaced: true,
   state,
