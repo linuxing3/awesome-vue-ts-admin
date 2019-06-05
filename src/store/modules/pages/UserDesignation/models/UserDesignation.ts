@@ -3,6 +3,7 @@ import { BaseModel } from '@/models/BaseModel';
 export interface IUserDesignation {
   id?: string;
   designation?: string;
+  description?: string;
 }
 
 export default class UserDesignation extends BaseModel {

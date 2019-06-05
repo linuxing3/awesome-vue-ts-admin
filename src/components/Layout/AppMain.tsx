@@ -7,6 +7,8 @@ import { menuItem } from '@/interface';
 
 import Header from '@/components/Layout/Header/Header';
 import Sidebar from '@/components/Layout/Sidebar/Sidebar';
+import Footer from '@/components/Layout/Footer/Footer.tsx';
+
 import './AppMain.less';
 
 @Component({
@@ -84,6 +86,7 @@ export default class AppMain extends Vue {
               <router-view/>
             </keep-alive>
           </div>
+          <Footer />
         </div>
       </div>
     );

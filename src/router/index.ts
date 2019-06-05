@@ -74,61 +74,11 @@ export const asyncRouterMap: routerItem[] = [
     ],
   },
   // insert more route below
-  // userMilitant
-  {
-    path: '/userMilitant',
-    icon: 'team',
-    name: 'UserMilitant',
-    component: getComponent('UserMilitant/index'),
-    permission: true,
-    meta: { key: 'userMilitant' },
-    children: [
-      {
-        path: 'userMilitant-form',
-        name: 'UserMilitantForm',
-        component: getComponent('UserMilitant/components/UserMilitantForm'),
-        permission: true,
-        meta: { key: 'UserMilitantForm' },
-      },
-      {
-        path: 'userMilitant-table',
-        name: 'UserMilitantTable',
-        component: getComponent('UserMilitant/components/UserMilitantTable'),
-        permission: true,
-        meta: { key: 'UserMilitantTable' },
-      },
-    ],
-  },
-  // event
-  {
-    path: '/event',
-    icon: 'calendar',
-    name: 'Event',
-    component: getComponent('Event/index'),
-    permission: true,
-    meta: { key: 'event' },
-    children: [
-      {
-        path: 'event-form',
-        name: 'EventForm',
-        component: getComponent('Event/components/EventForm'),
-        permission: true,
-        meta: { key: 'EventForm' },
-      },
-      {
-        path: 'event-table',
-        name: 'EventTable',
-        component: getComponent('Event/components/EventTable'),
-        permission: true,
-        meta: { key: 'EventTable' },
-      },
-    ],
-  },
   // document
   {
     path: '/document',
     icon: 'folder',
-    name: 'Document',
+    name: '文件',
     component: getComponent('Document/index'),
     permission: true,
     meta: { key: 'document' },
@@ -153,7 +103,7 @@ export const asyncRouterMap: routerItem[] = [
   {
     path: '/member',
     icon: 'team',
-    name: 'Member',
+    name: '成员',
     component: getComponent('Member/index'),
     permission: true,
     meta: { key: 'member' },
@@ -174,10 +124,185 @@ export const asyncRouterMap: routerItem[] = [
       },
     ],
   },
+  // employee
+  {
+    path: '/employee',
+    icon: 'flag',
+    name: '雇员',
+    component: getComponent('Employee/index'),
+    permission: true,
+    meta: { key: 'employee' },
+    children: [
+      {
+        path: 'employee-form',
+        name: 'EmployeeForm',
+        component: getComponent('Employee/components/EmployeeForm'),
+        permission: true,
+        meta: { key: 'EmployeeForm' },
+      },
+      {
+        path: 'employee-table',
+        name: 'EmployeeTable',
+        component: getComponent('Employee/components/EmployeeTable'),
+        permission: true,
+        meta: { key: 'EmployeeTable' },
+      },
+    ],
+  },
+  // userDesignation
+  {
+    path: '/userDesignation',
+    icon: 'team',
+    name: '任命',
+    component: getComponent('UserDesignation/index'),
+    permission: true,
+    meta: { key: 'userDesignation' },
+    children: [
+      {
+        path: 'userDesignation-form',
+        name: 'UserDesignationForm',
+        component: getComponent('UserDesignation/components/UserDesignationForm'),
+        permission: true,
+        meta: { key: 'UserDesignationForm' },
+      },
+      {
+        path: 'userDesignation-table',
+        name: 'UserDesignationTable',
+        component: getComponent('UserDesignation/components/UserDesignationTable'),
+        permission: true,
+        meta: { key: 'UserDesignationTable' },
+      },
+    ],
+  },
+  // userPromotion
+  {
+    path: '/userPromotion',
+    icon: 'rise',
+    name: '晋升',
+    component: getComponent('UserPromotion/index'),
+    permission: true,
+    meta: { key: 'userPromotion' },
+    children: [
+      {
+        path: 'userPromotion-form',
+        name: 'UserPromotionForm',
+        component: getComponent('UserPromotion/components/UserPromotionForm'),
+        permission: true,
+        meta: { key: 'UserPromotionForm' },
+      },
+      {
+        path: 'userPromotion-table',
+        name: 'UserPromotionTable',
+        component: getComponent('UserPromotion/components/UserPromotionTable'),
+        permission: true,
+        meta: { key: 'UserPromotionTable' },
+      },
+    ],
+  },
+  // leave
+  {
+    path: '/leave',
+    icon: 'car',
+    name: '休假',
+    component: getComponent('Leave/index'),
+    permission: true,
+    meta: { key: 'leave' },
+    children: [
+      {
+        path: 'leave-form',
+        name: 'LeaveForm',
+        component: getComponent('Leave/components/LeaveForm'),
+        permission: true,
+        meta: { key: 'LeaveForm' },
+      },
+      {
+        path: 'leave-table',
+        name: 'LeaveTable',
+        component: getComponent('Leave/components/LeaveTable'),
+        permission: true,
+        meta: { key: 'LeaveTable' },
+      },
+    ],
+  },
+  // project
+  {
+    path: '/project',
+    icon: 'ordered-list',
+    name: '项目任务',
+    component: getComponent('Project/index'),
+    permission: true,
+    meta: { key: 'project' },
+    children: [
+      {
+        path: 'project-form',
+        name: 'ProjectForm',
+        component: getComponent('Project/components/ProjectForm'),
+        permission: true,
+        meta: { key: 'ProjectForm' },
+      },
+      {
+        path: 'project-table',
+        name: 'ProjectTable',
+        component: getComponent('Project/components/ProjectTable'),
+        permission: true,
+        meta: { key: 'ProjectTable' },
+      },
+    ],
+  },
+  // userMilitant
+  {
+    path: '/userMilitant',
+    icon: 'team',
+    name: '党员',
+    component: getComponent('UserMilitant/index'),
+    permission: true,
+    meta: { key: 'userMilitant' },
+    children: [
+      {
+        path: 'userMilitant-form',
+        name: 'UserMilitantForm',
+        component: getComponent('UserMilitant/components/UserMilitantForm'),
+        permission: true,
+        meta: { key: 'UserMilitantForm' },
+      },
+      {
+        path: 'userMilitant-table',
+        name: 'UserMilitantTable',
+        component: getComponent('UserMilitant/components/UserMilitantTable'),
+        permission: true,
+        meta: { key: 'UserMilitantTable' },
+      },
+    ],
+  },
+  // event
+  {
+    path: '/event',
+    icon: 'calendar',
+    name: '活动',
+    component: getComponent('Event/index'),
+    permission: true,
+    meta: { key: 'event' },
+    children: [
+      {
+        path: 'event-form',
+        name: 'EventForm',
+        component: getComponent('Event/components/EventForm'),
+        permission: true,
+        meta: { key: 'EventForm' },
+      },
+      {
+        path: 'event-table',
+        name: 'EventTable',
+        component: getComponent('Event/components/EventTable'),
+        permission: true,
+        meta: { key: 'EventTable' },
+      },
+    ],
+  },
   {
     path: '/charts',
     icon: 'line-chart',
-    name: 'Charts',
+    name: '图表展示',
     component: getComponent('chart/index'),
     permission: true,
     meta: { key: 'Charts' },
@@ -231,7 +356,7 @@ export const asyncRouterMap: routerItem[] = [
   {
     path: '/profile',
     icon: 'appstore-o',
-    name: 'Profile',
+    name: '用户设置',
     component: getComponent('components/index'),
     permission: true,
     meta: { key: 'Profile' },
@@ -257,7 +382,7 @@ export const asyncRouterMap: routerItem[] = [
   {
     path: '/map',
     icon: 'environment',
-    name: 'Map',
+    name: '地图',
     component: getComponent('map/index'),
     permission: true,
     meta: { key: 'Map' },
@@ -274,7 +399,7 @@ export const asyncRouterMap: routerItem[] = [
   {
     path: '/playground',
     icon: 'setting',
-    name: 'Playground',
+    name: '实验室',
     component: getComponent('playground/index'),
     permission: true,
     meta: { key: 'Playground' },

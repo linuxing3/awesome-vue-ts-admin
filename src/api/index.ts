@@ -58,6 +58,111 @@ export const defaultApiList: ApiList = {
     fetchType: 'jsonp',
   },
   // insert more api below
+  // Employee
+  employeeDelete: {
+    url: '/employee/delete',
+    method: 'delete',
+    fetchType: 'json',
+  },
+  employeeUpdate: {
+    url: '/employee/update',
+    method: 'patch',
+    fetchType: 'json',
+  },
+  employeeCreate: {
+    url: '/employee/create',
+    method: 'post',
+    fetchType: 'json',
+  },
+  employeeFetch: {
+    url: '/employee/fetch',
+    method: 'get',
+    fetchType: 'json',
+  },
+  // UserDesignation
+  userDesignationDelete: {
+    url: '/userDesignation/delete',
+    method: 'delete',
+    fetchType: 'json',
+  },
+  userDesignationUpdate: {
+    url: '/userDesignation/update',
+    method: 'patch',
+    fetchType: 'json',
+  },
+  userDesignationCreate: {
+    url: '/userDesignation/create',
+    method: 'post',
+    fetchType: 'json',
+  },
+  userDesignationFetch: {
+    url: '/userDesignation/fetch',
+    method: 'get',
+    fetchType: 'json',
+  },
+  // UserPromotion
+  userPromotionDelete: {
+    url: '/userPromotion/delete',
+    method: 'delete',
+    fetchType: 'json',
+  },
+  userPromotionUpdate: {
+    url: '/userPromotion/update',
+    method: 'patch',
+    fetchType: 'json',
+  },
+  userPromotionCreate: {
+    url: '/userPromotion/create',
+    method: 'post',
+    fetchType: 'json',
+  },
+  userPromotionFetch: {
+    url: '/userPromotion/fetch',
+    method: 'get',
+    fetchType: 'json',
+  },
+  // Leave
+  leaveDelete: {
+    url: '/leave/delete',
+    method: 'delete',
+    fetchType: 'json',
+  },
+  leaveUpdate: {
+    url: '/leave/update',
+    method: 'patch',
+    fetchType: 'json',
+  },
+  leaveCreate: {
+    url: '/leave/create',
+    method: 'post',
+    fetchType: 'json',
+  },
+  leaveFetch: {
+    url: '/leave/fetch',
+    method: 'get',
+    fetchType: 'json',
+  },
+  // Project
+  projectDelete: {
+    url: '/project/delete',
+    method: 'delete',
+    fetchType: 'json',
+  },
+  projectUpdate: {
+    url: '/project/update',
+    method: 'patch',
+    fetchType: 'json',
+  },
+  projectCreate: {
+    url: '/project/create',
+    method: 'post',
+    fetchType: 'json',
+  },
+  projectFetch: {
+    url: '/project/fetch',
+    method: 'get',
+    fetchType: 'json',
+  },
   // UserMilitant
   userMilitantDelete: {
     url: '/userMilitant/delete',
