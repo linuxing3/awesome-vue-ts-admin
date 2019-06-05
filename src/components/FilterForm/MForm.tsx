@@ -302,11 +302,10 @@ class MFormClass extends Vue {
       // 日期时间
       case 'datetime':
         itemDom = (
-          <a-date-picker
+          <a-time-picker
             id={key}
             label={label}
-            showTime
-            format="YYYY/M/D HH:mm:ss"
+            format="HH:mm"
             placeholder={placeholder}
           />
         );

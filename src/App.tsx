@@ -3,6 +3,7 @@ import {
 } from 'vue-property-decorator';
 import { LocaleProvider } from 'ant-design-vue';
 import zh_CN from 'ant-design-vue/lib/locale-provider/zh_CN';
+import en_US from 'ant-design-vue/lib/locale-provider/en_US';
 import 'moment/locale/zh-cn';
 import AppMain from '@/components/Layout/AppMain';
 import Loader from '@/components/Loader/index.vue';

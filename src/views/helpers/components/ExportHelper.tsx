@@ -30,7 +30,7 @@ import './index.less';
 })
 export default class ExportHelper extends Mixins(exportMixin) {
   normalLayout = {
-    span: 8,
+    span: 24,
     xl: 24,
     lg: 24,
     md: 24,
@@ -39,10 +39,19 @@ export default class ExportHelper extends Mixins(exportMixin) {
   }
 
   halfLayout = {
-    span: 4,
+    span: 12,
     xl: 12,
     lg: 12,
     md: 12,
+    sm: 12,
+    xs: 24,
+  }
+
+  quarterLayout = {
+    span: 6,
+    xl: 6,
+    lg: 6,
+    md: 6,
     sm: 12,
     xs: 24,
   }
@@ -112,12 +121,23 @@ export default class ExportHelper extends Mixins(exportMixin) {
   renderActionBtn(): JSX.Element {
     return (
       <div style="{ margin: '16px' }">
-        <a-button on-click={this.import} id={'import'} icon="cloud" type="primary">
-          Import
-        </a-button>
-        <a-button on-click={this.export} id={'export'} icon="download">
-          Export
-        </a-button>
+        <a-row>
+          <a-col {...{ props: this.quarterLayout }}>
+            <a-button on-click={this.import} id={'import'} icon="cloud" type="primary">
+              Import
+            </a-button>
+          </a-col>
+          <a-col {...{ props: this.quarterLayout }}>
+            <a-button on-click={this.export} id={'export'} icon="download">
+              Export
+            </a-button>
+          </a-col>
+          <a-col {...{ props: this.quarterLayout }}>
+            <a-button type="ghost" on-click={this.resetData} id={'reset'} icon="refresh">
+              Destroy
+            </a-button>
+          </a-col>
+        </a-row>
       </div>
     );
   }
@@ -158,7 +178,7 @@ export default class ExportHelper extends Mixins(exportMixin) {
   }
 
   renderSampleData(): JSX.Element {
-    const dataSrouce = this.data.slice(0, 3);
+    const dataSource = this.data.slice(0, 3);
     const columns = this.itemList.slice(0, 6).reduce((list, item) => {
       list.push({
         title: this.$t(item.key),
@@ -166,9 +186,10 @@ export default class ExportHelper extends Mixins(exportMixin) {
       });
       return list;
     }, []);
+    this.$log.info('Sample data:', dataSource);
     return (
       <div style="{ margin: '16px' }">
-        <a-table bordered rowKey={'id'} dataSource={dataSrouce} columns={columns} />
+        <a-table bordered rowKey={'id'} dataSource={dataSource} columns={columns} />
       </div>
     );
   }

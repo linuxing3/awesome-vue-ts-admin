@@ -232,11 +232,13 @@ export default class exportMixin extends Vue {
     if (!Array.isArray(data)) return;
     if (this.modelName === '') return;
     try {
+      this.$store.commit('LOADING', true);
       console.log(`保存${this.modelName}...`);
       // 逐个插入数据到数据存储文件
       data.forEach((item) => {
         this.Entity.$create({ data: item });
       });
+      this.$store.commit('LOADING', false);
     } catch (error) {
       throw new Error(error);
     }
@@ -246,19 +248,15 @@ export default class exportMixin extends Vue {
    * 根据数据集，删除持久化内容
    * @param data 数据集
    */
-  resetData(data) {
+  resetData() {
     // Delete all data
-    if (!Array.isArray(data)) return;
     try {
       console.log(`删除${this.modelName}全部数据`);
-      let count = 0;
-      // 逐个插入数据到数据存储文件
-      data.forEach((item) => {
-        const id = item.id;
-        this.Entity.$delete(id);
-        count += 1;
+      const records: any[] = this.Entity.all();
+      records.forEach((record) => {
+        this.Entity.$delete(record.id);
       });
-      console.log(`共删除数据数: ${count}`);
+      this.Entity.$fetch();
     } catch (error) {
       throw new Error(error);
     }
@@ -278,6 +276,7 @@ export default class exportMixin extends Vue {
 
     this.attachFile = join(moduleAttachDirWithId, `${uuid}.docx`);
     setTimeout(() => null, 500);
+
     return Promise.resolve(this.attachFile);
   }
 
@@ -292,8 +291,10 @@ export default class exportMixin extends Vue {
     try {
       this.workbook = XLSX.readFile(path);
       const worksheet = this.workbook.Sheets[sheetName || 'Sheet1' || this.modelName];
+
       this.data = XLSX.utils.sheet_to_json(worksheet);
       this.$log.info('worksheet data:', this.data);
+
       this.$emit('setData', this.data);
       if (this.data.length > 0) this.persistData(this.data);
     } catch (error) {
