@@ -161,15 +161,20 @@ export const tableFieldsList: tableList[] = [
   },
 ];
 
-export const filterFormItemList: FilterFormList[] = fields.reduce((list, field) => {
-  list.push({
-    key: field,
-    type: 'input',
-    label: titleCase(field),
-    placeholder: `Search${titleCase(field)}`,
-  });
-  return list;
-}, []);
+export const filterFormItemList: FilterFormList[] = [
+  {
+    key: 'id', type: 'input', label: 'id', placeholder: 'Leave it untouched!',
+  },
+  {
+    key: 'name', type: 'input', label: 'name', placeholder: 'Input name',
+  },
+  {
+    key: 'gender', type: 'input', label: 'gender', placeholder: 'Input gender', options: [...gender],
+  },
+  {
+    key: 'etnia', type: 'input', label: 'etnia', placeholder: 'Input etnia', options: [...etnia],
+  },
+];
 
 export const BackParams: any = {
   code: 'data.result.resultCode',

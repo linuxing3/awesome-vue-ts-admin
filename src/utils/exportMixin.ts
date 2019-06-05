@@ -15,7 +15,7 @@ import XLSX from 'xlsx';
 import {
   Document, Paragraph, Packer,
 } from 'docx';
-import createReport from 'docx-templates'
+import createReport from 'docx-templates';
 
 import models from '@/models';
 import keysDef from '@/locales/cn.json';
@@ -189,11 +189,15 @@ export default class exportMixin extends Vue {
       this.exportCSV(data);
     } else if (this.fileFormat === 'xlsx' || this.fileFormat === 'xls') {
       this.exportExcel(data);
-    } else if (this.fileFormat === 'docx') {
-      this.exportDocTemplate(data, this.modelTemplate)
-    } else if (this.fileFormat === 'doc') {
-      // this.exportDocx(data);
-      this.exportDocTemplate(data, this.modelTemplate)
+    } else if (this.fileFormat === 'docx' || this.fileFormat === 'doc') {
+      this.ensureAttachFile()
+        .then((path) => {
+          this.$log.info(`Exporting template: ${path}`);
+          this.exportDocTemplate(data, this.modelTemplate, path);
+        })
+        .catch((err) => {
+          this.$log.error(err);
+        });
     }
   }
 
@@ -205,20 +209,10 @@ export default class exportMixin extends Vue {
    * @param e 事件
    */
   getImportFile(e) {
-    if (e.target && e.target.files) {
-      this.importFileMeta = e.target.files[0];
-    } else {
-      const openedFiles = remote.dialog.showOpenDialog({ properties: ['openFile'] });
-      // 文件对象
-      this.importFileMeta.path = openedFiles[0];
-    }
-    // 文件格式，csv， xls， docx
-    this.fileFormat = last(this.importFileMeta.path.split('.'));
-    this.$forceUpdate();
-    if (this.importFileMeta.path) {
-      return Promise.resolve(this.importFileMeta.path);
-    }
-    return Promise.reject('No file Selected');
+    const openedFiles = remote.dialog.showOpenDialog({ properties: ['openFile'] });
+    // 文件对象
+    this.importFileMeta.path = openedFiles[0];
+    return Promise.resolve(this.importFileMeta.path || '');
   }
 
   @Emit()
@@ -272,7 +266,6 @@ export default class exportMixin extends Vue {
 
   ensureAttachFile() {
     const uuid = uniqueId(`${this.modelName}_attach_`);
-
     const fileIdRef = uniqueId().toString();
     const moduleAttachDir = join(this.attachDir, this.modelName);
     const moduleAttachDirWithId = join(this.attachDir, this.modelName, fileIdRef);
@@ -283,8 +276,9 @@ export default class exportMixin extends Vue {
       mkdirSync(moduleAttachDirWithId);
     }
 
-    this.attachFile = join(moduleAttachDirWithId, `${uuid}.docx`)
-    this.$log.info('Ensure the attach files exists...', this.attachFile);
+    this.attachFile = join(moduleAttachDirWithId, `${uuid}.docx`);
+    setTimeout(() => null, 500);
+    return Promise.resolve(this.attachFile);
   }
 
   /**--------------------------------------------------------------------
@@ -395,9 +389,7 @@ export default class exportMixin extends Vue {
    * @param data string 写入附件的内容
    */
   exportDocx(content) {
-    this.ensureAttachFile();
-
-    try {
+    this.ensureAttachFile().then((path) => {
       // 创建新的文档或使用默认文档
       this.document = new Document({
         creator: 'cnve',
@@ -425,32 +417,25 @@ export default class exportMixin extends Vue {
           throw new Error(error);
         });
       shell.showItemInFolder(this.attachFile);
-    } catch (error) {
-      throw new Error(error);
-    }
+    });
   }
 
   /**
    * 使用word模板功能，自动生成报告
    * @param data string 写入附件的内容
    */
-  exportDocTemplate(data: any[], template: string) {
-    this.$log.info('Exporting with word template...');
-    this.ensureAttachFile();
+  exportDocTemplate(data: any[], template: string, output: string) {
     const options: ReportOptions = {
       template,
       data: {
         title: this.modelName,
-        data
+        data,
       },
-      output: this.attachFile,
+      output,
     };
-    try {
-      createReport(options);
-    } catch (error) {
-      this.$log.error(error);
-    }
+    createReport(options);
     this.$log.suc('Done!');
+    return Promise.resolve(true);
     // docxTemplate.parse(template).then(varDoc => {
     //   let staticDocx = varDoc.assemble({ name: 'foo', data: data })
     //   staticDocx.save(this.attachFile)

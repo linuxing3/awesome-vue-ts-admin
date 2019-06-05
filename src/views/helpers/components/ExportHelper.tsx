@@ -58,21 +58,30 @@ export default class ExportHelper extends Mixins(exportMixin) {
   ]
 
   import(e: Event) {
-    this.getImportFile(e)
-      .then((path) => {
-        this.$log.suc('Import File Path: ', path);
-        this.attemptImport(path);
-      })
-      .catch((error) => {
-        this.$log.err(error);
-      });
+    Modal.confirm({
+      title: 'Import',
+      okText: 'Import from Excel xls/xlsx',
+      cancelText: 'Import from csv',
+      onOk: () => {
+        this.fileFormat = 'xlsx';
+        this.getImportFile(e).then((path) => {
+          this.attemptImport(path);
+        });
+      },
+      onCancel: () => {
+        this.fileFormat = 'csv';
+        this.getImportFile(e).then((path) => {
+          this.attemptImport(path);
+        });
+      },
+    });
   }
 
   export() {
     Modal.confirm({
       title: 'Export',
-      okText: 'Export Excel/CSV Data',
-      cancelText: 'Export Word Doc/Docx',
+      okText: 'Export To Excel/CSV',
+      cancelText: 'Export To Word',
       onOk: () => {
         this.fileFormat = 'xlsx';
         this.attemptExport(this.data);
@@ -222,6 +231,6 @@ export default class ExportHelper extends Mixins(exportMixin) {
           </a-row>
         </a-card>
       </div>
-    )
+    );
   }
 }
