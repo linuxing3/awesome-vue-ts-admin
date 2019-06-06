@@ -104,6 +104,31 @@ export const loadAntvDataSet = () => new Promise(((resolve, reject) => {
   script.onreadystatechange = script.onload;
 }));
 
+/* -------------------------------------------------------------
+| Load Antv DataSet
+|-------------------------------------------------------------*/
+export const loadViserVue = () => new Promise(((resolve, reject) => {
+  if (window.ViserVue) {
+    resolve(window.ViserVue);
+  }
+  const script: any = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src = '/viser-vue.min.js';
+  script.onerror = reject;
+  const { head } = document;
+  if (head) {
+    head.appendChild(script);
+  }
+  script.onload = function onload() {
+    if (!this.readyState || this.readyState === 'loaded' || this.readyState === 'complete') {
+      resolve(window.ViserVue);
+    }
+    script.onload = null;
+    script.onreadystatechange = null;
+  };
+  script.onreadystatechange = script.onload;
+}));
+
 
 /* -------------------------------------------------------------
 | Load Baidu Map
