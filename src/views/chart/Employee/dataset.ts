@@ -1,29 +1,28 @@
-import { View } from '@antv/data-set';
-import { months } from 'moment';
-import { find } from 'lodash';
 import { countByCategory, DVHelper } from '@/utils/datetime';
-import { basicAreaOptions } from '@/views/chart/apexCharts/area/params';
 
 /* -------------------------------------------------------------
 | Query from Model
 |-------------------------------------------------------------*/
 import models from '@/models';
 const Entity: any = models.employee;
-const fields: string[] = Entity.fieldsKeys();
-const entity: string = Entity.entity;
 
 // Query from localforage
-Entity.$fetch();
-const employees: any[] = Entity.all();
+let employees: any[] = [];
+Entity.$fetch().then(() => {
+  employees = Entity.all();
+  console.log('Entity Data:', employees);
+});
 
 /* -------------------------------------------------------------
 | Transform with @antv/data-set tools
 |-------------------------------------------------------------*/
 const employeeSerie: DVHelper = countByCategory(employees, {
-  field: 'joiningDate',
+  field: 'birthday',
   as: 'month',
   operate: 'count',
 });
+
+console.log('Chart Data:', employeeSerie);
 
 export const employeeBasicAreaOptions = {
   chart: {
