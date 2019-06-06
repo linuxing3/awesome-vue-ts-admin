@@ -4,7 +4,45 @@ import {
 import moment, { months, MomentInput, Moment } from 'moment';
 import { View } from '@antv/data-set';
 
-export const testMonthData = [
+export interface DVHelper {
+  labels: Array<string>
+  data: Array<number>
+  source: any
+  check: any
+}
+
+export interface DVHelperOptions {
+  field: string
+  as: string
+  operate: string
+}
+
+const initMonthLabel = months();
+
+const initMonthData = months().reduce((list, month) => {
+  list.push({
+    month,
+    count: 0,
+  });
+  return list;
+}, []);
+
+const initYearData = [
+  {
+    year: 2018,
+    count: 0,
+  },
+  {
+    year: 2019,
+    count: 0,
+  },
+  {
+    year: 2020,
+    count: 0,
+  },
+];
+
+const mockData = [
   {
     date: '2019-04-01',
     type: 'in',
@@ -14,11 +52,11 @@ export const testMonthData = [
     type: 'in',
   },
   {
-    date: '2019-02-11',
+    date: '2018-02-11',
     type: 'in',
   },
   {
-    date: '2019-03-01',
+    date: '2017-03-01',
     type: 'out',
   },
   {
@@ -65,23 +103,11 @@ export const fillAllMonth = (monthData: { [x: string]: any; }, defaultNumber: nu
  * @param {string} fieldName field to pick
  * @param {string} withName use month name over index
  * @example
- * monthData = [
- *   {
- *     date: '2019-01-01'
- *   },
- *   {
- *     date: '2019-02-01'
- *   },
- *   {
- *     date: '2019-02-11'
- *   },
- *   {
- *     date: '2019-03-01'
- *   }
- * ]
+ * case 1.
  * dateToMonthIndex = [ 0, 1, 1, 2 ]
- * dateToMonthName = [ "February", "April", ... ]
  * countByMonth = { 3: 1, 1: 2, 2: 2 }
+ * case 2.
+ * dateToMonthName = [ "February", "April", ... ]
  * countByMonth = { April: 1, February: 2, March: 2 }
  */
 export const countAllByMonth = (data: any[], fieldName: string, withName: boolean) => {
@@ -138,17 +164,14 @@ export const convertDate = (itemList: any[], items: object[]|object, normal = tr
   return [items];
 };
 
-''
-export const dvCountAllByMonth = (state, data, options) => {
-  const dv = new View({
-    state,
-  }).source(data);
+const monthlyTransformer = (sourceDv, checkDv, options) => {
   const { field, as, operate } = options;
-  dv.transform({
-    // 选取【日期】列
-    type: 'pick',
-    fields: [field],
-  })
+  checkDv
+    .transform({
+      // 选取【日期】列
+      type: 'pick',
+      fields: [field],
+    })
     .transform({
       // 日期转化为【月份】，另存一列
       type: 'map',
@@ -164,6 +187,116 @@ export const dvCountAllByMonth = (state, data, options) => {
       operations: operate,
       as: operate,
       groupBy: [as],
+    })
+    .transform({
+      type: 'pick',
+      fields: [as, operate],
     });
-  return dv;
+  // 检查合并
+  sourceDv.transform({
+    type: 'map',
+    callback(row) {
+      const query = { [as]: row[as] };
+      const matched = find(checkDv.rows, query);
+      return matched !== undefined ? matched : row;
+    },
+  });
+  return {
+    source: sourceDv,
+    check: checkDv,
+  };
 };
+
+const yearlyTransformer = (sourceDv, checkDv, options) => {
+  const { field, as, operate } = options;
+  checkDv
+    .transform({
+      // 选取【日期】列
+      type: 'pick',
+      fields: [field],
+    })
+    .transform({
+      // 日期转化为【月份】，另存一列
+      type: 'map',
+      callback(row) {
+        row[as] = moment(row[field]).year();
+        return row;
+      },
+    })
+    .transform({
+      // 统计月份【计数】
+      type: 'aggregate',
+      fields: [as],
+      operations: operate,
+      as: operate,
+      groupBy: [as],
+    })
+    .transform({
+      type: 'pick',
+      fields: [as, operate],
+    });
+  // 检查合并
+  sourceDv.transform({
+    type: 'map',
+    callback(row) {
+      const query = { [as]: row[as] };
+      const matched = find(checkDv.rows, query);
+      return matched !== undefined ? matched : row;
+    },
+  });
+  return {
+    source: sourceDv,
+    check: checkDv,
+  };
+};
+
+/**
+ * 获取数据集中某一【日期】列，转化为月，并按月计数
+ * @param {any} state dv reactive state
+ * @param {array} data array of object
+ * @param {object} options field, as, operate, etc
+ *
+ * @example
+ * @returns {object} which rows has the transformed data
+ * [ { month: 'April', count: 1 },
+ *   { month: 'February', count: 2 },
+ *   { month: 'March', count: 2 } ]
+ */
+export const countByCategory = (checkData, options: DVHelperOptions, labels = initMonthLabel, initData = initMonthData, transformer = monthlyTransformer): DVHelper => {
+  const sourceDv = new View().source(initData);
+  const checkDv = new View().source(checkData);
+  const { source, check } = transformer(sourceDv, checkDv, options);
+  // 只输出按月统计数
+  const data = source.rows.reduce((l, i) => {
+    l.push(i.count);
+    return l;
+  }, []);
+
+  return {
+    labels,
+    data,
+    source,
+    check,
+  };
+};
+
+const monthlyData = countByCategory(
+  mockData,
+  {
+    field: 'date',
+    as: 'month',
+    operate: 'count',
+  },
+);
+
+const yearlyData = countByCategory(
+  mockData,
+  {
+    field: 'date',
+    as: 'year',
+    operate: 'count',
+  },
+  ['2018', '2019', '2020'],
+  initYearData,
+  yearlyTransformer,
+);

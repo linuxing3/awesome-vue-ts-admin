@@ -1,16 +1,8 @@
 import { Component, Vue } from 'vue-property-decorator';
 import { Row, Col, Card } from 'ant-design-vue';
 import { loadApexCharts } from '@/utils/index';
-import { keys, values } from 'lodash';
-import { months } from 'moment';
-import { dvCountAllByMonth, fillAllMonth } from '@/utils/datetime';
-import { basicAreaOptions } from '@/views/chart/apexCharts/area/params';
-import models from '@/models';
-import dv from './dataset';
-
+import { employeeBasicAreaOptions } from './dataset';
 import './index.less';
-
-const Entity: any = models.employee;
 
 @Component({
   name: 'Area',
@@ -49,44 +41,14 @@ export default class Area extends Vue {
 
   areaChartNullvaluesChart: any = null
 
-  activated() {
-    this.getData();
-  }
-
   mounted() {
-    this.getData();
-    const options = {
-      ...basicAreaOptions,
-      series: [
-        {
-          name: 'employee',
-          data: this.monthlyCount
-        }
-      ],
-      labels: months(),
-      xaxis: {
-        type: 'string'
-      }
-    }
     loadApexCharts().then(() => {
       this.basicAreaChart = new window.ApexCharts(
         document.querySelector('#basic-area'),
-        options,
+        employeeBasicAreaOptions,
       );
       this.basicAreaChart.render();
     });
-  }
-
-  getData() {
-    const data = dvCountAllByMonth({ name: 'employee' }, Entity.all(), {
-      field: 'joiningDate',
-      as: 'month',
-      operate: ['count'],
-    }).rows;
-    // const data = Entity.countByMonth('joiningDate', true)
-    this.$log.info('Chart Series from @antv/data-set: ', data);
-    this.monthlyCount = fillAllMonth(data, 10);
-    this.$log.info('Chart Series filledRows: ', this.monthlyCount);
   }
 
   render() {
