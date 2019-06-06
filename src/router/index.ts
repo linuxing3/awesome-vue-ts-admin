@@ -314,6 +314,15 @@ export const asyncRouterMap: routerItem[] = [
         permission: true,
         meta: { key: 'ApexCharts' },
         children: [
+          // Insert more charts here
+          // Employee
+          {
+            path: 'employee',
+            name: 'Employee',
+            component: getComponent('chart/Employee/index'),
+            permission: true,
+            meta: { key: 'Line' },
+          },
           {
             path: 'line',
             name: 'Line',

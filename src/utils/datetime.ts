@@ -2,27 +2,28 @@ import {
   map, countBy, find,
 } from 'lodash';
 import moment, { months, MomentInput, Moment } from 'moment';
+import { View } from '@antv/data-set';
 
 export const testMonthData = [
   {
     date: '2019-04-01',
-    in: 'in',
+    type: 'in',
   },
   {
     date: '2019-02-01',
-    in: 'in',
+    type: 'in',
   },
   {
     date: '2019-02-11',
-    in: 'in',
+    type: 'in',
   },
   {
     date: '2019-03-01',
-    in: 'out',
+    type: 'out',
   },
   {
     date: '2019-03-01',
-    in: 'out',
+    type: 'out',
   },
 ];
 
@@ -135,4 +136,34 @@ export const convertDate = (itemList: any[], items: object[]|object, normal = tr
   }
   hfunc(items, dateFields, refunc, format2);
   return [items];
+};
+
+''
+export const dvCountAllByMonth = (state, data, options) => {
+  const dv = new View({
+    state,
+  }).source(data);
+  const { field, as, operate } = options;
+  dv.transform({
+    // 选取【日期】列
+    type: 'pick',
+    fields: [field],
+  })
+    .transform({
+      // 日期转化为【月份】，另存一列
+      type: 'map',
+      callback(row) {
+        row[as] = months(moment(row[field]).month());
+        return row;
+      },
+    })
+    .transform({
+      // 统计月份【计数】
+      type: 'aggregate',
+      fields: [as],
+      operations: operate,
+      as: operate,
+      groupBy: [as],
+    });
+  return dv;
 };
