@@ -243,11 +243,11 @@ class MFormClass extends Vue {
     switch (item.type) {
       // 文本框
       case 'input':
-        itemDom = <a-input id={key} label={label} placeholder={placeholder} disabled={key === 'id'} />;
+        itemDom = <a-input style="width: 100%;" id={key} label={label} placeholder={placeholder} disabled={key === 'id'} />;
         break;
       // 段落框
       case 'textarea':
-        itemDom = <a-textarea id={key} label={label} placeholder={placeholder} />;
+        itemDom = <a-textarea style="width: 100%;" id={key} label={label} placeholder={placeholder} />;
         break;
       // 选择器
       case 'select':
@@ -303,6 +303,7 @@ class MFormClass extends Vue {
       case 'datetime':
         itemDom = (
           <a-time-picker
+            style="width: 100%;"
             id={key}
             label={label}
             format="HH:mm"
@@ -314,6 +315,7 @@ class MFormClass extends Vue {
       case 'date':
         itemDom = (
           <a-date-picker
+            style="width: 100%;"
             id={key}
             label={label}
             format="YYYY/M/D"

@@ -219,6 +219,7 @@ export default class MTable extends Vue {
       list.push({
         ...item,
         title,
+        sorter: true
       });
       return list;
     }, []);
