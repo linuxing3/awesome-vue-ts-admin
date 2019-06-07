@@ -17,9 +17,9 @@ export interface DVHelperOptions {
   operate: string
 }
 
-const initMonthLabel = months();
+export const initMonthLabel = months();
 
-const initMonthData = months().reduce((list, month) => {
+export const initMonthData = months().reduce((list, month) => {
   list.push({
     month,
     count: 0,
@@ -27,7 +27,11 @@ const initMonthData = months().reduce((list, month) => {
   return list;
 }, []);
 
-const initYearData = [
+export const initYearData = [
+  {
+    year: 2017,
+    count: 0,
+  },
   {
     year: 2018,
     count: 0,
@@ -164,7 +168,7 @@ export const convertDate = (itemList: any[], items: object[]|object, normal = tr
   return [items];
 };
 
-const monthlyTransformer = (sourceDv, checkDv, options) => {
+export const monthlyTransformer = (sourceDv, checkDv, options) => {
   const { field, as, operate } = options;
   checkDv
     .transform({
@@ -207,7 +211,7 @@ const monthlyTransformer = (sourceDv, checkDv, options) => {
   };
 };
 
-const yearlyTransformer = (sourceDv, checkDv, options) => {
+export const yearlyTransformer = (sourceDv, checkDv, options) => {
   const { field, as, operate } = options;
   checkDv
     .transform({

@@ -15,6 +15,7 @@ export const basicBarOptions = {
     enabled: !1,
   },
   series: [{
+    name: '文件数量',
     data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380],
   }],
   colors: ['#39afd1'],
@@ -62,10 +63,10 @@ export const groupedBarOptions = {
     colors: ['#fff'],
   },
   series: [{
-    name: 'Series 1',
+    name: '因公',
     data: [44, 55, 41, 64, 22, 43, 21],
   }, {
-    name: 'Series 2',
+    name: '因私',
     data: [53, 32, 33, 52, 13, 44, 32],
   }],
   xaxis: {
@@ -99,26 +100,26 @@ export const stackedBarOptions = {
     show: !1,
   },
   series: [{
-    name: 'Marine Sprite',
+    name: '政新处',
     data: [44, 55, 41, 37, 22, 43, 21],
   }, {
-    name: 'Striking Calf',
+    name: '经商处',
     data: [53, 32, 33, 52, 13, 43, 32],
   }, {
-    name: 'Tank Picture',
+    name: '武官处',
     data: [12, 17, 11, 9, 15, 11, 20],
   }, {
-    name: 'Bucket Slope',
+    name: '领侨处',
     data: [9, 7, 5, 8, 6, 9, 4],
   }, {
-    name: 'Reborn Kid',
+    name: '办公室',
     data: [25, 12, 19, 32, 25, 24, 10],
   }],
   xaxis: {
     categories: [2008, 2009, 2010, 2011, 2012, 2013, 2014],
     labels: {
       formatter(e: any) {
-        return `${e}K`;
+        return `${e}`;
       },
     },
   },
@@ -131,7 +132,7 @@ export const stackedBarOptions = {
   tooltip: {
     y: {
       formatter(e: any) {
-        return `${e}K`;
+        return `${e}`;
       },
     },
   },
@@ -172,20 +173,14 @@ export const fullStackedBarOptions = {
     colors: ['#fff'],
   },
   series: [{
-    name: 'Marine Sprite',
+    name: '美国',
     data: [44, 55, 41, 37, 22, 43, 21],
   }, {
-    name: 'Striking Calf',
+    name: '欧洲',
     data: [53, 32, 33, 52, 13, 43, 32],
   }, {
-    name: 'Tank Picture',
+    name: '其它',
     data: [12, 17, 11, 9, 15, 11, 20],
-  }, {
-    name: 'Bucket Slope',
-    data: [9, 7, 5, 8, 6, 9, 4],
-  }, {
-    name: 'Reborn Kid',
-    data: [25, 12, 19, 32, 25, 24, 10],
   }],
   xaxis: {
     categories: [2008, 2009, 2010, 2011, 2012, 2013, 2014],
