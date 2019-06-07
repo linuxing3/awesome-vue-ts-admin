@@ -1,7 +1,7 @@
 'use strict';
 
 import {
-  app, protocol, BrowserWindow, ipcMain, globalShortcut,
+  app, protocol, BrowserWindow, ipcMain, globalShortcut, Menu,
 } from 'electron';
 import { createProtocol, installVueDevtools } from 'vue-cli-plugin-electron-builder/lib';
 const isDevelopment = process.env.NODE_ENV !== 'production';
@@ -32,6 +32,8 @@ function createWindow() {
     // Load the index.html when not in development
     win.loadURL('app://./index.html');
   }
+
+  // require sqlite server
 
   win.on('closed', () => {
     win = null;
@@ -92,8 +94,23 @@ if (isDevelopment) {
   }
 }
 
-ipcMain.on('dev', ({ openDevTools }) => {
-  if (openDevTools) {
-    win.webContents.openDevTools();
+// Ipc events
+ipcMain.on('async-open-dev', (event, arg) => {
+  if (arg.openDevTools) {
+    console.log('async-open-dev send arg: ', arg);
+    if (!process.env.IS_TEST) win.webContents.openDevTools();
   }
+  event.sender.send('async-open-dev', {
+    devtoolsOpend: true,
+  });
+});
+
+ipcMain.on('async-show-menu', (event, arg) => {
+  if (arg.showMenu) {
+    console.log('async-show-menu send arg: ', arg);
+    Menu.setApplicationMenu(arg.template);
+  }
+  event.sender.send('async-show-menu', {
+    menuOpened: true,
+  });
 });

@@ -57,9 +57,15 @@ export default class MenuList extends Vue {
     );
   }
 
+  /**
+   * 用路由表自动生成菜单
+   * @param menuData array with dynamic routerItems
+   * @param parentPath posible path
+   */
   renderMenu(menuData: routerItem[], parentPath?: string): (JSX.Element | null)[] {
     return menuData.map((item: routerItem) => {
       if (item.children) {
+        // 如果具有[子项目]属性，显示子项目
         let isEmpty = true;
         item.children.forEach((items: routerItem) => {
           if (!items.hidden) {
@@ -67,6 +73,7 @@ export default class MenuList extends Vue {
           }
         });
         if (isEmpty) {
+          // 如果没有子菜单，只显示本级菜单
           return <a-menu-item
             id={item.path}
             key={`${item.path}`}>
@@ -74,6 +81,7 @@ export default class MenuList extends Vue {
             <span>{item.name}</span>
           </a-menu-item>;
         }
+        // 如果有子菜单，循环显示子菜单
         return <a-submenu
           id={item.path}
           key={item.path}>
@@ -81,11 +89,14 @@ export default class MenuList extends Vue {
           <a-icon type={item.icon}></a-icon>
             <span>{item.name}</span>
           </template>
+          {/* 循环显示子菜单 */}
           {this.renderMenu(item.children, parentPath ? `${parentPath}/${item.path}` : item.path)}
         </a-submenu>;
       } if (item.hidden) {
+        // 如果具有[隐藏]属性，不显示
         return null;
       }
+      // 默认返回一个菜单项
       return <a-menu-item
         id={item.path}
         key={`${item.path}`}>

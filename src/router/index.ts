@@ -62,6 +62,7 @@ export const asyncRouterMap: routerItem[] = [
     name: 'Helper',
     component: getComponent('helpers/index'),
     permission: true,
+    hidden: true,
     meta: { key: 'helper' },
     children: [
       {
@@ -122,6 +123,48 @@ export const asyncRouterMap: routerItem[] = [
         permission: true,
         meta: { key: 'MemberTable' },
       },
+      {
+        path: 'userDesignation-form',
+        name: 'UserDesignationForm',
+        component: getComponent('UserDesignation/components/UserDesignationForm'),
+        permission: true,
+        meta: { key: 'UserDesignationForm' },
+      },
+      {
+        path: 'userDesignation-table',
+        name: 'UserDesignationTable',
+        component: getComponent('UserDesignation/components/UserDesignationTable'),
+        permission: true,
+        meta: { key: 'UserDesignationTable' },
+      },
+      {
+        path: 'userPromotion-form',
+        name: 'UserPromotionForm',
+        component: getComponent('UserPromotion/components/UserPromotionForm'),
+        permission: true,
+        meta: { key: 'UserPromotionForm' },
+      },
+      {
+        path: 'userPromotion-table',
+        name: 'UserPromotionTable',
+        component: getComponent('UserPromotion/components/UserPromotionTable'),
+        permission: true,
+        meta: { key: 'UserPromotionTable' },
+      },
+      {
+        path: 'leave-form',
+        name: 'LeaveForm',
+        component: getComponent('Leave/components/LeaveForm'),
+        permission: true,
+        meta: { key: 'LeaveForm' },
+      },
+      {
+        path: 'leave-table',
+        name: 'LeaveTable',
+        component: getComponent('Leave/components/LeaveTable'),
+        permission: true,
+        meta: { key: 'LeaveTable' },
+      },
     ],
   },
   // employee
@@ -146,81 +189,6 @@ export const asyncRouterMap: routerItem[] = [
         component: getComponent('Employee/components/EmployeeTable'),
         permission: true,
         meta: { key: 'EmployeeTable' },
-      },
-    ],
-  },
-  // userDesignation
-  {
-    path: '/userDesignation',
-    icon: 'team',
-    name: '任命',
-    component: getComponent('UserDesignation/index'),
-    permission: true,
-    meta: { key: 'userDesignation' },
-    children: [
-      {
-        path: 'userDesignation-form',
-        name: 'UserDesignationForm',
-        component: getComponent('UserDesignation/components/UserDesignationForm'),
-        permission: true,
-        meta: { key: 'UserDesignationForm' },
-      },
-      {
-        path: 'userDesignation-table',
-        name: 'UserDesignationTable',
-        component: getComponent('UserDesignation/components/UserDesignationTable'),
-        permission: true,
-        meta: { key: 'UserDesignationTable' },
-      },
-    ],
-  },
-  // userPromotion
-  {
-    path: '/userPromotion',
-    icon: 'rise',
-    name: '晋升',
-    component: getComponent('UserPromotion/index'),
-    permission: true,
-    meta: { key: 'userPromotion' },
-    children: [
-      {
-        path: 'userPromotion-form',
-        name: 'UserPromotionForm',
-        component: getComponent('UserPromotion/components/UserPromotionForm'),
-        permission: true,
-        meta: { key: 'UserPromotionForm' },
-      },
-      {
-        path: 'userPromotion-table',
-        name: 'UserPromotionTable',
-        component: getComponent('UserPromotion/components/UserPromotionTable'),
-        permission: true,
-        meta: { key: 'UserPromotionTable' },
-      },
-    ],
-  },
-  // leave
-  {
-    path: '/leave',
-    icon: 'car',
-    name: '休假',
-    component: getComponent('Leave/index'),
-    permission: true,
-    meta: { key: 'leave' },
-    children: [
-      {
-        path: 'leave-form',
-        name: 'LeaveForm',
-        component: getComponent('Leave/components/LeaveForm'),
-        permission: true,
-        meta: { key: 'LeaveForm' },
-      },
-      {
-        path: 'leave-table',
-        name: 'LeaveTable',
-        component: getComponent('Leave/components/LeaveTable'),
-        permission: true,
-        meta: { key: 'LeaveTable' },
       },
     ],
   },
@@ -315,14 +283,6 @@ export const asyncRouterMap: routerItem[] = [
         meta: { key: 'ApexCharts' },
         children: [
           // Insert more charts here
-          // Employee
-          {
-            path: 'employee',
-            name: 'Employee',
-            component: getComponent('chart/Employee/index'),
-            permission: true,
-            meta: { key: 'Line' },
-          },
           {
             path: 'line',
             name: 'Line',
@@ -371,20 +331,11 @@ export const asyncRouterMap: routerItem[] = [
     meta: { key: 'Profile' },
     children: [
       {
-        path: 'form',
-        name: 'ProfileForm',
-        component: getComponent('components/form/index'),
+        path: 'baseForm',
+        name: 'ProfileBaseForm',
+        component: getComponent('components/form/baseForm/index'),
         permission: true,
-        meta: { key: 'Form' },
-        children: [
-          {
-            path: 'baseForm',
-            name: 'ProfileBaseForm',
-            component: getComponent('components/form/baseForm/index'),
-            permission: true,
-            meta: { key: 'BaseForm' },
-          },
-        ],
+        meta: { key: 'ProfileBaseForm' },
       },
     ],
   },
@@ -393,6 +344,7 @@ export const asyncRouterMap: routerItem[] = [
     icon: 'environment',
     name: '地图',
     component: getComponent('map/index'),
+    hidden: true,
     permission: true,
     meta: { key: 'Map' },
     children: [
@@ -409,6 +361,7 @@ export const asyncRouterMap: routerItem[] = [
     path: '/playground',
     icon: 'setting',
     name: '实验室',
+    hidden: true,
     component: getComponent('playground/index'),
     permission: true,
     meta: { key: 'Playground' },
