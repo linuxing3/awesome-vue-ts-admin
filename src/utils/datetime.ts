@@ -7,42 +7,44 @@ import { View } from '@antv/data-set';
 export interface DVHelper {
   labels: Array<string>
   data: Array<number>
+  series: Array<number>
   source: any
   check: any
 }
 
 export interface DVHelperOptions {
-  field: string
-  as: string
+  field: string | string[]
   operate: string
+  x: string
+  y: any
 }
 
 export const initMonthLabel = months();
 
-export const initMonthData = months().reduce((list, month) => {
+export const initMonthData = months().reduce((list, x) => {
   list.push({
-    month,
-    count: 0,
+    x,
+    y: 0,
   });
   return list;
 }, []);
 
-export const initYearData = [
+export const initData = [
   {
-    year: 2017,
-    count: 0,
+    x: 2017,
+    y: 0,
   },
   {
-    year: 2018,
-    count: 0,
+    x: 2018,
+    y: 0,
   },
   {
-    year: 2019,
-    count: 0,
+    x: 2019,
+    y: 0,
   },
   {
-    year: 2020,
-    count: 0,
+    x: 2020,
+    y: 0,
   },
 ];
 
@@ -168,8 +170,83 @@ export const convertDate = (itemList: any[], items: object[]|object, normal = tr
   return [items];
 };
 
+export const typeTransformer = (sourceDv, checkDv, options) => {
+  const {
+    field, operate, x, y,
+  } = options;
+  checkDv
+    .transform({
+      // 选取【类型】列
+      type: 'pick',
+      fields: [field],
+    })
+    .transform({
+      // 日期转化为【月份】，另存一列
+      type: 'rename',
+      map: {
+        [field]: x,
+      },
+    })
+    .transform({
+      // 统计月份【计数】
+      type: 'aggregate',
+      fields: [x],
+      operations: operate,
+      as: y,
+      groupBy: [x],
+    })
+    .transform({
+      type: 'pick',
+      fields: [x, y],
+    });
+  return {
+    source: checkDv,
+    check: checkDv,
+  };
+};
+
+export const partitionTransformer = (sourceDv, checkDv, options) => {
+  const {
+    field, operate, x, y,
+  } = options;
+  checkDv
+    .transform({
+      // 选取【类型】列
+      type: 'pick',
+      fields: [...field],
+    })
+    .transform({
+      // 日期转化为【年份】，另存一列
+      type: 'map',
+      callback(row) {
+        row.year = moment(row[field[1]]).year();
+        row.month = months(moment(row[field[1]]).month());
+        row[x] = row[field[0]];
+        console.log(row);
+        return row;
+      },
+    })
+    .transform({
+      // 统计月份【计数】
+      type: 'proportion',
+      field: field[0],
+      dimension: 'year',
+      as: y,
+    })
+    .transform({
+      type: 'pick',
+      fields: ['year', 'month', x, y],
+    });
+  return {
+    source: checkDv,
+    check: checkDv,
+  };
+};
+
 export const monthlyTransformer = (sourceDv, checkDv, options) => {
-  const { field, as, operate } = options;
+  const {
+    field, operate, x, y,
+  } = options;
   checkDv
     .transform({
       // 选取【日期】列
@@ -180,27 +257,27 @@ export const monthlyTransformer = (sourceDv, checkDv, options) => {
       // 日期转化为【月份】，另存一列
       type: 'map',
       callback(row) {
-        row[as] = months(moment(row[field]).month());
+        row[x] = months(moment(row[field]).month());
         return row;
       },
     })
     .transform({
       // 统计月份【计数】
       type: 'aggregate',
-      fields: [as],
+      fields: [x],
       operations: operate,
-      as: operate,
-      groupBy: [as],
+      as: y,
+      groupBy: [x],
     })
     .transform({
       type: 'pick',
-      fields: [as, operate],
+      fields: [x, y],
     });
   // 检查合并
   sourceDv.transform({
     type: 'map',
     callback(row) {
-      const query = { [as]: row[as] };
+      const query = { [x]: row[x] };
       const matched = find(checkDv.rows, query);
       return matched !== undefined ? matched : row;
     },
@@ -212,7 +289,9 @@ export const monthlyTransformer = (sourceDv, checkDv, options) => {
 };
 
 export const yearlyTransformer = (sourceDv, checkDv, options) => {
-  const { field, as, operate } = options;
+  const {
+    field, operate, x, y,
+  } = options;
   checkDv
     .transform({
       // 选取【日期】列
@@ -223,27 +302,27 @@ export const yearlyTransformer = (sourceDv, checkDv, options) => {
       // 日期转化为【月份】，另存一列
       type: 'map',
       callback(row) {
-        row[as] = moment(row[field]).year();
+        row[x] = moment(row[field]).year();
         return row;
       },
     })
     .transform({
       // 统计月份【计数】
       type: 'aggregate',
-      fields: [as],
+      fields: [x],
       operations: operate,
-      as: operate,
-      groupBy: [as],
+      as: y,
+      groupBy: [x],
     })
     .transform({
       type: 'pick',
-      fields: [as, operate],
+      fields: [x, y],
     });
   // 检查合并
   sourceDv.transform({
     type: 'map',
     callback(row) {
-      const query = { [as]: row[as] };
+      const query = { [x]: row[x] };
       const matched = find(checkDv.rows, query);
       return matched !== undefined ? matched : row;
     },
@@ -271,14 +350,16 @@ export const countByCategory = (checkData, options: DVHelperOptions, labels = in
   const checkDv = new View().source(checkData);
   const { source, check } = transformer(sourceDv, checkDv, options);
   // 只输出按月统计数
+  const series = source.rows;
   const data = source.rows.reduce((l, i) => {
-    l.push(i.count);
+    l.push(i.y);
     return l;
   }, []);
 
   return {
     labels,
     data,
+    series,
     source,
     check,
   };
@@ -288,8 +369,9 @@ const monthlyData = countByCategory(
   mockData,
   {
     field: 'date',
-    as: 'month',
     operate: 'count',
+    x: 'x',
+    y: 'y',
   },
 );
 
@@ -297,10 +379,26 @@ const yearlyData = countByCategory(
   mockData,
   {
     field: 'date',
-    as: 'year',
     operate: 'count',
+    x: 'x',
+    y: 'y',
   },
-  ['2018', '2019', '2020'],
-  initYearData,
+  ['2017', '2018', '2019', '2020'],
+  initData,
   yearlyTransformer,
 );
+
+const typeData = countByCategory(
+  mockData,
+  {
+    field: 'type',
+    operate: 'count',
+    x: 'x',
+    y: 'y',
+  },
+  ['In', 'Out'],
+  initData,
+  typeTransformer,
+);
+
+// typeData;

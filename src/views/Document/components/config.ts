@@ -93,9 +93,31 @@ export const defaultItemList: FilterFormList[] = [
   },
   {
     key: 'keyword',
-    type: 'input',
+    type: 'select',
     label: 'keyword',
     placeholder: 'Input keyword',
+    options: [
+      {
+        label: '人事',
+        value: '人事',
+      },
+      {
+        label: '党务',
+        value: '党务',
+      },
+      {
+        label: '财务',
+        value: '财务',
+      },
+      {
+        label: '后勤',
+        value: '后勤',
+      },
+      {
+        label: '对外',
+        value: '对外',
+      },
+    ],
   },
   {
     key: 'workEntity',

@@ -13,6 +13,22 @@ export const defaultItemList: FilterFormList[] = [
     placeholder: 'Input title',
   },
   {
+    key: 'private',
+    type: 'select',
+    label: 'private',
+    placeholder: '因公',
+    options: [
+      {
+        label: '因公',
+        value: '因公',
+      },
+      {
+        label: '因私',
+        value: '因私',
+      },
+    ],
+  },
+  {
     key: 'date',
     type: 'date',
     label: 'date',

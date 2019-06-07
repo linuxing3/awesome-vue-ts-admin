@@ -6,6 +6,7 @@ export interface ILeave {
   fromDate?: string;
   toDate?: string;
   isActive?: string;
+  private?: string;
   holidayList?: string;
 }
 
@@ -19,6 +20,7 @@ export default class Leave extends BaseModel {
       fromDate: this.string('2019-03-08'),
       toDate: this.string('2019-03-08'),
       isActive: this.string('isActive'),
+      private: this.string('Yes'),
       holidayList: this.string('holidayList'),
       user_id: this.attr(null),
       employee_id: this.attr(null),

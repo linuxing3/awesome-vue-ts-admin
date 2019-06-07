@@ -3,6 +3,7 @@ import { BaseModel } from '@/models/BaseModel';
 export interface IEvent {
   id?: string;
   title: string;
+  private?: string;
   date?: string;
   startTime?: string;
   duration?: string;
@@ -30,6 +31,7 @@ export default class Event extends BaseModel {
   static fields() {
     return {
       id: this.increment(),
+      private: this.string('yes'),
       title: this.string('title'),
       date: this.string('2019-02-23'),
       startTime: this.string('12:00'),

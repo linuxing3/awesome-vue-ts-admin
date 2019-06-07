@@ -8,7 +8,7 @@ export const basicBarOptions = {
   },
   plotOptions: {
     bar: {
-      horizontal: !0,
+      horizontal: !1,
     },
   },
   dataLabels: {
@@ -42,7 +42,7 @@ export const groupedBarOptions = {
   },
   plotOptions: {
     bar: {
-      horizontal: !0,
+      horizontal: !1,
       dataLabels: {
         position: 'top',
       },
@@ -93,7 +93,7 @@ export const stackedBarOptions = {
   },
   plotOptions: {
     bar: {
-      horizontal: !0,
+      horizontal: !1,
     },
   },
   stroke: {
@@ -165,7 +165,7 @@ export const fullStackedBarOptions = {
   },
   plotOptions: {
     bar: {
-      horizontal: !0,
+      horizontal: !1,
     },
   },
   stroke: {
@@ -222,7 +222,7 @@ export const negativeBarOptions = {
   colors: ['#fa5c7c', '#0acf97'],
   plotOptions: {
     bar: {
-      horizontal: !0,
+      horizontal: !1,
       barHeight: '80%',
     },
   },
@@ -297,7 +297,7 @@ export const patternBarOptions = {
   },
   plotOptions: {
     bar: {
-      horizontal: !0,
+      horizontal: !1,
       barHeight: '60%',
     },
   },
@@ -380,7 +380,7 @@ export const imageFillBarOptions = {
   },
   plotOptions: {
     bar: {
-      horizontal: !0,
+      horizontal: !1,
       barHeight: '100%',
     },
   },

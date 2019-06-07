@@ -3,7 +3,7 @@ import { Row, Col, Card } from 'ant-design-vue';
 import { loadApexCharts } from '@/utils/index';
 
 import {
-  countByCategory, DVHelper, initYearData, yearlyTransformer,
+  countByCategory, DVHelper, initData, yearlyTransformer,
 } from '@/utils/datetime';
 import models from '@/models';
 
@@ -22,7 +22,6 @@ import './index.less';
 const Document: any = models.document;
 const Event: any = models.event;
 const Leave: any = models.leave;
-const Member: any = models.member;
 
 @Component({
   name: 'Bar',
@@ -45,31 +44,35 @@ export default class Bar extends Vue {
 
   basicBarOption: any = basicBarOptions
 
-  basicBarChart: any = null;
+  basicBarChart: any = null
 
   groupedBarSerieData: DVHelper = null
 
   groupedBarOption: any = groupedBarOptions
 
-  groupedBarChart: any = null;
+  groupedBarChart: any = null
 
   stackedBarSerieData: DVHelper = null
 
   stackedBarOption: any = stackedBarOptions
 
-  stackedBarChart: any = null;
+  stackedBarChart: any = null
 
   fullStackedBarSerieData: DVHelper = null
 
   fullStackedBarOption: any = fullStackedBarOptions
 
-  fullStackedBarChart: any = null;
+  fullStackedBarChart: any = null
 
-  negativeBarChart: any = null;
+  negativeBarChart: any = null
 
-  patternBarChart: any = null;
+  patternBarChart: any = null
 
-  imageFillBarChart: any = null;
+  imageFillBarChart: any = null
+
+  activated() {
+    this.getData();
+  }
 
   mounted() {
     this.getData();
@@ -101,7 +104,8 @@ export default class Bar extends Vue {
         console.log('Document Data:', documents);
         this.basicBarSerieData = countByCategory(documents, {
           field: 'date',
-          as: 'month',
+          x: 'x',
+          y: 'y',
           operate: 'count',
         });
         console.log('Basic Chart Data:', this.basicBarSerieData);
@@ -117,11 +121,18 @@ export default class Bar extends Vue {
       Event.$fetch().then(async () => {
         const events = await Event.all();
         console.log('Event Data:', events);
-        this.groupedBarSerieData = countByCategory(events, {
-          field: 'date',
-          as: 'year',
-          operate: 'count',
-        }, ['2017', '2018', '2019', '2020'], initYearData, yearlyTransformer);
+        this.groupedBarSerieData = countByCategory(
+          events,
+          {
+            field: 'date',
+            x: 'x',
+            y: 'y',
+            operate: 'count',
+          },
+          ['2017', '2018', '2019', '2020'],
+          initData,
+          yearlyTransformer,
+        );
         console.log('Grouped Chart Data:', this.groupedBarSerieData);
         this.groupedBarOption.xaxis.categories = this.groupedBarSerieData.labels;
         this.groupedBarOption.series[0].data = this.groupedBarSerieData.data;
@@ -137,9 +148,10 @@ export default class Bar extends Vue {
         const leaves = await Leave.all();
         console.log('Leave Data:', leaves);
         this.stackedBarSerieData = countByCategory(leaves, {
-          field: 'date',
-          as: 'month',
+          field: 'fromDate',
           operate: 'count',
+          x: 'x',
+          y: 'y',
         });
         console.log('Stacked Chart Data:', this.stackedBarSerieData);
         this.stackedBarOption.xaxis.categories = this.stackedBarSerieData.labels;
@@ -159,9 +171,10 @@ export default class Bar extends Vue {
         const leaves = await Leave.all();
         console.log('Leave Data:', leaves);
         this.fullStackedBarSerieData = countByCategory(leaves, {
-          field: 'date',
-          as: 'month',
+          field: 'fromDate',
           operate: 'count',
+          x: 'x',
+          y: 'y',
         });
         console.log('Stacked Chart Data:', this.fullStackedBarSerieData);
         this.fullStackedBarOption.xaxis.categories = this.fullStackedBarSerieData.labels;
@@ -184,43 +197,43 @@ export default class Bar extends Vue {
           <a-col {...{ props: this.itemLayout }}>
             <a-card>
               <h2 class="item-title">按月统计文件</h2>
-              <div id="basic-bar"></div>
+              <div id="basic-bar" />
             </a-card>
           </a-col>
           <a-col {...{ props: this.itemLayout }}>
             <a-card>
               <h2 class="item-title">按公私统计活动</h2>
-              <div id="grouped-bar"></div>
+              <div id="grouped-bar" />
             </a-card>
           </a-col>
           <a-col {...{ props: this.itemLayout }}>
             <a-card>
               <h2 class="item-title">按月统计休假</h2>
-              <div id="stacked-bar"></div>
+              <div id="stacked-bar" />
             </a-card>
           </a-col>
           <a-col {...{ props: this.itemLayout }}>
             <a-card>
               <h2 class="item-title">按路线统计休假</h2>
-              <div id="full-stacked-bar"></div>
+              <div id="full-stacked-bar" />
             </a-card>
           </a-col>
-          <a-col {...{ props: this.itemLayout }}>
+          <a-col {...{ props: this.itemLayout }} hidden={true}>
             <a-card>
               <h2 class="item-title">negative-bar</h2>
-              <div id="negative-bar"></div>
+              <div id="negative-bar" />
             </a-card>
           </a-col>
-          <a-col {...{ props: this.itemLayout }}>
+          <a-col {...{ props: this.itemLayout }} hidden={true}>
             <a-card>
               <h2 class="item-title">pattern-bar</h2>
-              <div id="pattern-bar"></div>
+              <div id="pattern-bar" />
             </a-card>
           </a-col>
-          <a-col {...{ props: this.itemLayout }}>
+          <a-col {...{ props: this.itemLayout }} hidden={true}>
             <a-card>
               <h2 class="item-title">image-fill-bar</h2>
-              <div id="image-fill-bar"></div>
+              <div id="image-fill-bar" />
             </a-card>
           </a-col>
         </a-row>

@@ -47,11 +47,11 @@ export const basicAreaOptions = {
     ],
   }],
   title: {
-    text: 'Fundamental Analysis of Stocks',
+    text: '文档统计',
     align: 'left',
   },
   subtitle: {
-    text: 'Price Movements',
+    text: '收取/发送情况',
     align: 'left',
   },
   labels: [
@@ -77,7 +77,7 @@ export const basicAreaOptions = {
     '08 Dec 2017',
   ],
   xaxis: {
-    type: 'datetime',
+    type: 'string',
   },
   yaxis: {
     opposite: !0,
@@ -121,10 +121,10 @@ export const splineAreaOptions = {
   },
   colors: ['#727cf5', '#6c757d'],
   series: [{
-    name: 'Series 1',
+    name: '人事',
     data: [31, 40, 28, 51, 42, 109, 100],
   }, {
-    name: 'Series 2',
+    name: '党务',
     data: [11, 32, 45, 32, 34, 52, 41],
   }],
   xaxis: {
