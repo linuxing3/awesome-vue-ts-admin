@@ -1,7 +1,7 @@
 'use strict';
 
 import {
-  app, protocol, BrowserWindow, ipcMain, globalShortcut, Menu,
+  app, protocol, BrowserWindow, ipcMain, globalShortcut, Menu, shell,
 } from 'electron';
 import { createProtocol, installVueDevtools } from 'vue-cli-plugin-electron-builder/lib';
 const isDevelopment = process.env.NODE_ENV !== 'production';
@@ -108,9 +108,18 @@ ipcMain.on('async-open-dev', (event, arg) => {
 ipcMain.on('async-show-menu', (event, arg) => {
   if (arg.showMenu) {
     console.log('async-show-menu send arg: ', arg);
-    Menu.setApplicationMenu(arg.template);
+    const menu = Menu.buildFromTemplate(arg.template);
+    Menu.setApplicationMenu(menu);
   }
   event.sender.send('async-show-menu', {
     menuOpened: true,
+  });
+});
+
+ipcMain.on('async-add-jumplist', (event, arg) => {
+  console.log('async-add-jumplist send arg: ', arg)
+  shell.openExternal(arg.path);
+  event.sender.send('async-add-jumplist', {
+    added: true,
   });
 });
