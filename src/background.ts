@@ -26,6 +26,24 @@ if (isDevelopment) {
 // Scheme must be registered before the app is ready
 protocol.registerStandardSchemes(['app'], { secure: true });
 
+function registerShortcuts(win: BrowserWindow) {
+  globalShortcut.register('CommandOrControl+Shift+X', () => {
+    if (!process.env.IS_TEST) win.webContents.openDevTools();
+  });
+}
+
+function pollServer() {
+  http.get(APP_URL, (res) => {
+    if (res.statusCode === 200) {
+      win.loadURL(APP_URL);
+    } else {
+      console.log('restart poolServer');
+      setTimeout(pollServer, 300);
+    }
+  })
+    .on('error', pollServer);
+}
+
 function createWindow() {
   // Create the browser window.
   win = new BrowserWindow({
@@ -36,6 +54,8 @@ function createWindow() {
     },
     // icon: path.join(global.__static, 'icon.png')
   });
+
+  registerShortcuts(win);
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // pollServer()
@@ -61,6 +81,8 @@ function createWindows(winVar, devPath, prodPath) {
     },
   });
 
+  registerShortcuts(winVar);
+
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
     winVar.loadURL(process.env.WEBPACK_DEV_SERVER_URL + devPath);
@@ -78,24 +100,6 @@ function createWindows(winVar, devPath, prodPath) {
   });
 }
 
-function registerShortcuts(win: BrowserWindow) {
-  globalShortcut.register('CommandOrControl+Shift+X', () => {
-    if (!process.env.IS_TEST) win.webContents.openDevTools();
-  });
-}
-
-function pollServer() {
-  http.get(APP_URL, (res) => {
-    if (res.statusCode === 200) {
-      win.loadURL(APP_URL);
-    } else {
-      console.log('restart poolServer');
-      setTimeout(pollServer, 300);
-    }
-  })
-    .on('error', pollServer);
-}
-
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {
   // On macOS it is common for applications and their menu bar
@@ -109,7 +113,10 @@ app.on('activate', () => {
   // On macOS it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
   if (win === null) {
-    createWindow();
+    createWindows(win, '', 'index.html');
+  }
+  if (playWin === null) {
+    createWindows(playWin, 'playpage', 'playpage.html');
   }
 });
 
@@ -125,11 +132,11 @@ app.on('ready', async () => {
       console.error('Vue Devtools failed to install:', e.toString());
     }
   }
+  // Create only window
   // createWindow();
+  // Create multi windows
   createWindows(win, '', 'index.html');
   createWindows(playWin, 'playpage', 'playpage.html');
-  registerShortcuts(win);
-  registerShortcuts(playWin);
 });
 
 // Exit cleanly on request from parent process in development mode.
