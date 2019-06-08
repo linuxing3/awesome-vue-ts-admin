@@ -4,11 +4,20 @@ import {
   app, protocol, BrowserWindow, ipcMain, globalShortcut, Menu, shell,
 } from 'electron';
 import { createProtocol, installVueDevtools } from 'vue-cli-plugin-electron-builder/lib';
+import http from 'http';
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win: BrowserWindow | null;
+
+let APP_URL = '';
+if (isDevelopment) {
+  APP_URL = process.env.WEBPACK_DEV_SERVER_URL as string;
+  console.log(`App working on ${APP_URL}`);
+} else {
+  APP_URL = 'app://./index.html';
+}
 
 // Scheme must be registered before the app is ready
 protocol.registerStandardSchemes(['app'], { secure: true });
@@ -24,6 +33,7 @@ function createWindow() {
   });
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
+    // pollServer()
     // Load the url of the dev server if in development mode
     win.loadURL(process.env.WEBPACK_DEV_SERVER_URL as string);
     if (!process.env.IS_TEST) win.webContents.openDevTools();
@@ -44,6 +54,18 @@ function registerShortcuts(win: BrowserWindow) {
   globalShortcut.register('CommandOrControl+Shift+X', () => {
     if (!process.env.IS_TEST) win.webContents.openDevTools();
   });
+}
+
+function pollServer() {
+  http.get(APP_URL, (res) => {
+    if (res.statusCode === 200) {
+      win.loadURL(APP_URL);
+    } else {
+      console.log('restart poolServer');
+      setTimeout(pollServer, 300);
+    }
+  })
+    .on('error', pollServer);
 }
 
 // Quit when all windows are closed.
@@ -117,7 +139,7 @@ ipcMain.on('async-show-menu', (event, arg) => {
 });
 
 ipcMain.on('async-add-jumplist', (event, arg) => {
-  console.log('async-add-jumplist send arg: ', arg)
+  console.log('async-add-jumplist send arg: ', arg);
   shell.openExternal(arg.path);
   event.sender.send('async-add-jumplist', {
     added: true,
