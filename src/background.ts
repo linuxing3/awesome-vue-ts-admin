@@ -1,5 +1,7 @@
 'use strict';
 
+/* global __static */
+import path from 'path';
 import {
   app, protocol, BrowserWindow, ipcMain, globalShortcut, Menu, shell,
 } from 'electron';
@@ -9,6 +11,8 @@ const isDevelopment = process.env.NODE_ENV !== 'production';
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win: BrowserWindow | null;
+let playWin: BrowserWindow | null;
+let createdAppProtocol = false;
 
 // Scheme must be registered before the app is ready
 protocol.registerStandardSchemes(['app'], { secure: true });
@@ -16,11 +20,12 @@ protocol.registerStandardSchemes(['app'], { secure: true });
 function createWindow() {
   // Create the browser window.
   win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1024,
+    height: 768,
     webPreferences: {
       nodeIntegration: true,
     },
+    // icon: path.join(global.__static, 'icon.png')
   });
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
@@ -29,14 +34,37 @@ function createWindow() {
     if (!process.env.IS_TEST) win.webContents.openDevTools();
   } else {
     createProtocol('app');
-    // Load the index.html when not in development
     win.loadURL('app://./index.html');
   }
 
-  // require sqlite server
-
   win.on('closed', () => {
     win = null;
+  });
+}
+
+function createWindows(winVar, devPath, prodPath) {
+  winVar = new BrowserWindow({
+    width: 1024,
+    height: 768,
+    webPreferences: {
+      nodeIntegration: true,
+    },
+  });
+
+  if (process.env.WEBPACK_DEV_SERVER_URL) {
+    // Load the url of the dev server if in development mode
+    winVar.loadURL(process.env.WEBPACK_DEV_SERVER_URL + devPath);
+    if (!process.env.IS_TEST) winVar.webContents.openDevTools();
+  } else {
+    if (!createdAppProtocol) {
+      createProtocol('app');
+      createdAppProtocol = true;
+    }
+    winVar.loadURL(`app://./${prodPath}`);
+  }
+
+  winVar.on('closed', () => {
+    winVar = null;
   });
 }
 
@@ -75,8 +103,11 @@ app.on('ready', async () => {
       console.error('Vue Devtools failed to install:', e.toString());
     }
   }
-  createWindow();
+  // createWindow();
+  createWindows(win, '', 'index.html');
+  createWindows(playWin, 'playpage', 'playpage.html');
   registerShortcuts(win);
+  registerShortcuts(playWin);
 });
 
 // Exit cleanly on request from parent process in development mode.
@@ -117,8 +148,18 @@ ipcMain.on('async-show-menu', (event, arg) => {
 });
 
 ipcMain.on('async-add-jumplist', (event, arg) => {
-  console.log('async-add-jumplist send arg: ', arg)
-  shell.openExternal(arg.path);
+  console.log('async-add-jumplist send arg: ', arg);
+  // { type: 'file', path: 'C:\\Projects\\project1.proj' }
+  const items = [];
+  items.push(arg.item);
+  app.setJumpList([
+    {
+      type: 'custom',
+      name: 'Recent files',
+      items,
+    },
+  ]);
+  // shell.openExternal(arg.path);
   event.sender.send('async-add-jumplist', {
     added: true,
   });

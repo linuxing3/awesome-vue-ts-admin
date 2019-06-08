@@ -9,6 +9,7 @@ declare namespace NodeJS {
      */
     [propName: string]: any;
     (...args: any): any;
+    __static: string;
     (): any;
     /**
      * All properties and methods are exposed to global

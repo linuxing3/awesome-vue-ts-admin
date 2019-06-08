@@ -1,3 +1,5 @@
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Mock = require('./src/mock/index');
 
 const i18n = {
@@ -7,10 +9,28 @@ const i18n = {
   enableInSFC: true,
 };
 
+const pages = {
+  index: {
+    entry: 'src/main.ts',
+    template: 'public/index.html',
+    filename: 'index.html',
+    // title: 'Index Page',
+    chunks: ['chunk-vendors', 'chunk-common', 'index'],
+  },
+  playpage: {
+    entry: 'src/playpage/main.ts',
+    template: 'public/playpage.html',
+    filename: 'playpage.html',
+    title: 'Play Page',
+    chunks: ['play-chunk-vendors', 'play-chunk-common', 'playpage'],
+  },
+};
+
 module.exports = {
   // configureWebpack: {
   //   devtool: 'source-map',
   // },
+  pages,
   chainWebpack: (config) => {
     'use strict';
 
@@ -20,10 +40,16 @@ module.exports = {
       .use('vue-jsx-hot-loader')
       .before('babel-loader')
       .loader('vue-jsx-hot-loader');
-    config.plugin('html').tap((args) => {
-      args[0].chunksSortMode = 'none';
-      return args;
-    });
+    // html plugins
+    // config.plugin('html').tap((args) => {
+    //   args[0].chunksSortMode = 'auto';
+    //   return args;
+    // });
+    // multipage
+    // config.plugin('html').use(HtmlWebpackPlugin, {
+    //   template: path.resolve(__dirname, 'public/playpage.html'),
+    //   filename: 'playpage.html',
+    // });
   },
   css: {
     loaderOptions: {
