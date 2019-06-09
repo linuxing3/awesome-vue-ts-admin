@@ -6,7 +6,7 @@
     - [Running unit tests](#running-unit-tests)
     - [Introduction to Jest](#introduction-to-jest)
     - [Unit test files](#unit-test-files)
-    - [Unit test helpers](#unit-test-helpers)
+    - [Unit test setup](#unit-test-setup)
     - [Unit test mocks](#unit-test-mocks)
   - [End-to-end tests with Cypress](#end-to-end-tests-with-cypress)
     - [Running end-to-end tests](#running-end-to-end-tests)
@@ -198,12 +198,7 @@ This strategy could be called **accessibility-driven end-to-end tests**, because
 
 Working against the production API can be useful sometimes, but it also has some disadvantages:
 
-- Networks requests are slow, which slows down both development and testing.
-- Development and testing become dependent on a stable network connection.
-- Hitting the production API often means modifying the production database, which you typically don't want to do during automated tests.
-- To work on a frontend feature, the backend for it must already be complete.
-
-The mock API is an [Express](https://expressjs.com/) server in `tests/mock-api` you can extend to - you guessed it - mock what the real API would do, solving all the problems listed above. This solution is also backend-agnostic, making it ideal for a wide variety of projects.
+The mock API is from the `localforage`, backed by `request.localforage` util to work with `@/vuex-orm/core`
 
 ### Testing/developing against a real server
 

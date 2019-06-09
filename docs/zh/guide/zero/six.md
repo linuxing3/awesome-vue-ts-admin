@@ -2,7 +2,7 @@
 
 - [Languages](#languages)
 
-Transform 数据转换
+## Transform 数据转换
 一个数据视图（DataSet.View）通过 Transform 来进行数据转换操作，其语法如下：
 
 
@@ -206,10 +206,10 @@ dv.transform({
 });
 
 
-数据形变/数据补全相关
+## 数据形变/数据补全相关
 
 
-fill-rows 补全行
+### fill-rows 补全行
 
 
 alias: fillRows
@@ -228,7 +228,7 @@ alias: fillRows
 
 
 
-fillBy: group
+### fillBy: group
 
 
 
@@ -265,7 +265,7 @@ console.log(dv.rows);
  */
 
 
-fillBy: order
+#### fillBy: order
 
 
 
@@ -297,7 +297,7 @@ console.log(dv.rows);
  */
 
 
-impute 补全列/补全字段
+### impute 补全列/补全字段
 
 
 根据配置规则为某个字段补全缺失值。
@@ -361,7 +361,7 @@ dv.transform({
 });
 
 
-fold 字段展开
+### fold 字段展开
 
 
 以指定字段集为key，展开数据。
@@ -396,10 +396,10 @@ const dv = ds.createView()
  */
 
 
-数据比例（百分比）相关 Transform
+### 数据比例（百分比）相关 Transform
 
 
-percent 总和百分比
+#### percent 总和百分比
 
 
 统计某个维度下某个字段的值的和占总和的比例（可以分组）。
@@ -423,7 +423,7 @@ dv.transform({
 });
 
 
-proportion 行数百分比
+#### proportion 行数百分比
 
 
 统计某个维度下某个字段的数据条数占总条数的比例（可以分组）。和 percent Transform 类似，但统计的是数据条目的占比，而不是数据总和的占比。
@@ -442,10 +442,10 @@ dv.transform({
 });
 
 
-数据统计相关
+## 数据统计相关
 
 
-aggregate 聚合统计
+### aggregate 聚合统计
 
 
 统计处理，支持并行的多种统计。
@@ -497,7 +497,7 @@ variance
 
 
 
-regression 回归曲线
+### regression 回归曲线
 
 
 计算两个字段的回归拟合曲线。
@@ -654,7 +654,7 @@ dv.transform({
  */
 
 
-核函数相关
+### 核函数相关
 
 
 kernel-smooth.regression 核函数概率密度回归
@@ -811,7 +811,7 @@ dv.transform({
 });
 
 
-图相关
+### 图相关
 
 
 diagram.arc 弧长链接图
@@ -957,10 +957,10 @@ dv.transform({
 });
 
 
-其他
+## 其他
 
 
-tag-cloud 词云布局
+### tag-cloud 词云布局
 
 
 alias: word-cloud

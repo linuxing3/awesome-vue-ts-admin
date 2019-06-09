@@ -22,14 +22,14 @@ const pages = {
     template: 'public/playpage.html',
     filename: 'playpage.html',
     title: 'Play Page',
-    chunks: ['play-chunk-vendors', 'play-chunk-common', 'playpage'],
+    chunks: ['chunk-vendors', 'chunk-common', 'playpage'],
   },
 };
 
 module.exports = {
-  // configureWebpack: {
-  //   devtool: 'source-map',
-  // },
+  configureWebpack: {
+    devtool: 'source-map',
+  },
   pages,
   chainWebpack: (config) => {
     'use strict';
