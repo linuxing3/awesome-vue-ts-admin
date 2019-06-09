@@ -62,7 +62,6 @@ export const asyncRouterMap: routerItem[] = [
     name: 'Helper',
     component: getComponent('helpers/index'),
     permission: true,
-    hidden: true,
     meta: { key: 'helper' },
     children: [
       {
@@ -344,7 +343,6 @@ export const asyncRouterMap: routerItem[] = [
     icon: 'environment',
     name: '地图',
     component: getComponent('map/index'),
-    hidden: true,
     permission: true,
     meta: { key: 'Map' },
     children: [
@@ -361,7 +359,6 @@ export const asyncRouterMap: routerItem[] = [
     path: '/playground',
     icon: 'setting',
     name: '实验室',
-    hidden: true,
     component: getComponent('playground/index'),
     permission: true,
     meta: { key: 'Playground' },

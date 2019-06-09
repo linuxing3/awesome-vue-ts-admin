@@ -70,9 +70,9 @@ export default class Bar extends Vue {
 
   imageFillBarChart: any = null
 
-  activated() {
-    this.getData();
-  }
+  // activated() {
+  //   this.getData();
+  // }
 
   mounted() {
     this.getData();

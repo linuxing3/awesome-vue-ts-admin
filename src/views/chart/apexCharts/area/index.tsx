@@ -73,9 +73,9 @@ export default class Area extends Vue {
 
   areaChartNullvaluesChart: any = null
 
-  activated() {
-    this.getData();
-  }
+  // activated() {
+  //   this.getData();
+  // }
 
   mounted() {
     this.getData();

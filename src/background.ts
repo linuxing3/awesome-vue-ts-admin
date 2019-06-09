@@ -26,9 +26,9 @@ if (isDevelopment) {
 // Scheme must be registered before the app is ready
 protocol.registerStandardSchemes(['app'], { secure: true });
 
-function registerShortcuts(win: BrowserWindow) {
+function registerShortcuts(winVar: BrowserWindow) {
   globalShortcut.register('CommandOrControl+Shift+X', () => {
-    if (!process.env.IS_TEST) win.webContents.openDevTools();
+    if (!process.env.IS_TEST) winVar.webContents.openDevTools();
   });
 }
 
