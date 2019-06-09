@@ -176,9 +176,10 @@ ipcMain.on('async-show-menu', (event, arg) => {
 
 ipcMain.on('async-add-jumplist', (event, arg) => {
   console.log('async-add-jumplist send arg: ', arg);
-  // { type: 'file', path: 'C:\\Projects\\project1.proj' }
   const items = [];
   items.push(arg.item);
+  const settings = app.getJumpListSettings();
+  console.log(settings);
   app.setJumpList([
     {
       type: 'custom',
@@ -186,7 +187,7 @@ ipcMain.on('async-add-jumplist', (event, arg) => {
       items,
     },
   ]);
-  shell.openExternal(arg.path);
+  // shell.openExternal(arg.item.path);
   event.sender.send('async-add-jumplist', {
     added: true,
   });

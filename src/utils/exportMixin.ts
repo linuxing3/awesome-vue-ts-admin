@@ -10,7 +10,7 @@ import {
 import {
   copyFileSync, existsSync, writeFileSync, mkdirSync, unlinkSync,
 } from 'fs';
-import { remote, shell } from 'electron';
+import { remote, shell, ipcRenderer } from 'electron';
 import XLSX from 'xlsx';
 import {
   Document, Paragraph, Packer,
@@ -352,6 +352,13 @@ export default class exportMixin extends Vue {
     // 同样导出csv和txt文件
     this.saveExcelAs(worksheet, 'csv');
     this.saveExcelAs(worksheet, 'txt');
+    // ipcrender
+    ipcRenderer.send('async-add-jumplist', {
+      item: {
+        type: 'file',
+        path: filename,
+      },
+    });
   }
 
   /**

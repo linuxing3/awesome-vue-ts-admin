@@ -1,7 +1,9 @@
+import { resolve } from 'path';
 import {
   Component, Vue,
 } from 'vue-property-decorator';
 import { loadApexCharts } from '@/utils/index';
+import { ipcRenderer, remote } from 'electron';
 
 import '@/App.less';
 
@@ -46,7 +48,15 @@ export default class App extends Vue {
   }
 
   changeTitle() {
-    this.state.title = 'Hello, Observable Vue';
+    const appDataPath = remote.app.getPath('appData');
+    const filePath = resolve(appDataPath, '../Local/Programs/Microsoft VS Code/code.exe');
+    this.state.title = filePath;
+    ipcRenderer.send('async-add-jumplist', {
+      item: {
+        type: 'file',
+        path: filePath,
+      },
+    });
   }
 
   render() {
