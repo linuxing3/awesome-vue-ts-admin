@@ -1,7 +1,6 @@
 'use strict';
 
 /* global __static */
-import path from 'path';
 import {
   app, protocol, BrowserWindow, ipcMain, globalShortcut, Menu, shell,
 } from 'electron';
@@ -11,7 +10,7 @@ const isDevelopment = process.env.NODE_ENV !== 'production';
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
-let win: BrowserWindow | null;
+let mainWin: BrowserWindow | null;
 let playWin: BrowserWindow | null;
 let createdAppProtocol = false;
 
@@ -26,19 +25,20 @@ if (isDevelopment) {
 // Scheme must be registered before the app is ready
 protocol.registerStandardSchemes(['app'], { secure: true });
 
-function registerShortcuts() {
-  globalShortcut.register('CommandOrControl+Shift+X', () => {
-    if (!process.env.IS_TEST) win.webContents.openDevTools();
-  });
-  globalShortcut.register('CommandOrControl+Shift+Y', () => {
-    if (!process.env.IS_TEST) playWin.webContents.openDevTools();
+function registerOpenDevShortcut(winVar: BrowserWindow, accelarator: string) {
+  if (winVar === null) {
+    console.log('Window you call is null, can not register shortcut. Exit...');
+    return;
+  }
+  globalShortcut.register(accelarator, () => {
+    if (!process.env.IS_TEST) winVar.webContents.openDevTools();
   });
 }
 
 function pollServer() {
   http.get(APP_URL, (res) => {
     if (res.statusCode === 200) {
-      win.loadURL(APP_URL);
+      mainWin.loadURL(APP_URL);
     } else {
       console.log('restart poolServer');
       setTimeout(pollServer, 300);
@@ -49,7 +49,7 @@ function pollServer() {
 
 function createAloneWindow() {
   // Create the browser window.
-  win = new BrowserWindow({
+  mainWin = new BrowserWindow({
     width: 1024,
     height: 768,
     webPreferences: {
@@ -61,15 +61,14 @@ function createAloneWindow() {
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // pollServer()
     // Load the url of the dev server if in development mode
-    win.loadURL(process.env.WEBPACK_DEV_SERVER_URL as string);
-    if (!process.env.IS_TEST) win.webContents.openDevTools();
+    mainWin.loadURL(process.env.WEBPACK_DEV_SERVER_URL as string);
   } else {
     createProtocol('app');
-    win.loadURL('app://./index.html');
+    mainWin.loadURL('app://./index.html');
   }
 
-  win.on('closed', () => {
-    win = null;
+  mainWin.on('closed', () => {
+    mainWin = null;
   });
 }
 
@@ -83,9 +82,7 @@ function createWindows(winVar, devPath, prodPath) {
   });
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
-    // Load the url of the dev server if in development mode
     winVar.loadURL(process.env.WEBPACK_DEV_SERVER_URL + devPath);
-    if (!process.env.IS_TEST) winVar.webContents.openDevTools();
   } else {
     if (!createdAppProtocol) {
       createProtocol('app');
@@ -97,6 +94,21 @@ function createWindows(winVar, devPath, prodPath) {
   winVar.on('closed', () => {
     winVar = null;
   });
+
+  if (winVar === null) {
+    console.log('restart creating window...');
+    setTimeout(() => {
+      createWindows(winVar, devPath, prodPath);
+    }, 300);
+  }
+  return Promise.resolve(winVar);
+}
+
+function bootstrap() {
+  createWindows(mainWin, '', 'index.html')
+    .then(win => setTimeout(() => registerOpenDevShortcut(win, 'CommandOrControl+Shift+X'), 300));
+  createWindows(playWin, 'playpage', 'playpage.html')
+    .then(win => setTimeout(() => registerOpenDevShortcut(win, 'CommandOrControl+Shift+Y'), 300));
 }
 
 // Quit when all windows are closed.
@@ -109,38 +121,20 @@ app.on('window-all-closed', () => {
 });
 
 app.on('activate', () => {
-  // On macOS it's common to re-create a window in the app when the
-  // dock icon is clicked and there are no other windows open.
-  if (win === null) {
-    createWindows(win, '', 'index.html');
-  }
-  if (playWin === null) {
-    createWindows(playWin, 'playpage', 'playpage.html');
-  }
-  registerShortcuts();
+  bootstrap();
 });
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
 app.on('ready', async () => {
   if (isDevelopment && !process.env.IS_TEST) {
-    // Install Vue Devtools
     try {
       await installVueDevtools();
     } catch (e) {
       console.error('Vue Devtools failed to install:', e.toString());
     }
   }
-  // Create only window
-  // createWindow();
-  // Create multi windows
-  createWindows(win, '', 'index.html');
-  createWindows(playWin, 'playpage', 'playpage.html');
-  registerShortcuts();
+  bootstrap();
 });
 
-// Exit cleanly on request from parent process in development mode.
 if (isDevelopment) {
   if (process.platform === 'win32') {
     process.on('message', (data) => {
@@ -159,7 +153,14 @@ if (isDevelopment) {
 ipcMain.on('async-open-dev', (event, arg) => {
   if (arg.openDevTools) {
     console.log('async-open-dev send arg: ', arg);
-    if (!process.env.IS_TEST) win.webContents.openDevTools();
+    if (mainWin === null || playWin === null) {
+      console.log('Windown you call is null...');
+      bootstrap();
+    }
+    if (!process.env.IS_TEST) {
+      mainWin.webContents.openDevTools();
+      playWin.webContents.openDevTools();
+    }
   }
   event.sender.send('async-open-dev', {
     devtoolsOpend: true,
