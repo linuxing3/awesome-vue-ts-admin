@@ -26,9 +26,12 @@ if (isDevelopment) {
 // Scheme must be registered before the app is ready
 protocol.registerStandardSchemes(['app'], { secure: true });
 
-function registerShortcuts(winVar: BrowserWindow) {
+function registerShortcuts() {
   globalShortcut.register('CommandOrControl+Shift+X', () => {
-    if (!process.env.IS_TEST) winVar.webContents.openDevTools();
+    if (!process.env.IS_TEST) win.webContents.openDevTools();
+  });
+  globalShortcut.register('CommandOrControl+Shift+Y', () => {
+    if (!process.env.IS_TEST) playWin.webContents.openDevTools();
   });
 }
 
@@ -44,7 +47,7 @@ function pollServer() {
     .on('error', pollServer);
 }
 
-function createWindow() {
+function createAloneWindow() {
   // Create the browser window.
   win = new BrowserWindow({
     width: 1024,
@@ -54,8 +57,6 @@ function createWindow() {
     },
     // icon: path.join(global.__static, 'icon.png')
   });
-
-  registerShortcuts(win);
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // pollServer()
@@ -80,8 +81,6 @@ function createWindows(winVar, devPath, prodPath) {
       nodeIntegration: true,
     },
   });
-
-  registerShortcuts(winVar);
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
@@ -118,6 +117,7 @@ app.on('activate', () => {
   if (playWin === null) {
     createWindows(playWin, 'playpage', 'playpage.html');
   }
+  registerShortcuts();
 });
 
 // This method will be called when Electron has finished
@@ -137,6 +137,7 @@ app.on('ready', async () => {
   // Create multi windows
   createWindows(win, '', 'index.html');
   createWindows(playWin, 'playpage', 'playpage.html');
+  registerShortcuts();
 });
 
 // Exit cleanly on request from parent process in development mode.
