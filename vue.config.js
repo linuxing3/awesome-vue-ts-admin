@@ -30,7 +30,10 @@ module.exports = {
   configureWebpack: {
     devtool: 'source-map',
   },
-  pages,
+  pages: {
+    // index: pages.index,
+    playpage: pages.playpage,
+  },
   chainWebpack: (config) => {
     'use strict';
 

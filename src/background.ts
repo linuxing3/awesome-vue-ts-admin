@@ -153,13 +153,9 @@ if (isDevelopment) {
 ipcMain.on('async-open-dev', (event, arg) => {
   if (arg.openDevTools) {
     console.log('async-open-dev send arg: ', arg);
-    if (mainWin === null || playWin === null) {
-      console.log('Windown you call is null...');
-      bootstrap();
-    }
     if (!process.env.IS_TEST) {
-      mainWin.webContents.openDevTools();
-      playWin.webContents.openDevTools();
+      const focusedWin = BrowserWindow.getFocusedWindow();
+      focusedWin.webContents.openDevTools();
     }
   }
   event.sender.send('async-open-dev', {
