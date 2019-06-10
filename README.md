@@ -4,18 +4,20 @@
 
 # awesome-vue-ts-admin
 
-  > 一个基于`typesciprt` + `vue` + `vue-cli@3.4.1`的中台管理系统
+  > 一个基于`typesciprt` + `vue` + `vue-cli的中台管理系统
 
 ## [演示地址](https://embajadachinave.netlify.com)
 
 ### 特点
   1. 基于`vue-cli/vuex/vue-router`
-  2. 基于`typescript`, 代码健壮，出bug几率更小
+  2. 基于`typescript`, 代码更加健壮
   3. 基于`ant-design-vue`, 美观大方，简洁明亮
   4. 响应式架构，在移动端可以正常使用
   5. `tab`缓存页面，可以同时打开多个路由，并随意切换和关闭
-  6. 接入`electron`桌面应用
+  6. 接入`electron`桌面应用, 多窗口多页面管理
   7. 后台使用`vuex/orm/localforage`作为数据Mock和存储
+  8. 使用`apexchart`和`chart.js`图表, 浏览器和`node`两种环境
+  9. 测试`@antv/viser`和`@antv/data-set`图表, 浏览器和`node`两种环境
 
 ### 持续更新中
 
@@ -29,19 +31,14 @@ yarn electron:serve
 ```
 yarn dist
 yarn electron:build
+yarn electron:build  --skipBundle
 ```
 
-### install necessary plugins
-
-```
-yarn plugins:install
-```
-
-### generate new
+### generate gen
 
 ``` sh
 # hygen new component-table
-yarn new component-table
+yarn gen component
 ```
 
 ## General Project setup

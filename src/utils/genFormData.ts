@@ -1,4 +1,5 @@
 import { FilterFormList } from '@/interface';
+import titleCase from 'title-case';
 
 export const genAFormData = (field: string): FilterFormList => {
   // /.*$/.test(field)
@@ -6,7 +7,7 @@ export const genAFormData = (field: string): FilterFormList => {
     return {
       key: field,
       type: 'textarea',
-      label: field,
+      label: titleCase(field),
       placeholder: `Input ${field}`,
     };
   }
@@ -14,12 +15,12 @@ export const genAFormData = (field: string): FilterFormList => {
     return {
       key: field,
       type: 'select',
-      label: field,
+      label: titleCase(field),
       placeholder: [field],
       options: [
         {
           value: field,
-          label: field,
+          label: titleCase(field),
         },
       ],
     };
@@ -28,7 +29,7 @@ export const genAFormData = (field: string): FilterFormList => {
     return {
       key: field,
       type: 'date',
-      label: field,
+      label: titleCase(field),
       placeholder: '2019-01-01',
     };
   }
@@ -36,21 +37,21 @@ export const genAFormData = (field: string): FilterFormList => {
     return {
       key: field,
       type: 'datetime',
-      label: field,
-      placeholder: '12:00:00',
+      label: titleCase(field),
+      placeholder: '12:00',
     };
   }
   return {
     key: field,
     type: 'input',
-    label: field,
+    label: titleCase(field),
     placeholder: `Input ${field}`,
   };
 };
 
 export const AGenTableColumns = (fields: string[]): FilterFormList[] => fields.reduce((columnsConfig: FilterFormList[], field: string): FilterFormList[] => {
   const config: FilterFormList = {
-    title: field,
+    title: titleCase(field),
     dataIndex: field,
     width: '60px',
     sorter: true,
