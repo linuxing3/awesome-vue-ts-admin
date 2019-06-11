@@ -101,6 +101,6 @@ const server = new ApolloServer({ typeDefs, resolvers });
 const apolloServer = express();
 server.applyMiddleware({ ApolloServer });
 
-export default apolloServer;
-
 apolloServer.listen({ port: 4000 }, () => console.log(`Apollo Server ready at http://localhost:4000${server.graphqlPath}`));
+
+module.exports = apolloServer;

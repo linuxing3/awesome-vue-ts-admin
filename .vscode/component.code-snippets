@@ -1,0 +1,16 @@
+{
+	"Class Style Component": {
+		"scope": "javascriptreact, typescriptreact",
+		"prefix": "comp",
+		"body": [
+			"import { Component, Vue} from 'vue-property-decorator';",
+			"@Component({})",
+			"export default class $1 extends Vue {",
+			"  render(){",
+			"    return $2",
+			"  }",
+			"}"
+		],
+		"description": "Class style component"
+	}
+}

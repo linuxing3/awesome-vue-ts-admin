@@ -25,6 +25,7 @@
   "dependencies": {
     "@antv/data-set": "^0.10.2",
     "@vuex-orm/core": "^0.31.4",
+    "@vuex-orm/plugin-graphql": "^1.0.0-rc.35",
     "ant-design-vue": "^1.3.7",
     "apollo-cache-inmemory": "^1.6.2",
     "apollo-client": "^2.6.2",

@@ -382,7 +382,7 @@ export default class Dashboard extends Vue {
           <a-col span={16} xxl={16} xl={16} lg={24} md={24} sm={24} xs={24}>
             {/* Weekly Statistic chart */}
             <a-card loading={this.loading} class="dash-box revenue-chart">
-              <h2 class="title">REVENUE</h2>
+              <h2 class="title">{this.hello}</h2>
               <a-icon class="operate" type="ellipsis"></a-icon>
               <div class="week-data">
                 <div class="item">
