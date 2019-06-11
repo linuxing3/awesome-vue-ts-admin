@@ -6,6 +6,7 @@ import {
 } from 'electron';
 import { createProtocol, installVueDevtools } from 'vue-cli-plugin-electron-builder/lib';
 import http from 'http';
+// import apolloServer from './utils/apolloServer';
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -107,8 +108,8 @@ function createWindows(winVar, devPath, prodPath) {
 function bootstrap() {
   createWindows(mainWin, '', 'index.html')
     .then(win => setTimeout(() => registerOpenDevShortcut(win, 'CommandOrControl+Shift+X'), 300));
-  createWindows(playWin, 'playpage', 'playpage.html')
-    .then(win => setTimeout(() => registerOpenDevShortcut(win, 'CommandOrControl+Shift+Y'), 300));
+  // createWindows(playWin, 'playpage', 'playpage.html')
+  //   .then(win => setTimeout(() => registerOpenDevShortcut(win, 'CommandOrControl+Shift+Y'), 300));
 }
 
 // Quit when all windows are closed.
@@ -128,8 +129,12 @@ app.on('ready', async () => {
   if (isDevelopment && !process.env.IS_TEST) {
     try {
       await installVueDevtools();
+      // graphql server
+      // apolloServer.listen({ port: 4000 }, () =>
+      //   console.log(`Apollo Server ready`)
+      // );
     } catch (e) {
-      console.error('Vue Devtools failed to install:', e.toString());
+      console.error('failed:', e.toString());
     }
   }
   bootstrap();
@@ -160,6 +165,20 @@ ipcMain.on('async-open-dev', (event, arg) => {
   }
   event.sender.send('async-open-dev', {
     devtoolsOpend: true,
+  });
+});
+
+// Ipc events
+ipcMain.on('async-open-graphql', (event, arg) => {
+  if (arg.graphqlServerURL) {
+    console.log('async-open-graphql send arg: ', arg);
+    if (!process.env.IS_TEST) {
+      const focusedWin = BrowserWindow.getFocusedWindow();
+      focusedWin.loadURL(arg.graphqlServerURL);
+    }
+  }
+  event.sender.send('async-open-graphql', {
+    graphqlServerOpened: true,
   });
 });
 

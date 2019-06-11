@@ -31,8 +31,8 @@ module.exports = {
     devtool: 'source-map',
   },
   pages: {
-    // index: pages.index,
-    playpage: pages.playpage,
+    index: pages.index,
+    // playpage: pages.playpage,
   },
   chainWebpack: (config) => {
     'use strict';

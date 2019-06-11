@@ -1,6 +1,8 @@
 import { ipcRenderer, remote } from 'electron';
 const { Menu, MenuItem } = remote;
 
+const graphqlServerURL = 'http://localhost:4000/graphql';
+
 /**
  * Menut template
  */
@@ -79,6 +81,13 @@ menu.append(new MenuItem({
   label: 'Inspect',
   click() {
     ipcRenderer.send('async-open-dev', { openDevTools: true });
+  },
+}));
+
+menu.append(new MenuItem({
+  label: 'Graphql',
+  click() {
+    ipcRenderer.send('async-open-graphql', { graphqlServerURL });
   },
 }));
 

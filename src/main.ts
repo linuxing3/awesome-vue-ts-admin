@@ -25,6 +25,7 @@ import Api from '@/api/api.lf';
 /-----------------------------------------------------------------------*/
 import { log } from '@/utils/helper';
 import lfService from '@/utils/request.localforage';
+import { apolloProvider } from '@/utils/apollo';
 /*-----------------------------------------------------------------------
 / 格式和组件
 /-----------------------------------------------------------------------*/
@@ -99,5 +100,6 @@ new Vue({
   router,
   store,
   i18n,
+  apolloProvider,
   render: h => h(App),
 }).$mount('#app');

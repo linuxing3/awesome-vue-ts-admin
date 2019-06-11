@@ -7,11 +7,11 @@ import {
   Button, DatePicker, Modal, Row, Col, Card, Icon, Radio,
 } from 'ant-design-vue';
 import Chart from 'chart.js';
+import gql from 'graphql-tag';
 
 import { numFormat } from '@/utils/index';
 import { fillAllMonth } from '@/utils/datetime';
 import { entity } from '@/mock/dashboard';
-
 
 import Member from '@/store/modules/pages/Member/models/Member';
 import Document from '@/store/modules/pages/Document/models/Document';
@@ -39,6 +39,15 @@ export default class Dashboard extends Vue {
 
   pageData: any = null;
 
+  hello: string = '';
+
+  newTag: string = '';
+
+  apollo: any = {
+    // 简单的查询，将更新 'hello' 这个 vue 属性
+    hello: gql`query { hello }`,
+  }
+
   created() {
     // this.loadMock();
     this.loadData();
@@ -56,6 +65,55 @@ export default class Dashboard extends Vue {
     setTimeout(() => {
       this.init();
     }, 200);
+  }
+
+  addTag() {
+    // 保存用户输入以防止错误
+    const newTag = this.newTag;
+    // 将其清除以尽早更新用户页面
+    this.newTag = '';
+    // 调用 graphql 变更
+    this.$apollo.mutate({
+      // 查询语句
+      mutation: gql`mutation ($label: String!) {
+        addTag(label: $label) {
+          id
+          label
+        }
+      }`,
+      // 参数
+      variables: {
+        label: newTag,
+      },
+      // 用结果更新缓存
+      // 查询将先通过乐观响应、然后再通过真正的变更结果更新
+      update: (store, { data: { addTag } }) => {
+        // 从缓存中读取这个查询的数据
+        const data: any = store.readQuery({ query: 'TAGS_QUERY' });
+        // 将变更中的标签添加到最后
+        data.tags.push(addTag);
+        // 将数据写回缓存
+        store.writeQuery({ query: 'TAGS_QUERY', data });
+      },
+      // 乐观 UI
+      // 将在请求产生时作为“假”结果，使用户界面能够快速更新
+      optimisticResponse: {
+        __typename: 'Mutation',
+        addTag: {
+          __typename: 'Tag',
+          id: -1,
+          label: newTag,
+        },
+      },
+    }).then((data) => {
+      // 结果
+      console.log(data);
+    }).catch((error) => {
+      // 错误
+      console.error(error);
+      // 恢复初始用户输入
+      this.newTag = newTag;
+    });
   }
 
   loadData() {
