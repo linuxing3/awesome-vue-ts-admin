@@ -1,0 +1,74 @@
+{
+  "fields": [
+    {
+      "key": "loyaltyProgram",
+      "label": "Loyalty Program",
+      "type": "select",
+      "placeholder": "Input Loyalty Program",
+      "options": []
+    },
+    {
+      "key": "loyaltyProgramTier",
+      "label": "Loyalty Program Tier",
+      "type": "input",
+      "placeholder": "Input Loyalty Program Tier",
+      "options": []
+    },
+    {
+      "key": "customer",
+      "label": "Customer",
+      "type": "select",
+      "placeholder": "Input Customer",
+      "options": []
+    },
+    {
+      "key": "salesInvoice",
+      "label": "Sales Invoice",
+      "type": "select",
+      "placeholder": "Input Sales Invoice",
+      "options": []
+    },
+    {
+      "key": "redeemAgainst",
+      "label": "Redeem Against",
+      "type": "select",
+      "placeholder": "Input Redeem Against",
+      "options": []
+    },
+    {
+      "key": "loyaltyPoints",
+      "label": "Loyalty Points",
+      "type": "input",
+      "placeholder": "Input Loyalty Points",
+      "options": []
+    },
+    {
+      "key": "purchaseAmount",
+      "label": "Purchase Amount",
+      "type": "input",
+      "placeholder": "Input Purchase Amount",
+      "options": []
+    },
+    {
+      "key": "expiryDate",
+      "label": "Expiry Date",
+      "type": "input",
+      "placeholder": "Input Expiry Date",
+      "options": []
+    },
+    {
+      "key": "postingDate",
+      "label": "Posting Date",
+      "type": "input",
+      "placeholder": "Input Posting Date",
+      "options": []
+    },
+    {
+      "key": "company",
+      "label": "Company",
+      "type": "select",
+      "placeholder": "Input Company",
+      "options": []
+    }
+  ]
+}

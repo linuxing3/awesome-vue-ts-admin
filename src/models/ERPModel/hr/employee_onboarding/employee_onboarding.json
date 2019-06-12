@@ -1,0 +1,129 @@
+{
+  "fields": [
+    {
+      "key": "jobApplicant",
+      "label": "Job Applicant",
+      "type": "select",
+      "placeholder": "Input Job Applicant",
+      "options": []
+    },
+    {
+      "key": "jobOffer",
+      "label": "Job Offer",
+      "type": "select",
+      "placeholder": "Input Job Offer",
+      "options": []
+    },
+    {
+      "key": "employeeName",
+      "label": "Employee Name",
+      "type": "input",
+      "placeholder": "Input Employee Name",
+      "options": []
+    },
+    {
+      "key": "employee",
+      "label": "Employee",
+      "type": "select",
+      "placeholder": "Input Employee",
+      "options": []
+    },
+    {
+      "key": "dateOfJoining",
+      "label": "Date Of Joining",
+      "type": "input",
+      "placeholder": "Input Date Of Joining",
+      "options": []
+    },
+    {
+      "key": "status",
+      "label": "Status",
+      "type": "select",
+      "placeholder": "Input Status",
+      "options": [
+        {
+          "label": "Pending",
+          "value": "Pending"
+        },
+        {
+          "label": "In Process",
+          "value": "In Process"
+        },
+        {
+          "label": "Completed",
+          "value": "Completed"
+        }
+      ]
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "employeeOnboardingTemplate",
+      "label": "Employee Onboarding Template",
+      "type": "select",
+      "placeholder": "Input Employee Onboarding Template",
+      "options": []
+    },
+    {
+      "key": "company",
+      "label": "Company",
+      "type": "select",
+      "placeholder": "Input Company",
+      "options": []
+    },
+    {
+      "key": "department",
+      "label": "Department",
+      "type": "select",
+      "placeholder": "Input Department",
+      "options": []
+    },
+    {
+      "key": "designation",
+      "label": "Designation",
+      "type": "select",
+      "placeholder": "Input Designation",
+      "options": []
+    },
+    {
+      "key": "employeeGrade",
+      "label": "Employee Grade",
+      "type": "select",
+      "placeholder": "Input Employee Grade",
+      "options": []
+    },
+    {
+      "key": "project",
+      "label": "Project",
+      "type": "select",
+      "placeholder": "Input Project",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "activities",
+      "label": "Activities",
+      "type": "select",
+      "placeholder": "Input Activities",
+      "options": []
+    },
+    {
+      "key": "amendedFrom",
+      "label": "Amended From",
+      "type": "select",
+      "placeholder": "Input Amended From",
+      "options": []
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "fields": [
+    {
+      "key": "user",
+      "label": "User",
+      "type": "select",
+      "placeholder": "Input User",
+      "options": []
+    },
+    {
+      "key": "email",
+      "label": "Email",
+      "type": "input",
+      "placeholder": "Input Email",
+      "options": []
+    }
+  ]
+}

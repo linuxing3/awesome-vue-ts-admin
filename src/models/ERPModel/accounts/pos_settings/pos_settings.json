@@ -1,0 +1,11 @@
+{
+  "fields": [
+    {
+      "key": "usePosInOfflineMode",
+      "label": "Use Pos In Offline Mode",
+      "type": "input",
+      "placeholder": "Input Use Pos In Offline Mode",
+      "options": []
+    }
+  ]
+}

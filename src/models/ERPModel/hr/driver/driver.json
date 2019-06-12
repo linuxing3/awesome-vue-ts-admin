@@ -1,0 +1,118 @@
+{
+  "fields": [
+    {
+      "key": "series",
+      "label": "Series",
+      "type": "select",
+      "placeholder": "Input Series",
+      "options": []
+    },
+    {
+      "key": "fullName",
+      "label": "Full Name",
+      "type": "input",
+      "placeholder": "Input Full Name",
+      "options": []
+    },
+    {
+      "key": "status",
+      "label": "Status",
+      "type": "select",
+      "placeholder": "Input Status",
+      "options": [
+        {
+          "label": "Suspended",
+          "value": "Suspended"
+        },
+        {
+          "label": "Left",
+          "value": "Left"
+        }
+      ]
+    },
+    {
+      "key": "transporter",
+      "label": "Transporter",
+      "type": "select",
+      "placeholder": "Input Transporter",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "employee",
+      "label": "Employee",
+      "type": "select",
+      "placeholder": "Input Employee",
+      "options": []
+    },
+    {
+      "key": "cellphoneNumber",
+      "label": "Cellphone Number",
+      "type": "input",
+      "placeholder": "Input Cellphone Number",
+      "options": []
+    },
+    {
+      "key": "licenseDetails",
+      "label": "License Details",
+      "type": "input",
+      "placeholder": "Input License Details",
+      "options": []
+    },
+    {
+      "key": "licenseNumber",
+      "label": "License Number",
+      "type": "input",
+      "placeholder": "Input License Number",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "issuingDate",
+      "label": "Issuing Date",
+      "type": "input",
+      "placeholder": "Input Issuing Date",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "expiryDate",
+      "label": "Expiry Date",
+      "type": "input",
+      "placeholder": "Input Expiry Date",
+      "options": []
+    },
+    {
+      "key": "drivingLicenseCategories",
+      "label": "Driving License Categories",
+      "type": "input",
+      "placeholder": "Input Driving License Categories",
+      "options": []
+    },
+    {
+      "key": "drivingLicenseCategory",
+      "label": "Driving License Category",
+      "type": "select",
+      "placeholder": "Input Driving License Category",
+      "options": []
+    }
+  ]
+}

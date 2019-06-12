@@ -1,0 +1,11 @@
+{
+  "fields": [
+    {
+      "key": "itemGroup",
+      "label": "Item Group",
+      "type": "select",
+      "placeholder": "Input Item Group",
+      "options": []
+    }
+  ]
+}

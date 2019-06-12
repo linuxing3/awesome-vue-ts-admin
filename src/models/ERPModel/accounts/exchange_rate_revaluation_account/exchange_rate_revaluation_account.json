@@ -1,0 +1,95 @@
+{
+  "fields": [
+    {
+      "key": "account",
+      "label": "Account",
+      "type": "select",
+      "placeholder": "Input Account",
+      "options": []
+    },
+    {
+      "key": "partyType",
+      "label": "Party Type",
+      "type": "select",
+      "placeholder": "Input Party Type",
+      "options": []
+    },
+    {
+      "key": "party",
+      "label": "Party",
+      "type": "select",
+      "placeholder": "Input Party",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "accountCurrency",
+      "label": "Account Currency",
+      "type": "select",
+      "placeholder": "Input Account Currency",
+      "options": []
+    },
+    {
+      "key": "balanceInAccountCurrency",
+      "label": "Balance In Account Currency",
+      "type": "input",
+      "placeholder": "Input Balance In Account Currency",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "currentExchangeRate",
+      "label": "Current Exchange Rate",
+      "type": "input",
+      "placeholder": "Input Current Exchange Rate",
+      "options": []
+    },
+    {
+      "key": "balanceInBaseCurrency",
+      "label": "Balance In Base Currency",
+      "type": "input",
+      "placeholder": "Input Balance In Base Currency",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "newExchangeRate",
+      "label": "New Exchange Rate",
+      "type": "input",
+      "placeholder": "Input New Exchange Rate",
+      "options": []
+    },
+    {
+      "key": "newBalanceInBaseCurrency",
+      "label": "New Balance In Base Currency",
+      "type": "input",
+      "placeholder": "Input New Balance In Base Currency",
+      "options": []
+    },
+    {
+      "key": "gainLoss",
+      "label": "Gain Loss",
+      "type": "input",
+      "placeholder": "Input Gain Loss",
+      "options": []
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "fields": [
+    {
+      "key": "activityType",
+      "label": "Activity Type",
+      "type": "select",
+      "placeholder": "Input Activity Type",
+      "options": []
+    },
+    {
+      "key": "employee",
+      "label": "Employee",
+      "type": "select",
+      "placeholder": "Input Employee",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "employeeName",
+      "label": "Employee Name",
+      "type": "input",
+      "placeholder": "Input Employee Name",
+      "options": []
+    },
+    {
+      "key": "department",
+      "label": "Department",
+      "type": "select",
+      "placeholder": "Input Department",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "billingRate",
+      "label": "Billing Rate",
+      "type": "input",
+      "placeholder": "Input Billing Rate",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "costingRate",
+      "label": "Costing Rate",
+      "type": "input",
+      "placeholder": "Input Costing Rate",
+      "options": []
+    },
+    {
+      "key": "title",
+      "label": "Title",
+      "type": "input",
+      "placeholder": "Input Title",
+      "options": []
+    }
+  ]
+}

@@ -25,6 +25,7 @@ import Api from '@/api/api.lf';
 /-----------------------------------------------------------------------*/
 import { log } from '@/utils/helper';
 import lfService from '@/utils/request.localforage';
+import { genModelConfigJson } from '@/utils/generator';
 import { apolloProvider } from '@/utils/apollo';
 /*-----------------------------------------------------------------------
 / 格式和组件

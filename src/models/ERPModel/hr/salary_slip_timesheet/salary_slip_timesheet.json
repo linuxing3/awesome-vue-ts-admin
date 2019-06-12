@@ -1,0 +1,18 @@
+{
+  "fields": [
+    {
+      "key": "timeSheet",
+      "label": "Time Sheet",
+      "type": "select",
+      "placeholder": "Input Time Sheet",
+      "options": []
+    },
+    {
+      "key": "workingHours",
+      "label": "Working Hours",
+      "type": "input",
+      "placeholder": "Input Working Hours",
+      "options": []
+    }
+  ]
+}

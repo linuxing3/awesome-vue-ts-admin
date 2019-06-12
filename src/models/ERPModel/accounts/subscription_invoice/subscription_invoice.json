@@ -1,0 +1,11 @@
+{
+  "fields": [
+    {
+      "key": "invoice",
+      "label": "Invoice",
+      "type": "select",
+      "placeholder": "Input Invoice",
+      "options": []
+    }
+  ]
+}

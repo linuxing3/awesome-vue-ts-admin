@@ -1,0 +1,18 @@
+{
+  "fields": [
+    {
+      "key": "projectType",
+      "label": "Project Type",
+      "type": "input",
+      "placeholder": "Input Project Type",
+      "options": []
+    },
+    {
+      "key": "description",
+      "label": "Description",
+      "type": "input",
+      "placeholder": "Input Description",
+      "options": []
+    }
+  ]
+}

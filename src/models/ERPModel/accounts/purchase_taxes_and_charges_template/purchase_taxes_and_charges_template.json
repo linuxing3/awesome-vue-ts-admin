@@ -1,0 +1,53 @@
+{
+  "fields": [
+    {
+      "key": "title",
+      "label": "Title",
+      "type": "input",
+      "placeholder": "Input Title",
+      "options": []
+    },
+    {
+      "key": "default",
+      "label": "Default",
+      "type": "input",
+      "placeholder": "Input Default",
+      "options": []
+    },
+    {
+      "key": "disabled",
+      "label": "Disabled",
+      "type": "input",
+      "placeholder": "Input Disabled",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "company",
+      "label": "Company",
+      "type": "select",
+      "placeholder": "Input Company",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "purchaseTaxesAndCharges",
+      "label": "Purchase Taxes And Charges",
+      "type": "select",
+      "placeholder": "Input Purchase Taxes And Charges",
+      "options": []
+    }
+  ]
+}

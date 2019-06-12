@@ -1,0 +1,11 @@
+{
+  "fields": [
+    {
+      "key": "employmentType",
+      "label": "Employment Type",
+      "type": "input",
+      "placeholder": "Input Employment Type",
+      "options": []
+    }
+  ]
+}

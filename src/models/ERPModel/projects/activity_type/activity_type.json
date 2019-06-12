@@ -1,0 +1,39 @@
+{
+  "fields": [
+    {
+      "key": "activityType",
+      "label": "Activity Type",
+      "type": "input",
+      "placeholder": "Input Activity Type",
+      "options": []
+    },
+    {
+      "key": "defaultCostingRate",
+      "label": "Default Costing Rate",
+      "type": "input",
+      "placeholder": "Input Default Costing Rate",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "defaultBillingRate",
+      "label": "Default Billing Rate",
+      "type": "input",
+      "placeholder": "Input Default Billing Rate",
+      "options": []
+    },
+    {
+      "key": "disabled",
+      "label": "Disabled",
+      "type": "input",
+      "placeholder": "Input Disabled",
+      "options": []
+    }
+  ]
+}

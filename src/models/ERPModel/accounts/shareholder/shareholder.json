@@ -1,0 +1,109 @@
+{
+  "fields": [
+    {
+      "key": "title",
+      "label": "Title",
+      "type": "input",
+      "placeholder": "Input Title",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "select",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "folioNo",
+      "label": "Folio No",
+      "type": "input",
+      "placeholder": "Input Folio No",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "company",
+      "label": "Company",
+      "type": "select",
+      "placeholder": "Input Company",
+      "options": []
+    },
+    {
+      "key": "isCompany",
+      "label": "Is Company",
+      "type": "input",
+      "placeholder": "Input Is Company",
+      "options": []
+    },
+    {
+      "key": "addressAndContacts",
+      "label": "Address And Contacts",
+      "type": "select",
+      "placeholder": "Input Address And Contacts",
+      "options": []
+    },
+    {
+      "key": "addressHtml",
+      "label": "Address Html",
+      "type": "input",
+      "placeholder": "Input Address Html",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "contactHtml",
+      "label": "Contact Html",
+      "type": "input",
+      "placeholder": "Input Contact Html",
+      "options": []
+    },
+    {
+      "key": "shareBalance",
+      "label": "Share Balance",
+      "type": "input",
+      "placeholder": "Input Share Balance",
+      "options": []
+    },
+    {
+      "key": "shareBalance",
+      "label": "Share Balance",
+      "type": "select",
+      "placeholder": "Input Share Balance",
+      "options": []
+    },
+    {
+      "key": "contactList",
+      "label": "Contact List",
+      "type": "input",
+      "placeholder": "Input Contact List",
+      "options": []
+    }
+  ]
+}

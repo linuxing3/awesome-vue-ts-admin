@@ -1,0 +1,74 @@
+{
+  "fields": [
+    {
+      "key": "employee",
+      "label": "Employee",
+      "type": "select",
+      "placeholder": "Input Employee",
+      "options": []
+    },
+    {
+      "key": "employeeName",
+      "label": "Employee Name",
+      "type": "input",
+      "placeholder": "Input Employee Name",
+      "options": []
+    },
+    {
+      "key": "department",
+      "label": "Department",
+      "type": "select",
+      "placeholder": "Input Department",
+      "options": []
+    },
+    {
+      "key": "shiftType",
+      "label": "Shift Type",
+      "type": "select",
+      "placeholder": "Input Shift Type",
+      "options": []
+    },
+    {
+      "key": "present",
+      "label": "Present",
+      "type": "input",
+      "placeholder": "Input Present",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "company",
+      "label": "Company",
+      "type": "select",
+      "placeholder": "Input Company",
+      "options": []
+    },
+    {
+      "key": "date",
+      "label": "Date",
+      "type": "input",
+      "placeholder": "Input Date",
+      "options": []
+    },
+    {
+      "key": "shiftRequest",
+      "label": "Shift Request",
+      "type": "select",
+      "placeholder": "Input Shift Request",
+      "options": []
+    },
+    {
+      "key": "amendedFrom",
+      "label": "Amended From",
+      "type": "select",
+      "placeholder": "Input Amended From",
+      "options": []
+    }
+  ]
+}

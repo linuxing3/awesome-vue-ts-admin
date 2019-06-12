@@ -1,0 +1,67 @@
+{
+  "fields": [
+    {
+      "key": "type",
+      "label": "Type",
+      "type": "select",
+      "placeholder": "Input Type",
+      "options": []
+    },
+    {
+      "key": "name",
+      "label": "Name",
+      "type": "select",
+      "placeholder": "Input Name",
+      "options": []
+    },
+    {
+      "key": "dueDate",
+      "label": "Due Date",
+      "type": "input",
+      "placeholder": "Input Due Date",
+      "options": []
+    },
+    {
+      "key": "supplierInvoiceNo",
+      "label": "Supplier Invoice No",
+      "type": "input",
+      "placeholder": "Input Supplier Invoice No",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "totalAmount",
+      "label": "Total Amount",
+      "type": "input",
+      "placeholder": "Input Total Amount",
+      "options": []
+    },
+    {
+      "key": "outstanding",
+      "label": "Outstanding",
+      "type": "input",
+      "placeholder": "Input Outstanding",
+      "options": []
+    },
+    {
+      "key": "allocated",
+      "label": "Allocated",
+      "type": "input",
+      "placeholder": "Input Allocated",
+      "options": []
+    },
+    {
+      "key": "exchangeRate",
+      "label": "Exchange Rate",
+      "type": "input",
+      "placeholder": "Input Exchange Rate",
+      "options": []
+    }
+  ]
+}

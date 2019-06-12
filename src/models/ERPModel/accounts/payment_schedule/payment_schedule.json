@@ -1,0 +1,46 @@
+{
+  "fields": [
+    {
+      "key": "paymentTerm",
+      "label": "Payment Term",
+      "type": "select",
+      "placeholder": "Input Payment Term",
+      "options": []
+    },
+    {
+      "key": "description",
+      "label": "Description",
+      "type": "input",
+      "placeholder": "Input Description",
+      "options": []
+    },
+    {
+      "key": "dueDate",
+      "label": "Due Date",
+      "type": "input",
+      "placeholder": "Input Due Date",
+      "options": []
+    },
+    {
+      "key": "invoicePortion",
+      "label": "Invoice Portion",
+      "type": "input",
+      "placeholder": "Input Invoice Portion",
+      "options": []
+    },
+    {
+      "key": "paymentAmount",
+      "label": "Payment Amount",
+      "type": "select",
+      "placeholder": "Input Payment Amount",
+      "options": []
+    },
+    {
+      "key": "modeOfPayment",
+      "label": "Mode Of Payment",
+      "type": "select",
+      "placeholder": "Input Mode Of Payment",
+      "options": []
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "fields": [
+    {
+      "key": "title",
+      "label": "Title",
+      "type": "input",
+      "placeholder": "Input Title",
+      "options": []
+    },
+    {
+      "key": "description",
+      "label": "Description",
+      "type": "input",
+      "placeholder": "Input Description",
+      "options": []
+    }
+  ]
+}

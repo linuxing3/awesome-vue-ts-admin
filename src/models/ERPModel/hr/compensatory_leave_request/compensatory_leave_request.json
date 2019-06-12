@@ -1,0 +1,102 @@
+{
+  "fields": [
+    {
+      "key": "employee",
+      "label": "Employee",
+      "type": "select",
+      "placeholder": "Input Employee",
+      "options": []
+    },
+    {
+      "key": "employeeName",
+      "label": "Employee Name",
+      "type": "input",
+      "placeholder": "Input Employee Name",
+      "options": []
+    },
+    {
+      "key": "department",
+      "label": "Department",
+      "type": "select",
+      "placeholder": "Input Department",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "leaveType",
+      "label": "Leave Type",
+      "type": "select",
+      "placeholder": "Input Leave Type",
+      "options": []
+    },
+    {
+      "key": "leaveAllocation",
+      "label": "Leave Allocation",
+      "type": "select",
+      "placeholder": "Input Leave Allocation",
+      "options": []
+    },
+    {
+      "key": "workedOnHoliday",
+      "label": "Worked On Holiday",
+      "type": "input",
+      "placeholder": "Input Worked On Holiday",
+      "options": []
+    },
+    {
+      "key": "workFromDate",
+      "label": "Work From Date",
+      "type": "input",
+      "placeholder": "Input Work From Date",
+      "options": []
+    },
+    {
+      "key": "workEndDate",
+      "label": "Work End Date",
+      "type": "input",
+      "placeholder": "Input Work End Date",
+      "options": []
+    },
+    {
+      "key": "halfDay",
+      "label": "Half Day",
+      "type": "input",
+      "placeholder": "Input Half Day",
+      "options": []
+    },
+    {
+      "key": "halfDayDate",
+      "label": "Half Day Date",
+      "type": "input",
+      "placeholder": "Input Half Day Date",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "reason",
+      "label": "Reason",
+      "type": "input",
+      "placeholder": "Input Reason",
+      "options": []
+    },
+    {
+      "key": "amendedFrom",
+      "label": "Amended From",
+      "type": "select",
+      "placeholder": "Input Amended From",
+      "options": []
+    }
+  ]
+}

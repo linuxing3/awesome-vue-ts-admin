@@ -1,0 +1,53 @@
+{
+  "fields": [
+    {
+      "key": "loan",
+      "label": "Loan",
+      "type": "select",
+      "placeholder": "Input Loan",
+      "options": []
+    },
+    {
+      "key": "loanAccount",
+      "label": "Loan Account",
+      "type": "select",
+      "placeholder": "Input Loan Account",
+      "options": []
+    },
+    {
+      "key": "interestIncomeAccount",
+      "label": "Interest Income Account",
+      "type": "select",
+      "placeholder": "Input Interest Income Account",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "principalAmount",
+      "label": "Principal Amount",
+      "type": "input",
+      "placeholder": "Input Principal Amount",
+      "options": []
+    },
+    {
+      "key": "interestAmount",
+      "label": "Interest Amount",
+      "type": "input",
+      "placeholder": "Input Interest Amount",
+      "options": []
+    },
+    {
+      "key": "totalPayment",
+      "label": "Total Payment",
+      "type": "input",
+      "placeholder": "Input Total Payment",
+      "options": []
+    }
+  ]
+}

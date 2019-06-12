@@ -1,0 +1,64 @@
+{
+  "fields": [
+    {
+      "key": "employee",
+      "label": "Employee",
+      "type": "select",
+      "placeholder": "Input Employee",
+      "options": []
+    },
+    {
+      "key": "employeeName",
+      "label": "Employee Name",
+      "type": "input",
+      "placeholder": "Input Employee Name",
+      "options": []
+    },
+    {
+      "key": "department",
+      "label": "Department",
+      "type": "select",
+      "placeholder": "Input Department",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "status",
+      "label": "Status",
+      "type": "select",
+      "placeholder": "Input Status",
+      "options": [
+        {
+          "label": "Invited",
+          "value": "Invited"
+        },
+        {
+          "label": "Completed",
+          "value": "Completed"
+        },
+        {
+          "label": "Feedback Submitted",
+          "value": "Feedback Submitted"
+        }
+      ]
+    },
+    {
+      "key": "attendance",
+      "label": "Attendance",
+      "type": "select",
+      "placeholder": "Input Attendance",
+      "options": [
+        {
+          "label": "Optional",
+          "value": "Optional"
+        }
+      ]
+    }
+  ]
+}

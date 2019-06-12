@@ -1,0 +1,74 @@
+{
+  "fields": [
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "costCenterName",
+      "label": "Cost Center Name",
+      "type": "input",
+      "placeholder": "Input Cost Center Name",
+      "options": []
+    },
+    {
+      "key": "costCenterNumber",
+      "label": "Cost Center Number",
+      "type": "input",
+      "placeholder": "Input Cost Center Number",
+      "options": []
+    },
+    {
+      "key": "parentCostCenter",
+      "label": "Parent Cost Center",
+      "type": "select",
+      "placeholder": "Input Parent Cost Center",
+      "options": []
+    },
+    {
+      "key": "company",
+      "label": "Company",
+      "type": "select",
+      "placeholder": "Input Company",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "isGroup",
+      "label": "Is Group",
+      "type": "input",
+      "placeholder": "Input Is Group",
+      "options": []
+    },
+    {
+      "key": "lft",
+      "label": "Lft",
+      "type": "input",
+      "placeholder": "Input Lft",
+      "options": []
+    },
+    {
+      "key": "rgt",
+      "label": "Rgt",
+      "type": "input",
+      "placeholder": "Input Rgt",
+      "options": []
+    },
+    {
+      "key": "oldParent",
+      "label": "Old Parent",
+      "type": "select",
+      "placeholder": "Input Old Parent",
+      "options": []
+    }
+  ]
+}

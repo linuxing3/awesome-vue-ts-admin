@@ -1,0 +1,11 @@
+{
+  "fields": [
+    {
+      "key": "country",
+      "label": "Country",
+      "type": "select",
+      "placeholder": "Input Country",
+      "options": []
+    }
+  ]
+}

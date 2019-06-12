@@ -1,0 +1,11 @@
+{
+  "fields": [
+    {
+      "key": "company",
+      "label": "Company",
+      "type": "select",
+      "placeholder": "Input Company",
+      "options": []
+    }
+  ]
+}

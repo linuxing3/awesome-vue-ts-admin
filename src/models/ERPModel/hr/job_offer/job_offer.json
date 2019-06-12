@@ -1,0 +1,132 @@
+{
+  "fields": [
+    {
+      "key": "jobApplicant",
+      "label": "Job Applicant",
+      "type": "select",
+      "placeholder": "Input Job Applicant",
+      "options": []
+    },
+    {
+      "key": "applicantName",
+      "label": "Applicant Name",
+      "type": "input",
+      "placeholder": "Input Applicant Name",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "status",
+      "label": "Status",
+      "type": "select",
+      "placeholder": "Input Status",
+      "options": [
+        {
+          "label": "Accepted",
+          "value": "Accepted"
+        },
+        {
+          "label": "Rejected",
+          "value": "Rejected"
+        }
+      ]
+    },
+    {
+      "key": "offerDate",
+      "label": "Offer Date",
+      "type": "input",
+      "placeholder": "Input Offer Date",
+      "options": []
+    },
+    {
+      "key": "designation",
+      "label": "Designation",
+      "type": "select",
+      "placeholder": "Input Designation",
+      "options": []
+    },
+    {
+      "key": "company",
+      "label": "Company",
+      "type": "select",
+      "placeholder": "Input Company",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "jobOfferTerms",
+      "label": "Job Offer Terms",
+      "type": "select",
+      "placeholder": "Input Job Offer Terms",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "selectTermsAndConditions",
+      "label": "Select Terms And Conditions",
+      "type": "select",
+      "placeholder": "Input Select Terms And Conditions",
+      "options": []
+    },
+    {
+      "key": "termsAndConditions",
+      "label": "Terms And Conditions",
+      "type": "input",
+      "placeholder": "Input Terms And Conditions",
+      "options": []
+    },
+    {
+      "key": "printingDetails",
+      "label": "Printing Details",
+      "type": "input",
+      "placeholder": "Input Printing Details",
+      "options": []
+    },
+    {
+      "key": "letterHead",
+      "label": "Letter Head",
+      "type": "select",
+      "placeholder": "Input Letter Head",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "printHeading",
+      "label": "Print Heading",
+      "type": "select",
+      "placeholder": "Input Print Heading",
+      "options": []
+    },
+    {
+      "key": "amendedFrom",
+      "label": "Amended From",
+      "type": "select",
+      "placeholder": "Input Amended From",
+      "options": []
+    }
+  ]
+}

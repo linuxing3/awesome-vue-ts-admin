@@ -1,0 +1,67 @@
+{
+  "fields": [
+    {
+      "key": "name",
+      "label": "Name",
+      "type": "input",
+      "placeholder": "Input Name",
+      "options": []
+    },
+    {
+      "key": "label",
+      "label": "Label",
+      "type": "input",
+      "placeholder": "Input Label",
+      "options": []
+    },
+    {
+      "key": "accounts",
+      "label": "Accounts",
+      "type": "select",
+      "placeholder": "Input Accounts",
+      "options": []
+    },
+    {
+      "key": "selectMaximumOf_1",
+      "label": "Select Maximum Of 1",
+      "type": "input",
+      "placeholder": "Input Select Maximum Of 1",
+      "options": []
+    },
+    {
+      "key": "isFinanceCost",
+      "label": "Is Finance Cost",
+      "type": "input",
+      "placeholder": "Input Is Finance Cost",
+      "options": []
+    },
+    {
+      "key": "isWorkingCapital",
+      "label": "Is Working Capital",
+      "type": "input",
+      "placeholder": "Input Is Working Capital",
+      "options": []
+    },
+    {
+      "key": "isFinanceCostAdjustment",
+      "label": "Is Finance Cost Adjustment",
+      "type": "input",
+      "placeholder": "Input Is Finance Cost Adjustment",
+      "options": []
+    },
+    {
+      "key": "isIncomeTaxLiability",
+      "label": "Is Income Tax Liability",
+      "type": "input",
+      "placeholder": "Input Is Income Tax Liability",
+      "options": []
+    },
+    {
+      "key": "isIncomeTaxExpense",
+      "label": "Is Income Tax Expense",
+      "type": "input",
+      "placeholder": "Input Is Income Tax Expense",
+      "options": []
+    }
+  ]
+}

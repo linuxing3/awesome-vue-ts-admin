@@ -1,0 +1,18 @@
+{
+  "fields": [
+    {
+      "key": "templateName",
+      "label": "Template Name",
+      "type": "input",
+      "placeholder": "Input Template Name",
+      "options": []
+    },
+    {
+      "key": "paymentTerms",
+      "label": "Payment Terms",
+      "type": "select",
+      "placeholder": "Input Payment Terms",
+      "options": []
+    }
+  ]
+}

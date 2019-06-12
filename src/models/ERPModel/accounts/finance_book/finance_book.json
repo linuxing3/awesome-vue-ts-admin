@@ -1,0 +1,11 @@
+{
+  "fields": [
+    {
+      "key": "name",
+      "label": "Name",
+      "type": "input",
+      "placeholder": "Input Name",
+      "options": []
+    }
+  ]
+}

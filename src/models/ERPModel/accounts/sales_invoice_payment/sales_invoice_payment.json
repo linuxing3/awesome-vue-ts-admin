@@ -1,0 +1,60 @@
+{
+  "fields": [
+    {
+      "key": "default",
+      "label": "Default",
+      "type": "input",
+      "placeholder": "Input Default",
+      "options": []
+    },
+    {
+      "key": "modeOfPayment",
+      "label": "Mode Of Payment",
+      "type": "select",
+      "placeholder": "Input Mode Of Payment",
+      "options": []
+    },
+    {
+      "key": "amount",
+      "label": "Amount",
+      "type": "select",
+      "placeholder": "Input Amount",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "account",
+      "label": "Account",
+      "type": "select",
+      "placeholder": "Input Account",
+      "options": []
+    },
+    {
+      "key": "type",
+      "label": "Type",
+      "type": "input",
+      "placeholder": "Input Type",
+      "options": []
+    },
+    {
+      "key": "baseAmountCompanyCurrency",
+      "label": "Base Amount Company Currency",
+      "type": "select",
+      "placeholder": "Input Base Amount Company Currency",
+      "options": []
+    },
+    {
+      "key": "clearanceDate",
+      "label": "Clearance Date",
+      "type": "input",
+      "placeholder": "Input Clearance Date",
+      "options": []
+    }
+  ]
+}

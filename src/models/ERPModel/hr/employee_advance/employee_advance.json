@@ -1,0 +1,161 @@
+{
+  "fields": [
+    {
+      "key": "series",
+      "label": "Series",
+      "type": "select",
+      "placeholder": "Input Series",
+      "options": []
+    },
+    {
+      "key": "employee",
+      "label": "Employee",
+      "type": "select",
+      "placeholder": "Input Employee",
+      "options": []
+    },
+    {
+      "key": "employeeName",
+      "label": "Employee Name",
+      "type": "input",
+      "placeholder": "Input Employee Name",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "postingDate",
+      "label": "Posting Date",
+      "type": "input",
+      "placeholder": "Input Posting Date",
+      "options": []
+    },
+    {
+      "key": "department",
+      "label": "Department",
+      "type": "select",
+      "placeholder": "Input Department",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "purpose",
+      "label": "Purpose",
+      "type": "input",
+      "placeholder": "Input Purpose",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "advanceAmount",
+      "label": "Advance Amount",
+      "type": "select",
+      "placeholder": "Input Advance Amount",
+      "options": []
+    },
+    {
+      "key": "paidAmount",
+      "label": "Paid Amount",
+      "type": "select",
+      "placeholder": "Input Paid Amount",
+      "options": []
+    },
+    {
+      "key": "dueAdvanceAmount",
+      "label": "Due Advance Amount",
+      "type": "select",
+      "placeholder": "Input Due Advance Amount",
+      "options": []
+    },
+    {
+      "key": "claimedAmount",
+      "label": "Claimed Amount",
+      "type": "select",
+      "placeholder": "Input Claimed Amount",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "status",
+      "label": "Status",
+      "type": "select",
+      "placeholder": "Input Status",
+      "options": [
+        {
+          "label": "Paid",
+          "value": "Paid"
+        },
+        {
+          "label": "Unpaid",
+          "value": "Unpaid"
+        },
+        {
+          "label": "Claimed",
+          "value": "Claimed"
+        },
+        {
+          "label": "Cancelled",
+          "value": "Cancelled"
+        }
+      ]
+    },
+    {
+      "key": "company",
+      "label": "Company",
+      "type": "select",
+      "placeholder": "Input Company",
+      "options": []
+    },
+    {
+      "key": "amendedFrom",
+      "label": "Amended From",
+      "type": "select",
+      "placeholder": "Input Amended From",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "advanceAccount",
+      "label": "Advance Account",
+      "type": "select",
+      "placeholder": "Input Advance Account",
+      "options": []
+    },
+    {
+      "key": "modeOfPayment",
+      "label": "Mode Of Payment",
+      "type": "select",
+      "placeholder": "Input Mode Of Payment",
+      "options": []
+    }
+  ]
+}

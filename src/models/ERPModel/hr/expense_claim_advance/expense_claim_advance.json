@@ -1,0 +1,46 @@
+{
+  "fields": [
+    {
+      "key": "employeeAdvance",
+      "label": "Employee Advance",
+      "type": "select",
+      "placeholder": "Input Employee Advance",
+      "options": []
+    },
+    {
+      "key": "postingDate",
+      "label": "Posting Date",
+      "type": "input",
+      "placeholder": "Input Posting Date",
+      "options": []
+    },
+    {
+      "key": "advancePaid",
+      "label": "Advance Paid",
+      "type": "select",
+      "placeholder": "Input Advance Paid",
+      "options": []
+    },
+    {
+      "key": "unclaimedAmount",
+      "label": "Unclaimed Amount",
+      "type": "select",
+      "placeholder": "Input Unclaimed Amount",
+      "options": []
+    },
+    {
+      "key": "allocatedAmount",
+      "label": "Allocated Amount",
+      "type": "select",
+      "placeholder": "Input Allocated Amount",
+      "options": []
+    },
+    {
+      "key": "advanceAccount",
+      "label": "Advance Account",
+      "type": "select",
+      "placeholder": "Input Advance Account",
+      "options": []
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "fields": [
+    {
+      "key": "company",
+      "label": "Company",
+      "type": "select",
+      "placeholder": "Input Company",
+      "options": []
+    },
+    {
+      "key": "department",
+      "label": "Department",
+      "type": "select",
+      "placeholder": "Input Department",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "fromDate",
+      "label": "From Date",
+      "type": "input",
+      "placeholder": "Input From Date",
+      "options": []
+    },
+    {
+      "key": "toDate",
+      "label": "To Date",
+      "type": "input",
+      "placeholder": "Input To Date",
+      "options": []
+    },
+    {
+      "key": "staffingPlanDetails",
+      "label": "Staffing Plan Details",
+      "type": "input",
+      "placeholder": "Input Staffing Plan Details",
+      "options": []
+    },
+    {
+      "key": "staffingPlanDetail",
+      "label": "Staffing Plan Detail",
+      "type": "select",
+      "placeholder": "Input Staffing Plan Detail",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "totalEstimatedBudget",
+      "label": "Total Estimated Budget",
+      "type": "input",
+      "placeholder": "Input Total Estimated Budget",
+      "options": []
+    },
+    {
+      "key": "amendedFrom",
+      "label": "Amended From",
+      "type": "select",
+      "placeholder": "Input Amended From",
+      "options": []
+    }
+  ]
+}

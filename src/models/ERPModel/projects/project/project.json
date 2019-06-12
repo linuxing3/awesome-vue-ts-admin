@@ -1,0 +1,473 @@
+{
+  "fields": [
+    {
+      "key": "projectName",
+      "label": "Project Name",
+      "type": "input",
+      "placeholder": "Input Project Name",
+      "options": []
+    },
+    {
+      "key": "status",
+      "label": "Status",
+      "type": "select",
+      "placeholder": "Input Status",
+      "options": [
+        {
+          "label": "Completed",
+          "value": "Completed"
+        },
+        {
+          "label": "Cancelled",
+          "value": "Cancelled"
+        }
+      ]
+    },
+    {
+      "key": "projectType",
+      "label": "Project Type",
+      "type": "select",
+      "placeholder": "Input Project Type",
+      "options": []
+    },
+    {
+      "key": "isActive",
+      "label": "Is Active",
+      "type": "select",
+      "placeholder": "Input Is Active",
+      "options": [
+        {
+          "label": "No",
+          "value": "No"
+        }
+      ]
+    },
+    {
+      "key": "completeMethod",
+      "label": "Complete Method",
+      "type": "select",
+      "placeholder": "Input Complete Method",
+      "options": [
+        {
+          "label": "Task Progress",
+          "value": "Task Progress"
+        },
+        {
+          "label": "Task Weight",
+          "value": "Task Weight"
+        }
+      ]
+    },
+    {
+      "key": "completed",
+      "label": "Completed",
+      "type": "input",
+      "placeholder": "Input Completed",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "fromTemplate",
+      "label": "From Template",
+      "type": "select",
+      "placeholder": "Input From Template",
+      "options": []
+    },
+    {
+      "key": "expectedStartDate",
+      "label": "Expected Start Date",
+      "type": "input",
+      "placeholder": "Input Expected Start Date",
+      "options": []
+    },
+    {
+      "key": "expectedEndDate",
+      "label": "Expected End Date",
+      "type": "input",
+      "placeholder": "Input Expected End Date",
+      "options": []
+    },
+    {
+      "key": "priority",
+      "label": "Priority",
+      "type": "select",
+      "placeholder": "Input Priority",
+      "options": [
+        {
+          "label": "Low",
+          "value": "Low"
+        },
+        {
+          "label": "High",
+          "value": "High"
+        }
+      ]
+    },
+    {
+      "key": "department",
+      "label": "Department",
+      "type": "select",
+      "placeholder": "Input Department",
+      "options": []
+    },
+    {
+      "key": "customerDetails",
+      "label": "Customer Details",
+      "type": "select",
+      "placeholder": "Input Customer Details",
+      "options": []
+    },
+    {
+      "key": "customer",
+      "label": "Customer",
+      "type": "select",
+      "placeholder": "Input Customer",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "salesOrder",
+      "label": "Sales Order",
+      "type": "select",
+      "placeholder": "Input Sales Order",
+      "options": []
+    },
+    {
+      "key": "users",
+      "label": "Users",
+      "type": "input",
+      "placeholder": "Input Users",
+      "options": []
+    },
+    {
+      "key": "users",
+      "label": "Users",
+      "type": "select",
+      "placeholder": "Input Users",
+      "options": []
+    },
+    {
+      "key": "tasks",
+      "label": "Tasks",
+      "type": "select",
+      "placeholder": "Input Tasks",
+      "options": []
+    },
+    {
+      "key": "tasks",
+      "label": "Tasks",
+      "type": "select",
+      "placeholder": "Input Tasks",
+      "options": []
+    },
+    {
+      "key": "copiedFrom",
+      "label": "Copied From",
+      "type": "input",
+      "placeholder": "Input Copied From",
+      "options": []
+    },
+    {
+      "key": "notes",
+      "label": "Notes",
+      "type": "select",
+      "placeholder": "Input Notes",
+      "options": []
+    },
+    {
+      "key": "notes",
+      "label": "Notes",
+      "type": "input",
+      "placeholder": "Input Notes",
+      "options": []
+    },
+    {
+      "key": "startAndEndDates",
+      "label": "Start And End Dates",
+      "type": "input",
+      "placeholder": "Input Start And End Dates",
+      "options": []
+    },
+    {
+      "key": "actualStartDate",
+      "label": "Actual Start Date",
+      "type": "input",
+      "placeholder": "Input Actual Start Date",
+      "options": []
+    },
+    {
+      "key": "actualTimeInHours",
+      "label": "Actual Time In Hours",
+      "type": "input",
+      "placeholder": "Input Actual Time In Hours",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "actualEndDate",
+      "label": "Actual End Date",
+      "type": "input",
+      "placeholder": "Input Actual End Date",
+      "options": []
+    },
+    {
+      "key": "costingAndBilling",
+      "label": "Costing And Billing",
+      "type": "select",
+      "placeholder": "Input Costing And Billing",
+      "options": []
+    },
+    {
+      "key": "estimatedCost",
+      "label": "Estimated Cost",
+      "type": "select",
+      "placeholder": "Input Estimated Cost",
+      "options": []
+    },
+    {
+      "key": "totalCostingAmountViaTimesheets",
+      "label": "Total Costing Amount Via Timesheets",
+      "type": "input",
+      "placeholder": "Input Total Costing Amount Via Timesheets",
+      "options": []
+    },
+    {
+      "key": "totalExpenseClaimViaExpenseClaims",
+      "label": "Total Expense Claim Via Expense Claims",
+      "type": "input",
+      "placeholder": "Input Total Expense Claim Via Expense Claims",
+      "options": []
+    },
+    {
+      "key": "totalPurchaseCostViaPurchaseInvoice",
+      "label": "Total Purchase Cost Via Purchase Invoice",
+      "type": "input",
+      "placeholder": "Input Total Purchase Cost Via Purchase Invoice",
+      "options": []
+    },
+    {
+      "key": "company",
+      "label": "Company",
+      "type": "select",
+      "placeholder": "Input Company",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "totalSalesAmountViaSalesOrder",
+      "label": "Total Sales Amount Via Sales Order",
+      "type": "input",
+      "placeholder": "Input Total Sales Amount Via Sales Order",
+      "options": []
+    },
+    {
+      "key": "totalBillableAmountViaTimesheets",
+      "label": "Total Billable Amount Via Timesheets",
+      "type": "input",
+      "placeholder": "Input Total Billable Amount Via Timesheets",
+      "options": []
+    },
+    {
+      "key": "totalBilledAmountViaSalesInvoices",
+      "label": "Total Billed Amount Via Sales Invoices",
+      "type": "input",
+      "placeholder": "Input Total Billed Amount Via Sales Invoices",
+      "options": []
+    },
+    {
+      "key": "totalConsumedMaterialCostViaStockEntry",
+      "label": "Total Consumed Material Cost Via Stock Entry",
+      "type": "input",
+      "placeholder": "Input Total Consumed Material Cost Via Stock Entry",
+      "options": []
+    },
+    {
+      "key": "defaultCostCenter",
+      "label": "Default Cost Center",
+      "type": "select",
+      "placeholder": "Input Default Cost Center",
+      "options": []
+    },
+    {
+      "key": "margin",
+      "label": "Margin",
+      "type": "input",
+      "placeholder": "Input Margin",
+      "options": []
+    },
+    {
+      "key": "grossMargin",
+      "label": "Gross Margin",
+      "type": "select",
+      "placeholder": "Input Gross Margin",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "grossMargin",
+      "label": "Gross Margin",
+      "type": "input",
+      "placeholder": "Input Gross Margin",
+      "options": []
+    },
+    {
+      "key": "monitorProgress",
+      "label": "Monitor Progress",
+      "type": "input",
+      "placeholder": "Input Monitor Progress",
+      "options": []
+    },
+    {
+      "key": "collectProgress",
+      "label": "Collect Progress",
+      "type": "input",
+      "placeholder": "Input Collect Progress",
+      "options": []
+    },
+    {
+      "key": "holidayList",
+      "label": "Holiday List",
+      "type": "select",
+      "placeholder": "Input Holiday List",
+      "options": []
+    },
+    {
+      "key": "frequencyToCollectProgress",
+      "label": "Frequency To Collect Progress",
+      "type": "select",
+      "placeholder": "Input Frequency To Collect Progress",
+      "options": [
+        {
+          "label": "Twice Daily",
+          "value": "Twice Daily"
+        },
+        {
+          "label": "Daily",
+          "value": "Daily"
+        },
+        {
+          "label": "Weekly",
+          "value": "Weekly"
+        }
+      ]
+    },
+    {
+      "key": "fromTime",
+      "label": "From Time",
+      "type": "input",
+      "placeholder": "Input From Time",
+      "options": []
+    },
+    {
+      "key": "toTime",
+      "label": "To Time",
+      "type": "input",
+      "placeholder": "Input To Time",
+      "options": []
+    },
+    {
+      "key": "firstEmail",
+      "label": "First Email",
+      "type": "input",
+      "placeholder": "Input First Email",
+      "options": []
+    },
+    {
+      "key": "secondEmail",
+      "label": "Second Email",
+      "type": "input",
+      "placeholder": "Input Second Email",
+      "options": []
+    },
+    {
+      "key": "timeToSend",
+      "label": "Time To Send",
+      "type": "input",
+      "placeholder": "Input Time To Send",
+      "options": []
+    },
+    {
+      "key": "dayToSend",
+      "label": "Day To Send",
+      "type": "select",
+      "placeholder": "Input Day To Send",
+      "options": [
+        {
+          "label": "Tuesday",
+          "value": "Tuesday"
+        },
+        {
+          "label": "Wednesday",
+          "value": "Wednesday"
+        },
+        {
+          "label": "Thursday",
+          "value": "Thursday"
+        },
+        {
+          "label": "Friday",
+          "value": "Friday"
+        },
+        {
+          "label": "Saturday",
+          "value": "Saturday"
+        },
+        {
+          "label": "Sunday",
+          "value": "Sunday"
+        }
+      ]
+    },
+    {
+      "key": "timeToSend",
+      "label": "Time To Send",
+      "type": "input",
+      "placeholder": "Input Time To Send",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "message",
+      "label": "Message",
+      "type": "input",
+      "placeholder": "Input Message",
+      "options": []
+    }
+  ]
+}

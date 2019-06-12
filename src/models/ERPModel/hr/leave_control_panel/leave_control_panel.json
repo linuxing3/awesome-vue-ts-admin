@@ -1,0 +1,109 @@
+{
+  "fields": [
+    {
+      "key": "company",
+      "label": "Company",
+      "type": "select",
+      "placeholder": "Input Company",
+      "options": []
+    },
+    {
+      "key": "employmentType",
+      "label": "Employment Type",
+      "type": "select",
+      "placeholder": "Input Employment Type",
+      "options": []
+    },
+    {
+      "key": "branch",
+      "label": "Branch",
+      "type": "select",
+      "placeholder": "Input Branch",
+      "options": []
+    },
+    {
+      "key": "department",
+      "label": "Department",
+      "type": "select",
+      "placeholder": "Input Department",
+      "options": []
+    },
+    {
+      "key": "designation",
+      "label": "Designation",
+      "type": "select",
+      "placeholder": "Input Designation",
+      "options": []
+    },
+    {
+      "key": "employeeGrade",
+      "label": "Employee Grade",
+      "type": "select",
+      "placeholder": "Input Employee Grade",
+      "options": []
+    },
+    {
+      "key": "employee",
+      "label": "Employee",
+      "type": "select",
+      "placeholder": "Input Employee",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "fromDate",
+      "label": "From Date",
+      "type": "input",
+      "placeholder": "Input From Date",
+      "options": []
+    },
+    {
+      "key": "toDate",
+      "label": "To Date",
+      "type": "input",
+      "placeholder": "Input To Date",
+      "options": []
+    },
+    {
+      "key": "leavePolicy",
+      "label": "Leave Policy",
+      "type": "select",
+      "placeholder": "Input Leave Policy",
+      "options": []
+    },
+    {
+      "key": "leaveType",
+      "label": "Leave Type",
+      "type": "select",
+      "placeholder": "Input Leave Type",
+      "options": []
+    },
+    {
+      "key": "carryForward",
+      "label": "Carry Forward",
+      "type": "input",
+      "placeholder": "Input Carry Forward",
+      "options": []
+    },
+    {
+      "key": "newLeavesAllocatedInDays",
+      "label": "New Leaves Allocated In Days",
+      "type": "input",
+      "placeholder": "Input New Leaves Allocated In Days",
+      "options": []
+    },
+    {
+      "key": "allocate",
+      "label": "Allocate",
+      "type": "select",
+      "placeholder": "Input Allocate",
+      "options": []
+    }
+  ]
+}

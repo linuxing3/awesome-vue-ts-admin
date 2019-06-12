@@ -1,0 +1,46 @@
+{
+  "fields": [
+    {
+      "key": "fromDate",
+      "label": "From Date",
+      "type": "input",
+      "placeholder": "Input From Date",
+      "options": []
+    },
+    {
+      "key": "toDate",
+      "label": "To Date",
+      "type": "input",
+      "placeholder": "Input To Date",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "company",
+      "label": "Company",
+      "type": "select",
+      "placeholder": "Input Company",
+      "options": []
+    },
+    {
+      "key": "isActive",
+      "label": "Is Active",
+      "type": "input",
+      "placeholder": "Input Is Active",
+      "options": []
+    },
+    {
+      "key": "holidayListForOptionalLeave",
+      "label": "Holiday List For Optional Leave",
+      "type": "select",
+      "placeholder": "Input Holiday List For Optional Leave",
+      "options": []
+    }
+  ]
+}

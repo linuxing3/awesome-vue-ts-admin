@@ -1,0 +1,277 @@
+{
+  "fields": [
+    {
+      "key": "selectEmployees",
+      "label": "Select Employees",
+      "type": "input",
+      "placeholder": "Input Select Employees",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "postingDate",
+      "label": "Posting Date",
+      "type": "input",
+      "placeholder": "Input Posting Date",
+      "options": []
+    },
+    {
+      "key": "payrollFrequency",
+      "label": "Payroll Frequency",
+      "type": "select",
+      "placeholder": "Input Payroll Frequency",
+      "options": [
+        {
+          "label": "Monthly",
+          "value": "Monthly"
+        },
+        {
+          "label": "Fortnightly",
+          "value": "Fortnightly"
+        },
+        {
+          "label": "Bimonthly",
+          "value": "Bimonthly"
+        },
+        {
+          "label": "Weekly",
+          "value": "Weekly"
+        },
+        {
+          "label": "Daily",
+          "value": "Daily"
+        }
+      ]
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "company",
+      "label": "Company",
+      "type": "select",
+      "placeholder": "Input Company",
+      "options": []
+    },
+    {
+      "key": "employees",
+      "label": "Employees",
+      "type": "input",
+      "placeholder": "Input Employees",
+      "options": []
+    },
+    {
+      "key": "branch",
+      "label": "Branch",
+      "type": "select",
+      "placeholder": "Input Branch",
+      "options": []
+    },
+    {
+      "key": "department",
+      "label": "Department",
+      "type": "select",
+      "placeholder": "Input Department",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "designation",
+      "label": "Designation",
+      "type": "select",
+      "placeholder": "Input Designation",
+      "options": []
+    },
+    {
+      "key": "numberOfEmployees",
+      "label": "Number Of Employees",
+      "type": "input",
+      "placeholder": "Input Number Of Employees",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "employeeDetails",
+      "label": "Employee Details",
+      "type": "select",
+      "placeholder": "Input Employee Details",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "validateAttendance",
+      "label": "Validate Attendance",
+      "type": "input",
+      "placeholder": "Input Validate Attendance",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "salarySlipBasedOnTimesheet",
+      "label": "Salary Slip Based On Timesheet",
+      "type": "input",
+      "placeholder": "Input Salary Slip Based On Timesheet",
+      "options": []
+    },
+    {
+      "key": "selectPayrollPeriod",
+      "label": "Select Payroll Period",
+      "type": "input",
+      "placeholder": "Input Select Payroll Period",
+      "options": []
+    },
+    {
+      "key": "startDate",
+      "label": "Start Date",
+      "type": "input",
+      "placeholder": "Input Start Date",
+      "options": []
+    },
+    {
+      "key": "endDate",
+      "label": "End Date",
+      "type": "input",
+      "placeholder": "Input End Date",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "deductTaxForUnclaimedEmployeeBenefits",
+      "label": "Deduct Tax For Unclaimed Employee Benefits",
+      "type": "input",
+      "placeholder": "Input Deduct Tax For Unclaimed Employee Benefits",
+      "options": []
+    },
+    {
+      "key": "deductTaxForUnsubmittedTaxExemptionProof",
+      "label": "Deduct Tax For Unsubmitted Tax Exemption Proof",
+      "type": "input",
+      "placeholder": "Input Deduct Tax For Unsubmitted Tax Exemption Proof",
+      "options": []
+    },
+    {
+      "key": "accounts",
+      "label": "Accounts",
+      "type": "input",
+      "placeholder": "Input Accounts",
+      "options": []
+    },
+    {
+      "key": "costCenter",
+      "label": "Cost Center",
+      "type": "select",
+      "placeholder": "Input Cost Center",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "project",
+      "label": "Project",
+      "type": "select",
+      "placeholder": "Input Project",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "paymentEntry",
+      "label": "Payment Entry",
+      "type": "input",
+      "placeholder": "Input Payment Entry",
+      "options": []
+    },
+    {
+      "key": "paymentAccount",
+      "label": "Payment Account",
+      "type": "select",
+      "placeholder": "Input Payment Account",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "amendedFrom",
+      "label": "Amended From",
+      "type": "select",
+      "placeholder": "Input Amended From",
+      "options": []
+    },
+    {
+      "key": "salarySlipsCreated",
+      "label": "Salary Slips Created",
+      "type": "input",
+      "placeholder": "Input Salary Slips Created",
+      "options": []
+    },
+    {
+      "key": "salarySlipsSubmitted",
+      "label": "Salary Slips Submitted",
+      "type": "input",
+      "placeholder": "Input Salary Slips Submitted",
+      "options": []
+    }
+  ]
+}

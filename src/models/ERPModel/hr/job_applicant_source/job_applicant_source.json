@@ -1,0 +1,18 @@
+{
+  "fields": [
+    {
+      "key": "sourceName",
+      "label": "Source Name",
+      "type": "input",
+      "placeholder": "Input Source Name",
+      "options": []
+    },
+    {
+      "key": "details",
+      "label": "Details",
+      "type": "input",
+      "placeholder": "Input Details",
+      "options": []
+    }
+  ]
+}

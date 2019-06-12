@@ -1,0 +1,39 @@
+{
+  "fields": [
+    {
+      "key": "fiscalYear",
+      "label": "Fiscal Year",
+      "type": "select",
+      "placeholder": "Input Fiscal Year",
+      "options": []
+    },
+    {
+      "key": "taxWithholdingRate",
+      "label": "Tax Withholding Rate",
+      "type": "input",
+      "placeholder": "Input Tax Withholding Rate",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "singleTransactionThreshold",
+      "label": "Single Transaction Threshold",
+      "type": "input",
+      "placeholder": "Input Single Transaction Threshold",
+      "options": []
+    },
+    {
+      "key": "cumulativeTransactionThreshold",
+      "label": "Cumulative Transaction Threshold",
+      "type": "input",
+      "placeholder": "Input Cumulative Transaction Threshold",
+      "options": []
+    }
+  ]
+}

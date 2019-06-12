@@ -1,0 +1,145 @@
+{
+  "fields": [
+    {
+      "key": "planName",
+      "label": "Plan Name",
+      "type": "input",
+      "placeholder": "Input Plan Name",
+      "options": []
+    },
+    {
+      "key": "currency",
+      "label": "Currency",
+      "type": "select",
+      "placeholder": "Input Currency",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "item",
+      "label": "Item",
+      "type": "select",
+      "placeholder": "Input Item",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "priceDetermination",
+      "label": "Price Determination",
+      "type": "select",
+      "placeholder": "Input Price Determination",
+      "options": [
+        {
+          "label": "Fixed rate",
+          "value": "Fixed rate"
+        },
+        {
+          "label": "Based on price list",
+          "value": "Based on price list"
+        }
+      ]
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "cost",
+      "label": "Cost",
+      "type": "input",
+      "placeholder": "Input Cost",
+      "options": []
+    },
+    {
+      "key": "priceList",
+      "label": "Price List",
+      "type": "select",
+      "placeholder": "Input Price List",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "billingInterval",
+      "label": "Billing Interval",
+      "type": "select",
+      "placeholder": "Input Billing Interval",
+      "options": [
+        {
+          "label": "Week",
+          "value": "Week"
+        },
+        {
+          "label": "Month",
+          "value": "Month"
+        },
+        {
+          "label": "Year",
+          "value": "Year"
+        }
+      ]
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "billingIntervalCount",
+      "label": "Billing Interval Count",
+      "type": "input",
+      "placeholder": "Input Billing Interval Count",
+      "options": []
+    },
+    {
+      "key": "paymentPlan",
+      "label": "Payment Plan",
+      "type": "input",
+      "placeholder": "Input Payment Plan",
+      "options": []
+    },
+    {
+      "key": "paymentPlan",
+      "label": "Payment Plan",
+      "type": "input",
+      "placeholder": "Input Payment Plan",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "paymentGateway",
+      "label": "Payment Gateway",
+      "type": "select",
+      "placeholder": "Input Payment Gateway",
+      "options": []
+    }
+  ]
+}

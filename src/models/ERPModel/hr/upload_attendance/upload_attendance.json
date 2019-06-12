@@ -1,0 +1,53 @@
+{
+  "fields": [
+    {
+      "key": "downloadTemplate",
+      "label": "Download Template",
+      "type": "input",
+      "placeholder": "Input Download Template",
+      "options": []
+    },
+    {
+      "key": "attendanceFromDate",
+      "label": "Attendance From Date",
+      "type": "input",
+      "placeholder": "Input Attendance From Date",
+      "options": []
+    },
+    {
+      "key": "attendanceToDate",
+      "label": "Attendance To Date",
+      "type": "input",
+      "placeholder": "Input Attendance To Date",
+      "options": []
+    },
+    {
+      "key": "getTemplate",
+      "label": "Get Template",
+      "type": "input",
+      "placeholder": "Input Get Template",
+      "options": []
+    },
+    {
+      "key": "importAttendance",
+      "label": "Import Attendance",
+      "type": "input",
+      "placeholder": "Input Import Attendance",
+      "options": []
+    },
+    {
+      "key": "uploadHtml",
+      "label": "Upload Html",
+      "type": "input",
+      "placeholder": "Input Upload Html",
+      "options": []
+    },
+    {
+      "key": "importLog",
+      "label": "Import Log",
+      "type": "input",
+      "placeholder": "Input Import Log",
+      "options": []
+    }
+  ]
+}

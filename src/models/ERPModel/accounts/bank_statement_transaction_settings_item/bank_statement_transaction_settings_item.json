@@ -1,0 +1,45 @@
+{
+  "fields": [
+    {
+      "key": "mappingType",
+      "label": "Mapping Type",
+      "type": "select",
+      "placeholder": "Input Mapping Type",
+      "options": []
+    },
+    {
+      "key": "bankData",
+      "label": "Bank Data",
+      "type": "input",
+      "placeholder": "Input Bank Data",
+      "options": []
+    },
+    {
+      "key": "mappedDataType",
+      "label": "Mapped Data Type",
+      "type": "select",
+      "placeholder": "Input Mapped Data Type",
+      "options": [
+        {
+          "label": "Customer",
+          "value": "Customer"
+        },
+        {
+          "label": "Supplier",
+          "value": "Supplier"
+        },
+        {
+          "label": "Account",
+          "value": "Account"
+        }
+      ]
+    },
+    {
+      "key": "mappedData",
+      "label": "Mapped Data",
+      "type": "select",
+      "placeholder": "Input Mapped Data",
+      "options": []
+    }
+  ]
+}

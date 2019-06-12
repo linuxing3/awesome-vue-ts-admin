@@ -1,0 +1,18 @@
+{
+  "fields": [
+    {
+      "key": "company",
+      "label": "Company",
+      "type": "select",
+      "placeholder": "Input Company",
+      "options": []
+    },
+    {
+      "key": "account",
+      "label": "Account",
+      "type": "select",
+      "placeholder": "Input Account",
+      "options": []
+    }
+  ]
+}

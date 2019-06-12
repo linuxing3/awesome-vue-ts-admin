@@ -1,0 +1,11 @@
+{
+  "fields": [
+    {
+      "key": "location",
+      "label": "Location",
+      "type": "select",
+      "placeholder": "Input Location",
+      "options": []
+    }
+  ]
+}

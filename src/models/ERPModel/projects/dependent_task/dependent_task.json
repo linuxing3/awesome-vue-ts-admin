@@ -1,0 +1,11 @@
+{
+  "fields": [
+    {
+      "key": "task",
+      "label": "Task",
+      "type": "select",
+      "placeholder": "Input Task",
+      "options": []
+    }
+  ]
+}

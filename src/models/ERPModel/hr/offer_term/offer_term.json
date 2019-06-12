@@ -1,0 +1,11 @@
+{
+  "fields": [
+    {
+      "key": "offerTerm",
+      "label": "Offer Term",
+      "type": "input",
+      "placeholder": "Input Offer Term",
+      "options": []
+    }
+  ]
+}

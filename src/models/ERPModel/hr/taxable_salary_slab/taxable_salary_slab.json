@@ -1,0 +1,71 @@
+{
+  "fields": [
+    {
+      "key": "fromAmount",
+      "label": "From Amount",
+      "type": "input",
+      "placeholder": "Input From Amount",
+      "options": []
+    },
+    {
+      "key": "toAmount",
+      "label": "To Amount",
+      "type": "input",
+      "placeholder": "Input To Amount",
+      "options": []
+    },
+    {
+      "key": "percentDeduction",
+      "label": "Percent Deduction",
+      "type": "input",
+      "placeholder": "Input Percent Deduction",
+      "options": []
+    },
+    {
+      "key": "condition",
+      "label": "Condition",
+      "type": "input",
+      "placeholder": "Input Condition",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "select",
+      "placeholder": "Input ",
+      "options": [
+        {
+          "label": "<ol>",
+          "value": "<ol>"
+        },
+        {
+          "label": "<li>Applying tax if employee born between 31-12-1937 and 01-01-1958 (Employees aged 60 to 80)<br>",
+          "value": "<li>Applying tax if employee born between 31-12-1937 and 01-01-1958 (Employees aged 60 to 80)<br>"
+        },
+        {
+          "label": "<code>Condition: date_of_birth&gt;date(1937, 12, 31) and date_of_birth&lt;date(1958, 01, 01)</code></li><br><li>Applying tax by employee gender<br>",
+          "value": "<code>Condition: date_of_birth&gt;date(1937, 12, 31) and date_of_birth&lt;date(1958, 01, 01)</code></li><br><li>Applying tax by employee gender<br>"
+        },
+        {
+          "label": "<code>Condition: gender=\"Male\"</code></li><br>",
+          "value": "<code>Condition: gender=\"Male\"</code></li><br>"
+        },
+        {
+          "label": "<li>Applying tax by Salary Component<br>",
+          "value": "<li>Applying tax by Salary Component<br>"
+        },
+        {
+          "label": "<code>Condition: base &gt; 10000</code></li></ol>",
+          "value": "<code>Condition: base &gt; 10000</code></li></ol>"
+        }
+      ]
+    }
+  ]
+}

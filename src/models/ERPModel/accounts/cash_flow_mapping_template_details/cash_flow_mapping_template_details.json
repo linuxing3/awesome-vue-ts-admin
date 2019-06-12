@@ -1,0 +1,11 @@
+{
+  "fields": [
+    {
+      "key": "mapping",
+      "label": "Mapping",
+      "type": "select",
+      "placeholder": "Input Mapping",
+      "options": []
+    }
+  ]
+}

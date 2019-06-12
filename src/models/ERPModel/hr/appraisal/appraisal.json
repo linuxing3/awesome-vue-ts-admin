@@ -1,0 +1,60 @@
+{
+  "fields": [
+    {
+      "key": "forEmployeeName",
+      "label": "For Employee Name",
+      "type": "input",
+      "placeholder": "Input For Employee Name",
+      "options": []
+    },
+    {
+      "key": "startDate",
+      "label": "Start Date",
+      "type": "input",
+      "placeholder": "Input Start Date",
+      "options": []
+    },
+    {
+      "key": "endDate",
+      "label": "End Date",
+      "type": "input",
+      "placeholder": "Input End Date",
+      "options": []
+    },
+    {
+      "key": "department",
+      "label": "Department",
+      "type": "select",
+      "placeholder": "Input Department",
+      "options": []
+    },
+    {
+      "key": "goals",
+      "label": "Goals",
+      "type": "select",
+      "placeholder": "Input Goals",
+      "options": []
+    },
+    {
+      "key": "totalScoreOutOf_5",
+      "label": "Total Score Out Of 5",
+      "type": "input",
+      "placeholder": "Input Total Score Out Of 5",
+      "options": []
+    },
+    {
+      "key": "remarks",
+      "label": "Remarks",
+      "type": "input",
+      "placeholder": "Input Remarks",
+      "options": []
+    },
+    {
+      "key": "company",
+      "label": "Company",
+      "type": "select",
+      "placeholder": "Input Company",
+      "options": []
+    }
+  ]
+}

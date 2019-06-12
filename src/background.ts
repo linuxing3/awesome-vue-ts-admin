@@ -106,10 +106,10 @@ function createWindows(winVar, devPath, prodPath) {
 }
 
 function bootstrap() {
-  createWindows(mainWin, '', 'index.html')
-    .then(win => setTimeout(() => registerOpenDevShortcut(win, 'CommandOrControl+Shift+X'), 300));
-  // createWindows(playWin, 'playpage', 'playpage.html')
-  //   .then(win => setTimeout(() => registerOpenDevShortcut(win, 'CommandOrControl+Shift+Y'), 300));
+  // createWindows(mainWin, '', 'index.html')
+  //   .then(win => setTimeout(() => registerOpenDevShortcut(win, 'CommandOrControl+Shift+X'), 300));
+  createWindows(playWin, 'playpage', 'playpage.html')
+    .then(win => setTimeout(() => registerOpenDevShortcut(win, 'CommandOrControl+Shift+Y'), 300));
 }
 
 // Quit when all windows are closed.

@@ -1,0 +1,233 @@
+{
+  "fields": [
+    {
+      "key": "component",
+      "label": "Component",
+      "type": "select",
+      "placeholder": "Input Component",
+      "options": []
+    },
+    {
+      "key": "abbr",
+      "label": "Abbr",
+      "type": "input",
+      "placeholder": "Input Abbr",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "statisticalComponent",
+      "label": "Statistical Component",
+      "type": "input",
+      "placeholder": "Input Statistical Component",
+      "options": []
+    },
+    {
+      "key": "isTaxApplicable",
+      "label": "Is Tax Applicable",
+      "type": "input",
+      "placeholder": "Input Is Tax Applicable",
+      "options": []
+    },
+    {
+      "key": "isFlexibleBenefit",
+      "label": "Is Flexible Benefit",
+      "type": "input",
+      "placeholder": "Input Is Flexible Benefit",
+      "options": []
+    },
+    {
+      "key": "isAdditionalComponent",
+      "label": "Is Additional Component",
+      "type": "input",
+      "placeholder": "Input Is Additional Component",
+      "options": []
+    },
+    {
+      "key": "variableBasedOnTaxableSalary",
+      "label": "Variable Based On Taxable Salary",
+      "type": "input",
+      "placeholder": "Input Variable Based On Taxable Salary",
+      "options": []
+    },
+    {
+      "key": "dependsOnLeaveWithoutPay",
+      "label": "Depends On Leave Without Pay",
+      "type": "input",
+      "placeholder": "Input Depends On Leave Without Pay",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "condition",
+      "label": "Condition",
+      "type": "input",
+      "placeholder": "Input Condition",
+      "options": []
+    },
+    {
+      "key": "amountBasedOnFormula",
+      "label": "Amount Based On Formula",
+      "type": "input",
+      "placeholder": "Input Amount Based On Formula",
+      "options": []
+    },
+    {
+      "key": "formula",
+      "label": "Formula",
+      "type": "input",
+      "placeholder": "Input Formula",
+      "options": []
+    },
+    {
+      "key": "amount",
+      "label": "Amount",
+      "type": "select",
+      "placeholder": "Input Amount",
+      "options": []
+    },
+    {
+      "key": "doNotIncludeInTotal",
+      "label": "Do Not Include In Total",
+      "type": "input",
+      "placeholder": "Input Do Not Include In Total",
+      "options": []
+    },
+    {
+      "key": "defaultAmount",
+      "label": "Default Amount",
+      "type": "select",
+      "placeholder": "Input Default Amount",
+      "options": []
+    },
+    {
+      "key": "taxOnFlexibleBenefit",
+      "label": "Tax On Flexible Benefit",
+      "type": "input",
+      "placeholder": "Input Tax On Flexible Benefit",
+      "options": []
+    },
+    {
+      "key": "taxOnAdditionalSalary",
+      "label": "Tax On Additional Salary",
+      "type": "input",
+      "placeholder": "Input Tax On Additional Salary",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "conditionAndFormulaHelp",
+      "label": "Condition And Formula Help",
+      "type": "select",
+      "placeholder": "Input Condition And Formula Help",
+      "options": [
+        {
+          "label": "",
+          "value": ""
+        },
+        {
+          "label": "<p>Notes:</p>",
+          "value": "<p>Notes:</p>"
+        },
+        {
+          "label": "",
+          "value": ""
+        },
+        {
+          "label": "<ol>",
+          "value": "<ol>"
+        },
+        {
+          "label": "<li>Use field <code>base</code> for using base salary of the Employee</li>",
+          "value": "<li>Use field <code>base</code> for using base salary of the Employee</li>"
+        },
+        {
+          "label": "<li>Use Salary Component abbreviations in conditions and formulas. <code>BS = Basic Salary</code></li>",
+          "value": "<li>Use Salary Component abbreviations in conditions and formulas. <code>BS = Basic Salary</code></li>"
+        },
+        {
+          "label": "<li>Use field name for employee details in conditions and formulas. <code>Employment Type = employment_type</code><code>Branch = branch</code></li>",
+          "value": "<li>Use field name for employee details in conditions and formulas. <code>Employment Type = employment_type</code><code>Branch = branch</code></li>"
+        },
+        {
+          "label": "<li>Use field name from Salary Slip in conditions and formulas. <code>Payment Days = payment_days</code><code>Leave without pay = leave_without_pay</code></li>",
+          "value": "<li>Use field name from Salary Slip in conditions and formulas. <code>Payment Days = payment_days</code><code>Leave without pay = leave_without_pay</code></li>"
+        },
+        {
+          "label": "<li>Direct Amount can also be entered based on Condtion. See example 3</li></ol>",
+          "value": "<li>Direct Amount can also be entered based on Condtion. See example 3</li></ol>"
+        },
+        {
+          "label": "",
+          "value": ""
+        },
+        {
+          "label": "<h4>Examples</h4>",
+          "value": "<h4>Examples</h4>"
+        },
+        {
+          "label": "<ol>",
+          "value": "<ol>"
+        },
+        {
+          "label": "<li>Calculating Basic Salary based on <code>base</code>",
+          "value": "<li>Calculating Basic Salary based on <code>base</code>"
+        },
+        {
+          "label": "<pre><code>Condition: base &lt; 10000</code></pre>",
+          "value": "<pre><code>Condition: base &lt; 10000</code></pre>"
+        },
+        {
+          "label": "<pre><code>Formula: base * .2</code></pre></li>",
+          "value": "<pre><code>Formula: base * .2</code></pre></li>"
+        },
+        {
+          "label": "<li>Calculating HRA based on Basic Salary<code>BS</code> ",
+          "value": "<li>Calculating HRA based on Basic Salary<code>BS</code> "
+        },
+        {
+          "label": "<pre><code>Condition: BS &gt; 2000</code></pre>",
+          "value": "<pre><code>Condition: BS &gt; 2000</code></pre>"
+        },
+        {
+          "label": "<pre><code>Formula: BS * .1</code></pre></li>",
+          "value": "<pre><code>Formula: BS * .1</code></pre></li>"
+        },
+        {
+          "label": "<li>Calculating TDS based on Employment Type<code>employment_type</code> ",
+          "value": "<li>Calculating TDS based on Employment Type<code>employment_type</code> "
+        },
+        {
+          "label": "<pre><code>Condition: employment_type==\"Intern\"</code></pre>",
+          "value": "<pre><code>Condition: employment_type==\"Intern\"</code></pre>"
+        },
+        {
+          "label": "<pre><code>Amount: 1000</code></pre></li>",
+          "value": "<pre><code>Amount: 1000</code></pre></li>"
+        },
+        {
+          "label": "</ol>",
+          "value": "</ol>"
+        }
+      ]
+    }
+  ]
+}

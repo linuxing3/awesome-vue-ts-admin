@@ -1,0 +1,55 @@
+{
+  "fields": [
+    {
+      "key": "schoolUniversity",
+      "label": "School University",
+      "type": "input",
+      "placeholder": "Input School University",
+      "options": []
+    },
+    {
+      "key": "qualification",
+      "label": "Qualification",
+      "type": "input",
+      "placeholder": "Input Qualification",
+      "options": []
+    },
+    {
+      "key": "level",
+      "label": "Level",
+      "type": "select",
+      "placeholder": "Input Level",
+      "options": [
+        {
+          "label": "Post Graduate",
+          "value": "Post Graduate"
+        },
+        {
+          "label": "Under Graduate",
+          "value": "Under Graduate"
+        }
+      ]
+    },
+    {
+      "key": "yearOfPassing",
+      "label": "Year Of Passing",
+      "type": "input",
+      "placeholder": "Input Year Of Passing",
+      "options": []
+    },
+    {
+      "key": "classPercentage",
+      "label": "Class Percentage",
+      "type": "input",
+      "placeholder": "Input Class Percentage",
+      "options": []
+    },
+    {
+      "key": "majorOptionalSubjects",
+      "label": "Major Optional Subjects",
+      "type": "input",
+      "placeholder": "Input Major Optional Subjects",
+      "options": []
+    }
+  ]
+}

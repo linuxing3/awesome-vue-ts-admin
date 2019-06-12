@@ -1,0 +1,181 @@
+{
+  "fields": [
+    {
+      "key": "applicantType",
+      "label": "Applicant Type",
+      "type": "select",
+      "placeholder": "Input Applicant Type",
+      "options": [
+        {
+          "label": "Member",
+          "value": "Member"
+        }
+      ]
+    },
+    {
+      "key": "applicant",
+      "label": "Applicant",
+      "type": "select",
+      "placeholder": "Input Applicant",
+      "options": []
+    },
+    {
+      "key": "applicantName",
+      "label": "Applicant Name",
+      "type": "input",
+      "placeholder": "Input Applicant Name",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "postingDate",
+      "label": "Posting Date",
+      "type": "input",
+      "placeholder": "Input Posting Date",
+      "options": []
+    },
+    {
+      "key": "status",
+      "label": "Status",
+      "type": "select",
+      "placeholder": "Input Status",
+      "options": [
+        {
+          "label": "Approved",
+          "value": "Approved"
+        },
+        {
+          "label": "Rejected",
+          "value": "Rejected"
+        }
+      ]
+    },
+    {
+      "key": "company",
+      "label": "Company",
+      "type": "select",
+      "placeholder": "Input Company",
+      "options": []
+    },
+    {
+      "key": "loanInfo",
+      "label": "Loan Info",
+      "type": "input",
+      "placeholder": "Input Loan Info",
+      "options": []
+    },
+    {
+      "key": "loanType",
+      "label": "Loan Type",
+      "type": "select",
+      "placeholder": "Input Loan Type",
+      "options": []
+    },
+    {
+      "key": "loanAmount",
+      "label": "Loan Amount",
+      "type": "select",
+      "placeholder": "Input Loan Amount",
+      "options": []
+    },
+    {
+      "key": "requiredByDate",
+      "label": "Required By Date",
+      "type": "input",
+      "placeholder": "Input Required By Date",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "reason",
+      "label": "Reason",
+      "type": "input",
+      "placeholder": "Input Reason",
+      "options": []
+    },
+    {
+      "key": "repaymentInfo",
+      "label": "Repayment Info",
+      "type": "input",
+      "placeholder": "Input Repayment Info",
+      "options": []
+    },
+    {
+      "key": "repaymentMethod",
+      "label": "Repayment Method",
+      "type": "select",
+      "placeholder": "Input Repayment Method",
+      "options": [
+        {
+          "label": "Repay Fixed Amount per Period",
+          "value": "Repay Fixed Amount per Period"
+        },
+        {
+          "label": "Repay Over Number of Periods",
+          "value": "Repay Over Number of Periods"
+        }
+      ]
+    },
+    {
+      "key": "rateOfInterest",
+      "label": "Rate Of Interest",
+      "type": "input",
+      "placeholder": "Input Rate Of Interest",
+      "options": []
+    },
+    {
+      "key": "totalPayableInterest",
+      "label": "Total Payable Interest",
+      "type": "select",
+      "placeholder": "Input Total Payable Interest",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "monthlyRepaymentAmount",
+      "label": "Monthly Repayment Amount",
+      "type": "select",
+      "placeholder": "Input Monthly Repayment Amount",
+      "options": []
+    },
+    {
+      "key": "repaymentPeriodInMonths",
+      "label": "Repayment Period In Months",
+      "type": "input",
+      "placeholder": "Input Repayment Period In Months",
+      "options": []
+    },
+    {
+      "key": "totalPayableAmount",
+      "label": "Total Payable Amount",
+      "type": "select",
+      "placeholder": "Input Total Payable Amount",
+      "options": []
+    },
+    {
+      "key": "amendedFrom",
+      "label": "Amended From",
+      "type": "select",
+      "placeholder": "Input Amended From",
+      "options": []
+    }
+  ]
+}

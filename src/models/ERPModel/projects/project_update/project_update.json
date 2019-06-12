@@ -1,0 +1,67 @@
+{
+  "fields": [
+    {
+      "key": "series",
+      "label": "Series",
+      "type": "select",
+      "placeholder": "Input Series",
+      "options": []
+    },
+    {
+      "key": "project",
+      "label": "Project",
+      "type": "select",
+      "placeholder": "Input Project",
+      "options": []
+    },
+    {
+      "key": "sent",
+      "label": "Sent",
+      "type": "input",
+      "placeholder": "Input Sent",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "date",
+      "label": "Date",
+      "type": "input",
+      "placeholder": "Input Date",
+      "options": []
+    },
+    {
+      "key": "time",
+      "label": "Time",
+      "type": "input",
+      "placeholder": "Input Time",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "users",
+      "label": "Users",
+      "type": "select",
+      "placeholder": "Input Users",
+      "options": []
+    },
+    {
+      "key": "amendedFrom",
+      "label": "Amended From",
+      "type": "select",
+      "placeholder": "Input Amended From",
+      "options": []
+    }
+  ]
+}

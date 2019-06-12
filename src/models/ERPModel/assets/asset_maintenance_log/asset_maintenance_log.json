@@ -1,0 +1,178 @@
+{
+  "fields": [
+    {
+      "key": "assetMaintenance",
+      "label": "Asset Maintenance",
+      "type": "select",
+      "placeholder": "Input Asset Maintenance",
+      "options": []
+    },
+    {
+      "key": "series",
+      "label": "Series",
+      "type": "select",
+      "placeholder": "Input Series",
+      "options": []
+    },
+    {
+      "key": "assetName",
+      "label": "Asset Name",
+      "type": "input",
+      "placeholder": "Input Asset Name",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "itemCode",
+      "label": "Item Code",
+      "type": "input",
+      "placeholder": "Input Item Code",
+      "options": []
+    },
+    {
+      "key": "itemName",
+      "label": "Item Name",
+      "type": "input",
+      "placeholder": "Input Item Name",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "task",
+      "label": "Task",
+      "type": "select",
+      "placeholder": "Input Task",
+      "options": []
+    },
+    {
+      "key": "maintenanceType",
+      "label": "Maintenance Type",
+      "type": "input",
+      "placeholder": "Input Maintenance Type",
+      "options": []
+    },
+    {
+      "key": "periodicity",
+      "label": "Periodicity",
+      "type": "input",
+      "placeholder": "Input Periodicity",
+      "options": []
+    },
+    {
+      "key": "assignTo",
+      "label": "Assign To",
+      "type": "input",
+      "placeholder": "Input Assign To",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "dueDate",
+      "label": "Due Date",
+      "type": "input",
+      "placeholder": "Input Due Date",
+      "options": []
+    },
+    {
+      "key": "completionDate",
+      "label": "Completion Date",
+      "type": "input",
+      "placeholder": "Input Completion Date",
+      "options": []
+    },
+    {
+      "key": "maintenanceStatus",
+      "label": "Maintenance Status",
+      "type": "select",
+      "placeholder": "Input Maintenance Status",
+      "options": [
+        {
+          "label": "Completed",
+          "value": "Completed"
+        },
+        {
+          "label": "Cancelled",
+          "value": "Cancelled"
+        },
+        {
+          "label": "Overdue",
+          "value": "Overdue"
+        }
+      ]
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "hasCertificate",
+      "label": "Has Certificate",
+      "type": "input",
+      "placeholder": "Input Has Certificate",
+      "options": []
+    },
+    {
+      "key": "certificate",
+      "label": "Certificate",
+      "type": "input",
+      "placeholder": "Input Certificate",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "description",
+      "label": "Description",
+      "type": "input",
+      "placeholder": "Input Description",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "actionsPerformed",
+      "label": "Actions Performed",
+      "type": "input",
+      "placeholder": "Input Actions Performed",
+      "options": []
+    },
+    {
+      "key": "amendedFrom",
+      "label": "Amended From",
+      "type": "select",
+      "placeholder": "Input Amended From",
+      "options": []
+    }
+  ]
+}

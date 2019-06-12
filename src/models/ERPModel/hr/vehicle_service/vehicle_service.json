@@ -1,0 +1,91 @@
+{
+  "fields": [
+    {
+      "key": "serviceItem",
+      "label": "Service Item",
+      "type": "select",
+      "placeholder": "Input Service Item",
+      "options": [
+        {
+          "label": "Brake Oil",
+          "value": "Brake Oil"
+        },
+        {
+          "label": "Brake Pad",
+          "value": "Brake Pad"
+        },
+        {
+          "label": "Clutch Plate",
+          "value": "Clutch Plate"
+        },
+        {
+          "label": "Engine Oil",
+          "value": "Engine Oil"
+        },
+        {
+          "label": "Oil Change",
+          "value": "Oil Change"
+        },
+        {
+          "label": "Wheels",
+          "value": "Wheels"
+        }
+      ]
+    },
+    {
+      "key": "type",
+      "label": "Type",
+      "type": "select",
+      "placeholder": "Input Type",
+      "options": [
+        {
+          "label": "Inspection",
+          "value": "Inspection"
+        },
+        {
+          "label": "Service",
+          "value": "Service"
+        },
+        {
+          "label": "Change",
+          "value": "Change"
+        }
+      ]
+    },
+    {
+      "key": "frequency",
+      "label": "Frequency",
+      "type": "select",
+      "placeholder": "Input Frequency",
+      "options": [
+        {
+          "label": "Mileage",
+          "value": "Mileage"
+        },
+        {
+          "label": "Monthly",
+          "value": "Monthly"
+        },
+        {
+          "label": "Quarterly",
+          "value": "Quarterly"
+        },
+        {
+          "label": "Half Yearly",
+          "value": "Half Yearly"
+        },
+        {
+          "label": "Yearly",
+          "value": "Yearly"
+        }
+      ]
+    },
+    {
+      "key": "expense",
+      "label": "Expense",
+      "type": "input",
+      "placeholder": "Input Expense",
+      "options": []
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "fields": [
+    {
+      "key": "customerGroup",
+      "label": "Customer Group",
+      "type": "select",
+      "placeholder": "Input Customer Group",
+      "options": []
+    }
+  ]
+}

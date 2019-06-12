@@ -1,0 +1,11 @@
+{
+  "fields": [
+    {
+      "key": "bankName",
+      "label": "Bank Name",
+      "type": "input",
+      "placeholder": "Input Bank Name",
+      "options": []
+    }
+  ]
+}

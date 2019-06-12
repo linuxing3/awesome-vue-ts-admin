@@ -1,0 +1,151 @@
+{
+  "fields": [
+    {
+      "key": "leaveTypeName",
+      "label": "Leave Type Name",
+      "type": "input",
+      "placeholder": "Input Leave Type Name",
+      "options": []
+    },
+    {
+      "key": "maxLeavesAllowed",
+      "label": "Max Leaves Allowed",
+      "type": "input",
+      "placeholder": "Input Max Leaves Allowed",
+      "options": []
+    },
+    {
+      "key": "applicableAfterWorkingDays",
+      "label": "Applicable After Working Days",
+      "type": "input",
+      "placeholder": "Input Applicable After Working Days",
+      "options": []
+    },
+    {
+      "key": "maximumContinuousDaysApplicable",
+      "label": "Maximum Continuous Days Applicable",
+      "type": "input",
+      "placeholder": "Input Maximum Continuous Days Applicable",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "isCarryForward",
+      "label": "Is Carry Forward",
+      "type": "input",
+      "placeholder": "Input Is Carry Forward",
+      "options": []
+    },
+    {
+      "key": "isLeaveWithoutPay",
+      "label": "Is Leave Without Pay",
+      "type": "input",
+      "placeholder": "Input Is Leave Without Pay",
+      "options": []
+    },
+    {
+      "key": "isOptionalLeave",
+      "label": "Is Optional Leave",
+      "type": "input",
+      "placeholder": "Input Is Optional Leave",
+      "options": []
+    },
+    {
+      "key": "allowNegativeBalance",
+      "label": "Allow Negative Balance",
+      "type": "input",
+      "placeholder": "Input Allow Negative Balance",
+      "options": []
+    },
+    {
+      "key": "includeHolidaysWithinLeavesAsLeaves",
+      "label": "Include Holidays Within Leaves As Leaves",
+      "type": "input",
+      "placeholder": "Input Include Holidays Within Leaves As Leaves",
+      "options": []
+    },
+    {
+      "key": "isCompensatory",
+      "label": "Is Compensatory",
+      "type": "input",
+      "placeholder": "Input Is Compensatory",
+      "options": []
+    },
+    {
+      "key": "encashment",
+      "label": "Encashment",
+      "type": "input",
+      "placeholder": "Input Encashment",
+      "options": []
+    },
+    {
+      "key": "allowEncashment",
+      "label": "Allow Encashment",
+      "type": "input",
+      "placeholder": "Input Allow Encashment",
+      "options": []
+    },
+    {
+      "key": "encashmentThresholdDays",
+      "label": "Encashment Threshold Days",
+      "type": "input",
+      "placeholder": "Input Encashment Threshold Days",
+      "options": []
+    },
+    {
+      "key": "earningComponent",
+      "label": "Earning Component",
+      "type": "select",
+      "placeholder": "Input Earning Component",
+      "options": []
+    },
+    {
+      "key": "earnedLeave",
+      "label": "Earned Leave",
+      "type": "input",
+      "placeholder": "Input Earned Leave",
+      "options": []
+    },
+    {
+      "key": "isEarnedLeave",
+      "label": "Is Earned Leave",
+      "type": "input",
+      "placeholder": "Input Is Earned Leave",
+      "options": []
+    },
+    {
+      "key": "earnedLeaveFrequency",
+      "label": "Earned Leave Frequency",
+      "type": "select",
+      "placeholder": "Input Earned Leave Frequency",
+      "options": [
+        {
+          "label": "Quarterly",
+          "value": "Quarterly"
+        },
+        {
+          "label": "Yearly",
+          "value": "Yearly"
+        }
+      ]
+    },
+    {
+      "key": "rounding",
+      "label": "Rounding",
+      "type": "select",
+      "placeholder": "Input Rounding",
+      "options": [
+        {
+          "label": "1.0",
+          "value": "1.0"
+        }
+      ]
+    }
+  ]
+}

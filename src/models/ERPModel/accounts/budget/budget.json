@@ -1,0 +1,245 @@
+{
+  "fields": [
+    {
+      "key": "budgetAgainst",
+      "label": "Budget Against",
+      "type": "select",
+      "placeholder": "Input Budget Against",
+      "options": [
+        {
+          "label": "Cost Center",
+          "value": "Cost Center"
+        },
+        {
+          "label": "Project",
+          "value": "Project"
+        }
+      ]
+    },
+    {
+      "key": "company",
+      "label": "Company",
+      "type": "select",
+      "placeholder": "Input Company",
+      "options": []
+    },
+    {
+      "key": "costCenter",
+      "label": "Cost Center",
+      "type": "select",
+      "placeholder": "Input Cost Center",
+      "options": []
+    },
+    {
+      "key": "project",
+      "label": "Project",
+      "type": "select",
+      "placeholder": "Input Project",
+      "options": []
+    },
+    {
+      "key": "fiscalYear",
+      "label": "Fiscal Year",
+      "type": "select",
+      "placeholder": "Input Fiscal Year",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "monthlyDistribution",
+      "label": "Monthly Distribution",
+      "type": "select",
+      "placeholder": "Input Monthly Distribution",
+      "options": []
+    },
+    {
+      "key": "amendedFrom",
+      "label": "Amended From",
+      "type": "select",
+      "placeholder": "Input Amended From",
+      "options": []
+    },
+    {
+      "key": "controlAction",
+      "label": "Control Action",
+      "type": "input",
+      "placeholder": "Input Control Action",
+      "options": []
+    },
+    {
+      "key": "applicableOnMaterialRequest",
+      "label": "Applicable On Material Request",
+      "type": "input",
+      "placeholder": "Input Applicable On Material Request",
+      "options": []
+    },
+    {
+      "key": "actionIfAnnualBudgetExceededOnMr",
+      "label": "Action If Annual Budget Exceeded On Mr",
+      "type": "select",
+      "placeholder": "Input Action If Annual Budget Exceeded On Mr",
+      "options": [
+        {
+          "label": "Stop",
+          "value": "Stop"
+        },
+        {
+          "label": "Warn",
+          "value": "Warn"
+        },
+        {
+          "label": "Ignore",
+          "value": "Ignore"
+        }
+      ]
+    },
+    {
+      "key": "actionIfAccumulatedMonthlyBudgetExceededOnMr",
+      "label": "Action If Accumulated Monthly Budget Exceeded On Mr",
+      "type": "select",
+      "placeholder": "Input Action If Accumulated Monthly Budget Exceeded On Mr",
+      "options": [
+        {
+          "label": "Stop",
+          "value": "Stop"
+        },
+        {
+          "label": "Warn",
+          "value": "Warn"
+        },
+        {
+          "label": "Ignore",
+          "value": "Ignore"
+        }
+      ]
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "applicableOnPurchaseOrder",
+      "label": "Applicable On Purchase Order",
+      "type": "input",
+      "placeholder": "Input Applicable On Purchase Order",
+      "options": []
+    },
+    {
+      "key": "actionIfAnnualBudgetExceededOnPo",
+      "label": "Action If Annual Budget Exceeded On Po",
+      "type": "select",
+      "placeholder": "Input Action If Annual Budget Exceeded On Po",
+      "options": [
+        {
+          "label": "Stop",
+          "value": "Stop"
+        },
+        {
+          "label": "Warn",
+          "value": "Warn"
+        },
+        {
+          "label": "Ignore",
+          "value": "Ignore"
+        }
+      ]
+    },
+    {
+      "key": "actionIfAccumulatedMonthlyBudgetExceededOnPo",
+      "label": "Action If Accumulated Monthly Budget Exceeded On Po",
+      "type": "select",
+      "placeholder": "Input Action If Accumulated Monthly Budget Exceeded On Po",
+      "options": [
+        {
+          "label": "Stop",
+          "value": "Stop"
+        },
+        {
+          "label": "Warn",
+          "value": "Warn"
+        },
+        {
+          "label": "Ignore",
+          "value": "Ignore"
+        }
+      ]
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "applicableOnBookingActualExpenses",
+      "label": "Applicable On Booking Actual Expenses",
+      "type": "input",
+      "placeholder": "Input Applicable On Booking Actual Expenses",
+      "options": []
+    },
+    {
+      "key": "actionIfAnnualBudgetExceededOnActual",
+      "label": "Action If Annual Budget Exceeded On Actual",
+      "type": "select",
+      "placeholder": "Input Action If Annual Budget Exceeded On Actual",
+      "options": [
+        {
+          "label": "Stop",
+          "value": "Stop"
+        },
+        {
+          "label": "Warn",
+          "value": "Warn"
+        },
+        {
+          "label": "Ignore",
+          "value": "Ignore"
+        }
+      ]
+    },
+    {
+      "key": "actionIfAccumulatedMonthlyBudgetExceededOnActual",
+      "label": "Action If Accumulated Monthly Budget Exceeded On Actual",
+      "type": "select",
+      "placeholder": "Input Action If Accumulated Monthly Budget Exceeded On Actual",
+      "options": [
+        {
+          "label": "Stop",
+          "value": "Stop"
+        },
+        {
+          "label": "Warn",
+          "value": "Warn"
+        },
+        {
+          "label": "Ignore",
+          "value": "Ignore"
+        }
+      ]
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "budgetAccounts",
+      "label": "Budget Accounts",
+      "type": "select",
+      "placeholder": "Input Budget Accounts",
+      "options": []
+    }
+  ]
+}

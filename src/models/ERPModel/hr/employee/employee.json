@@ -1,0 +1,657 @@
+{
+  "fields": [
+    {
+      "key": "employee",
+      "label": "Employee",
+      "type": "input",
+      "placeholder": "Input Employee",
+      "options": []
+    },
+    {
+      "key": "series",
+      "label": "Series",
+      "type": "select",
+      "placeholder": "Input Series",
+      "options": []
+    },
+    {
+      "key": "salutation",
+      "label": "Salutation",
+      "type": "select",
+      "placeholder": "Input Salutation",
+      "options": []
+    },
+    {
+      "key": "firstName",
+      "label": "First Name",
+      "type": "input",
+      "placeholder": "Input First Name",
+      "options": []
+    },
+    {
+      "key": "middleName",
+      "label": "Middle Name",
+      "type": "input",
+      "placeholder": "Input Middle Name",
+      "options": []
+    },
+    {
+      "key": "lastName",
+      "label": "Last Name",
+      "type": "input",
+      "placeholder": "Input Last Name",
+      "options": []
+    },
+    {
+      "key": "fullName",
+      "label": "Full Name",
+      "type": "input",
+      "placeholder": "Input Full Name",
+      "options": []
+    },
+    {
+      "key": "image",
+      "label": "Image",
+      "type": "input",
+      "placeholder": "Input Image",
+      "options": []
+    },
+    {
+      "key": "company",
+      "label": "Company",
+      "type": "select",
+      "placeholder": "Input Company",
+      "options": []
+    },
+    {
+      "key": "status",
+      "label": "Status",
+      "type": "select",
+      "placeholder": "Input Status",
+      "options": [
+        {
+          "label": "Active",
+          "value": "Active"
+        },
+        {
+          "label": "Left",
+          "value": "Left"
+        }
+      ]
+    },
+    {
+      "key": "employeeNumber",
+      "label": "Employee Number",
+      "type": "input",
+      "placeholder": "Input Employee Number",
+      "options": []
+    },
+    {
+      "key": "employmentType",
+      "label": "Employment Type",
+      "type": "select",
+      "placeholder": "Input Employment Type",
+      "options": []
+    },
+    {
+      "key": "gender",
+      "label": "Gender",
+      "type": "select",
+      "placeholder": "Input Gender",
+      "options": []
+    },
+    {
+      "key": "dateOfBirth",
+      "label": "Date Of Birth",
+      "type": "input",
+      "placeholder": "Input Date Of Birth",
+      "options": []
+    },
+    {
+      "key": "dateOfJoining",
+      "label": "Date Of Joining",
+      "type": "input",
+      "placeholder": "Input Date Of Joining",
+      "options": []
+    },
+    {
+      "key": "emergencyContact",
+      "label": "Emergency Contact",
+      "type": "input",
+      "placeholder": "Input Emergency Contact",
+      "options": []
+    },
+    {
+      "key": "emergencyPhone",
+      "label": "Emergency Phone",
+      "type": "input",
+      "placeholder": "Input Emergency Phone",
+      "options": []
+    },
+    {
+      "key": "emergencyContact",
+      "label": "Emergency Contact",
+      "type": "input",
+      "placeholder": "Input Emergency Contact",
+      "options": []
+    },
+    {
+      "key": "relation",
+      "label": "Relation",
+      "type": "input",
+      "placeholder": "Input Relation",
+      "options": []
+    },
+    {
+      "key": "jobApplicant",
+      "label": "Job Applicant",
+      "type": "select",
+      "placeholder": "Input Job Applicant",
+      "options": []
+    },
+    {
+      "key": "offerDate",
+      "label": "Offer Date",
+      "type": "input",
+      "placeholder": "Input Offer Date",
+      "options": []
+    },
+    {
+      "key": "confirmationDate",
+      "label": "Confirmation Date",
+      "type": "input",
+      "placeholder": "Input Confirmation Date",
+      "options": []
+    },
+    {
+      "key": "contractEndDate",
+      "label": "Contract End Date",
+      "type": "input",
+      "placeholder": "Input Contract End Date",
+      "options": []
+    },
+    {
+      "key": "noticeDays",
+      "label": "Notice Days",
+      "type": "input",
+      "placeholder": "Input Notice Days",
+      "options": []
+    },
+    {
+      "key": "dateOfRetirement",
+      "label": "Date Of Retirement",
+      "type": "input",
+      "placeholder": "Input Date Of Retirement",
+      "options": []
+    },
+    {
+      "key": "department",
+      "label": "Department",
+      "type": "select",
+      "placeholder": "Input Department",
+      "options": []
+    },
+    {
+      "key": "designation",
+      "label": "Designation",
+      "type": "select",
+      "placeholder": "Input Designation",
+      "options": []
+    },
+    {
+      "key": "reportsTo",
+      "label": "Reports To",
+      "type": "select",
+      "placeholder": "Input Reports To",
+      "options": []
+    },
+    {
+      "key": "grade",
+      "label": "Grade",
+      "type": "select",
+      "placeholder": "Input Grade",
+      "options": []
+    },
+    {
+      "key": "branch",
+      "label": "Branch",
+      "type": "select",
+      "placeholder": "Input Branch",
+      "options": []
+    },
+    {
+      "key": "leavePolicy",
+      "label": "Leave Policy",
+      "type": "select",
+      "placeholder": "Input Leave Policy",
+      "options": []
+    },
+    {
+      "key": "holidayList",
+      "label": "Holiday List",
+      "type": "select",
+      "placeholder": "Input Holiday List",
+      "options": []
+    },
+    {
+      "key": "salaryMode",
+      "label": "Salary Mode",
+      "type": "select",
+      "placeholder": "Input Salary Mode",
+      "options": [
+        {
+          "label": "Bank",
+          "value": "Bank"
+        },
+        {
+          "label": "Cash",
+          "value": "Cash"
+        },
+        {
+          "label": "Cheque",
+          "value": "Cheque"
+        }
+      ]
+    },
+    {
+      "key": "bankName",
+      "label": "Bank Name",
+      "type": "input",
+      "placeholder": "Input Bank Name",
+      "options": []
+    },
+    {
+      "key": "bankACNo",
+      "label": "Bank A C No",
+      "type": "input",
+      "placeholder": "Input Bank A C No",
+      "options": []
+    },
+    {
+      "key": "healthInsurance",
+      "label": "Health Insurance",
+      "type": "input",
+      "placeholder": "Input Health Insurance",
+      "options": []
+    },
+    {
+      "key": "healthInsuranceProvider",
+      "label": "Health Insurance Provider",
+      "type": "select",
+      "placeholder": "Input Health Insurance Provider",
+      "options": []
+    },
+    {
+      "key": "healthInsuranceNo",
+      "label": "Health Insurance No",
+      "type": "input",
+      "placeholder": "Input Health Insurance No",
+      "options": []
+    },
+    {
+      "key": "mobile",
+      "label": "Mobile",
+      "type": "input",
+      "placeholder": "Input Mobile",
+      "options": []
+    },
+    {
+      "key": "preferedContactEmail",
+      "label": "Prefered Contact Email",
+      "type": "select",
+      "placeholder": "Input Prefered Contact Email",
+      "options": [
+        {
+          "label": "Company Email",
+          "value": "Company Email"
+        },
+        {
+          "label": "Personal Email",
+          "value": "Personal Email"
+        },
+        {
+          "label": "User ID",
+          "value": "User ID"
+        }
+      ]
+    },
+    {
+      "key": "preferedEmail",
+      "label": "Prefered Email",
+      "type": "select",
+      "placeholder": "Input Prefered Email",
+      "options": []
+    },
+    {
+      "key": "companyEmail",
+      "label": "Company Email",
+      "type": "select",
+      "placeholder": "Input Company Email",
+      "options": []
+    },
+    {
+      "key": "personalEmail",
+      "label": "Personal Email",
+      "type": "select",
+      "placeholder": "Input Personal Email",
+      "options": []
+    },
+    {
+      "key": "unsubscribed",
+      "label": "Unsubscribed",
+      "type": "input",
+      "placeholder": "Input Unsubscribed",
+      "options": []
+    },
+    {
+      "key": "permanentAddressIs",
+      "label": "Permanent Address Is",
+      "type": "select",
+      "placeholder": "Input Permanent Address Is",
+      "options": [
+        {
+          "label": "Rented",
+          "value": "Rented"
+        },
+        {
+          "label": "Owned",
+          "value": "Owned"
+        }
+      ]
+    },
+    {
+      "key": "permanentAddress",
+      "label": "Permanent Address",
+      "type": "input",
+      "placeholder": "Input Permanent Address",
+      "options": []
+    },
+    {
+      "key": "currentAddressIs",
+      "label": "Current Address Is",
+      "type": "select",
+      "placeholder": "Input Current Address Is",
+      "options": [
+        {
+          "label": "Rented",
+          "value": "Rented"
+        },
+        {
+          "label": "Owned",
+          "value": "Owned"
+        }
+      ]
+    },
+    {
+      "key": "currentAddress",
+      "label": "Current Address",
+      "type": "input",
+      "placeholder": "Input Current Address",
+      "options": []
+    },
+    {
+      "key": "bioCoverLetter",
+      "label": "Bio Cover Letter",
+      "type": "input",
+      "placeholder": "Input Bio Cover Letter",
+      "options": []
+    },
+    {
+      "key": "passportNumber",
+      "label": "Passport Number",
+      "type": "input",
+      "placeholder": "Input Passport Number",
+      "options": []
+    },
+    {
+      "key": "dateOfIssue",
+      "label": "Date Of Issue",
+      "type": "input",
+      "placeholder": "Input Date Of Issue",
+      "options": []
+    },
+    {
+      "key": "validUpto",
+      "label": "Valid Upto",
+      "type": "input",
+      "placeholder": "Input Valid Upto",
+      "options": []
+    },
+    {
+      "key": "placeOfIssue",
+      "label": "Place Of Issue",
+      "type": "input",
+      "placeholder": "Input Place Of Issue",
+      "options": []
+    },
+    {
+      "key": "maritalStatus",
+      "label": "Marital Status",
+      "type": "select",
+      "placeholder": "Input Marital Status",
+      "options": [
+        {
+          "label": "Single",
+          "value": "Single"
+        },
+        {
+          "label": "Married",
+          "value": "Married"
+        },
+        {
+          "label": "Divorced",
+          "value": "Divorced"
+        },
+        {
+          "label": "Widowed",
+          "value": "Widowed"
+        }
+      ]
+    },
+    {
+      "key": "bloodGroup",
+      "label": "Blood Group",
+      "type": "select",
+      "placeholder": "Input Blood Group",
+      "options": [
+        {
+          "label": "A+",
+          "value": "A+"
+        },
+        {
+          "label": "A-",
+          "value": "A-"
+        },
+        {
+          "label": "B+",
+          "value": "B+"
+        },
+        {
+          "label": "B-",
+          "value": "B-"
+        },
+        {
+          "label": "AB+",
+          "value": "AB+"
+        },
+        {
+          "label": "AB-",
+          "value": "AB-"
+        },
+        {
+          "label": "O+",
+          "value": "O+"
+        },
+        {
+          "label": "O-",
+          "value": "O-"
+        }
+      ]
+    },
+    {
+      "key": "familyBackground",
+      "label": "Family Background",
+      "type": "input",
+      "placeholder": "Input Family Background",
+      "options": []
+    },
+    {
+      "key": "healthDetails",
+      "label": "Health Details",
+      "type": "input",
+      "placeholder": "Input Health Details",
+      "options": []
+    },
+    {
+      "key": "educationalQualification",
+      "label": "Educational Qualification",
+      "type": "input",
+      "placeholder": "Input Educational Qualification",
+      "options": []
+    },
+    {
+      "key": "education",
+      "label": "Education",
+      "type": "select",
+      "placeholder": "Input Education",
+      "options": []
+    },
+    {
+      "key": "previousWorkExperience",
+      "label": "Previous Work Experience",
+      "type": "select",
+      "placeholder": "Input Previous Work Experience",
+      "options": []
+    },
+    {
+      "key": "externalWorkHistory",
+      "label": "External Work History",
+      "type": "select",
+      "placeholder": "Input External Work History",
+      "options": []
+    },
+    {
+      "key": "historyInCompany",
+      "label": "History In Company",
+      "type": "select",
+      "placeholder": "Input History In Company",
+      "options": []
+    },
+    {
+      "key": "internalWorkHistory",
+      "label": "Internal Work History",
+      "type": "select",
+      "placeholder": "Input Internal Work History",
+      "options": []
+    },
+    {
+      "key": "resignationLetterDate",
+      "label": "Resignation Letter Date",
+      "type": "input",
+      "placeholder": "Input Resignation Letter Date",
+      "options": []
+    },
+    {
+      "key": "relievingDate",
+      "label": "Relieving Date",
+      "type": "input",
+      "placeholder": "Input Relieving Date",
+      "options": []
+    },
+    {
+      "key": "reasonForLeaving",
+      "label": "Reason For Leaving",
+      "type": "input",
+      "placeholder": "Input Reason For Leaving",
+      "options": []
+    },
+    {
+      "key": "leaveEncashed",
+      "label": "Leave Encashed",
+      "type": "select",
+      "placeholder": "Input Leave Encashed",
+      "options": [
+        {
+          "label": "Yes",
+          "value": "Yes"
+        },
+        {
+          "label": "No",
+          "value": "No"
+        }
+      ]
+    },
+    {
+      "key": "encashmentDate",
+      "label": "Encashment Date",
+      "type": "input",
+      "placeholder": "Input Encashment Date",
+      "options": []
+    },
+    {
+      "key": "exitInterviewDetails",
+      "label": "Exit Interview Details",
+      "type": "input",
+      "placeholder": "Input Exit Interview Details",
+      "options": []
+    },
+    {
+      "key": "heldOn",
+      "label": "Held On",
+      "type": "input",
+      "placeholder": "Input Held On",
+      "options": []
+    },
+    {
+      "key": "reasonForResignation",
+      "label": "Reason For Resignation",
+      "type": "select",
+      "placeholder": "Input Reason For Resignation",
+      "options": [
+        {
+          "label": "Better Prospects",
+          "value": "Better Prospects"
+        },
+        {
+          "label": "Health Concerns",
+          "value": "Health Concerns"
+        }
+      ]
+    },
+    {
+      "key": "newWorkplace",
+      "label": "New Workplace",
+      "type": "input",
+      "placeholder": "Input New Workplace",
+      "options": []
+    },
+    {
+      "key": "feedback",
+      "label": "Feedback",
+      "type": "input",
+      "placeholder": "Input Feedback",
+      "options": []
+    },
+    {
+      "key": "lft",
+      "label": "Lft",
+      "type": "input",
+      "placeholder": "Input Lft",
+      "options": []
+    },
+    {
+      "key": "rgt",
+      "label": "Rgt",
+      "type": "input",
+      "placeholder": "Input Rgt",
+      "options": []
+    },
+    {
+      "key": "oldParent",
+      "label": "Old Parent",
+      "type": "input",
+      "placeholder": "Input Old Parent",
+      "options": []
+    }
+  ]
+}

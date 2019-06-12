@@ -1,0 +1,123 @@
+{
+  "fields": [
+    {
+      "key": "company",
+      "label": "Company",
+      "type": "select",
+      "placeholder": "Input Company",
+      "options": []
+    },
+    {
+      "key": "partyType",
+      "label": "Party Type",
+      "type": "select",
+      "placeholder": "Input Party Type",
+      "options": []
+    },
+    {
+      "key": "party",
+      "label": "Party",
+      "type": "select",
+      "placeholder": "Input Party",
+      "options": []
+    },
+    {
+      "key": "receivablePayableAccount",
+      "label": "Receivable Payable Account",
+      "type": "select",
+      "placeholder": "Input Receivable Payable Account",
+      "options": []
+    },
+    {
+      "key": "bankCashAccount",
+      "label": "Bank Cash Account",
+      "type": "select",
+      "placeholder": "Input Bank Cash Account",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "fromInvoiceDate",
+      "label": "From Invoice Date",
+      "type": "input",
+      "placeholder": "Input From Invoice Date",
+      "options": []
+    },
+    {
+      "key": "toInvoiceDate",
+      "label": "To Invoice Date",
+      "type": "input",
+      "placeholder": "Input To Invoice Date",
+      "options": []
+    },
+    {
+      "key": "minimumInvoiceAmount",
+      "label": "Minimum Invoice Amount",
+      "type": "input",
+      "placeholder": "Input Minimum Invoice Amount",
+      "options": []
+    },
+    {
+      "key": "maximumInvoiceAmount",
+      "label": "Maximum Invoice Amount",
+      "type": "input",
+      "placeholder": "Input Maximum Invoice Amount",
+      "options": []
+    },
+    {
+      "key": "limit",
+      "label": "Limit",
+      "type": "input",
+      "placeholder": "Input Limit",
+      "options": []
+    },
+    {
+      "key": "getUnreconciledEntries",
+      "label": "Get Unreconciled Entries",
+      "type": "input",
+      "placeholder": "Input Get Unreconciled Entries",
+      "options": []
+    },
+    {
+      "key": "unreconciledPaymentDetails",
+      "label": "Unreconciled Payment Details",
+      "type": "input",
+      "placeholder": "Input Unreconciled Payment Details",
+      "options": []
+    },
+    {
+      "key": "payments",
+      "label": "Payments",
+      "type": "select",
+      "placeholder": "Input Payments",
+      "options": []
+    },
+    {
+      "key": "reconcile",
+      "label": "Reconcile",
+      "type": "input",
+      "placeholder": "Input Reconcile",
+      "options": []
+    },
+    {
+      "key": "invoiceJournalEntryDetails",
+      "label": "Invoice Journal Entry Details",
+      "type": "input",
+      "placeholder": "Input Invoice Journal Entry Details",
+      "options": []
+    },
+    {
+      "key": "invoices",
+      "label": "Invoices",
+      "type": "select",
+      "placeholder": "Input Invoices",
+      "options": []
+    }
+  ]
+}

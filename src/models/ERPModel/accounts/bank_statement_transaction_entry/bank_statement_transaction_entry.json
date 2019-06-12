@@ -1,0 +1,158 @@
+{
+  "fields": [
+    {
+      "key": "bankAccount",
+      "label": "Bank Account",
+      "type": "select",
+      "placeholder": "Input Bank Account",
+      "options": []
+    },
+    {
+      "key": "fromDate",
+      "label": "From Date",
+      "type": "input",
+      "placeholder": "Input From Date",
+      "options": []
+    },
+    {
+      "key": "toDate",
+      "label": "To Date",
+      "type": "input",
+      "placeholder": "Input To Date",
+      "options": []
+    },
+    {
+      "key": "bankStatementSettings",
+      "label": "Bank Statement Settings",
+      "type": "select",
+      "placeholder": "Input Bank Statement Settings",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "bank",
+      "label": "Bank",
+      "type": "select",
+      "placeholder": "Input Bank",
+      "options": []
+    },
+    {
+      "key": "receivableAccount",
+      "label": "Receivable Account",
+      "type": "select",
+      "placeholder": "Input Receivable Account",
+      "options": []
+    },
+    {
+      "key": "payableAccount",
+      "label": "Payable Account",
+      "type": "select",
+      "placeholder": "Input Payable Account",
+      "options": []
+    },
+    {
+      "key": "bankStatement",
+      "label": "Bank Statement",
+      "type": "input",
+      "placeholder": "Input Bank Statement",
+      "options": []
+    },
+    {
+      "key": "bankTransactionEntries",
+      "label": "Bank Transaction Entries",
+      "type": "input",
+      "placeholder": "Input Bank Transaction Entries",
+      "options": []
+    },
+    {
+      "key": "newTransactions",
+      "label": "New Transactions",
+      "type": "select",
+      "placeholder": "Input New Transactions",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "matchTransactionToInvoices",
+      "label": "Match Transaction To Invoices",
+      "type": "input",
+      "placeholder": "Input Match Transaction To Invoices",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "createNewPaymentJournalEntry",
+      "label": "Create New Payment Journal Entry",
+      "type": "input",
+      "placeholder": "Input Create New Payment Journal Entry",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "submitReconcilePayments",
+      "label": "Submit Reconcile Payments",
+      "type": "input",
+      "placeholder": "Input Submit Reconcile Payments",
+      "options": []
+    },
+    {
+      "key": "matchingInvoices",
+      "label": "Matching Invoices",
+      "type": "input",
+      "placeholder": "Input Matching Invoices",
+      "options": []
+    },
+    {
+      "key": "paymentInvoiceItems",
+      "label": "Payment Invoice Items",
+      "type": "select",
+      "placeholder": "Input Payment Invoice Items",
+      "options": []
+    },
+    {
+      "key": "reconciledTransactions",
+      "label": "Reconciled Transactions",
+      "type": "input",
+      "placeholder": "Input Reconciled Transactions",
+      "options": []
+    },
+    {
+      "key": "reconciledTransactions",
+      "label": "Reconciled Transactions",
+      "type": "select",
+      "placeholder": "Input Reconciled Transactions",
+      "options": []
+    },
+    {
+      "key": "amendedFrom",
+      "label": "Amended From",
+      "type": "select",
+      "placeholder": "Input Amended From",
+      "options": []
+    }
+  ]
+}

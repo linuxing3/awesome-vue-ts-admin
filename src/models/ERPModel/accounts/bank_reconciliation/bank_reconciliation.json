@@ -1,0 +1,74 @@
+{
+  "fields": [
+    {
+      "key": "bankAccount",
+      "label": "Bank Account",
+      "type": "select",
+      "placeholder": "Input Bank Account",
+      "options": []
+    },
+    {
+      "key": "accountCurrency",
+      "label": "Account Currency",
+      "type": "select",
+      "placeholder": "Input Account Currency",
+      "options": []
+    },
+    {
+      "key": "fromDate",
+      "label": "From Date",
+      "type": "input",
+      "placeholder": "Input From Date",
+      "options": []
+    },
+    {
+      "key": "toDate",
+      "label": "To Date",
+      "type": "input",
+      "placeholder": "Input To Date",
+      "options": []
+    },
+    {
+      "key": "includeReconciledEntries",
+      "label": "Include Reconciled Entries",
+      "type": "input",
+      "placeholder": "Input Include Reconciled Entries",
+      "options": []
+    },
+    {
+      "key": "includePosTransactions",
+      "label": "Include Pos Transactions",
+      "type": "input",
+      "placeholder": "Input Include Pos Transactions",
+      "options": []
+    },
+    {
+      "key": "getPaymentEntries",
+      "label": "Get Payment Entries",
+      "type": "input",
+      "placeholder": "Input Get Payment Entries",
+      "options": []
+    },
+    {
+      "key": "paymentEntries",
+      "label": "Payment Entries",
+      "type": "select",
+      "placeholder": "Input Payment Entries",
+      "options": []
+    },
+    {
+      "key": "updateClearanceDate",
+      "label": "Update Clearance Date",
+      "type": "input",
+      "placeholder": "Input Update Clearance Date",
+      "options": []
+    },
+    {
+      "key": "totalAmount",
+      "label": "Total Amount",
+      "type": "select",
+      "placeholder": "Input Total Amount",
+      "options": []
+    }
+  ]
+}

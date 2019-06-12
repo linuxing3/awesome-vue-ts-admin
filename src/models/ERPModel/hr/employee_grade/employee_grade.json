@@ -1,0 +1,18 @@
+{
+  "fields": [
+    {
+      "key": "defaultLeavePolicy",
+      "label": "Default Leave Policy",
+      "type": "select",
+      "placeholder": "Input Default Leave Policy",
+      "options": []
+    },
+    {
+      "key": "defaultSalaryStructure",
+      "label": "Default Salary Structure",
+      "type": "select",
+      "placeholder": "Input Default Salary Structure",
+      "options": []
+    }
+  ]
+}

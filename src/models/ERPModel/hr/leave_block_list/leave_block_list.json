@@ -1,0 +1,53 @@
+{
+  "fields": [
+    {
+      "key": "leaveBlockListName",
+      "label": "Leave Block List Name",
+      "type": "input",
+      "placeholder": "Input Leave Block List Name",
+      "options": []
+    },
+    {
+      "key": "company",
+      "label": "Company",
+      "type": "select",
+      "placeholder": "Input Company",
+      "options": []
+    },
+    {
+      "key": "appliesToCompany",
+      "label": "Applies To Company",
+      "type": "input",
+      "placeholder": "Input Applies To Company",
+      "options": []
+    },
+    {
+      "key": "blockDays",
+      "label": "Block Days",
+      "type": "input",
+      "placeholder": "Input Block Days",
+      "options": []
+    },
+    {
+      "key": "leaveBlockListDates",
+      "label": "Leave Block List Dates",
+      "type": "select",
+      "placeholder": "Input Leave Block List Dates",
+      "options": []
+    },
+    {
+      "key": "allowUsers",
+      "label": "Allow Users",
+      "type": "input",
+      "placeholder": "Input Allow Users",
+      "options": []
+    },
+    {
+      "key": "leaveBlockListAllowed",
+      "label": "Leave Block List Allowed",
+      "type": "select",
+      "placeholder": "Input Leave Block List Allowed",
+      "options": []
+    }
+  ]
+}

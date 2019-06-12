@@ -1,0 +1,18 @@
+{
+  "fields": [
+    {
+      "key": "date",
+      "label": "Date",
+      "type": "input",
+      "placeholder": "Input Date",
+      "options": []
+    },
+    {
+      "key": "description",
+      "label": "Description",
+      "type": "input",
+      "placeholder": "Input Description",
+      "options": []
+    }
+  ]
+}

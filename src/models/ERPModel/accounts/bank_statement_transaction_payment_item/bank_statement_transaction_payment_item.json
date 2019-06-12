@@ -1,0 +1,123 @@
+{
+  "fields": [
+    {
+      "key": "transactionDate",
+      "label": "Transaction Date",
+      "type": "input",
+      "placeholder": "Input Transaction Date",
+      "options": []
+    },
+    {
+      "key": "description",
+      "label": "Description",
+      "type": "input",
+      "placeholder": "Input Description",
+      "options": []
+    },
+    {
+      "key": "amount",
+      "label": "Amount",
+      "type": "input",
+      "placeholder": "Input Amount",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "partyType",
+      "label": "Party Type",
+      "type": "select",
+      "placeholder": "Input Party Type",
+      "options": [
+        {
+          "label": "Supplier",
+          "value": "Supplier"
+        },
+        {
+          "label": "Account",
+          "value": "Account"
+        }
+      ]
+    },
+    {
+      "key": "party",
+      "label": "Party",
+      "type": "select",
+      "placeholder": "Input Party",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "referenceType",
+      "label": "Reference Type",
+      "type": "select",
+      "placeholder": "Input Reference Type",
+      "options": [
+        {
+          "label": "Journal Entry",
+          "value": "Journal Entry"
+        }
+      ]
+    },
+    {
+      "key": "account",
+      "label": "Account",
+      "type": "select",
+      "placeholder": "Input Account",
+      "options": []
+    },
+    {
+      "key": "modeOfPayment",
+      "label": "Mode Of Payment",
+      "type": "select",
+      "placeholder": "Input Mode Of Payment",
+      "options": []
+    },
+    {
+      "key": "outstandingAmount",
+      "label": "Outstanding Amount",
+      "type": "input",
+      "placeholder": "Input Outstanding Amount",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "referenceName",
+      "label": "Reference Name",
+      "type": "select",
+      "placeholder": "Input Reference Name",
+      "options": []
+    },
+    {
+      "key": "paymentReference",
+      "label": "Payment Reference",
+      "type": "input",
+      "placeholder": "Input Payment Reference",
+      "options": []
+    },
+    {
+      "key": "invoices",
+      "label": "Invoices",
+      "type": "input",
+      "placeholder": "Input Invoices",
+      "options": []
+    }
+  ]
+}

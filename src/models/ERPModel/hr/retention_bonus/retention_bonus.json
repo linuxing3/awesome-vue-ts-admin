@@ -1,0 +1,67 @@
+{
+  "fields": [
+    {
+      "key": "company",
+      "label": "Company",
+      "type": "select",
+      "placeholder": "Input Company",
+      "options": []
+    },
+    {
+      "key": "employee",
+      "label": "Employee",
+      "type": "select",
+      "placeholder": "Input Employee",
+      "options": []
+    },
+    {
+      "key": "bonusPaymentDate",
+      "label": "Bonus Payment Date",
+      "type": "input",
+      "placeholder": "Input Bonus Payment Date",
+      "options": []
+    },
+    {
+      "key": "bonusAmount",
+      "label": "Bonus Amount",
+      "type": "input",
+      "placeholder": "Input Bonus Amount",
+      "options": []
+    },
+    {
+      "key": "amendedFrom",
+      "label": "Amended From",
+      "type": "select",
+      "placeholder": "Input Amended From",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "employeeName",
+      "label": "Employee Name",
+      "type": "input",
+      "placeholder": "Input Employee Name",
+      "options": []
+    },
+    {
+      "key": "department",
+      "label": "Department",
+      "type": "select",
+      "placeholder": "Input Department",
+      "options": []
+    },
+    {
+      "key": "dateOfJoining",
+      "label": "Date Of Joining",
+      "type": "input",
+      "placeholder": "Input Date Of Joining",
+      "options": []
+    }
+  ]
+}

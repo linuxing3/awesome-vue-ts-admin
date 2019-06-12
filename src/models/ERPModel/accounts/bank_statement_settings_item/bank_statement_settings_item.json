@@ -1,0 +1,18 @@
+{
+  "fields": [
+    {
+      "key": "mappedHeader",
+      "label": "Mapped Header",
+      "type": "input",
+      "placeholder": "Input Mapped Header",
+      "options": []
+    },
+    {
+      "key": "bankHeader",
+      "label": "Bank Header",
+      "type": "input",
+      "placeholder": "Input Bank Header",
+      "options": []
+    }
+  ]
+}

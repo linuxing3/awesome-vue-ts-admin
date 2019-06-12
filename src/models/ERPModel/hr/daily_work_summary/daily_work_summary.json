@@ -1,0 +1,30 @@
+{
+  "fields": [
+    {
+      "key": "dailyWorkSummaryGroup",
+      "label": "Daily Work Summary Group",
+      "type": "select",
+      "placeholder": "Input Daily Work Summary Group",
+      "options": []
+    },
+    {
+      "key": "status",
+      "label": "Status",
+      "type": "select",
+      "placeholder": "Input Status",
+      "options": [
+        {
+          "label": "Sent",
+          "value": "Sent"
+        }
+      ]
+    },
+    {
+      "key": "emailSentTo",
+      "label": "Email Sent To",
+      "type": "input",
+      "placeholder": "Input Email Sent To",
+      "options": []
+    }
+  ]
+}

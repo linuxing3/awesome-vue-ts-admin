@@ -1,0 +1,51 @@
+{
+  "fields": [
+    {
+      "key": "company",
+      "label": "Company",
+      "type": "select",
+      "placeholder": "Input Company",
+      "options": []
+    },
+    {
+      "key": "createMissingParty",
+      "label": "Create Missing Party",
+      "type": "input",
+      "placeholder": "Input Create Missing Party",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "invoiceType",
+      "label": "Invoice Type",
+      "type": "select",
+      "placeholder": "Input Invoice Type",
+      "options": [
+        {
+          "label": "Purchase",
+          "value": "Purchase"
+        }
+      ]
+    },
+    {
+      "key": "invoices",
+      "label": "Invoices",
+      "type": "input",
+      "placeholder": "Input Invoices",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "select",
+      "placeholder": "Input ",
+      "options": []
+    }
+  ]
+}

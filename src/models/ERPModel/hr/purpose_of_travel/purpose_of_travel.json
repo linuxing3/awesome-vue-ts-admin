@@ -1,0 +1,11 @@
+{
+  "fields": [
+    {
+      "key": "purposeOfTravel",
+      "label": "Purpose Of Travel",
+      "type": "input",
+      "placeholder": "Input Purpose Of Travel",
+      "options": []
+    }
+  ]
+}

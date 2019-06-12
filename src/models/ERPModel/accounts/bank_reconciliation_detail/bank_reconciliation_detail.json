@@ -1,0 +1,67 @@
+{
+  "fields": [
+    {
+      "key": "paymentDocument",
+      "label": "Payment Document",
+      "type": "select",
+      "placeholder": "Input Payment Document",
+      "options": []
+    },
+    {
+      "key": "paymentEntry",
+      "label": "Payment Entry",
+      "type": "select",
+      "placeholder": "Input Payment Entry",
+      "options": []
+    },
+    {
+      "key": "againstAccount",
+      "label": "Against Account",
+      "type": "input",
+      "placeholder": "Input Against Account",
+      "options": []
+    },
+    {
+      "key": "amount",
+      "label": "Amount",
+      "type": "input",
+      "placeholder": "Input Amount",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "postingDate",
+      "label": "Posting Date",
+      "type": "input",
+      "placeholder": "Input Posting Date",
+      "options": []
+    },
+    {
+      "key": "chequeNumber",
+      "label": "Cheque Number",
+      "type": "input",
+      "placeholder": "Input Cheque Number",
+      "options": []
+    },
+    {
+      "key": "chequeDate",
+      "label": "Cheque Date",
+      "type": "input",
+      "placeholder": "Input Cheque Date",
+      "options": []
+    },
+    {
+      "key": "clearanceDate",
+      "label": "Clearance Date",
+      "type": "input",
+      "placeholder": "Input Clearance Date",
+      "options": []
+    }
+  ]
+}

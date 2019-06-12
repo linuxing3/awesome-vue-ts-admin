@@ -1,0 +1,18 @@
+{
+  "fields": [
+    {
+      "key": "documentType",
+      "label": "Document Type",
+      "type": "select",
+      "placeholder": "Input Document Type",
+      "options": []
+    },
+    {
+      "key": "closed",
+      "label": "Closed",
+      "type": "input",
+      "placeholder": "Input Closed",
+      "options": []
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "fields": [
+    {
+      "key": "approver",
+      "label": "Approver",
+      "type": "select",
+      "placeholder": "Input Approver",
+      "options": []
+    }
+  ]
+}

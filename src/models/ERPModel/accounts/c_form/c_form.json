@@ -1,0 +1,112 @@
+{
+  "fields": [
+    {
+      "key": "series",
+      "label": "Series",
+      "type": "select",
+      "placeholder": "Input Series",
+      "options": []
+    },
+    {
+      "key": "cFormNo",
+      "label": "C Form No",
+      "type": "input",
+      "placeholder": "Input C Form No",
+      "options": []
+    },
+    {
+      "key": "receivedDate",
+      "label": "Received Date",
+      "type": "input",
+      "placeholder": "Input Received Date",
+      "options": []
+    },
+    {
+      "key": "customer",
+      "label": "Customer",
+      "type": "select",
+      "placeholder": "Input Customer",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "company",
+      "label": "Company",
+      "type": "select",
+      "placeholder": "Input Company",
+      "options": []
+    },
+    {
+      "key": "quarter",
+      "label": "Quarter",
+      "type": "select",
+      "placeholder": "Input Quarter",
+      "options": [
+        {
+          "label": "I",
+          "value": "I"
+        },
+        {
+          "label": "II",
+          "value": "II"
+        },
+        {
+          "label": "III",
+          "value": "III"
+        },
+        {
+          "label": "IV",
+          "value": "IV"
+        }
+      ]
+    },
+    {
+      "key": "totalAmount",
+      "label": "Total Amount",
+      "type": "select",
+      "placeholder": "Input Total Amount",
+      "options": []
+    },
+    {
+      "key": "state",
+      "label": "State",
+      "type": "input",
+      "placeholder": "Input State",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "invoices",
+      "label": "Invoices",
+      "type": "select",
+      "placeholder": "Input Invoices",
+      "options": []
+    },
+    {
+      "key": "totalInvoicedAmount",
+      "label": "Total Invoiced Amount",
+      "type": "select",
+      "placeholder": "Input Total Invoiced Amount",
+      "options": []
+    },
+    {
+      "key": "amendedFrom",
+      "label": "Amended From",
+      "type": "select",
+      "placeholder": "Input Amended From",
+      "options": []
+    }
+  ]
+}

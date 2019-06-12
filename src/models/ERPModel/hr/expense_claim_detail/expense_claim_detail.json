@@ -1,0 +1,74 @@
+{
+  "fields": [
+    {
+      "key": "expenseDate",
+      "label": "Expense Date",
+      "type": "input",
+      "placeholder": "Input Expense Date",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "expenseClaimType",
+      "label": "Expense Claim Type",
+      "type": "select",
+      "placeholder": "Input Expense Claim Type",
+      "options": []
+    },
+    {
+      "key": "defaultAccount",
+      "label": "Default Account",
+      "type": "select",
+      "placeholder": "Input Default Account",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "description",
+      "label": "Description",
+      "type": "input",
+      "placeholder": "Input Description",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "claimAmount",
+      "label": "Claim Amount",
+      "type": "select",
+      "placeholder": "Input Claim Amount",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "sanctionedAmount",
+      "label": "Sanctioned Amount",
+      "type": "select",
+      "placeholder": "Input Sanctioned Amount",
+      "options": []
+    }
+  ]
+}

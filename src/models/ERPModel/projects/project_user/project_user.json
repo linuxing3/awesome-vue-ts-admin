@@ -1,0 +1,67 @@
+{
+  "fields": [
+    {
+      "key": "user",
+      "label": "User",
+      "type": "select",
+      "placeholder": "Input User",
+      "options": []
+    },
+    {
+      "key": "email",
+      "label": "Email",
+      "type": "input",
+      "placeholder": "Input Email",
+      "options": []
+    },
+    {
+      "key": "image",
+      "label": "Image",
+      "type": "input",
+      "placeholder": "Input Image",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "fullName",
+      "label": "Full Name",
+      "type": "input",
+      "placeholder": "Input Full Name",
+      "options": []
+    },
+    {
+      "key": "welcomeEmailSent",
+      "label": "Welcome Email Sent",
+      "type": "input",
+      "placeholder": "Input Welcome Email Sent",
+      "options": []
+    },
+    {
+      "key": "viewAttachments",
+      "label": "View Attachments",
+      "type": "input",
+      "placeholder": "Input View Attachments",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "projectStatus",
+      "label": "Project Status",
+      "type": "input",
+      "placeholder": "Input Project Status",
+      "options": []
+    }
+  ]
+}

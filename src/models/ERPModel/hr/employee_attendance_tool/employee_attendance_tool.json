@@ -1,0 +1,67 @@
+{
+  "fields": [
+    {
+      "key": "date",
+      "label": "Date",
+      "type": "input",
+      "placeholder": "Input Date",
+      "options": []
+    },
+    {
+      "key": "department",
+      "label": "Department",
+      "type": "select",
+      "placeholder": "Input Department",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "branch",
+      "label": "Branch",
+      "type": "select",
+      "placeholder": "Input Branch",
+      "options": []
+    },
+    {
+      "key": "company",
+      "label": "Company",
+      "type": "select",
+      "placeholder": "Input Company",
+      "options": []
+    },
+    {
+      "key": "unmarkedAttendance",
+      "label": "Unmarked Attendance",
+      "type": "input",
+      "placeholder": "Input Unmarked Attendance",
+      "options": []
+    },
+    {
+      "key": "employeesHtml",
+      "label": "Employees Html",
+      "type": "input",
+      "placeholder": "Input Employees Html",
+      "options": []
+    },
+    {
+      "key": "markedAttendance",
+      "label": "Marked Attendance",
+      "type": "input",
+      "placeholder": "Input Marked Attendance",
+      "options": []
+    },
+    {
+      "key": "markedAttendanceHtml",
+      "label": "Marked Attendance Html",
+      "type": "input",
+      "placeholder": "Input Marked Attendance Html",
+      "options": []
+    }
+  ]
+}

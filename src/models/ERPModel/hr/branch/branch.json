@@ -1,0 +1,11 @@
+{
+  "fields": [
+    {
+      "key": "branch",
+      "label": "Branch",
+      "type": "input",
+      "placeholder": "Input Branch",
+      "options": []
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "fields": [
+    {
+      "key": "partyType",
+      "label": "Party Type",
+      "type": "select",
+      "placeholder": "Input Party Type",
+      "options": []
+    },
+    {
+      "key": "party",
+      "label": "Party",
+      "type": "select",
+      "placeholder": "Input Party",
+      "options": []
+    },
+    {
+      "key": "temporaryOpeningAccount",
+      "label": "Temporary Opening Account",
+      "type": "select",
+      "placeholder": "Input Temporary Opening Account",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "postingDate",
+      "label": "Posting Date",
+      "type": "input",
+      "placeholder": "Input Posting Date",
+      "options": []
+    },
+    {
+      "key": "dueDate",
+      "label": "Due Date",
+      "type": "input",
+      "placeholder": "Input Due Date",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "itemName",
+      "label": "Item Name",
+      "type": "input",
+      "placeholder": "Input Item Name",
+      "options": []
+    },
+    {
+      "key": "outstandingAmount",
+      "label": "Outstanding Amount",
+      "type": "input",
+      "placeholder": "Input Outstanding Amount",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "quantity",
+      "label": "Quantity",
+      "type": "input",
+      "placeholder": "Input Quantity",
+      "options": []
+    }
+  ]
+}

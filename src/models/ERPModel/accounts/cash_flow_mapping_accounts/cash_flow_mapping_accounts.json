@@ -1,0 +1,11 @@
+{
+  "fields": [
+    {
+      "key": "account",
+      "label": "Account",
+      "type": "select",
+      "placeholder": "Input Account",
+      "options": []
+    }
+  ]
+}

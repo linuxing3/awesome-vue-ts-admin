@@ -1,0 +1,39 @@
+{
+  "fields": [
+    {
+      "key": "subject",
+      "label": "Subject",
+      "type": "input",
+      "placeholder": "Input Subject",
+      "options": []
+    },
+    {
+      "key": "beginOnDays",
+      "label": "Begin On Days",
+      "type": "input",
+      "placeholder": "Input Begin On Days",
+      "options": []
+    },
+    {
+      "key": "durationDays",
+      "label": "Duration Days",
+      "type": "input",
+      "placeholder": "Input Duration Days",
+      "options": []
+    },
+    {
+      "key": "taskWeight",
+      "label": "Task Weight",
+      "type": "input",
+      "placeholder": "Input Task Weight",
+      "options": []
+    },
+    {
+      "key": "description",
+      "label": "Description",
+      "type": "input",
+      "placeholder": "Input Description",
+      "options": []
+    }
+  ]
+}

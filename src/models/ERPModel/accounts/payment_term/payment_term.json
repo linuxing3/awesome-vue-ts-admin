@@ -1,0 +1,76 @@
+{
+  "fields": [
+    {
+      "key": "paymentTermName",
+      "label": "Payment Term Name",
+      "type": "input",
+      "placeholder": "Input Payment Term Name",
+      "options": []
+    },
+    {
+      "key": "invoicePortion",
+      "label": "Invoice Portion",
+      "type": "input",
+      "placeholder": "Input Invoice Portion",
+      "options": []
+    },
+    {
+      "key": "modeOfPayment",
+      "label": "Mode Of Payment",
+      "type": "select",
+      "placeholder": "Input Mode Of Payment",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "dueDateBasedOn",
+      "label": "Due Date Based On",
+      "type": "select",
+      "placeholder": "Input Due Date Based On",
+      "options": [
+        {
+          "label": "Day(s) after the end of the invoice month",
+          "value": "Day(s) after the end of the invoice month"
+        },
+        {
+          "label": "Month(s) after the end of the invoice month",
+          "value": "Month(s) after the end of the invoice month"
+        }
+      ]
+    },
+    {
+      "key": "creditDays",
+      "label": "Credit Days",
+      "type": "input",
+      "placeholder": "Input Credit Days",
+      "options": []
+    },
+    {
+      "key": "creditMonths",
+      "label": "Credit Months",
+      "type": "input",
+      "placeholder": "Input Credit Months",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "description",
+      "label": "Description",
+      "type": "input",
+      "placeholder": "Input Description",
+      "options": []
+    }
+  ]
+}

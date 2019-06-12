@@ -1,0 +1,123 @@
+{
+  "fields": [
+    {
+      "key": "locationName",
+      "label": "Location Name",
+      "type": "input",
+      "placeholder": "Input Location Name",
+      "options": []
+    },
+    {
+      "key": "parentLocation",
+      "label": "Parent Location",
+      "type": "select",
+      "placeholder": "Input Parent Location",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "isContainer",
+      "label": "Is Container",
+      "type": "input",
+      "placeholder": "Input Is Container",
+      "options": []
+    },
+    {
+      "key": "isGroup",
+      "label": "Is Group",
+      "type": "input",
+      "placeholder": "Input Is Group",
+      "options": []
+    },
+    {
+      "key": "locationDetails",
+      "label": "Location Details",
+      "type": "input",
+      "placeholder": "Input Location Details",
+      "options": []
+    },
+    {
+      "key": "latitude",
+      "label": "Latitude",
+      "type": "input",
+      "placeholder": "Input Latitude",
+      "options": []
+    },
+    {
+      "key": "longitude",
+      "label": "Longitude",
+      "type": "input",
+      "placeholder": "Input Longitude",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "area",
+      "label": "Area",
+      "type": "input",
+      "placeholder": "Input Area",
+      "options": []
+    },
+    {
+      "key": "areaUom",
+      "label": "Area Uom",
+      "type": "select",
+      "placeholder": "Input Area Uom",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "location",
+      "label": "Location",
+      "type": "input",
+      "placeholder": "Input Location",
+      "options": []
+    },
+    {
+      "key": "treeDetails",
+      "label": "Tree Details",
+      "type": "input",
+      "placeholder": "Input Tree Details",
+      "options": []
+    },
+    {
+      "key": "lft",
+      "label": "Lft",
+      "type": "input",
+      "placeholder": "Input Lft",
+      "options": []
+    },
+    {
+      "key": "rgt",
+      "label": "Rgt",
+      "type": "input",
+      "placeholder": "Input Rgt",
+      "options": []
+    },
+    {
+      "key": "oldParent",
+      "label": "Old Parent",
+      "type": "input",
+      "placeholder": "Input Old Parent",
+      "options": []
+    }
+  ]
+}

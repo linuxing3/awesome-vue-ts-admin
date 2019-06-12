@@ -1,0 +1,93 @@
+{
+  "fields": [
+    {
+      "key": "jobTitle",
+      "label": "Job Title",
+      "type": "input",
+      "placeholder": "Input Job Title",
+      "options": []
+    },
+    {
+      "key": "company",
+      "label": "Company",
+      "type": "select",
+      "placeholder": "Input Company",
+      "options": []
+    },
+    {
+      "key": "status",
+      "label": "Status",
+      "type": "select",
+      "placeholder": "Input Status",
+      "options": [
+        {
+          "label": "Closed",
+          "value": "Closed"
+        }
+      ]
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "designation",
+      "label": "Designation",
+      "type": "select",
+      "placeholder": "Input Designation",
+      "options": []
+    },
+    {
+      "key": "department",
+      "label": "Department",
+      "type": "select",
+      "placeholder": "Input Department",
+      "options": []
+    },
+    {
+      "key": "staffingPlan",
+      "label": "Staffing Plan",
+      "type": "select",
+      "placeholder": "Input Staffing Plan",
+      "options": []
+    },
+    {
+      "key": "plannedNumberOfPositions",
+      "label": "Planned Number Of Positions",
+      "type": "input",
+      "placeholder": "Input Planned Number Of Positions",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "publishOnWebsite",
+      "label": "Publish On Website",
+      "type": "input",
+      "placeholder": "Input Publish On Website",
+      "options": []
+    },
+    {
+      "key": "route",
+      "label": "Route",
+      "type": "input",
+      "placeholder": "Input Route",
+      "options": []
+    },
+    {
+      "key": "description",
+      "label": "Description",
+      "type": "input",
+      "placeholder": "Input Description",
+      "options": []
+    }
+  ]
+}

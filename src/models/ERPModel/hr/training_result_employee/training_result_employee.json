@@ -1,0 +1,67 @@
+{
+  "fields": [
+    {
+      "key": "employee",
+      "label": "Employee",
+      "type": "select",
+      "placeholder": "Input Employee",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "employeeName",
+      "label": "Employee Name",
+      "type": "input",
+      "placeholder": "Input Employee Name",
+      "options": []
+    },
+    {
+      "key": "department",
+      "label": "Department",
+      "type": "select",
+      "placeholder": "Input Department",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "hours",
+      "label": "Hours",
+      "type": "input",
+      "placeholder": "Input Hours",
+      "options": []
+    },
+    {
+      "key": "grade",
+      "label": "Grade",
+      "type": "input",
+      "placeholder": "Input Grade",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "comments",
+      "label": "Comments",
+      "type": "input",
+      "placeholder": "Input Comments",
+      "options": []
+    }
+  ]
+}

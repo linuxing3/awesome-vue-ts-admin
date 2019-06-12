@@ -1,0 +1,105 @@
+{
+  "fields": [
+    {
+      "key": "paymentGateway",
+      "label": "Payment Gateway",
+      "type": "select",
+      "placeholder": "Input Payment Gateway",
+      "options": []
+    },
+    {
+      "key": "isDefault",
+      "label": "Is Default",
+      "type": "input",
+      "placeholder": "Input Is Default",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "paymentAccount",
+      "label": "Payment Account",
+      "type": "select",
+      "placeholder": "Input Payment Account",
+      "options": []
+    },
+    {
+      "key": "currency",
+      "label": "Currency",
+      "type": "input",
+      "placeholder": "Input Currency",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "defaultPaymentRequestMessage",
+      "label": "Default Payment Request Message",
+      "type": "input",
+      "placeholder": "Input Default Payment Request Message",
+      "options": []
+    },
+    {
+      "key": "messageExamples",
+      "label": "Message Examples",
+      "type": "select",
+      "placeholder": "Input Message Examples",
+      "options": [
+        {
+          "label": "",
+          "value": ""
+        },
+        {
+          "label": "&lt;p&gt; Thank You for being a part of {{ doc.company }}! We hope you are enjoying the service.&lt;/p&gt;",
+          "value": "&lt;p&gt; Thank You for being a part of {{ doc.company }}! We hope you are enjoying the service.&lt;/p&gt;"
+        },
+        {
+          "label": "",
+          "value": ""
+        },
+        {
+          "label": "&lt;p&gt; Please find enclosed the E Bill statement. The outstanding amount is {{ doc.grand_total }}.&lt;/p&gt;",
+          "value": "&lt;p&gt; Please find enclosed the E Bill statement. The outstanding amount is {{ doc.grand_total }}.&lt;/p&gt;"
+        },
+        {
+          "label": "",
+          "value": ""
+        },
+        {
+          "label": "&lt;p&gt; We don't want you to be spending time running around in order to pay for your Bill.<br>After all, life is beautiful and the time you have in hand should be spent to enjoy it!<br>So here are our little ways to help you get more time for life! &lt;/p&gt;",
+          "value": "&lt;p&gt; We don't want you to be spending time running around in order to pay for your Bill.<br>After all, life is beautiful and the time you have in hand should be spent to enjoy it!<br>So here are our little ways to help you get more time for life! &lt;/p&gt;"
+        },
+        {
+          "label": "",
+          "value": ""
+        },
+        {
+          "label": "&lt;a href=\"{{ payment_url }}\"&gt; click here to pay &lt;/a&gt;",
+          "value": "&lt;a href=\"{{ payment_url }}\"&gt; click here to pay &lt;/a&gt;"
+        },
+        {
+          "label": "",
+          "value": ""
+        },
+        {
+          "label": "</pre>",
+          "value": "</pre>"
+        },
+        {
+          "label": "",
+          "value": ""
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,446 @@
+{
+  "fields": [
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "title",
+      "label": "Title",
+      "type": "input",
+      "placeholder": "Input Title",
+      "options": []
+    },
+    {
+      "key": "applyOn",
+      "label": "Apply On",
+      "type": "select",
+      "placeholder": "Input Apply On",
+      "options": [
+        {
+          "label": "Item Code",
+          "value": "Item Code"
+        },
+        {
+          "label": "Item Group",
+          "value": "Item Group"
+        },
+        {
+          "label": "Brand",
+          "value": "Brand"
+        }
+      ]
+    },
+    {
+      "key": "itemCode",
+      "label": "Item Code",
+      "type": "select",
+      "placeholder": "Input Item Code",
+      "options": []
+    },
+    {
+      "key": "brand",
+      "label": "Brand",
+      "type": "select",
+      "placeholder": "Input Brand",
+      "options": []
+    },
+    {
+      "key": "itemGroup",
+      "label": "Item Group",
+      "type": "select",
+      "placeholder": "Input Item Group",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "priority",
+      "label": "Priority",
+      "type": "select",
+      "placeholder": "Input Priority",
+      "options": [
+        {
+          "label": "1",
+          "value": "1"
+        },
+        {
+          "label": "2",
+          "value": "2"
+        },
+        {
+          "label": "3",
+          "value": "3"
+        },
+        {
+          "label": "4",
+          "value": "4"
+        },
+        {
+          "label": "5",
+          "value": "5"
+        },
+        {
+          "label": "6",
+          "value": "6"
+        },
+        {
+          "label": "7",
+          "value": "7"
+        },
+        {
+          "label": "8",
+          "value": "8"
+        },
+        {
+          "label": "9",
+          "value": "9"
+        },
+        {
+          "label": "10",
+          "value": "10"
+        },
+        {
+          "label": "11",
+          "value": "11"
+        },
+        {
+          "label": "12",
+          "value": "12"
+        },
+        {
+          "label": "13",
+          "value": "13"
+        },
+        {
+          "label": "14",
+          "value": "14"
+        },
+        {
+          "label": "15",
+          "value": "15"
+        },
+        {
+          "label": "16",
+          "value": "16"
+        },
+        {
+          "label": "17",
+          "value": "17"
+        },
+        {
+          "label": "18",
+          "value": "18"
+        },
+        {
+          "label": "19",
+          "value": "19"
+        },
+        {
+          "label": "20",
+          "value": "20"
+        }
+      ]
+    },
+    {
+      "key": "disable",
+      "label": "Disable",
+      "type": "input",
+      "placeholder": "Input Disable",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "selling",
+      "label": "Selling",
+      "type": "input",
+      "placeholder": "Input Selling",
+      "options": []
+    },
+    {
+      "key": "buying",
+      "label": "Buying",
+      "type": "input",
+      "placeholder": "Input Buying",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "applicableFor",
+      "label": "Applicable For",
+      "type": "select",
+      "placeholder": "Input Applicable For",
+      "options": [
+        {
+          "label": "Customer",
+          "value": "Customer"
+        },
+        {
+          "label": "Customer Group",
+          "value": "Customer Group"
+        },
+        {
+          "label": "Territory",
+          "value": "Territory"
+        },
+        {
+          "label": "Sales Partner",
+          "value": "Sales Partner"
+        },
+        {
+          "label": "Campaign",
+          "value": "Campaign"
+        },
+        {
+          "label": "Supplier",
+          "value": "Supplier"
+        },
+        {
+          "label": "Supplier Group",
+          "value": "Supplier Group"
+        }
+      ]
+    },
+    {
+      "key": "customer",
+      "label": "Customer",
+      "type": "select",
+      "placeholder": "Input Customer",
+      "options": []
+    },
+    {
+      "key": "customerGroup",
+      "label": "Customer Group",
+      "type": "select",
+      "placeholder": "Input Customer Group",
+      "options": []
+    },
+    {
+      "key": "territory",
+      "label": "Territory",
+      "type": "select",
+      "placeholder": "Input Territory",
+      "options": []
+    },
+    {
+      "key": "salesPartner",
+      "label": "Sales Partner",
+      "type": "select",
+      "placeholder": "Input Sales Partner",
+      "options": []
+    },
+    {
+      "key": "campaign",
+      "label": "Campaign",
+      "type": "select",
+      "placeholder": "Input Campaign",
+      "options": []
+    },
+    {
+      "key": "supplier",
+      "label": "Supplier",
+      "type": "select",
+      "placeholder": "Input Supplier",
+      "options": []
+    },
+    {
+      "key": "supplierGroup",
+      "label": "Supplier Group",
+      "type": "select",
+      "placeholder": "Input Supplier Group",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "minQty",
+      "label": "Min Qty",
+      "type": "input",
+      "placeholder": "Input Min Qty",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "maxQty",
+      "label": "Max Qty",
+      "type": "input",
+      "placeholder": "Input Max Qty",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "validFrom",
+      "label": "Valid From",
+      "type": "input",
+      "placeholder": "Input Valid From",
+      "options": []
+    },
+    {
+      "key": "validUpto",
+      "label": "Valid Upto",
+      "type": "input",
+      "placeholder": "Input Valid Upto",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "company",
+      "label": "Company",
+      "type": "select",
+      "placeholder": "Input Company",
+      "options": []
+    },
+    {
+      "key": "currency",
+      "label": "Currency",
+      "type": "select",
+      "placeholder": "Input Currency",
+      "options": []
+    },
+    {
+      "key": "margin",
+      "label": "Margin",
+      "type": "input",
+      "placeholder": "Input Margin",
+      "options": []
+    },
+    {
+      "key": "marginType",
+      "label": "Margin Type",
+      "type": "select",
+      "placeholder": "Input Margin Type",
+      "options": [
+        {
+          "label": "Percentage",
+          "value": "Percentage"
+        },
+        {
+          "label": "Amount",
+          "value": "Amount"
+        }
+      ]
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "marginRateOrAmount",
+      "label": "Margin Rate Or Amount",
+      "type": "input",
+      "placeholder": "Input Margin Rate Or Amount",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "rateOrDiscount",
+      "label": "Rate Or Discount",
+      "type": "select",
+      "placeholder": "Input Rate Or Discount",
+      "options": [
+        {
+          "label": "Rate",
+          "value": "Rate"
+        },
+        {
+          "label": "Discount Percentage",
+          "value": "Discount Percentage"
+        }
+      ]
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "rate",
+      "label": "Rate",
+      "type": "input",
+      "placeholder": "Input Rate",
+      "options": []
+    },
+    {
+      "key": "discountOnPriceListRate",
+      "label": "Discount On Price List Rate",
+      "type": "input",
+      "placeholder": "Input Discount On Price List Rate",
+      "options": []
+    },
+    {
+      "key": "forPriceList",
+      "label": "For Price List",
+      "type": "select",
+      "placeholder": "Input For Price List",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "select",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "pricingRuleHelp",
+      "label": "Pricing Rule Help",
+      "type": "input",
+      "placeholder": "Input Pricing Rule Help",
+      "options": []
+    }
+  ]
+}

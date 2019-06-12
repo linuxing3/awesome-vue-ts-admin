@@ -1,0 +1,67 @@
+{
+  "fields": [
+    {
+      "key": "postingDate",
+      "label": "Posting Date",
+      "type": "input",
+      "placeholder": "Input Posting Date",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "company",
+      "label": "Company",
+      "type": "select",
+      "placeholder": "Input Company",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "getEntries",
+      "label": "Get Entries",
+      "type": "input",
+      "placeholder": "Input Get Entries",
+      "options": []
+    },
+    {
+      "key": "exchangeRateRevaluationAccount",
+      "label": "Exchange Rate Revaluation Account",
+      "type": "select",
+      "placeholder": "Input Exchange Rate Revaluation Account",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "totalGainLoss",
+      "label": "Total Gain Loss",
+      "type": "input",
+      "placeholder": "Input Total Gain Loss",
+      "options": []
+    },
+    {
+      "key": "amendedFrom",
+      "label": "Amended From",
+      "type": "select",
+      "placeholder": "Input Amended From",
+      "options": []
+    }
+  ]
+}

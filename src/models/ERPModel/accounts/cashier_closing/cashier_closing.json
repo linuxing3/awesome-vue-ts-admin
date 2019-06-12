@@ -1,0 +1,88 @@
+{
+  "fields": [
+    {
+      "key": "series",
+      "label": "Series",
+      "type": "select",
+      "placeholder": "Input Series",
+      "options": []
+    },
+    {
+      "key": "user",
+      "label": "User",
+      "type": "select",
+      "placeholder": "Input User",
+      "options": []
+    },
+    {
+      "key": "date",
+      "label": "Date",
+      "type": "input",
+      "placeholder": "Input Date",
+      "options": []
+    },
+    {
+      "key": "fromTime",
+      "label": "From Time",
+      "type": "input",
+      "placeholder": "Input From Time",
+      "options": []
+    },
+    {
+      "key": "toTime",
+      "label": "To Time",
+      "type": "input",
+      "placeholder": "Input To Time",
+      "options": []
+    },
+    {
+      "key": "expense",
+      "label": "Expense",
+      "type": "input",
+      "placeholder": "Input Expense",
+      "options": []
+    },
+    {
+      "key": "custody",
+      "label": "Custody",
+      "type": "input",
+      "placeholder": "Input Custody",
+      "options": []
+    },
+    {
+      "key": "returns",
+      "label": "Returns",
+      "type": "input",
+      "placeholder": "Input Returns",
+      "options": []
+    },
+    {
+      "key": "outstandingAmount",
+      "label": "Outstanding Amount",
+      "type": "input",
+      "placeholder": "Input Outstanding Amount",
+      "options": []
+    },
+    {
+      "key": "payments",
+      "label": "Payments",
+      "type": "select",
+      "placeholder": "Input Payments",
+      "options": []
+    },
+    {
+      "key": "netAmount",
+      "label": "Net Amount",
+      "type": "input",
+      "placeholder": "Input Net Amount",
+      "options": []
+    },
+    {
+      "key": "amendedFrom",
+      "label": "Amended From",
+      "type": "select",
+      "placeholder": "Input Amended From",
+      "options": []
+    }
+  ]
+}

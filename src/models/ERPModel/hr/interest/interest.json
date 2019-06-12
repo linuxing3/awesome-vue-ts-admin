@@ -1,0 +1,11 @@
+{
+  "fields": [
+    {
+      "key": "interest",
+      "label": "Interest",
+      "type": "input",
+      "placeholder": "Input Interest",
+      "options": []
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "fields": [
+    {
+      "key": "type",
+      "label": "Type",
+      "type": "select",
+      "placeholder": "Input Type",
+      "options": []
+    },
+    {
+      "key": "name",
+      "label": "Name",
+      "type": "select",
+      "placeholder": "Input Name",
+      "options": []
+    },
+    {
+      "key": "amount",
+      "label": "Amount",
+      "type": "input",
+      "placeholder": "Input Amount",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "supplier",
+      "label": "Supplier",
+      "type": "select",
+      "placeholder": "Input Supplier",
+      "options": []
+    },
+    {
+      "key": "paymentRequest",
+      "label": "Payment Request",
+      "type": "select",
+      "placeholder": "Input Payment Request",
+      "options": []
+    },
+    {
+      "key": "modeOfPayment",
+      "label": "Mode Of Payment",
+      "type": "select",
+      "placeholder": "Input Mode Of Payment",
+      "options": []
+    },
+    {
+      "key": "bankAccountDetails",
+      "label": "Bank Account Details",
+      "type": "input",
+      "placeholder": "Input Bank Account Details",
+      "options": []
+    },
+    {
+      "key": "bankAccount",
+      "label": "Bank Account",
+      "type": "select",
+      "placeholder": "Input Bank Account",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "account",
+      "label": "Account",
+      "type": "select",
+      "placeholder": "Input Account",
+      "options": []
+    },
+    {
+      "key": "paymentReference",
+      "label": "Payment Reference",
+      "type": "input",
+      "placeholder": "Input Payment Reference",
+      "options": []
+    }
+  ]
+}

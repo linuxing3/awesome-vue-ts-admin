@@ -1,0 +1,11 @@
+{
+  "fields": [
+    {
+      "key": "allowUser",
+      "label": "Allow User",
+      "type": "select",
+      "placeholder": "Input Allow User",
+      "options": []
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "fields": [
+    {
+      "key": "healthInsuranceName",
+      "label": "Health Insurance Name",
+      "type": "input",
+      "placeholder": "Input Health Insurance Name",
+      "options": []
+    }
+  ]
+}

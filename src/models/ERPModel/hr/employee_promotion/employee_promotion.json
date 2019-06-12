@@ -1,0 +1,67 @@
+{
+  "fields": [
+    {
+      "key": "employee",
+      "label": "Employee",
+      "type": "select",
+      "placeholder": "Input Employee",
+      "options": []
+    },
+    {
+      "key": "employeeName",
+      "label": "Employee Name",
+      "type": "input",
+      "placeholder": "Input Employee Name",
+      "options": []
+    },
+    {
+      "key": "department",
+      "label": "Department",
+      "type": "select",
+      "placeholder": "Input Department",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "promotionDate",
+      "label": "Promotion Date",
+      "type": "input",
+      "placeholder": "Input Promotion Date",
+      "options": []
+    },
+    {
+      "key": "company",
+      "label": "Company",
+      "type": "select",
+      "placeholder": "Input Company",
+      "options": []
+    },
+    {
+      "key": "employeePromotionDetails",
+      "label": "Employee Promotion Details",
+      "type": "input",
+      "placeholder": "Input Employee Promotion Details",
+      "options": []
+    },
+    {
+      "key": "employeePromotionDetail",
+      "label": "Employee Promotion Detail",
+      "type": "select",
+      "placeholder": "Input Employee Promotion Detail",
+      "options": []
+    },
+    {
+      "key": "amendedFrom",
+      "label": "Amended From",
+      "type": "select",
+      "placeholder": "Input Amended From",
+      "options": []
+    }
+  ]
+}

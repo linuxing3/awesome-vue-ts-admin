@@ -1,0 +1,185 @@
+{
+  "fields": [
+    {
+      "key": "transferType",
+      "label": "Transfer Type",
+      "type": "select",
+      "placeholder": "Input Transfer Type",
+      "options": [
+        {
+          "label": "Issue",
+          "value": "Issue"
+        },
+        {
+          "label": "Purchase",
+          "value": "Purchase"
+        },
+        {
+          "label": "Transfer",
+          "value": "Transfer"
+        }
+      ]
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "date",
+      "label": "Date",
+      "type": "input",
+      "placeholder": "Input Date",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "fromShareholder",
+      "label": "From Shareholder",
+      "type": "select",
+      "placeholder": "Input From Shareholder",
+      "options": []
+    },
+    {
+      "key": "fromFolioNo",
+      "label": "From Folio No",
+      "type": "input",
+      "placeholder": "Input From Folio No",
+      "options": []
+    },
+    {
+      "key": "equityLiabilityAccount",
+      "label": "Equity Liability Account",
+      "type": "select",
+      "placeholder": "Input Equity Liability Account",
+      "options": []
+    },
+    {
+      "key": "assetAccount",
+      "label": "Asset Account",
+      "type": "select",
+      "placeholder": "Input Asset Account",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "toShareholder",
+      "label": "To Shareholder",
+      "type": "select",
+      "placeholder": "Input To Shareholder",
+      "options": []
+    },
+    {
+      "key": "toFolioNo",
+      "label": "To Folio No",
+      "type": "input",
+      "placeholder": "Input To Folio No",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "shareType",
+      "label": "Share Type",
+      "type": "select",
+      "placeholder": "Input Share Type",
+      "options": []
+    },
+    {
+      "key": "fromNo",
+      "label": "From No",
+      "type": "input",
+      "placeholder": "Input From No",
+      "options": []
+    },
+    {
+      "key": "rate",
+      "label": "Rate",
+      "type": "input",
+      "placeholder": "Input Rate",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "noOfShares",
+      "label": "No Of Shares",
+      "type": "input",
+      "placeholder": "Input No Of Shares",
+      "options": []
+    },
+    {
+      "key": "toNo",
+      "label": "To No",
+      "type": "input",
+      "placeholder": "Input To No",
+      "options": []
+    },
+    {
+      "key": "amount",
+      "label": "Amount",
+      "type": "input",
+      "placeholder": "Input Amount",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "company",
+      "label": "Company",
+      "type": "select",
+      "placeholder": "Input Company",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "remarks",
+      "label": "Remarks",
+      "type": "input",
+      "placeholder": "Input Remarks",
+      "options": []
+    },
+    {
+      "key": "amendedFrom",
+      "label": "Amended From",
+      "type": "select",
+      "placeholder": "Input Amended From",
+      "options": []
+    }
+  ]
+}

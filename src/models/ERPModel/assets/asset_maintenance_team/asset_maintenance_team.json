@@ -1,0 +1,53 @@
+{
+  "fields": [
+    {
+      "key": "maintenanceTeamName",
+      "label": "Maintenance Team Name",
+      "type": "input",
+      "placeholder": "Input Maintenance Team Name",
+      "options": []
+    },
+    {
+      "key": "maintenanceManager",
+      "label": "Maintenance Manager",
+      "type": "select",
+      "placeholder": "Input Maintenance Manager",
+      "options": []
+    },
+    {
+      "key": "maintenanceManagerName",
+      "label": "Maintenance Manager Name",
+      "type": "input",
+      "placeholder": "Input Maintenance Manager Name",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "company",
+      "label": "Company",
+      "type": "select",
+      "placeholder": "Input Company",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "maintenanceTeamMembers",
+      "label": "Maintenance Team Members",
+      "type": "select",
+      "placeholder": "Input Maintenance Team Members",
+      "options": []
+    }
+  ]
+}

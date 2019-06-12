@@ -1,0 +1,102 @@
+{
+  "fields": [
+    {
+      "key": "department",
+      "label": "Department",
+      "type": "input",
+      "placeholder": "Input Department",
+      "options": []
+    },
+    {
+      "key": "parentDepartment",
+      "label": "Parent Department",
+      "type": "select",
+      "placeholder": "Input Parent Department",
+      "options": []
+    },
+    {
+      "key": "company",
+      "label": "Company",
+      "type": "select",
+      "placeholder": "Input Company",
+      "options": []
+    },
+    {
+      "key": "isGroup",
+      "label": "Is Group",
+      "type": "input",
+      "placeholder": "Input Is Group",
+      "options": []
+    },
+    {
+      "key": "disabled",
+      "label": "Disabled",
+      "type": "input",
+      "placeholder": "Input Disabled",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "leaveBlockList",
+      "label": "Leave Block List",
+      "type": "select",
+      "placeholder": "Input Leave Block List",
+      "options": []
+    },
+    {
+      "key": "leaveApprovers",
+      "label": "Leave Approvers",
+      "type": "input",
+      "placeholder": "Input Leave Approvers",
+      "options": []
+    },
+    {
+      "key": "leaveApprover",
+      "label": "Leave Approver",
+      "type": "select",
+      "placeholder": "Input Leave Approver",
+      "options": []
+    },
+    {
+      "key": "expenseApprovers",
+      "label": "Expense Approvers",
+      "type": "input",
+      "placeholder": "Input Expense Approvers",
+      "options": []
+    },
+    {
+      "key": "expenseApprover",
+      "label": "Expense Approver",
+      "type": "select",
+      "placeholder": "Input Expense Approver",
+      "options": []
+    },
+    {
+      "key": "lft",
+      "label": "Lft",
+      "type": "input",
+      "placeholder": "Input Lft",
+      "options": []
+    },
+    {
+      "key": "rgt",
+      "label": "Rgt",
+      "type": "input",
+      "placeholder": "Input Rgt",
+      "options": []
+    },
+    {
+      "key": "oldParent",
+      "label": "Old Parent",
+      "type": "input",
+      "placeholder": "Input Old Parent",
+      "options": []
+    }
+  ]
+}

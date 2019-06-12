@@ -1,0 +1,55 @@
+{
+  "fields": [
+    {
+      "key": "invoiceType",
+      "label": "Invoice Type",
+      "type": "select",
+      "placeholder": "Input Invoice Type",
+      "options": [
+        {
+          "label": "Purchase Invoice",
+          "value": "Purchase Invoice"
+        },
+        {
+          "label": "Journal Entry",
+          "value": "Journal Entry"
+        }
+      ]
+    },
+    {
+      "key": "invoiceNumber",
+      "label": "Invoice Number",
+      "type": "select",
+      "placeholder": "Input Invoice Number",
+      "options": []
+    },
+    {
+      "key": "invoiceDate",
+      "label": "Invoice Date",
+      "type": "input",
+      "placeholder": "Input Invoice Date",
+      "options": []
+    },
+    {
+      "key": "",
+      "label": "",
+      "type": "input",
+      "placeholder": "Input ",
+      "options": []
+    },
+    {
+      "key": "amount",
+      "label": "Amount",
+      "type": "input",
+      "placeholder": "Input Amount",
+      "options": []
+    },
+    {
+      "key": "outstandingAmount",
+      "label": "Outstanding Amount",
+      "type": "input",
+      "placeholder": "Input Outstanding Amount",
+      "options": []
+    }
+  ]
+}

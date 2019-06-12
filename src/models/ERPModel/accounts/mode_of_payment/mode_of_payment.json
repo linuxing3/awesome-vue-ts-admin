@@ -1,0 +1,34 @@
+{
+  "fields": [
+    {
+      "key": "modeOfPayment",
+      "label": "Mode Of Payment",
+      "type": "input",
+      "placeholder": "Input Mode Of Payment",
+      "options": []
+    },
+    {
+      "key": "type",
+      "label": "Type",
+      "type": "select",
+      "placeholder": "Input Type",
+      "options": [
+        {
+          "label": "Bank",
+          "value": "Bank"
+        },
+        {
+          "label": "General",
+          "value": "General"
+        }
+      ]
+    },
+    {
+      "key": "accounts",
+      "label": "Accounts",
+      "type": "select",
+      "placeholder": "Input Accounts",
+      "options": []
+    }
+  ]
+}
