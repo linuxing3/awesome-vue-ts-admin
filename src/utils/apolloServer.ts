@@ -98,9 +98,7 @@ const resolvers = {
 
 const server = new ApolloServer({ typeDefs, resolvers });
 
-const apolloServer = express();
-server.applyMiddleware({ ApolloServer });
+const app = express();
+server.applyMiddleware({ app });
 
-apolloServer.listen({ port: 4000 }, () => console.log(`Apollo Server ready at http://localhost:4000${server.graphqlPath}`));
-
-module.exports = apolloServer;
+app.listen({ port: 4000 }, () => console.log(`Apollo Server ready at http://localhost:4000${server.graphqlPath}`));

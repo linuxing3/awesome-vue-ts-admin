@@ -1,5 +1,3 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Mock = require('./src/mock/index');
 
 const i18n = {
@@ -79,6 +77,13 @@ module.exports = {
         changeOrigin: true,
         pathRewrite: {
           '^/api': '',
+        },
+      },
+      '/graphql': {
+        target: 'http://localhost:4000/graphql/', // 开发环境地址
+        changeOrigin: true,
+        pathRewrite: {
+          '^/graphql': '',
         },
       },
     },
