@@ -4,7 +4,8 @@ import {
 } from 'lodash';
 import { pathExistsSync, mkdirpSync, writeFileSync } from 'fs-extra';
 import { resolve } from 'path';
-import { camelCase, titleCase } from 'change-case';
+import { camelCase, titleCase, camel } from 'change-case';
+import { BaseModel } from '../BaseModel';
 
 const data = {
   fields: [
@@ -104,3 +105,19 @@ export function genModelConfigJson() {
     console.log(`${fileName} created`);
   });
 }
+
+const models = {}
+ERPModels.keys().forEach((fileName: string) => {
+  const fileNameMeta = last(tail(fileName.split('/'))) as string
+  const modelName = camel(fileNameMeta);
+  const fields: any[] = ERPModels(fileName).fields
+
+  const Entity = class AModel extends BaseModel {
+    static entity = modelName
+    static fields() {
+      return {
+        id: BaseModel.increment()
+      }
+    }
+  }
+})

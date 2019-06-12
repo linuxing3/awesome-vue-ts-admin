@@ -29,13 +29,6 @@
       "options": []
     },
     {
-      "key": "",
-      "label": "",
-      "type": "input",
-      "placeholder": "Input ",
-      "options": []
-    },
-    {
       "key": "isCarryForward",
       "label": "Is Carry Forward",
       "type": "input",
