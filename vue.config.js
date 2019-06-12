@@ -16,7 +16,7 @@ const pages = {
     chunks: ['chunk-vendors', 'chunk-common', 'index'],
   },
   playpage: {
-    entry: 'src/playpage/main.ts',
+    entry: 'src/playpage/client/main.ts',
     template: 'public/playpage.html',
     filename: 'playpage.html',
     title: 'Play Page',

@@ -123,26 +123,37 @@ const lfService: LfService = {
     // response api
     switch (method) {
       case 'post':
-        const createdItems = await Entity.$create({ data });
-        requestedData = baseData('success', '创建成功');
-        requestedData.entity = createdItems;
-        if (createdItems !== undefined) Entity.$fetch();
+        await Entity.create({ data });
+        const createdItem = Entity.query().first();
+        if (createdItem !== undefined) {
+          await createdItem.$persist();
+          requestedData = baseData('success', '创建成功');
+          requestedData.entity = createdItem;
+          Entity.fetch();
+        }
         break;
       case 'delete':
-        const deletedItems = await Entity.$delete(data.id || data);
-        requestedData = baseData('success', '删除成功');
-        requestedData.entity = deletedItems;
-        if (deletedItems !== undefined) Entity.$fetch();
+        const itemToDelete = await Entity.find(data.id);
+        if (itemToDelete !== undefined) {
+          await itemToDelete.$deleteAndDestroy();
+          requestedData = baseData('success', '删除成功');
+          requestedData.entity = itemToDelete;
+          Entity.fetch();
+        }
         break;
       case 'patch':
-        const patchedItems = await Entity.$update({ data });
-        requestedData = baseData('success', '更新成功');
-        requestedData.entity = patchedItems;
-        if (patchedItems !== undefined) Entity.$fetch();
+        const itemToUpdate = await Entity.find(data.id);
+        if (itemToUpdate !== undefined) {
+          itemToUpdate.$update({ data });
+          itemToUpdate.$push();
+          requestedData = baseData('success', '更新成功');
+          requestedData.entity = itemToUpdate;
+          Entity.fetch();
+        }
         break;
       case 'get':
         if (!data) {
-          Entity.$fetch();
+          await Entity.fetch();
           // query with pageParams, header, columns
           if (pageParams.page) {
             // console.log('Get pagination information');
@@ -164,10 +175,10 @@ const lfService: LfService = {
           // using query builder get real data
           requestedData.entity = query.orderBy('id', 'desc').get();
         } else {
-          await Entity.$fetch();
-          const entities = await Entity.$get(data.id.toString());
+          await Entity.fetch();
+          const itemFound = await Entity.find(data.id);
           requestedData = baseData('success', '查询成功');
-          requestedData.entity = entities[namespace][0];
+          requestedData.entity = itemFound;
         }
     }
     console.log(`${method} Localforage vuex -> `, requestedData);

@@ -9,7 +9,6 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "gen": "hygen gen",
-    "apollo:server": "ts-node src/utils/apolloServer.ts",
     "dev": "vue-cli-service electron:serve",
     "dist": "cross-env NODE_ENV=production vue-cli-service electron:build",
     "electron:build": "vue-cli-service electron:build",
@@ -18,6 +17,7 @@
     "electron:generate-icons": "electron-icon-builder --input=./public/icon.png --output=build --flatten",
     "postinstall": "electron-builder install-app-deps",
     "postuninstall": "electron-builder install-app-deps",
+    "apollo:serve": "ts-node src/playpage/server/apolloServer.ts",
     "test:e2e": "vue-cli-service test:e2e",
     "inspect": "vue inspect > ./webpack.config.inspect.js"
   },

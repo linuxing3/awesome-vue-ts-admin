@@ -1,3 +1,158 @@
+export const priority = [
+  {
+    label: '特提',
+    value: '特提',
+  },
+  {
+    label: '特急',
+    value: '特急',
+  },
+  {
+    label: '加急',
+    value: '加急',
+  },
+];
+
+export const privacy = [
+  {
+    label: '因公',
+    value: '因公',
+  },
+  {
+    label: '因私',
+    value: '因私',
+  },
+];
+
+export const area = [
+  {
+    label: '人事',
+    value: '人事',
+  },
+  {
+    label: '党务',
+    value: '党务',
+  },
+  {
+    label: '财务',
+    value: '财务',
+  },
+  {
+    label: '后勤',
+    value: '后勤',
+  },
+  {
+    label: '纪检',
+    value: '纪检',
+  },
+  {
+    label: '安全',
+    value: '安全',
+  },
+  {
+    label: '对外',
+    value: '对外',
+  },
+];
+
+export const inOrOut = [
+  {
+    label: '发',
+    value: '发',
+  },
+  {
+    label: '收',
+    value: '收',
+  },
+];
+
+export const classLevel = [
+  {
+    label: '机密',
+    value: '机密',
+  },
+  {
+    label: '秘密',
+    value: '秘密',
+  },
+  {
+    label: '内部',
+    value: '内部',
+  },
+];
+
+export const entity = [
+  {
+    key: '1',
+    label: '外交部',
+    value: '外交部',
+    children: [
+      {
+        label: '办公厅',
+        value: '办公厅',
+      },
+      {
+        label: '拉美司',
+        value: '拉美司',
+      },
+      {
+        label: '礼宾司',
+        value: '礼宾司',
+      },
+      {
+        label: '新闻司',
+        value: '新闻司',
+      },
+      {
+        label: '财务司',
+        value: '财务司',
+      },
+      {
+        label: '行政司',
+        value: '行政司',
+      },
+      {
+        label: '服务中心',
+        value: '服务中心',
+      },
+    ],
+  },
+  {
+    key: '2',
+    label: '商务部',
+    value: '商务部',
+    children: [
+      {
+        label: '美大司',
+        value: '美大司',
+      },
+      {
+        label: '援外司',
+        value: '援外司',
+      },
+      {
+        label: '人事司',
+        value: '人事司',
+      },
+    ],
+  },
+  {
+    key: '3',
+    label: '文化旅游部',
+    value: '文化旅游部',
+    children: [
+      {
+        label: '国际司',
+        value: '国际司',
+      },
+      {
+        label: '人事司',
+        value: '人事司',
+      },
+    ],
+  },
+];
+
 export const department = [
   {
     key: '1',
@@ -323,5 +478,98 @@ export const administravieRank = [
     key: '科员',
     label: '科员',
     value: '科员',
+  },
+];
+
+export const leavePolicy = [];
+
+export const salaryMode = [
+  {
+    label: 'mixto',
+    value: 'mixto',
+  },
+  {
+    label: 'divisas',
+    value: 'divisas',
+  },
+];
+
+export const banks = [
+  {
+    label: 'Banco Provincial',
+    value: 'Banco Provincial',
+  },
+  {
+    label: 'Banco Banesco',
+    value: 'Banco Banesco',
+  },
+  {
+    label: 'Bank of China',
+    value: 'Bank of China',
+  },
+];
+
+export const bloodGroup = [
+  {
+    label: 'A',
+    value: 'A',
+  },
+  {
+    label: 'B',
+    value: 'B',
+  },
+  {
+    label: 'AB',
+    value: 'AB',
+  },
+  {
+    label: 'O',
+    value: 'O',
+  },
+];
+
+export const educationalQualification = [
+  {
+    label: 'Escuela Primaria',
+    value: 'Escuela Primaria',
+  },
+  {
+    label: 'Bachelet',
+    value: 'Bachelet',
+  },
+  {
+    label: 'Licenciado',
+    value: 'Licenciado',
+  },
+  {
+    label: 'Maestro',
+    value: 'Maestro',
+  },
+  {
+    label: 'Doctor',
+    value: 'Doctor',
+  },
+];
+
+export const leaveType = [
+  {
+    label: 'Leave Without Pay',
+    value: 'Leave Without Pay',
+  },
+  {
+    label: 'Privilege leave',
+    value: 'Privilege leave',
+  },
+  {
+    label: 'Sick leave',
+    value: 'Sick leave',
+  },
+  {
+    label: 'Compensatory off',
+    value: 'Compensatory off',
+  },
+  {
+    label: 'Casual Leave',
+    value: 'Casual Leave',
   },
 ];

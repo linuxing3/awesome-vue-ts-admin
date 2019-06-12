@@ -1,4 +1,5 @@
 import { tableList, FilterFormList, operate } from '@/interface';
+import { gender, department, educationalQualification } from '@/utils/constant';
 
 /* -------------------------------------------------------------
 | Item list for forms in m-form
@@ -32,7 +33,7 @@ export const defaultItemList: FilterFormList[] = [
     type: 'input', key: 'employeeNo', label: 'employeeNo', placeholder: 'employeeNo',
   },
   {
-    type: 'select', key: 'gender', label: 'gender', placeholder: 'gender',
+    type: 'select', key: 'gender', label: 'gender', placeholder: 'gender', options: [...gender],
   },
   {
     type: 'date', key: 'birthday', label: 'birthday', placeholder: 'birthday',
@@ -53,7 +54,7 @@ export const defaultItemList: FilterFormList[] = [
     type: 'date', key: 'contractEndDate', label: 'contractEndDate', placeholder: 'contractEndDate',
   },
   {
-    type: 'input', key: 'department', label: 'department', placeholder: 'department',
+    type: 'input', key: 'department', label: 'department', placeholder: 'department', options: [...department],
   },
   {
     type: 'input', key: 'designation', label: 'designation', placeholder: 'designation',
@@ -153,6 +154,7 @@ export const defaultItemList: FilterFormList[] = [
     key: 'educationalQualification',
     label: 'educationalQualification,',
     placeholder: 'educationalQualification',
+    options: [...educationalQualification],
   },
   {
     type: 'input',

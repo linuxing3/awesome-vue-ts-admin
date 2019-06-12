@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import {
   MutationOptions,
-  NetworkStatus
-} from 'apollo-client'
+  NetworkStatus,
+} from 'apollo-client';
 import { DocumentNode } from 'graphql';
 
 declare module '*.vue' {

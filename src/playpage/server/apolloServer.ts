@@ -1,6 +1,5 @@
 const express = require('express');
 const { ApolloServer, gql } = require('apollo-server-express');
-
 const { find, filter } = require('lodash');
 
 const typeDefs = `

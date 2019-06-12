@@ -1,0 +1,30 @@
+type User {
+  id: Int!
+  firstName: String
+  lastName: String
+  """
+  the list of Events by this user
+  """
+  events: [Event]
+}
+
+type Event {
+  id: Int!
+  title: String
+  user: User
+  votes: Int
+}
+
+# the schema allows the following query:
+type Query {
+  event(id: Int!): Event
+  events: [Event]
+  user(id: Int!): User
+}
+
+# this schema allows the following mutation:
+type Mutation {
+  upvoteEvent (
+    eventId: Int!
+  ): Event
+}

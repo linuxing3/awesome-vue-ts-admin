@@ -1,4 +1,5 @@
 import { tableList, FilterFormList, operate } from '@/interface';
+import { priority, privacy } from '@/utils/constant';
 
 export const defaultItemList: FilterFormList[] = [
   {
@@ -17,16 +18,7 @@ export const defaultItemList: FilterFormList[] = [
     type: 'select',
     label: 'private',
     placeholder: '因公',
-    options: [
-      {
-        label: '因公',
-        value: '因公',
-      },
-      {
-        label: '因私',
-        value: '因私',
-      },
-    ],
+    options: [...privacy],
   },
   {
     key: 'date',
@@ -105,20 +97,7 @@ export const defaultItemList: FilterFormList[] = [
     type: 'select',
     label: 'priority',
     placeholder: 'Input priority',
-    options: [
-      {
-        label: '特提',
-        value: '特提',
-      },
-      {
-        label: '特急',
-        value: '特急',
-      },
-      {
-        label: '加急',
-        value: '加急',
-      },
-    ],
+    options: [...priority],
   },
 ];
 

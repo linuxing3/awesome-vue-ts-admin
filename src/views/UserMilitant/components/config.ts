@@ -1,12 +1,7 @@
 import { tableList, FilterFormList, operate } from '@/interface';
-import titleCase from 'title-case';
 import {
   department, etnia, gender, academicBackground, administravieRank, diplomaticRank,
 } from '@/utils/constant';
-import models from '@/models';
-
-const Entity: any = models.userMilitant;
-const fields: string[] = Entity.fieldsKeys();
 
 export const defaultItemList: FilterFormList[] = [
   {

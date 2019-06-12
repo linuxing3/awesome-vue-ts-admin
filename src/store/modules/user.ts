@@ -114,9 +114,14 @@ const user = {
       return Promise.resolve(builder(data, 'OK'));
     },
     getUserLocalInfo: async (context: any) => {
+      // for localforage Model.$fetch
+      if (Entity.$fetch) Entity.$fetch();
       const token = JSON.parse(window.localStorage.getItem('token'));
       console.log('token:', token);
       const entity = Entity.find(token.id);
+      // for graghql entity.fetch
+      if (entity.fetch) entity.fetch();
+
       console.log('User Entity:', entity);
       return new Promise((resolve, reject) => {
         if (entity) {
@@ -170,9 +175,8 @@ const user = {
     }),
   },
   getters: {
-    currentUser: (state: any) => {
+    currentUser: async (state: any) => {
       const { id } = JSON.parse(window.localStorage.getItem('token'));
-      Entity.$fetch();
       const entity = Entity.find(id);
       return entity;
     },

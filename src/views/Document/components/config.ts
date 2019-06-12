@@ -1,4 +1,7 @@
 import { tableList, FilterFormList, operate } from '@/interface';
+import {
+  entity, classLevel, inOrOut, area,
+} from '@/utils/constant';
 
 export const defaultItemList: FilterFormList[] = [
   {
@@ -22,20 +25,7 @@ export const defaultItemList: FilterFormList[] = [
     key: 'classiLevel',
     type: 'select',
     label: 'classiLevel',
-    options: [
-      {
-        label: '机密',
-        value: '机密',
-      },
-      {
-        label: '秘密',
-        value: '秘密',
-      },
-      {
-        label: '内部',
-        value: '内部',
-      },
-    ],
+    options: [...classLevel],
   },
   {
     key: 'category',
@@ -45,9 +35,10 @@ export const defaultItemList: FilterFormList[] = [
   },
   {
     key: 'inOrOut',
-    type: 'input',
+    type: 'select',
     label: 'inOrOut',
     placeholder: 'Input inOrOut',
+    options: [...inOrOut],
   },
   {
     key: 'sendingCode',
@@ -75,15 +66,17 @@ export const defaultItemList: FilterFormList[] = [
   },
   {
     key: 'toEntity',
-    type: 'input',
+    type: 'cascader',
     label: 'toEntity',
     placeholder: 'Input toEntity',
+    options: [...entity],
   },
   {
     key: 'copyEntity',
     type: 'input',
     label: 'copyEntity',
     placeholder: 'Input copyEntity',
+    options: [...entity],
   },
   {
     key: 'attachment',
@@ -96,28 +89,7 @@ export const defaultItemList: FilterFormList[] = [
     type: 'select',
     label: 'keyword',
     placeholder: 'Input keyword',
-    options: [
-      {
-        label: '人事',
-        value: '人事',
-      },
-      {
-        label: '党务',
-        value: '党务',
-      },
-      {
-        label: '财务',
-        value: '财务',
-      },
-      {
-        label: '后勤',
-        value: '后勤',
-      },
-      {
-        label: '对外',
-        value: '对外',
-      },
-    ],
+    options: [...area],
   },
   {
     key: 'workEntity',
@@ -164,6 +136,18 @@ export const filterFormItemList: FilterFormList[] = [
     type: 'input',
     label: 'content',
     placeholder: 'Search content',
+  },
+  {
+    key: 'toEntity',
+    type: 'cascader',
+    label: 'To Entity',
+    options: [...entity],
+  },
+  {
+    key: 'keyword',
+    type: 'select',
+    label: 'Keyword',
+    options: [...area],
   },
 ];
 
