@@ -13,6 +13,7 @@ module.exports = {
     'no-shadow': 'off',
     'no-alert': 'off',
     radix: 'off',
+    'func-names': 'off',
     'array-callback-return': 'off',
     'no-case-declarations': 'off',
     'default-case': 'off',

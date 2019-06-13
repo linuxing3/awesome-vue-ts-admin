@@ -6,6 +6,9 @@ import {
   installVueDevtools,
 } from 'vue-cli-plugin-electron-builder/lib';
 import MainWindows from './mainWindow';
+import windowManager from './windowManager';
+import menu from './menu';
+
 import utils from './utils';
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
@@ -38,6 +41,17 @@ class ECVApp {
 
   addIpcEventListener() {
     const that = this;
+
+    ipcMain.on(utils.ipcChan.createPlayground, (event, arg) => {
+      const playWin = windowManager.create('playground', arg);
+      // newWindow.loadFile(path.resolve(__dirname, `${type}.html`))
+      this.loadUrl(playWin);
+    });
+
+    ipcMain.on(utils.ipcChan.dispatch, (event, action, arg) => {
+      windowManager.dispatch(action, arg);
+    });
+
     ipcMain.on(utils.ipcChan.renderSendResizeToMain, () => {
       that.mainWindow.resize();
     });
@@ -125,10 +139,12 @@ class ECVApp {
         await this.installDevtools();
         this.loadUrl(this.mainWindow);
       }
+      // set menu
+      Menu.setApplicationMenu(menu);
     });
   }
 
-  loadUrl(win: MainWindows) {
+  loadUrl(win: MainWindows | BrowserWindow) {
     if (process.env.WEBPACK_DEV_SERVER_URL) {
       win.loadURL(
         process.env.WEBPACK_DEV_SERVER_URL + this.devPath,

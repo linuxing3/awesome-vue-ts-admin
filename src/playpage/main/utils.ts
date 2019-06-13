@@ -11,6 +11,9 @@ const utils: any = {
     openGraphqlTools: 'async-open-graph',
     setAppMenu: 'async-show-menu',
     addJumpList: 'async-add-jumplist',
+    createConfigManager: 'create-config-manager',
+    createPlayground: 'create-playground',
+    dispatch: 'dispatch',
   },
   assets(name) {
     return join(__dirname, `/../../assets/${name}`);

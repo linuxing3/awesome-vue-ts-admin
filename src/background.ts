@@ -1,2 +1,2 @@
 import ecv from './playpage/main';
-ecv.init({ isPlay: false });
+ecv.init({ isPlay: true });

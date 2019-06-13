@@ -1,12 +1,19 @@
-import { BrowserWindow, globalShortcut, BrowserWindowConstructorOptions } from 'electron';
+import {
+  app, BrowserWindow, globalShortcut, BrowserWindowConstructorOptions,
+} from 'electron';
+import { writeFile } from 'fs';
+import { resolve } from 'path';
 
 export default class MainWindows {
   browserWindow: BrowserWindow = null
+
+  printPdfPath: string = ''
 
   constructor() {
     this.browserWindow = null;
     this.createBrowserWindow();
     this.addEventListener();
+    this.printPdfPath = resolve(app.getPath('home'), '/print/pdf') || '';
   }
 
   createBrowserWindow() {
@@ -109,11 +116,29 @@ export default class MainWindows {
 
   registerglobalShortcut() {
     const that = this;
+    // Hide
     globalShortcut.register('ESC', () => {
       that.hide();
     });
+    // Open devtools
     globalShortcut.register('CommandOrControl+Shift+X', () => {
       that.browserWindow.webContents.openDevTools();
+    });
+    // Print to pdf
+    globalShortcut.register('CommandOrControl+Shift+P', () => {
+      that.browserWindow.webContents.printToPDF({}, (error, data) => {
+        if (error) throw error;
+        writeFile(this.printPdfPath, data, (error) => {
+          if (error) alert('write pdf file error');
+        });
+      });
+    });
+    // Print
+    globalShortcut.register('CommandOrControl+P', () => {
+      window.print();
+      // that.browserWindow.webContents.print({}, (success) => {
+      //   if(!success) alert('Print error')
+      // })
     });
   }
 
