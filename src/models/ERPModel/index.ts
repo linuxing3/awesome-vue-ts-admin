@@ -40,12 +40,10 @@ function mapFieldKeys(fieldConfig: any): any[] {
     const placerholder = `Input ${titleCase(config.label)}`;
     let type = 'input';
     if (config.options) {
-      options = tail(config.options.split('\n').concat()).map(v => {
-        return {
-          label: v,
-          value: v
-        }
-      });
+      options = tail(config.options.split('\n').concat()).map(v => ({
+        label: v,
+        value: v,
+      }));
       type = 'select';
     }
     switch (config.fieldType) {
@@ -106,18 +104,34 @@ export function genModelConfigJson() {
   });
 }
 
-const models = {}
-ERPModels.keys().forEach((fileName: string) => {
-  const fileNameMeta = last(tail(fileName.split('/'))) as string
-  const modelName = camel(fileNameMeta);
-  const fields: any[] = ERPModels(fileName).fields
+/**
+ * Auto create all models
+ */
+const models: {
+  [key: string]: typeof BaseModel
+} = {};
 
-  const Entity = class AModel extends BaseModel {
+ERPModels.keys().forEach((fileName: string) => {
+  const fileNameMeta = last(tail(fileName.split('/'))) as string;
+  const modelName = camel(fileNameMeta);
+  const initFields: any[] = ERPModels(fileName).fields;
+
+  class DynamicEntity extends BaseModel {
     static entity = modelName
+
     static fields() {
-      return {
-        id: BaseModel.increment()
-      }
+      const fields = {
+        id: BaseModel.increment(),
+      };
+      initFields.forEach((field) => {
+        fields[field.label] = BaseModel.attr('');
+      });
+      console.log(`${modelName} Model has fields: `, fields);
+      return fields;
     }
   }
-})
+
+  models[modelName] = DynamicEntity;
+});
+
+export default models;

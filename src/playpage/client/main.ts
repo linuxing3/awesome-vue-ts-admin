@@ -3,11 +3,11 @@ import Vue from 'vue';
 / 核心插件
 /-----------------------------------------------------------------------*/
 import App from './App';
-// import { genModelConfigJson } from '@/models/TestModel';
+import models from '@/models/ERPModel';
 /*-----------------------------------------------------------------------
 / 挂载实例
 /-----------------------------------------------------------------------*/
-// genModelConfigJson();
+window.models = models;
 
 new Vue({
   render: h => h(App),
