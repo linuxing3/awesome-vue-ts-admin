@@ -24,6 +24,22 @@ export const defaultItemList: FilterFormList[] = [
     key: 'isActive', type: 'select', label: 'isActive', placeholder: 'isActive',
   },
   {
+    key: 'private',
+    type: 'select',
+    label: 'Private/Public',
+    placeholder: 'private or public',
+    options: [
+      {
+        label: '因公',
+        value: '因公',
+      },
+      {
+        label: '因私',
+        value: '因私',
+      },
+    ],
+  },
+  {
     key: 'holidayList', type: 'input', label: 'holidayList', placeholder: 'holidayList',
   },
 ];
