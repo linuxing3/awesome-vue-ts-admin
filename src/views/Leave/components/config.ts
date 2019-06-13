@@ -1,7 +1,5 @@
 import { tableList, FilterFormList, operate } from '@/interface';
-import LeaveType from '@/models/ERPModel/hr/leave_type.json';
-
-const fields: FilterFormList[] = LeaveType.fields;
+// import LeaveType from '@/models/ERPModel/hr/leave_type/leave_type.json';
 
 /* -------------------------------------------------------------
 | Item list for forms in m-form

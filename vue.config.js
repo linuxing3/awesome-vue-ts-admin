@@ -29,7 +29,7 @@ module.exports = {
     devtool: 'source-map',
   },
   pages: {
-    // index: pages.index,
+    index: pages.index,
     playpage: pages.playpage,
   },
   chainWebpack: (config) => {

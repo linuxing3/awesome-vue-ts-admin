@@ -1,6 +1,6 @@
 import { tableList, FilterFormList, operate } from '@/interface';
 import {
-  entity, classLevel, inOrOut, area,
+  classLevel, inOrOut, area,
 } from '@/utils/constant';
 
 export const defaultItemList: FilterFormList[] = [
@@ -66,17 +66,15 @@ export const defaultItemList: FilterFormList[] = [
   },
   {
     key: 'toEntity',
-    type: 'cascader',
+    type: 'input',
     label: 'toEntity',
     placeholder: 'Input toEntity',
-    options: [...entity],
   },
   {
     key: 'copyEntity',
     type: 'input',
     label: 'copyEntity',
     placeholder: 'Input copyEntity',
-    options: [...entity],
   },
   {
     key: 'attachment',
@@ -139,9 +137,8 @@ export const filterFormItemList: FilterFormList[] = [
   },
   {
     key: 'toEntity',
-    type: 'cascader',
+    type: 'input',
     label: 'To Entity',
-    options: [...entity],
   },
   {
     key: 'keyword',
