@@ -27,10 +27,15 @@ class LeaveForm extends Mixins(FormMixin) {
 
   formValues: any = {}
 
-  itemList: any[] = defaultItemList
+  itemList: FilterFormList[] = defaultItemList
 
   outParams: any = {
     itemList: defaultItemList,
+  }
+
+  save() {
+    const form = this.$refs.MForm as any;
+    this.$log.info(form);
   }
 
   render() {
@@ -42,6 +47,9 @@ class LeaveForm extends Mixins(FormMixin) {
               <a-icon type="ellipsis" style="font-size: 22px" />
             </a>
             <a-menu slot="overlay">
+              <a-menu-item>
+                <a on-click={this.save}>Save</a>
+              </a-menu-item>
               <a-menu-item>
                 <a on-click={this.importOrExport}>Import/Export</a>
               </a-menu-item>

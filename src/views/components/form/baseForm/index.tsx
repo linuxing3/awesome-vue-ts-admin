@@ -1,14 +1,17 @@
 import { Component, Vue } from 'vue-property-decorator';
 import {
-  Form, Input, Select, Radio, Card, Dropdown, Menu, Icon, DatePicker, Button, Modal,
+  Form, Input, Select, Radio, Card, Dropdown, Menu, Icon, DatePicker, Button, Col, Row, Modal,
 } from 'ant-design-vue';
 import lfService from '@/utils/request.localforage';
+import AvatarModal from './AvatarModal';
 import './index.less';
 
 @Component({
   name: 'baseForm',
   components: {
     'a-form': Form,
+    'a-row': Row,
+    'a-col': Col,
     'a-form-item': Form.Item,
     'a-input': Input,
     'a-select': Select,
@@ -22,6 +25,7 @@ import './index.less';
     'a-date-picker': DatePicker,
     'a-button': Button,
     'a-modal': Modal,
+    'avatar-modal': AvatarModal,
   },
   props: {
     Form,
@@ -29,6 +33,8 @@ import './index.less';
 })
 class BaseForm extends Vue {
   modelName: string = 'user'
+
+  showModal: boolean = false;
 
   get id() {
     return this.$route.params.id || -1;
@@ -118,78 +124,108 @@ class BaseForm extends Vue {
     });
   }
 
+  changeAvatar() {
+    this.showModal = true;
+  }
+
+  renderAvatar(): JSX.Element {
+    return (
+      <div class="ant-upload-preview" on-click={this.changeAvatar} >
+        <a-icon type="cloud-upload-o" class="upload-icon"/>
+        <div class="mask">
+          <a-icon type="plus" />
+        </div>
+        <img src='/avatar/man_1.jpg'/>
+      </div>
+    );
+  }
+
   render() {
     const { getFieldDecorator } = this.Form;
     return (
       <div class="base-form-wrap">
-        <a-card title="Base Form">
-          <a-dropdown slot="extra">
-            <a class="ant-dropdown-link">
-              <a-icon type="ellipsis" style="font-size: 22px" />
-            </a>
-            <a-menu slot="overlay">
-              <a-menu-item>
-                <a>Export</a>
-              </a-menu-item>
-            </a-menu>
-          </a-dropdown>
-          <a-form on-submit={this.submit}>
-            <a-form-item {...{ props: this.itemLayout }} label="编号">
-              {getFieldDecorator('id', {
-                rules: [{ required: false, message: '编号' }],
-              })(<a-input placeholder="自动编号" disabled />)}
-            </a-form-item>
-            <a-form-item {...{ props: this.itemLayout }} label="姓名">
-              {getFieldDecorator('name', {
-                rules: [{ required: true, message: '请输入姓名' }],
-              })(<a-input placeholder="请输入姓名" />)}
-            </a-form-item>
-            <a-form-item {...{ props: this.itemLayout }} label="密码">
-              {getFieldDecorator('password', {
-                rules: [{ required: true, message: '请输入密码' }],
-              })(
-                <a-input
-                  prefix-icon="iconfont-lock"
-                  type="password"
-                  placeholder="Please enter a user name"
+        <a-row gutter={20}>
+          <a-col xl={8} lg={8} md={8} sm={12} xs={24}>
+            {this.renderAvatar()}
+          </a-col>
+          <a-col xl={16} lg={16} md={16} sm={12} xs={24}>
+            <a-card title="用户设置">
+              <a-dropdown slot="extra">
+                <a class="ant-dropdown-link">
+                  <a-icon type="ellipsis" style="font-size: 22px" />
+                </a>
+                <a-menu slot="overlay">
+                  <a-menu-item>
+                    <a>Export</a>
+                  </a-menu-item>
+                </a-menu>
+              </a-dropdown>
+              <a-form on-submit={this.submit}>
+                <a-form-item {...{ props: this.itemLayout }} label="编号">
+                  {getFieldDecorator('id', {
+                    rules: [{ required: false, message: '编号' }],
+                  })(<a-input placeholder="自动编号" disabled />)}
+                </a-form-item>
+                <a-form-item {...{ props: this.itemLayout }} label="姓名">
+                  {getFieldDecorator('name', {
+                    rules: [{ required: true, message: '请输入姓名' }],
+                  })(<a-input placeholder="请输入姓名" />)}
+                </a-form-item>
+                <a-form-item {...{ props: this.itemLayout }} label="密码">
+                  {getFieldDecorator('password', {
+                    rules: [{ required: true, message: '请输入密码' }],
+                  })(
+                    <a-input
+                      prefix-icon="iconfont-lock"
+                      type="password"
+                      placeholder="Please enter a user name"
+                    >
+                      <a-icon slot="prefix" type="lock" />
+                    </a-input>,
+                  )}
+                </a-form-item>
+                <a-form-item {...{ props: this.itemLayout }} label="用户名">
+                  {getFieldDecorator('username', {
+                    rules: [{ required: true, message: '请输入用户名' }],
+                  })(<a-input placeholder="请输入客户名" />)}
+                </a-form-item>
+                <a-form-item {...{ props: this.itemLayout }} label="Email">
+                  {getFieldDecorator('email', {
+                    rules: [{ required: false, message: '请输入Email' }],
+                  })(<a-input placeholder="请输入Email" />)}
+                </a-form-item>
+                <a-form-item
+                  {...{ props: this.itemLayout }}
+                  label="Telephone"
                 >
-                  <a-icon slot="prefix" type="lock" />
-                </a-input>,
-              )}
-            </a-form-item>
-            <a-form-item {...{ props: this.itemLayout }} label="用户名">
-              {getFieldDecorator('username', {
-                rules: [{ required: true, message: '请输入用户名' }],
-              })(<a-input placeholder="请输入客户名" />)}
-            </a-form-item>
-            <a-form-item {...{ props: this.itemLayout }} label="Email">
-              {getFieldDecorator('email', {
-                rules: [{ required: false, message: '请输入Email' }],
-              })(<a-input placeholder="请输入Email" />)}
-            </a-form-item>
-            <a-form-item {...{ props: this.itemLayout }} label="Telephone">
-              {getFieldDecorator('telephone', {
-                rules: [{ required: false, message: '请输入电话' }],
-              })(<a-input placeholder="请输入电话" />)}
-            </a-form-item>
-            <a-form-item {...{ props: this.itemLayout }} label="证书">
-              {getFieldDecorator('token', {
-                rules: [{ required: false, message: '请输入证书' }],
-              })(<a-input placeholder="请输入证书" />)}
-            </a-form-item>
-            <a-form-item {...{ props: this.itemLayout }} label="联系地址">
-              {getFieldDecorator('address', {
-                rules: [{ required: false, message: '请输入联系地址' }],
-              })(<a-input placeholder="请输入联系地址" />)}
-              <div class="form-btn-wrap">
-                <a-button type="primary" htmlType="submit">
-                  提交
-                </a-button>
-                <a-button on-click={this.handleReset}>重置</a-button>
-              </div>
-            </a-form-item>
-          </a-form>
-        </a-card>
+                  {getFieldDecorator('telephone', {
+                    rules: [{ required: false, message: '请输入电话' }],
+                  })(<a-input placeholder="请输入电话" />)}
+                </a-form-item>
+                <a-form-item {...{ props: this.itemLayout }} label="证书">
+                  {getFieldDecorator('token', {
+                    rules: [{ required: false, message: '请输入证书' }],
+                  })(<a-input placeholder="请输入证书" />)}
+                </a-form-item>
+                <a-form-item
+                  {...{ props: this.itemLayout }}
+                  label="联系地址"
+                >
+                  {getFieldDecorator('address', {
+                    rules: [{ required: false, message: '请输入联系地址' }],
+                  })(<a-input placeholder="请输入联系地址" />)}
+                  <div class="form-btn-wrap">
+                    <a-button type="primary" htmlType="submit">
+                      提交
+                    </a-button>
+                    <a-button on-click={this.handleReset}>重置</a-button>
+                  </div>
+                </a-form-item>
+              </a-form>
+            </a-card>
+          </a-col>
+        </a-row>
+        <avatar-model visible={this.showModal}></avatar-model>
       </div>
     );
   }

@@ -58,6 +58,27 @@ export const defaultApiList: ApiList = {
     fetchType: 'jsonp',
   },
   // insert more api below
+  // Leave
+  leaveDelete: {
+    url: '/leave/delete',
+    method: 'delete',
+    fetchType: 'json',
+  },
+  leaveUpdate: {
+    url: '/leave/update',
+    method: 'patch',
+    fetchType: 'json',
+  },
+  leaveCreate: {
+    url: '/leave/create',
+    method: 'post',
+    fetchType: 'json',
+  },
+  leaveFetch: {
+    url: '/leave/fetch',
+    method: 'get',
+    fetchType: 'json',
+  },
   // Employee
   employeeDelete: {
     url: '/employee/delete',
@@ -118,27 +139,6 @@ export const defaultApiList: ApiList = {
   },
   userPromotionFetch: {
     url: '/userPromotion/fetch',
-    method: 'get',
-    fetchType: 'json',
-  },
-  // Leave
-  leaveDelete: {
-    url: '/leave/delete',
-    method: 'delete',
-    fetchType: 'json',
-  },
-  leaveUpdate: {
-    url: '/leave/update',
-    method: 'patch',
-    fetchType: 'json',
-  },
-  leaveCreate: {
-    url: '/leave/create',
-    method: 'post',
-    fetchType: 'json',
-  },
-  leaveFetch: {
-    url: '/leave/fetch',
     method: 'get',
     fetchType: 'json',
   },

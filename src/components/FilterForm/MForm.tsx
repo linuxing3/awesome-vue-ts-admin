@@ -58,12 +58,6 @@ class MFormClass extends Vue {
     return this.$route.params.id || -1;
   }
 
-  btnXl: number = 24 - this.itemList.length * 3
-
-  btnlg: number = 24 - this.itemList.length * 3
-
-  btnmd: number = 24 - this.itemList.length * 4
-
   // 弹出窗开关
   setModal: boolean = false
 
@@ -378,7 +372,8 @@ class MFormClass extends Vue {
             <a-button
               on-click={this.reset}
               id={isNormal ? 'formExport' : 'formExport2'}
-              icon="cloud"
+              icon="stop"
+              type="danger"
             >
               Reset
             </a-button>
@@ -391,18 +386,18 @@ class MFormClass extends Vue {
   render() {
     const { getFieldDecorator } = this.Form as any;
     return (
-      <div class="base-form-wrap">
-        <a-card title={`编辑数据: ${this.id}`}>
+      <div>
+        <a-card>
           <a-form>
             {/* Render action buttons */}
             <a-row gutter={20}>
               <a-col
-                class="btn-wrap"
-                xl={this.btnXl}
-                lg={this.btnlg}
-                md={this.btnmd ? this.btnmd : 24}
-                sm={24}
-                xs={24}
+                push={20}
+                xl={4}
+                lg={4}
+                md={6}
+                sm={12}
+                xs={12}
               >
                 {this.renderActionBtn(true)}
               </a-col>

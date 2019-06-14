@@ -15,6 +15,34 @@ export const constantRouterMap: routerItem[] & RouterOptions['routes'] = [
     redirect: '/charts',
   },
   {
+    path: '/helper',
+    name: 'Helper',
+    component: getComponent('helpers/index'),
+    meta: { key: 'helper' },
+    children: [
+      {
+        path: 'export-helper',
+        name: 'ExportHelper',
+        component: getComponent('helpers/components/ExportHelper'),
+        meta: { key: 'ExportHelper' },
+      },
+    ],
+  },
+  {
+    path: '/playground',
+    name: '实验室',
+    component: getComponent('playground/index'),
+    meta: { key: 'Playground' },
+    children: [
+      {
+        path: 'crudForm',
+        name: 'Crud From',
+        component: getComponent('playground/crudForm/index'),
+        meta: { key: 'CrudForm' },
+      },
+    ],
+  },
+  {
     path: '/login',
     name: 'login',
     component: getComponent('login/index'),
@@ -55,23 +83,6 @@ export const asyncRouterMap: routerItem[] = [
     component: getComponent('dashboard/index'),
     permission: true,
     meta: { key: 'Dashboard' },
-  },
-  {
-    path: '/helper',
-    icon: 'dashboard',
-    name: 'Helper',
-    component: getComponent('helpers/index'),
-    permission: true,
-    meta: { key: 'helper' },
-    children: [
-      {
-        path: 'export-helper',
-        name: 'ExportHelper',
-        component: getComponent('helpers/components/ExportHelper'),
-        permission: true,
-        meta: { key: 'ExportHelper' },
-      },
-    ],
   },
   // insert more route below
   // document
@@ -323,7 +334,7 @@ export const asyncRouterMap: routerItem[] = [
   },
   {
     path: '/profile',
-    icon: 'appstore-o',
+    icon: 'setting',
     name: '用户设置',
     component: getComponent('components/index'),
     permission: true,
@@ -352,23 +363,6 @@ export const asyncRouterMap: routerItem[] = [
         component: getComponent('map/trajectory/index'),
         permission: true,
         meta: { key: 'Trajectory' },
-      },
-    ],
-  },
-  {
-    path: '/playground',
-    icon: 'setting',
-    name: '实验室',
-    component: getComponent('playground/index'),
-    permission: true,
-    meta: { key: 'Playground' },
-    children: [
-      {
-        path: 'crudForm',
-        name: 'Crud From',
-        component: getComponent('playground/crudForm/index'),
-        permission: true,
-        meta: { key: 'CrudForm' },
       },
     ],
   },

@@ -27,7 +27,7 @@ class EmployeeForm extends Mixins(FormMixin) {
 
   formValues: any = {}
 
-  itemList: any[] = defaultItemList
+  itemList: FilterFormList[] = defaultItemList
 
   outParams: any = {
     itemList: defaultItemList,

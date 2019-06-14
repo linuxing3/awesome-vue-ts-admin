@@ -1,6 +1,5 @@
 import { Component, Vue } from 'vue-property-decorator';
-import { map } from 'lodash';
-import { months, weekdays } from 'moment';
+import { months } from 'moment';
 import {
   Button, DatePicker, Modal, Row, Col, Card, Icon, Radio,
 } from 'ant-design-vue';
@@ -12,7 +11,6 @@ import { numFormat } from '@/utils/index';
 import {
   countByCategory, initData, yearlyTransformer, typeTransformer,
 } from '@/utils/datetime';
-import { entity } from '@/mock/dashboard';
 import models from '@/models';
 
 import './index.less';
@@ -76,15 +74,14 @@ export default class Dashboard extends Vue {
   }
 
   async created() {
-    await this.fetch();
-    await this.loadData();
-    this.loading = false;
-    setTimeout(() => {
-      this.init();
-    }, 200);
+    await this.refresh();
   }
 
   async activated() {
+    await this.refresh();
+  }
+
+  async refresh() {
     await this.fetch();
     await this.loadData();
     this.loading = false;
@@ -427,9 +424,10 @@ export default class Dashboard extends Vue {
 
   async changeDonut(e) {
     const field = e.target.value;
+    this.$log.info('Donut value changed:', field);
     const leaves = await Leave.all();
     let label = [];
-    console.log('Leave Data:', leaves);
+    this.$log.info('Leave Data:', leaves);
     if (field ==='private') {
       label = ['因私', '因公'];
       this.doughnutData = countByCategory(
@@ -472,6 +470,7 @@ export default class Dashboard extends Vue {
       );
     }
     // donut chart
+    this.$log.info('Leave Statistic:', this.doughnutData);
     this.Doughnut();
   }
 
@@ -490,139 +489,156 @@ export default class Dashboard extends Vue {
     });
   }
 
-  iconList = ['team', 'shopping-cart', 'pay-circle', 'line-chart']
+  iconList = ['team', 'profile', 'calendar', 'folder-open']
 
   loading: boolean = true
+
+  renderDonut(): JSX.Element {
+    return (
+      <a-col span={8} xxl={8} xl={8} lg={24} md={24} sm={24} xs={24}>
+        <a-card loading={this.loading} class="dash-box total-wrap">
+          <h2 class="title">休假统计</h2>
+          <a-icon class="operate" type="ellipsis" />
+          <div class="filter-wrap">
+            <a-radio-group
+              defaultValue="private"
+              buttonStyle="solid"
+              on-change={this.changeDonut}
+            >
+              <a-radio-button value="private">公私</a-radio-button>
+              <a-radio-button value="route">路线</a-radio-button>
+              <a-radio-button value="month">月份</a-radio-button>
+            </a-radio-group>
+            <span class="tips">选择分类</span>
+          </div>
+          <div
+            style="height: 225px; margin-top: 40px"
+            class="chartjs-chart"
+          >
+            <canvas height="100px" id="Doughnut" />
+          </div>
+          <div class="chart-widget-list">
+            {this.doughnutData.labels.map((label, index) => (
+              <p>
+                <i class="mdi mdi-square text-primary" />
+                {label}
+                <span class="fr">{this.doughnutData.data[index]}</span>
+              </p>
+            ))}
+          </div>
+        </a-card>
+      </a-col>
+    );
+  }
+
+  renderCard(): JSX.Element {
+    return (
+      <a-col span={10} xxl={10} xl={10} lg={12} md={24} sm={24} xs={24}>
+        <a-row gutter={{ xs: 8, md: 12, xl: 20 }}>
+          {/* card list grid */}
+          {this.cardList.map((item: any, index: number) => (
+            <a-col
+              {...{ props: this.ColLayout }}
+              class="sub-item"
+              on-click={() => this.changeRoute(item.name)}
+            >
+              <a-card loading={this.loading} class="dash-card">
+                <h3>{this.$t(item.name)}</h3>
+                <a-icon class="icon" type={this.iconList[index]} />
+                <p class="number">{numFormat(item.value)}</p>
+                <div class="footer">
+                  <span class={`s-number ${index % 2 ? 'green' : 'red'}`}>
+                    <a-icon type={index % 2 ? 'arrow-up' : 'arrow-down'} />
+                    {item.number}%
+                  </span>
+                  <span class="txt">Status</span>
+                </div>
+              </a-card>
+            </a-col>
+          ))}
+        </a-row>
+      </a-col>
+    );
+  }
+
+  renderBar(): JSX.Element {
+    return (
+      <a-col
+        span={14}
+        xxl={14}
+        xl={14}
+        lg={12}
+        md={24}
+        sm={24}
+        xs={24}
+        on-click={() => this.changeRoute('document')}
+      >
+        <a-card loading={this.loading} class="dash-box dash-bar-chart">
+          <a-icon class="operate" type="ellipsis" />
+          <h2 class="title">按月统计文档</h2>
+          <div style="height: 263px;" class="chartjs-chart">
+            <canvas height="86px" id="BarChart" />
+          </div>
+        </a-card>
+      </a-col>
+    );
+  }
+
+  renderLine(): JSX.Element {
+    return (
+      <a-col
+        span={16}
+        xxl={16}
+        xl={16}
+        lg={24}
+        md={24}
+        sm={24}
+        xs={24}
+        on-click={() => this.changeRoute('event')}
+      >
+        <a-card loading={this.loading} class="dash-box revenue-chart">
+          <h2 class="title">内外活动统计</h2>
+          <a-icon class="operate" type="ellipsis" />
+          <div class="week-data">
+            <div class="item">
+              <h4 class="item-title">今年</h4>
+              <p class="number">{numFormat(this.lineData.currentYear)}件</p>
+            </div>
+            <div class="item">
+              <h4 class="item-title">去年</h4>
+              <p class="number number2">
+                {numFormat(this.lineData.PreviousYear)}件
+              </p>
+            </div>
+          </div>
+          <div class="float-text">
+            <p class="txt">统计：</p>
+            <p class="tips">...</p>
+            <a-button type="dashed">
+              看图说话 <a-icon type="arrow-right" />
+            </a-button>
+          </div>
+          <div
+            style="height: 364px; margin-top: 40px"
+            class="chartjs-chart"
+          >
+            <canvas height="100px" id="LineChart" />
+          </div>
+        </a-card>
+      </a-col>
+    );
+  }
 
   render() {
     return (
       <div class="container">
         <a-row gutter={{ xs: 8, md: 12, xl: 20 }} class="dash-col">
-          <a-col span={10} xxl={10} xl={10} lg={12} md={24} sm={24} xs={24}>
-            <a-row gutter={{ xs: 8, md: 12, xl: 20 }}>
-              {this.cardList.map((item: any, index: number) => (
-                <a-col
-                  {...{ props: this.ColLayout }}
-                  class="sub-item"
-                  on-click={() => this.changeRoute(item.name)}
-                >
-                  <a-card loading={this.loading} class="dash-card">
-                    <h3>{item.name}</h3>
-                    <a-icon class="icon" type={this.iconList[index]} />
-                    <p class="number">{numFormat(item.value)}</p>
-                    <div class="footer">
-                      <span
-                        class={`s-number ${index % 2 ? 'green' : 'red'}`}
-                      >
-                        <a-icon
-                          type={index % 2 ? 'arrow-up' : 'arrow-down'}
-                        />
-                        {item.number}%
-                      </span>
-                      <span class="txt">Status</span>
-                    </div>
-                  </a-card>
-                </a-col>
-              ))}
-            </a-row>
-          </a-col>
-          <a-col
-            span={14}
-            xxl={14}
-            xl={14}
-            lg={12}
-            md={24}
-            sm={24}
-            xs={24}
-            on-click={() => this.changeRoute('document')}
-          >
-            <a-card loading={this.loading} class="dash-box dash-bar-chart">
-              <a-icon class="operate" type="ellipsis" />
-              <h2 class="title">Document by month</h2>
-              <div style="height: 263px;" class="chartjs-chart">
-                <canvas height="86px" id="BarChart" />
-              </div>
-            </a-card>
-          </a-col>
+          {this.renderCard()}
+          {this.renderBar()}
         </a-row>
         <a-row gutter={{ xs: 8, md: 12, xl: 20 }}>
-          <a-col
-            span={16}
-            xxl={16}
-            xl={16}
-            lg={24}
-            md={24}
-            sm={24}
-            xs={24}
-            on-click={() => this.changeRoute('event')}
-          >
-            <a-card loading={this.loading} class="dash-box revenue-chart">
-              <h2 class="title">活动</h2>
-              <a-icon class="operate" type="ellipsis" />
-              <div class="week-data">
-                <div class="item">
-                  <h4 class="item-title">今年</h4>
-                  <p class="number">
-                    {numFormat(this.lineData.currentYear)}件
-                  </p>
-                </div>
-                <div class="item">
-                  <h4 class="item-title">去年</h4>
-                  <p class="number number2">
-                    {numFormat(this.lineData.PreviousYear)}件
-                  </p>
-                </div>
-              </div>
-              <div class="float-text">
-                <p class="txt">统计：</p>
-                <p class="tips">...</p>
-                <a-button type="dashed">
-                  看图说话 <a-icon type="arrow-right" />
-                </a-button>
-              </div>
-              <div
-                style="height: 364px; margin-top: 40px"
-                class="chartjs-chart"
-              >
-                <canvas height="100px" id="LineChart" />
-              </div>
-            </a-card>
-          </a-col>
-          <a-col
-            span={8}
-            xxl={8}
-            xl={8}
-            lg={24}
-            md={24}
-            sm={24}
-            xs={24}
-          >
-            <a-card loading={this.loading} class="dash-box total-wrap">
-              <h2 class="title">休假统计</h2>
-              <a-icon class="operate" type="ellipsis" />
-              <div class="filter-wrap">
-                <a-radio-group defaultValue="private" buttonStyle="solid" change={this.changeDonut}>
-                  <a-radio-button value="private">公私</a-radio-button>
-                  <a-radio-button value="route">路线</a-radio-button>
-                  <a-radio-button value="month">月份</a-radio-button>
-                </a-radio-group>
-                <span class="tips">选择分类</span>
-              </div>
-              <div
-                style="height: 225px; margin-top: 40px"
-                class="chartjs-chart"
-              >
-                <canvas height="100px" id="Doughnut" />
-              </div>
-              <div class="chart-widget-list">
-                {this.doughnutData.labels.map((label, index) => (
-                  <p>
-                    <i class="mdi mdi-square text-primary" />{label}
-                    <span class="fr">{this.doughnutData.data[index]}</span>
-                  </p>))}
-              </div>
-            </a-card>
-          </a-col>
+          {this.renderLine()}
+          {this.renderDonut()}
         </a-row>
       </div>
     );
