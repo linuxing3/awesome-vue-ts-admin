@@ -1,6 +1,6 @@
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue, Emit } from 'vue-property-decorator';
 import {
-  Form, Input, Select, Radio, Card, Dropdown, Menu, Icon, DatePicker, Button, Col, Row, Modal,
+  Form, Input, Select, Radio, Card, Dropdown, Menu, Icon, DatePicker, Button, Col, Row, Modal, Avatar,
 } from 'ant-design-vue';
 import lfService from '@/utils/request.localforage';
 import AvatarModal from './AvatarModal';
@@ -25,6 +25,7 @@ import './index.less';
     'a-date-picker': DatePicker,
     'a-button': Button,
     'a-modal': Modal,
+    'a-avatar': Avatar,
     'avatar-modal': AvatarModal,
   },
   props: {
@@ -33,6 +34,8 @@ import './index.less';
 })
 class BaseForm extends Vue {
   modelName: string = 'user'
+
+  avatarUrl: string = '/avatar/man_1.jpg'
 
   showModal: boolean = false;
 
@@ -124,18 +127,20 @@ class BaseForm extends Vue {
     });
   }
 
-  changeAvatar() {
-    this.showModal = true;
+  @Emit()
+  changeAvatar(avatarUrl) {
+    this.avatarUrl = avatarUrl;
+    this.toggleModal();
+  }
+
+  toggleModal() {
+    this.showModal = !this.showModal;
   }
 
   renderAvatar(): JSX.Element {
     return (
-      <div class="ant-upload-preview" on-click={this.changeAvatar} >
-        <a-icon type="cloud-upload-o" class="upload-icon"/>
-        <div class="mask">
-          <a-icon type="plus" />
-        </div>
-        <img src='/avatar/man_1.jpg'/>
+      <div on-click={this.toggleModal} >
+        <a-avatar size={256} src={this.avatarUrl}></a-avatar>
       </div>
     );
   }
@@ -144,22 +149,24 @@ class BaseForm extends Vue {
     const { getFieldDecorator } = this.Form;
     return (
       <div class="base-form-wrap">
-        <a-row gutter={20}>
-          <a-col xl={8} lg={8} md={8} sm={12} xs={24}>
-            {this.renderAvatar()}
-          </a-col>
-          <a-col xl={16} lg={16} md={16} sm={12} xs={24}>
-            <a-card title="用户设置">
-              <a-dropdown slot="extra">
-                <a class="ant-dropdown-link">
-                  <a-icon type="ellipsis" style="font-size: 22px" />
-                </a>
-                <a-menu slot="overlay">
-                  <a-menu-item>
-                    <a>Export</a>
-                  </a-menu-item>
-                </a-menu>
-              </a-dropdown>
+        <a-card title="用户设置">
+          {/* extra slot button */}
+          <a-dropdown slot="extra">
+            <a class="ant-dropdown-link">
+              <a-icon type="ellipsis" style="font-size: 22px" />
+            </a>
+            <a-menu slot="overlay">
+              <a-menu-item>
+                <a>Export</a>
+              </a-menu-item>
+            </a-menu>
+          </a-dropdown>
+          {/* content */}
+          <a-row gutter={20}>
+            <a-col xl={8} lg={8} md={8} sm={12} xs={24}>
+              {this.renderAvatar()}
+            </a-col>
+            <a-col xl={16} lg={16} md={16} sm={12} xs={24}>
               <a-form on-submit={this.submit}>
                 <a-form-item {...{ props: this.itemLayout }} label="编号">
                   {getFieldDecorator('id', {
@@ -222,10 +229,10 @@ class BaseForm extends Vue {
                   </div>
                 </a-form-item>
               </a-form>
-            </a-card>
-          </a-col>
-        </a-row>
-        <avatar-model visible={this.showModal}></avatar-model>
+            </a-col>
+          </a-row>
+        </a-card>
+        <avatar-modal visible={this.showModal} />
       </div>
     );
   }

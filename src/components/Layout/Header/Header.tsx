@@ -1,13 +1,17 @@
 import {
   Component, Prop, Emit, Vue, Watch,
 } from 'vue-property-decorator';
+import moment from 'moment';
 import {
-  Badge, Dropdown, Breadcrumb, Popover, Icon, Menu,
+  Badge, Dropdown, Breadcrumb, Popover, Icon, Menu, Timeline,
 } from 'ant-design-vue';
 import { routerItem } from '@/interface';
 import { routeToArray } from '@/utils';
 import MenuList from '@/components/Layout/Sidebar/MenuList';
+import models from '@/models';
 import './Header.less';
+
+const Event = models.event;
 
 interface breadItem {
   url: string,
@@ -16,29 +20,39 @@ interface breadItem {
 
 @Component({
   components: {
+    'menu-list': MenuList,
     'a-badge': Badge,
     'a-dropdown': Dropdown,
+    'a-menu': Menu,
     'a-menu-item': Menu.Item,
+    'a-menu-divider': Menu.Divider,
     'a-breadcrumb': Breadcrumb,
     'a-breadcrumb-item': Breadcrumb.Item,
     'a-popover': Popover,
-    'menu-list': MenuList,
+    'a-timeline': Timeline,
+    'a-timeline-item': Timeline.Item,
     'a-icon': Icon,
-    'a-menu-divider': Menu.Divider,
-    'a-menu': Menu,
   },
 })
 export default class Header extends Vue {
   // @Prop() private username!: string;
-
   // data
-  username: string = 'admin';
+  username: string = 'admin'
 
-  menuData: routerItem[] = [];
+  menuData: routerItem[] = []
 
-  breadList: breadItem[] = [];
+  breadList: breadItem[] = []
 
-  onIndex: number = 0;
+  onIndex: number = 0
+
+  showNotification = false;
+
+  get notifications(): any[] {
+    const today = moment().format('l');
+    return Event.query()
+      .where('date', today)
+      .get();
+  }
 
   get id() {
     return this.$store.getters.currentUser.id;
@@ -66,7 +80,7 @@ export default class Header extends Vue {
           url: item.path,
           text: item.name ? item.name : '',
         });
-        if (item.children && (toDepth.length - 1) >= this.onIndex) {
+        if (item.children && toDepth.length - 1 >= this.onIndex) {
           this.onIndex += 1;
           this.routerBread(item.children, toDepth);
         }
@@ -76,7 +90,7 @@ export default class Header extends Vue {
   }
 
   @Emit()
-  menuClick(params: {item: any, key: string, keyPath: string[]}): void {
+  menuClick(params: { item: any; key: string; keyPath: string[] }): void {
     const self = this;
     switch (params.key) {
       case '1':
@@ -97,10 +111,9 @@ export default class Header extends Vue {
         break;
       case '3':
         // Cookies.remove('token');
-        this.$store.dispatch('logout')
-          .then(() => {
-            this.$router.push('/login');
-          });
+        this.$store.dispatch('logout').then(() => {
+          this.$router.push('/login');
+        });
         break;
       default:
         break;
@@ -109,8 +122,18 @@ export default class Header extends Vue {
 
   @Emit()
   notificationClick(): void {
+    this.showNotification = !this.showNotification;
+  }
+
+  @Emit()
+  showEvent(item): void {
+    const today = moment().format('l');
+    const event: any = Event.query().where('title', item.title).where('date', today).get()[0];
     this.$router.push({
-      name: 'ProfileBaseForm',
+      name: 'EventForm',
+      params: {
+        id: event.id,
+      },
     });
   }
 
@@ -121,13 +144,22 @@ export default class Header extends Vue {
 
   render() {
     this.username = this.$store.getters.currentUser.username;
-    const { menuData, sidebar: { opened }, isMobile } = this.$store.state.app;
+    const {
+      menuData,
+      sidebar: { opened },
+      isMobile,
+    } = this.$store.state.app;
     this.menuData = menuData;
     return (
       <header class="header-wrap">
         <div class="header-left">
           {isMobile ? (
-            <a-popover placement="bottom" title="" width="300" trigger="click">
+            <a-popover
+              placement="bottom"
+              title=""
+              width="300"
+              trigger="click"
+            >
               <menu-list slot="content" bgColor="#fff" txtColor="#898989" />
               <i class="menu-btn iconfont-listMenu" />
             </a-popover>
@@ -149,12 +181,33 @@ export default class Header extends Vue {
         </div>
         <ul class="header-menu">
           <li>
-            <a-badge count={2} class="item">
-              <a-icon type="inbox" size="large" on-click={this.notificationClick} />
-            </a-badge>
+            <a-dropdown>
+              <span class="ant-dropdown-link">
+                <a-badge count={this.notifications.length} class="item">
+                  <a-icon
+                    type="inbox"
+                    size="large"
+                    on-click={this.notificationClick}
+                  />
+                </a-badge>
+              </span>
+              <a-timeline slot="overlay">
+                {this.notifications.map((event, index) => (
+                  <a-timeline-item
+                    index={index}
+                    on-click={() => this.showEvent(event)}
+                  >
+                    {event.title}
+                  </a-timeline-item>
+                ))}
+              </a-timeline>
+            </a-dropdown>
           </li>
           <li>
-            <a href="https://github.com/linuxing3/awesome-vue-ts-admin" target="_blank">
+            <a
+              href="https://github.com/linuxing3/awesome-vue-ts-admin"
+              target="_blank"
+            >
               <a-icon type="github" />
             </a>
           </li>
@@ -162,7 +215,7 @@ export default class Header extends Vue {
             <a-dropdown>
               <span class="ant-dropdown-link">
                 <a-icon type="user" />
-                <span class="name">{ this.username }</span>
+                <span class="name">{this.username}</span>
               </span>
               <a-menu slot="overlay" on-click={this.menuClick}>
                 <a-menu-item key="1">个人中心</a-menu-item>

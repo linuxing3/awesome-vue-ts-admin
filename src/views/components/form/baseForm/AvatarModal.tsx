@@ -4,6 +4,7 @@ import {
   Col,
   Row,
   Modal,
+  Carousel
 } from 'ant-design-vue';
 
 @Component({
@@ -12,86 +13,64 @@ import {
     'a-col': Col,
     'a-button': Button,
     'a-modal': Modal,
+    'a-carousel': Carousel,
   },
 })
 export default class AvatarMoal extends Vue {
-  @Prop()
-  visible = false
+  @Prop({ default: false })
+  private visible!: boolean
 
   id = null
 
+  avatarList = ['/avatar/man_1.jpg', '/avatar/man_2.jpg', '/avatar/man_3.jpg']
+
+  chosenAvatarUrl = ''
+
   confirmLoading = false
 
-  options = {
-    img: '/avatar/man_2.jpg',
-    autoCrop: true,
-    autoCropWidth: 200,
-    autoCropHeight: 200,
-    fixedBox: true,
+  chooseAvatar(avatarUrl) {
+    this.chosenAvatarUrl = avatarUrl;
   }
 
-  previews: {
-    url: '/avatar/man_2.jpg'
-  }
-
-  edit(id) {
-    this.visible = true;
-    this.id = id;
-  }
-
-  close() {
-    this.id = null;
-    this.visible = false;
-  }
-
-  cancelHandel() {
-    this.close();
-  }
-
-  okHandel() {
-    const vm = this;
-    vm.confirmLoading = true;
+  handleOk() {
+    this.confirmLoading = true;
+    this.$emit('change-avatar', this.chosenAvatarUrl);
     setTimeout(() => {
-      vm.confirmLoading = false;
-      vm.close();
-      vm.$message.success('上传头像成功');
+      this.confirmLoading = false;
+      this.$message.success('成功');
     }, 2000);
-  }
-
-  realTime(data) {
-    this.previews = data;
   }
 
   render() {
     const {
-      visible, confirmLoading, previews, okHandel, cancelHandel,
+      visible,
+      confirmLoading,
+      chooseAvatar,
+      handleOk,
     } = this;
     return (
       <a-modal
         title="修改头像"
         visible={visible}
-        maskClosable="false"
+        maskClosable={true}
         confirmLoading={confirmLoading}
-        width="800"
-        on-cancel={this.cancelHandel}
+        width="360"
       >
         <a-row>
-          <a-col xs="24" md="12" style="{height: '350px'}">
-            <div class="avatar-upload-preview">
-              <img src={previews.url} />
-            </div>
-          </a-col>
+          <a-carousel>
+            {this.avatarList.map(avatarUrl => (
+              <div on-click={() => chooseAvatar(avatarUrl)}>
+                <img size={300} src={avatarUrl} />
+              </div>
+            ))}
+          </a-carousel>
         </a-row>
-
         <div slot="footer">
-          <a-button key="back" on-click={cancelHandel}>
-            取消
-          </a-button>
           <a-button
             key="submit"
             type="primary"
             loading={confirmLoading}
-            on-click={okHandel}
+            on-click={handleOk}
           >
             保存
           </a-button>
