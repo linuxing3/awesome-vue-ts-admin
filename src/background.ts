@@ -1,2 +1,3 @@
-import ecv from './playpage/main';
-ecv.init({ isPlay: true });
+import ECVApp from './playpage/main';
+const ecv = new ECVApp();
+ecv.init({ isPlay: false });

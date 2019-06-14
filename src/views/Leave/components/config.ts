@@ -40,6 +40,26 @@ export const defaultItemList: FilterFormList[] = [
     ],
   },
   {
+    key: 'route',
+    type: 'select',
+    label: 'route',
+    placeholder: 'Input route',
+    options: [
+      {
+        label: '美国',
+        value: '美国',
+      },
+      {
+        label: '欧洲',
+        value: '欧洲',
+      },
+      {
+        label: '其他',
+        value: '其他',
+      },
+    ],
+  },
+  {
     key: 'holidayList', type: 'input', label: 'holidayList', placeholder: 'holidayList',
   },
 ];
@@ -48,27 +68,17 @@ export const defaultItemList: FilterFormList[] = [
 | Field list for tables in filter-table
 |-------------------------------------------------------------*/
 export const tableFieldsList: tableList[] = [
-  {
-    title: 'Name',
-    dataIndex: 'name',
-  },
   { title: 'Applicant', dataIndex: 'applicant' },
   { title: 'From Date', dataIndex: 'fromDate' },
   { title: 'To Date', dataIndex: 'toDate' },
-  { title: 'Is Active', dataIndex: 'isActive' },
-  { title: 'Holiday List', dataIndex: 'holidayList' },
+  { title: 'Route', dataIndex: 'route' },
+  { title: 'private', dataIndex: 'private' },
 ];
 
 /* -------------------------------------------------------------
 | Item list for filter forms in filter-table
 |-------------------------------------------------------------*/
 export const filterFormItemList: FilterFormList[] = [
-  {
-    key: 'id',
-    type: 'input',
-    label: 'id',
-    placeholder: 'Leave it untouched!',
-  },
   {
     key: 'applicant', type: 'input', label: 'applicant', placeholder: 'applicant',
   },
@@ -77,12 +87,6 @@ export const filterFormItemList: FilterFormList[] = [
   },
   {
     key: 'toDate', type: 'date', label: 'toDate', placeholder: 'toDate',
-  },
-  {
-    key: 'isActive', type: 'select', label: 'isActive', placeholder: 'isActive',
-  },
-  {
-    key: 'holidayList', type: 'input', label: 'holidayList', placeholder: 'holidayList',
   },
 ];
 

@@ -1,24 +1,18 @@
 import {
-  app, shell, Menu, MenuItemConstructorOptions,
+  app, shell, Menu, MenuItemConstructorOptions, BrowserWindow,
 } from 'electron';
-import windowManager from './windowManager';
+import MainWindows from './mainWindow';
 
 const menuTemplates: MenuItemConstructorOptions[] = [
   {
     label: 'File',
     submenu: [
       {
-        label: 'New Connection Window',
+        label: 'New Graphql',
         accelerator: 'CmdOrCtrl+N',
         click() {
-          windowManager.create();
-        },
-      },
-      {
-        label: 'New Connection Tab',
-        accelerator: 'CmdOrCtrl+T',
-        click() {
-          windowManager.current.webContents.send('action', 'createInstance');
+          const newWin = new MainWindows({});
+          newWin.loadURL('http://127.0.0.1:4000/graphql');
         },
       },
       {
@@ -28,14 +22,14 @@ const menuTemplates: MenuItemConstructorOptions[] = [
         label: 'Close Window',
         accelerator: 'Shift+CmdOrCtrl+W',
         click() {
-          windowManager.current.close();
+          BrowserWindow.getFocusedWindow().close();
         },
       },
       {
-        label: 'Close Tab',
-        accelerator: 'CmdOrCtrl+W',
+        label: 'Print',
+        accelerator: 'Shift+CmdOrCtrl+P',
         click() {
-          windowManager.current.webContents.send('action', 'delInstance');
+          BrowserWindow.getFocusedWindow().webContents.print();
         },
       },
     ],
@@ -206,23 +200,5 @@ if (process.platform === 'darwin') {
 }
 
 const menu = Menu.buildFromTemplate(menuTemplates);
-
-if (process.env.NODE_ENV === 'production') {
-  const { submenu } = menu.items[baseIndex + 2] as any;
-  submenu.items[0].visible = false;
-  submenu.items[2].visible = false;
-}
-
-const { submenu } = menu.items[baseIndex + 0] as any;
-windowManager.on('blur', () => {
-  submenu.items[3].enabled = false;
-  submenu.items[4].enabled = false;
-});
-
-windowManager.on('focus', () => {
-  const { submenu } = menu.items[baseIndex + 0] as any;
-  submenu.items[3].enabled = true;
-  submenu.items[4].enabled = true;
-});
 
 export default menu;

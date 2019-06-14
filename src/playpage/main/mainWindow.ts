@@ -1,32 +1,37 @@
 import {
-  app, BrowserWindow, globalShortcut, BrowserWindowConstructorOptions,
+  app, BrowserWindow, globalShortcut, shell,
 } from 'electron';
 import { writeFile } from 'fs';
 import { resolve } from 'path';
 
 export default class MainWindows {
+  windows = new Set<BrowserWindow>()
+
   browserWindow: BrowserWindow = null
 
   printPdfPath: string = ''
 
-  constructor() {
+  constructor(options) {
     this.browserWindow = null;
-    this.createBrowserWindow();
+    this.createBrowserWindow(options);
     this.addEventListener();
     this.printPdfPath = resolve(app.getPath('home'), '/print/pdf') || '';
   }
 
-  createBrowserWindow() {
-    const options: BrowserWindowConstructorOptions = {
-      width: 1000,
-      height: 600,
-      webPreferences: {
-        javascript: true,
-        plugins: true,
-        nodeIntegration: true,
-      },
-    };
+  get current() {
+    return BrowserWindow.getFocusedWindow();
+  }
+
+  createBrowserWindow(options) {
     this.browserWindow = new BrowserWindow(options);
+    this.registerWindow(this.browserWindow);
+  }
+
+  registerWindow(win: BrowserWindow): void {
+    this.windows.add(win);
+    win.on('closed', () => {
+      this.windows.delete(win);
+    });
   }
 
   addEventListener() {
@@ -130,19 +135,28 @@ export default class MainWindows {
         if (error) throw error;
         writeFile(this.printPdfPath, data, (error) => {
           if (error) alert('write pdf file error');
+          shell.openExternal(this.printPdfPath);
         });
       });
     });
     // Print
     globalShortcut.register('CommandOrControl+P', () => {
-      window.print();
-      // that.browserWindow.webContents.print({}, (success) => {
-      //   if(!success) alert('Print error')
-      // })
+      // window.print();
+      that.browserWindow.webContents.print({}, (success) => {
+        if (!success) alert('Print error');
+      });
     });
   }
 
   unregisterglobalShortcut() {
     globalShortcut.unregisterAll();
+  }
+
+  dispatch(action: string, args: any) {
+    this.windows.forEach((win) => {
+      if (win && win.webContents) {
+        win.webContents.send('action', action, args);
+      }
+    });
   }
 }

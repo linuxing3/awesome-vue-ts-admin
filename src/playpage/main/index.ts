@@ -6,7 +6,6 @@ import {
   installVueDevtools,
 } from 'vue-cli-plugin-electron-builder/lib';
 import MainWindows from './mainWindow';
-import windowManager from './windowManager';
 import menu from './menu';
 
 import utils from './utils';
@@ -41,16 +40,6 @@ class ECVApp {
 
   addIpcEventListener() {
     const that = this;
-
-    ipcMain.on(utils.ipcChan.createPlayground, (event, arg) => {
-      const playWin = windowManager.create('playground', arg);
-      // newWindow.loadFile(path.resolve(__dirname, `${type}.html`))
-      this.loadUrl(playWin);
-    });
-
-    ipcMain.on(utils.ipcChan.dispatch, (event, action, arg) => {
-      windowManager.dispatch(action, arg);
-    });
 
     ipcMain.on(utils.ipcChan.renderSendResizeToMain, () => {
       that.mainWindow.resize();
@@ -94,6 +83,8 @@ class ECVApp {
       if (arg.showMenu) {
         console.log('async-show-menu send arg: ', arg);
         const menu = Menu.buildFromTemplate(arg.template);
+        Menu.setApplicationMenu(menu);
+      } else {
         Menu.setApplicationMenu(menu);
       }
       event.sender.send(utils.ipcChan.setAppMenu, {
@@ -139,8 +130,6 @@ class ECVApp {
         await this.installDevtools();
         this.loadUrl(this.mainWindow);
       }
-      // set menu
-      Menu.setApplicationMenu(menu);
     });
   }
 
@@ -180,11 +169,24 @@ class ECVApp {
   }
 
   createMainWindow() {
-    this.mainWindow = new MainWindows();
+    const options = {
+      width: 1000,
+      height: 600,
+      webPreferences: {
+        javascript: true,
+        plugins: true,
+        nodeIntegration: true,
+      },
+    };
+    this.mainWindow = new MainWindows(options);
   }
 
   createPlayWindow() {
-    this.playWindow = new MainWindows();
+    const options = {
+      width: 800,
+      height: 600,
+    };
+    this.playWindow = new MainWindows(options);
   }
 
   exit() {
@@ -193,6 +195,4 @@ class ECVApp {
 }
 
 // bootstrap
-const ecv = new ECVApp();
-export default ecv;
-// ecv.init({ isPlay: false })
+export default ECVApp;

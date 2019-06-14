@@ -334,7 +334,9 @@ export const yearlyTransformer = (sourceDv, checkDv, options) => {
 };
 
 /**
- * 获取数据集中某一【日期】列，转化为月，并按月计数
+ * 获取数据集中某一【日期】列，转化为【月】，并按月计数
+ * 同样可以转化为【年】，分类计数
+ * 或者不转化，根据不同唯一值分类计数
  * @param {any} state dv reactive state
  * @param {array} data array of object
  * @param {object} options field, as, operate, etc

@@ -425,6 +425,56 @@ export default class Dashboard extends Vue {
     this.DoughnutDom = new Chart(Doughnut.getContext('2d'), config);
   }
 
+  async changeDonut(e) {
+    const field = e.target.value;
+    const leaves = await Leave.all();
+    let label = [];
+    console.log('Leave Data:', leaves);
+    if (field ==='private') {
+      label = ['因私', '因公'];
+      this.doughnutData = countByCategory(
+        leaves,
+        {
+          field,
+          operate: 'count',
+          x: 'x',
+          y: 'y',
+        },
+        label,
+        initData,
+        typeTransformer,
+      );
+    }
+    if (field ==='route') {
+      label = ['美国', '欧洲', '其他'];
+      this.doughnutData = countByCategory(
+        leaves,
+        {
+          field,
+          operate: 'count',
+          x: 'x',
+          y: 'y',
+        },
+        label,
+        initData,
+        typeTransformer,
+      );
+    }
+    if (field ==='month') {
+      this.doughnutData = countByCategory(
+        leaves,
+        {
+          field: 'fromDate',
+          operate: 'count',
+          x: 'x',
+          y: 'y',
+        },
+      );
+    }
+    // donut chart
+    this.Doughnut();
+  }
+
   ColLayout: any = {
     span: 12,
     lg: 12,
@@ -546,16 +596,15 @@ export default class Dashboard extends Vue {
             md={24}
             sm={24}
             xs={24}
-            on-click={() => this.changeRoute('leave')}
           >
             <a-card loading={this.loading} class="dash-box total-wrap">
               <h2 class="title">休假统计</h2>
               <a-icon class="operate" type="ellipsis" />
               <div class="filter-wrap">
-                <a-radio-group defaultValue="a" buttonStyle="solid">
-                  <a-radio-button value="a">公私</a-radio-button>
-                  <a-radio-button value="c">路线</a-radio-button>
-                  <a-radio-button value="c">月份</a-radio-button>
+                <a-radio-group defaultValue="private" buttonStyle="solid" change={this.changeDonut}>
+                  <a-radio-button value="private">公私</a-radio-button>
+                  <a-radio-button value="route">路线</a-radio-button>
+                  <a-radio-button value="month">月份</a-radio-button>
                 </a-radio-group>
                 <span class="tips">选择分类</span>
               </div>
@@ -566,14 +615,11 @@ export default class Dashboard extends Vue {
                 <canvas height="100px" id="Doughnut" />
               </div>
               <div class="chart-widget-list">
-                <p>
-                  <i class="mdi mdi-square text-primary" /> 因公
-                  <span class="fr">{this.doughnutData.data[0]}</span>
-                </p>
-                <p>
-                  <i class="mdi mdi-square text-success" /> 因私
-                  <span class="fr">{this.doughnutData.data[1]}</span>
-                </p>
+                {this.doughnutData.labels.map((label, index) => (
+                  <p>
+                    <i class="mdi mdi-square text-primary" />{label}
+                    <span class="fr">{this.doughnutData.data[index]}</span>
+                  </p>))}
               </div>
             </a-card>
           </a-col>
