@@ -28,15 +28,15 @@ export const defaultItemList: FilterFormList[] = [
   },
   {
     key: 'startTime',
-    type: 'datetime',
+    type: 'input',
     label: 'startTime',
-    placeholder: 'Input startTime',
+    placeholder: 'As 10:00',
   },
   {
     key: 'duration',
     type: 'input',
     label: 'duration',
-    placeholder: 'Input duration',
+    placeholder: 'As 30 m',
   },
   {
     key: 'applicant',

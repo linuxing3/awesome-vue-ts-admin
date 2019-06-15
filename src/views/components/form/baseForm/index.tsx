@@ -45,12 +45,12 @@ class BaseForm extends Vue {
 
   itemLayout = {
     labelCol: {
-      xs: { span: 24 },
-      sm: { span: 8 },
+      xs: { span: 6 },
+      sm: { span: 6 },
     },
     wrapperCol: {
-      xs: { span: 12 },
-      sm: { span: 6 },
+      xs: { span: 16 },
+      sm: { span: 16 },
     },
   }
 
@@ -163,11 +163,11 @@ class BaseForm extends Vue {
           </a-dropdown>
           {/* content */}
           <a-row gutter={20}>
-            <a-col xl={8} lg={8} md={8} sm={12} xs={24}>
+            <a-col xl={8} lg={8} md={8} sm={8} xs={24}>
               {this.renderAvatar()}
             </a-col>
-            <a-col xl={16} lg={16} md={16} sm={12} xs={24}>
-              <a-form on-submit={this.submit}>
+            <a-col xl={16} lg={16} md={16} sm={16} xs={24}>
+              <a-form layout="horizontal" on-submit={this.submit}>
                 <a-form-item {...{ props: this.itemLayout }} label="编号">
                   {getFieldDecorator('id', {
                     rules: [{ required: false, message: '编号' }],

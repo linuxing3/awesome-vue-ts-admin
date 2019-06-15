@@ -34,7 +34,7 @@ class Login extends Vue {
   }
 
   @Emit()
-  submitForm() {
+  login() {
     this.Form.validateFields((err: any, values: object) => {
       if (!err) {
         this.loading = true;
@@ -70,58 +70,89 @@ class Login extends Vue {
     });
   }
 
+  @Emit()
+  register() {
+    this.Form.validateFields((err: any, values: object) => {
+      if (!err) {
+        this.loading = true;
+        this.$store.dispatch('registerByName', values)
+          .then((res) => {
+            this.$log.suc('response from registerByName', res);
+            this.loading = false;
+            const {
+              result: { resultCode, resultMessage },
+            } = res.data;
+            if (resultCode !== 0) {
+              this.$message.error(resultMessage || 'unkown error');
+            } else {
+              this.$message.success(resultMessage);
+            }
+          })
+          .catch((errs: any) => {
+            this.loading = false;
+            this.$message.error(errs.message);
+          });
+        return true;
+      }
+      return false;
+    });
+  }
+
   render() {
     const { getFieldDecorator } = this.Form;
     return (
       <div class="loginWrap">
         <h2 class="loginTxt">
-          WELCOME
+          通用管理系统
           <br />
-          EM-VE-ADMIN
+          ADMIN SYSTEM
         </h2>
         <div class="loginForm">
           <div class="logo">
             <img alt="logo" src={require('../../assets/logo.svg')} />
             <span>{config.name}</span>
           </div>
-          <a-form ref="loginForm" on-submit={this.submitForm}>
-            <a-form-item>
+          <a-form ref="loginForm">
+            <a-form-item id="username">
               {getFieldDecorator('username', {
-                rules: [{ required: true, message: 'Please enter a user name' }],
+                rules: [{ required: true, message: '请输入用户名' }],
               })(
                 <a-input
                   id="username"
                   prefix-icon="iconfont-user"
-                  placeholder="Please enter a user name"
+                  placeholder="请输入用户名"
                 >
                   <a-icon slot="prefix" type="user" />
                 </a-input>,
               )}
             </a-form-item>
-            <a-form-item>
+            <a-form-item id="password">
               {getFieldDecorator('password', {
-                rules: [{ required: true, message: 'Please enter a password' }],
+                rules: [{ required: true, message: '请输入密码' }],
               })(
                 <a-input
                   id="password"
                   prefix-icon="iconfont-lock"
                   type="password"
-                  on-pressEnter={this.submitForm}
-                  placeholder="Please enter a user password"
+                  on-pressEnter={this.login}
+                  placeholder="请输入密码"
                 >
                   <a-icon slot="prefix" type="lock" />
                 </a-input>,
               )}
             </a-form-item>
-            <a-form-item>
-              <a-button loading={this.loading} type="primary" on-click={this.submitForm}>
-                Login
+            <a-form-item id="loginButton">
+              <a-button loading={this.loading} type="primary" on-click={this.login}>
+                登录 / Login
+              </a-button>
+              <a-button loading={this.loading} type="default" on-click={this.register}>
+                注册 / Register
               </a-button>
             </a-form-item>
           </a-form>
-          <div class="tips" hidden={true}>
-            <span>username：...</span>
-            <span class="right">password：...</span>
+          <div class="tips">
+            <span>已有用户请登录</span>
+            <span class="right">新用户请注册</span>
           </div>
         </div>
       </div>

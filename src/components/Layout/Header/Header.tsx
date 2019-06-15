@@ -3,13 +3,15 @@ import {
 } from 'vue-property-decorator';
 import moment from 'moment';
 import {
-  Badge, Dropdown, Breadcrumb, Popover, Icon, Menu, Timeline,
+  Badge, Dropdown, Breadcrumb, Popover, Icon, Menu, Timeline, Card, Input, Tag,
 } from 'ant-design-vue';
 import { routerItem } from '@/interface';
 import { routeToArray } from '@/utils';
 import MenuList from '@/components/Layout/Sidebar/MenuList';
 import models from '@/models';
 import './Header.less';
+import { lazyFilter, checkStringMatch } from '@/utils/helper';
+import { title } from 'change-case';
 
 const Event = models.event;
 
@@ -21,6 +23,8 @@ interface breadItem {
 @Component({
   components: {
     'menu-list': MenuList,
+    'a-input': Input,
+    'a-tag': Tag,
     'a-badge': Badge,
     'a-dropdown': Dropdown,
     'a-menu': Menu,
@@ -32,6 +36,7 @@ interface breadItem {
     'a-timeline': Timeline,
     'a-timeline-item': Timeline.Item,
     'a-icon': Icon,
+    'a-card': Card,
   },
 })
 export default class Header extends Vue {
@@ -39,7 +44,25 @@ export default class Header extends Vue {
   // data
   username: string = 'admin'
 
-  menuData: routerItem[] = []
+  get menuData(): routerItem[] {
+    return this.$store.state.app.menuData;
+  }
+
+  get routerData() {
+    this.$log.info(this.menuData);
+    return this.menuData.reduce((routes, menu) => {
+      if (menu.children) {
+        menu.children.forEach((child) => {
+          routes.push({
+            name: child.name,
+          });
+        });
+      }
+      return routes;
+    }, []);
+  }
+
+  filteredRouter: any[] = []
 
   breadList: breadItem[] = []
 
@@ -51,6 +74,7 @@ export default class Header extends Vue {
     const today = moment().format('l');
     return Event.query()
       .where('date', today)
+      .orderBy('startTime')
       .get();
   }
 
@@ -121,8 +145,17 @@ export default class Header extends Vue {
   }
 
   @Emit()
-  notificationClick(): void {
+  search(e): void {
+    e.preventDefault();
+    // do search logic
+    const filter = e.target.value;
+    this.filteredRouter = lazyFilter(filter)(this.routerData);
+  }
+
+  @Emit()
+  notificationClick(params: { item: any; key: string; keyPath: string[] }): void {
     this.showNotification = !this.showNotification;
+    // this.showEvent(params.item);
   }
 
   @Emit()
@@ -138,6 +171,14 @@ export default class Header extends Vue {
   }
 
   @Emit()
+  showRouter(router: {name: string}): void {
+    this.$log.info('Go to router ', router.name);
+    this.$router.push({
+      name: router.name,
+    });
+  }
+
+  @Emit()
   switchSidebar(): void {
     this.$store.dispatch('ToggleSideBar');
   }
@@ -145,11 +186,9 @@ export default class Header extends Vue {
   render() {
     this.username = this.$store.getters.currentUser.username;
     const {
-      menuData,
       sidebar: { opened },
       isMobile,
     } = this.$store.state.app;
-    this.menuData = menuData;
     return (
       <header class="header-wrap">
         <div class="header-left">
@@ -180,6 +219,23 @@ export default class Header extends Vue {
           )}
         </div>
         <ul class="header-menu">
+          <li style="width: 200px;">
+            <a-dropdown>
+              <span>
+                <a-input prefix-icon="iconfont-search" on-change={this.search}></a-input>
+              </span>
+              <a-menu slot="overlay">
+              {this.filteredRouter.map((router) => {
+                const name = title(router.name);
+                return (
+                  <a-menu-item key={name} title={name} on-click={() => this.showRouter(router)}>
+                    <a-tag>{name}</a-tag>
+                  </a-menu-item>
+                );
+              })}
+              </a-menu>
+            </a-dropdown>
+          </li>
           <li>
             <a-dropdown>
               <span class="ant-dropdown-link">
@@ -187,20 +243,25 @@ export default class Header extends Vue {
                   <a-icon
                     type="inbox"
                     size="large"
-                    on-click={this.notificationClick}
                   />
                 </a-badge>
               </span>
-              <a-timeline slot="overlay">
-                {this.notifications.map((event, index) => (
-                  <a-timeline-item
-                    index={index}
-                    on-click={() => this.showEvent(event)}
-                  >
-                    {event.title}
-                  </a-timeline-item>
-                ))}
-              </a-timeline>
+              <a-card slot="overlay" style="width: 300px;">
+                <a-timeline style="margin: 10px 10px;">
+                  {this.notifications.map((event, index) => (
+                    <a-timeline-item
+                      color="orange"
+                      style="margin-top: 5px;"
+                      index={index}
+                      key={index}
+                      on-click={() => this.showEvent(event)}
+                    >
+                      <font color="grey">{event.title}</font>
+                      <a-tag color="blue" style="margin-left: 10px;">{event.startTime}</a-tag>
+                    </a-timeline-item>
+                  ))}
+                </a-timeline>
+              </a-card>
             </a-dropdown>
           </li>
           <li>

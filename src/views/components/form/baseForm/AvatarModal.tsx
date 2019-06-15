@@ -4,7 +4,7 @@ import {
   Col,
   Row,
   Modal,
-  Carousel
+  Carousel,
 } from 'ant-design-vue';
 
 @Component({

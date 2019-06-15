@@ -122,7 +122,7 @@ export default class MainWindows {
   registerglobalShortcut() {
     const that = this;
     // Hide
-    globalShortcut.register('ESC', () => {
+    globalShortcut.register('CommandOrControl+Shift+ESC', () => {
       that.hide();
     });
     // Open devtools

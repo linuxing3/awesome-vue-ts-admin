@@ -80,8 +80,34 @@ const user = {
               permissions: user.permissions,
             },
           });
+          console.log('Created default Users:', foundItems);
         }
       });
+    },
+    registerByName: async (context: any, loginParams: any) => {
+      const foundItems = Entity.query()
+        .where('username', loginParams.username)
+        .get();
+      if (foundItems.length === 0) {
+        const hash = await bcrypt.hash(loginParams.password, 10);
+        const newUser = await Entity.$create({
+          data: {
+            name: loginParams.username,
+            username: loginParams.username,
+            password: loginParams.password,
+            hash,
+            permissions: ['1', '2', '3', '4', '5'],
+          },
+        });
+        if (newUser) {
+          const data = baseData('success', '注册成功，请登录');
+          return Promise.resolve(builder(data, '注册成功，请登录'));
+        }
+        const error = baseData('fail', '注册失败');
+        return Promise.reject(builder(error, '未知错误'));
+      }
+      const error = baseData('fail', '注册失败');
+      return Promise.reject(builder(error, '用户名已存在'));
     },
     loginByName: async (context: any, loginParams: any) => {
       const user = Entity.query()
@@ -100,18 +126,18 @@ const user = {
             }),
           );
           const data = baseData('success', '登录成功');
-          return Promise.resolve(builder(data, 'OK'));
+          return Promise.resolve(builder(data, '登陆成功'));
         }
         const error = baseData('fail', '登录失败');
-        return Promise.reject(builder(error, 'Password Check Failed'));
+        return Promise.reject(builder(error, '密码错误'));
       }
       const error = baseData('fail', '登录失败');
-      return Promise.reject(builder(error, 'No matched username'));
+      return Promise.reject(builder(error, '无此用户名'));
     },
     logout: (context: any, loginParams: any) => {
       window.localStorage.clear();
       const data = baseData('success', '登出成功');
-      return Promise.resolve(builder(data, 'OK'));
+      return Promise.resolve(builder(data, '登出，结束会话'));
     },
     getUserLocalInfo: async (context: any) => {
       // for localforage Model.$fetch
@@ -177,7 +203,7 @@ const user = {
   getters: {
     currentUser: async (state: any) => {
       const { id } = JSON.parse(window.localStorage.getItem('token'));
-      const entity = Entity.find(id);
+      const entity = await Entity.$get(id);
       return entity;
     },
   },

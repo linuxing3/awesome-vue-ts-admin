@@ -32,8 +32,8 @@ export const adminUsers = [
 export const noAuthList = ['/api/user/login'];
 
 const config = {
-  name: 'Embajada China Ve',
-  footerText: 'Embajada China en Venzuela  © 2019 linuxing3',
+  name: 'GENERAL ADMIN',
+  footerText: 'General Admin System  © 2019 linuxing3',
   logo: Logo,
   icon: '/favicon.ico',
   API,
