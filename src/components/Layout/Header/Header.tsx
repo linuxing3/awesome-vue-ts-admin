@@ -119,7 +119,7 @@ export default class Header extends Vue {
     switch (params.key) {
       case '1':
         this.$router.push({
-          name: 'ProfileBaseForm',
+          name: 'PersonalCenter',
           params: {
             id: self.id,
           },

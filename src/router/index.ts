@@ -134,6 +134,13 @@ export const asyncRouterMap: routerItem[] = [
         meta: { key: 'MemberTable' },
       },
       {
+        path: 'member-card-list',
+        name: 'MemberCardList',
+        component: getComponent('Member/components/MemberCardList'),
+        permission: true,
+        meta: { key: 'MemberCardList' },
+      },
+      {
         path: 'userDesignation-form',
         name: 'UserDesignationForm',
         component: getComponent('UserDesignation/components/UserDesignationForm'),
@@ -346,6 +353,13 @@ export const asyncRouterMap: routerItem[] = [
         component: getComponent('components/form/baseForm/index'),
         permission: true,
         meta: { key: 'ProfileBaseForm' },
+      },
+      {
+        path: 'personalCenter',
+        name: 'PersonalCenter',
+        component: getComponent('components/form/personalCenter/index'),
+        permission: true,
+        meta: { key: 'PersonalCenter' },
       },
     ],
   },

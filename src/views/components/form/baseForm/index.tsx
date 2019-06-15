@@ -163,11 +163,8 @@ class BaseForm extends Vue {
           </a-dropdown>
           {/* content */}
           <a-row gutter={20}>
-            <a-col xl={8} lg={8} md={8} sm={8} xs={24}>
-              {this.renderAvatar()}
-            </a-col>
             <a-col xl={16} lg={16} md={16} sm={16} xs={24}>
-              <a-form layout="horizontal" on-submit={this.submit}>
+              <a-form ref="BaseForm" layout="horizontal" on-submit={this.submit}>
                 <a-form-item {...{ props: this.itemLayout }} label="编号">
                   {getFieldDecorator('id', {
                     rules: [{ required: false, message: '编号' }],
@@ -230,6 +227,10 @@ class BaseForm extends Vue {
                 </a-form-item>
               </a-form>
             </a-col>
+            {/* avatar on rigth */}
+            <a-col xl={8} lg={8} md={8} sm={8} xs={24}>
+              {this.renderAvatar()}
+            </a-col>
           </a-row>
         </a-card>
         <avatar-modal visible={this.showModal} />
@@ -238,4 +239,9 @@ class BaseForm extends Vue {
   }
 }
 
-export default Form.create({})(BaseForm);
+export default Form.create({
+  props: {
+    modelName: String,
+    Form: Object,
+  },
+})(BaseForm);

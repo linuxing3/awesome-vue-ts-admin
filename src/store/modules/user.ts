@@ -63,15 +63,15 @@ const user = {
     },
   },
   actions: {
-    setDefaultUsers: (context: any) => {
+    setDefaultUsers: async (context: any) => {
+      await Entity.$fetch();
       adminUsers.map(async (user) => {
         const foundItems = Entity.query()
           .where('username', user.username)
           .get();
-        console.log('Found Existing User:', foundItems);
         if (foundItems.length === 0) {
           const hash = await bcrypt.hash(user.password, 10);
-          Entity.$create({
+          const newUser = await Entity.$create({
             data: {
               name: user.username,
               username: user.username,
@@ -80,11 +80,14 @@ const user = {
               permissions: user.permissions,
             },
           });
-          console.log('Created default Users:', foundItems);
+          console.log('Created new User:', newUser);
+        } else {
+          console.log('Found Existing User:', foundItems);
         }
       });
     },
     registerByName: async (context: any, loginParams: any) => {
+      await Entity.$fetch();
       const foundItems = Entity.query()
         .where('username', loginParams.username)
         .get();
@@ -99,7 +102,7 @@ const user = {
             permissions: ['1', '2', '3', '4', '5'],
           },
         });
-        if (newUser) {
+        if (newUser !== undefined) {
           const data = baseData('success', '注册成功，请登录');
           return Promise.resolve(builder(data, '注册成功，请登录'));
         }
@@ -110,6 +113,7 @@ const user = {
       return Promise.reject(builder(error, '用户名已存在'));
     },
     loginByName: async (context: any, loginParams: any) => {
+      await Entity.$fetch();
       const user = Entity.query()
         .where('username', loginParams.username)
         .get();
@@ -135,7 +139,11 @@ const user = {
       return Promise.reject(builder(error, '无此用户名'));
     },
     logout: (context: any, loginParams: any) => {
+      // clear token
       window.localStorage.clear();
+      // Delete localforage storage
+      // Entity.$fetch();
+      // Entity.all().map(entity => Entity.$destroy(entity.id));
       const data = baseData('success', '登出成功');
       return Promise.resolve(builder(data, '登出，结束会话'));
     },
