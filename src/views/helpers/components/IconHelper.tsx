@@ -16,7 +16,7 @@ export default class IconHelper extends Vue {
   render() {
     const { handleIconChange } = this;
     return (
-      <a-card body-style={{padding: '24px 32px'}} bordered={false}>
+      <a-card body-style={{ padding: '24px 32px' }} bordered={false}>
         <icon-selector on-change={handleIconChange}/>
       </a-card>
     );

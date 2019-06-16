@@ -56,7 +56,7 @@ export interface LfResponse<T = any> {
 export interface LfService {
   validateUrl: (options: LfRequestConfig) => LfRequestConfig;
 
-  request(params: any): Promise<LfResponse>;
+  request(params: LfRequestConfig): Promise<LfResponse>;
 
   post?(model: any, data: any): Promise<LfResponse>;
 

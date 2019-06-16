@@ -97,10 +97,6 @@ const MemberActions: IMemberActions = {
     } = await lfService.request({
       url: '/member',
       method: 'get',
-      pageParams: {
-        pageNo: 1,
-        pageSize: 1000,
-      },
     });
 
     const authedMembers = model
@@ -157,10 +153,6 @@ const MemberActions: IMemberActions = {
     } = await lfService.request({
       url: '/member',
       method: 'get',
-      pageParams: {
-        pageNo: 1,
-        pageSize: 100,
-      },
     });
 
     const authedMember = model

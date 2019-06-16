@@ -367,6 +367,13 @@ export const asyncRouterMap: routerItem[] = [
         permission: true,
         meta: { key: 'PersonalCenter' },
       },
+      {
+        path: 'userRoleTable',
+        name: 'UserRoleTable',
+        component: getComponent('components/list/userRoleTable/index'),
+        permission: true,
+        meta: { key: 'UserRoleTable' },
+      },
     ],
   },
   {
