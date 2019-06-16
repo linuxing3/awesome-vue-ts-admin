@@ -134,6 +134,9 @@ export default class Header extends Vue {
         });
         break;
       case '3':
+        this.$router.push({ name: 'IconHelper' });
+        break;
+      case '4':
         // Cookies.remove('token');
         this.$store.dispatch('logout').then(() => {
           this.$router.push('/login');
@@ -281,8 +284,9 @@ export default class Header extends Vue {
               <a-menu slot="overlay" on-click={this.menuClick}>
                 <a-menu-item key="1">个人中心</a-menu-item>
                 <a-menu-item key="2">修改密码</a-menu-item>
+                <a-menu-item key="3">测试中心</a-menu-item>
                 <a-menu-divider />
-                <a-menu-item key="3">
+                <a-menu-item key="4">
                   <font color="red">退出登录</font>
                 </a-menu-item>
               </a-menu>

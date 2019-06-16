@@ -14,6 +14,7 @@ const utils: any = {
     createConfigManager: 'create-config-manager',
     createPlayground: 'create-playground',
     dispatch: 'dispatch',
+    printPdf: 'print-pdf',
   },
   assets(name) {
     return join(__dirname, `/../../assets/${name}`);

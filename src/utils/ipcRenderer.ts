@@ -98,6 +98,13 @@ menu.append(new MenuItem({
   },
 }));
 
+menu.append(new MenuItem({
+  label: 'Print',
+  click() {
+    ipcRenderer.send('print-pdf', { fileType: 'pdf' });
+  },
+}));
+
 // add contextmenu to right click
 window.addEventListener('contextmenu', (e) => {
   e.preventDefault();

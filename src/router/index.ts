@@ -26,6 +26,12 @@ export const constantRouterMap: routerItem[] & RouterOptions['routes'] = [
         component: getComponent('helpers/components/ExportHelper'),
         meta: { key: 'ExportHelper' },
       },
+      {
+        path: 'icon-helper',
+        name: 'IconHelper',
+        component: getComponent('helpers/components/IconHelper'),
+        meta: { key: 'IconHelper' },
+      },
     ],
   },
   {

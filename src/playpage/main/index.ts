@@ -1,10 +1,11 @@
 import {
-  app, protocol, Menu, ipcMain, BrowserWindow,
+  app, protocol, Menu, ipcMain, BrowserWindow, shell,
 } from 'electron';
 import {
   createProtocol,
   installVueDevtools,
 } from 'vue-cli-plugin-electron-builder/lib';
+import { writeFile } from 'fs';
 import MainWindows from './mainWindow';
 import menu from './menu';
 
@@ -108,6 +109,21 @@ class ECVApp {
       // shell.openExternal(arg.item.path);
       event.sender.send(utils.ipcChan.addJumpList, {
         added: true,
+      });
+    });
+
+    ipcMain.on(utils.ipcChan.printPdf, (event, arg) => {
+      console.log('print send arg: ', arg);
+      this.mainWindow.browserWindow.webContents.printToPDF({}, (error, data) => {
+        if (error) throw error;
+        writeFile(this.mainWindow.printPdfPath, data, (error) => {
+          if (error) alert('write pdf file error');
+          shell.openExternal(this.mainWindow.printPdfPath);
+        });
+      });
+      // shell.openExternal(arg.item.path);
+      event.sender.send(utils.ipcChan.printPdf, {
+        printed: true,
       });
     });
   }
