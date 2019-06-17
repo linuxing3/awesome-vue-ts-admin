@@ -1,6 +1,6 @@
 import { Component, Vue, Emit } from 'vue-property-decorator';
 import {
-  Form, Input, Select, Radio, Card, Dropdown, Menu, Icon, DatePicker, Button, Col, Row, Modal, Avatar,
+  Form, Input, Select, Radio, Card, Dropdown, Menu, Icon, DatePicker, Button, Col, Row, Modal, Avatar, Tag, Tooltip, Divider,
 } from 'ant-design-vue';
 import lfService from '@/utils/request.localforage';
 import AvatarModal from './AvatarModal';
@@ -12,6 +12,9 @@ import './index.less';
     'a-form': Form,
     'a-row': Row,
     'a-col': Col,
+    'a-tag': Tag,
+    'a-tooltip': Tooltip,
+    'a-divider': Divider,
     'a-form-item': Form.Item,
     'a-input': Input,
     'a-select': Select,
@@ -36,6 +39,8 @@ class BaseForm extends Vue {
   modelName: string = 'user'
 
   avatarUrl: string = '/avatar/man_1.jpg'
+
+  tags = ['很有想法的', '专注设计', '辣~', '海纳百川', '好学的', 'Vim/Emacs']
 
   showModal: boolean = false;
 
@@ -139,9 +144,50 @@ class BaseForm extends Vue {
 
   renderAvatar(): JSX.Element {
     return (
-      <div on-click={this.toggleModal} >
+      <div>
         <a-avatar size={256} src={this.avatarUrl}></a-avatar>
       </div>
+    );
+  }
+
+  renderDescription(): JSX.Element {
+    return (
+      <div class="account-center-detail">
+        <p>
+          <i class="title"></i>交互专家
+        </p>
+        <p>
+          <i class="group"></i>某某事业群－某某平台－UED
+        </p>
+        <p>
+          <i class="address"></i>
+          <span>Venezuela</span>
+          <span>Caracas</span>
+        </p>
+      </div>
+    );
+  }
+
+  renderTags(): JSX.Element {
+    const { tags } = this;
+    return (
+      <div class="account-center-tags">
+      <div class="tagsTitle">标签</div>
+      <div>
+        {tags.map(tag => (
+            <a-tooltip key={tag} title={tag} style="margin-bottom: 15px;">
+              <a-tag
+                class="ant-tag"
+                color="cyan"
+                key={tag}
+              >{`${tag.slice(0, 20)}...`}</a-tag>
+            </a-tooltip>
+        ))}
+        <a-tag style="background: #fff; borderStyle: dashed;">
+          <a-icon type="plus"/>New Tag
+        </a-tag>
+      </div>
+    </div>
     );
   }
 
@@ -227,9 +273,13 @@ class BaseForm extends Vue {
                 </a-form-item>
               </a-form>
             </a-col>
-            {/* avatar on rigth */}
+            {/* avatar on right */}
             <a-col xl={8} lg={8} md={8} sm={8} xs={24}>
               {this.renderAvatar()}
+              <a-divider></a-divider>
+              {this.renderDescription()}
+              <a-divider></a-divider>
+              {this.renderTags()}
             </a-col>
           </a-row>
         </a-card>

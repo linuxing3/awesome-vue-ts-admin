@@ -1,7 +1,10 @@
 const getters = {
   sidebar: (state: any) => state.app.sidebar,
+  theme: (state: any) => state.app.theme,
   roles: (state: any) => state.user.roles,
-  permission_routers: (state: any) => state.user.routers,
+  user: (state: any) => state.user.user,
+  permission_routers: (state: any) => state.user.permission_routers,
+  permission_roles: (state: any) => state.user.permission_roles,
   spinning: (state: any) => state.user.spinning,
 };
 export default getters;

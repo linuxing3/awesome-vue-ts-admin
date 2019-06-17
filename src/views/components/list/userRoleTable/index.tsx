@@ -65,16 +65,11 @@ export default class UserList extends Vue {
 
   keyPath = 'permissions'
 
-  data = roleList;
+  data = []
 
-  created() {
-    lfService.request({
-      url: '/user',
-      method: 'get',
-    }).then((response) => {
-      const users = response.data.entity;
-      // this.data = Object.assign(users, this.data)
-    });
+  mounted() {
+    this.$log.info('Permission roles:', this.$store.getters.permission_roles);
+    this.data = roleList;
   }
 
   handleChange(value, key, column, record) {
@@ -97,7 +92,7 @@ export default class UserList extends Vue {
 
   renderRoleTags(actionEntitySet) {
     return (
-      <a-col lg="20" md="24">
+      <a-col>
         {actionEntitySet.map((action, key) => <a-tag size="64px" color="cyan" >{ action.describe }</a-tag>)}
       </a-col>
     );

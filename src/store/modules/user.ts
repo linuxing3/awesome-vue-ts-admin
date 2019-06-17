@@ -1,4 +1,6 @@
-import config, { adminUsers, noAuthList } from '@/utils/config';
+import {
+  adminUsers, userPermissionMap, actionEntityArray, actionEntitySetString,
+} from '@/utils/config';
 import router, { asyncRouterMap, constantRouterMap } from '@/router';
 import bcrypt from 'bcryptjs';
 import { routerItem } from '@/interface';
@@ -39,6 +41,17 @@ const hasPermission = (permission: string[]) => {
   return filterRouter;
 };
 
+const generateUserPermisson = user => user.permissions.reduce((result, value) => {
+  result.push({
+    roleId: user.username,
+    permissionId: userPermissionMap[value],
+    permissionName: userPermissionMap[value],
+    actions: actionEntitySetString,
+    actionEntitySet: actionEntityArray,
+  });
+  return result;
+}, []);
+
 const user = {
   state: {
     user: {
@@ -49,11 +62,15 @@ const user = {
     },
     roles: [],
     permission_routers: [],
+    permission_roles: [],
     spinning: true,
   },
   mutations: {
     SAVEROLES: (state: any, roles: Array<any>) => {
       state.roles = roles;
+    },
+    SAVEPERMISSIONROLES: (state: any, roles: Array<any>) => {
+      state.permission_roles = roles;
     },
     SAVEUSER: (state: any, userData: UserData) => {
       state.user = user;
@@ -165,9 +182,14 @@ const user = {
             avatarUri: entity.avatar_uri,
             email: entity.email,
           };
+          // SAVE USER
           context.commit('SAVEUSER', userData);
+          // SAVE PERMISSION
           context.commit('SAVEROLES', entity.permissions);
-          const getRouter = hasPermission(entity.permissions.permission);
+          // SAVE PERMISSION ROLES
+          context.commit('SAVEPERMISSIONROLES', generateUserPermisson(entity));
+          // GET ROUTERS
+          const getRouter = hasPermission(entity.permissions);
           context.dispatch('GetMenuData', getRouter);
           resolve(entity);
         } else {

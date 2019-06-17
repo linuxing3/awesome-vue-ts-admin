@@ -8,6 +8,17 @@ export const userPermission = {
   DEVELOPER: ['1', '2', '3'],
 };
 
+export const userPermissionMap = {
+  1: 'dashboard',
+  2: 'exception',
+  3: 'result',
+  4: 'profile',
+  5: 'table',
+  6: 'form',
+  7: 'permission',
+  8: 'role',
+};
+
 export const adminUsers = [
   {
     id: 0,
@@ -30,6 +41,31 @@ export const adminUsers = [
 ];
 
 export const noAuthList = ['/api/user/login'];
+
+export const actionEntityArray = [
+  {
+    action: 'add',
+    describe: '新增',
+    defaultCheck: false,
+  },
+  {
+    action: 'get',
+    describe: '详情',
+    defaultCheck: false,
+  },
+  {
+    action: 'update',
+    describe: '修改',
+    defaultCheck: false,
+  },
+  {
+    action: 'delete',
+    describe: '删除',
+    defaultCheck: false,
+  },
+];
+
+export const actionEntitySetString = '[{"action":"add","defaultCheck":false,"describe":"新增"},{"action":"query","defaultCheck":false,"describe":"查询"},{"action":"get","defaultCheck":false,"describe":"详情"},{"action":"update","defaultCheck":false,"describe":"修改"},{"action":"delete","defaultCheck":false,"describe":"删除"}]';
 
 const config = {
   name: 'GENERAL ADMIN',
