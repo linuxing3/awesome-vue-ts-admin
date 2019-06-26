@@ -16,10 +16,6 @@ import './MenuList.less';
   },
 })
 export default class MenuList extends Vue {
-  @Prop({ default: '#010101' }) private bgColor!: string;
-
-  @Prop({ default: '#fff' }) private txtColor!: string;
-
   keys: string[] = []
 
   openKeys: string[] = []
@@ -37,17 +33,25 @@ export default class MenuList extends Vue {
   }
 
   render() {
-    const { menuData, sidebar: { opened } } = this.$store.state.app;
+    const {
+      openKeys, openChange, keys,
+    } = this;
+    const {
+      menuData,
+      sidebar: {
+        opened, mode, leftOrRight, theme,
+      },
+    } = this.$store.state.app;
     return (
       <a-menu
         inlineCollapsed={!opened}
-        theme='dark'
-        mode="inline"
-        class="left-menu"
-        openKeys={this.openKeys}
-        on-openChange={this.openChange}
-        selectedKeys={this.keys}
-        on-click={(params: {item: any, key: string, keyPath: string[]}) => {
+        theme={theme}
+        mode={mode}
+        class={leftOrRight}
+        openKeys={openKeys}
+        on-openChange={openChange}
+        selectedKeys={keys}
+        on-click={(params: { item: any; key: string; keyPath: string[] }) => {
           const keyPath = params.keyPath.reverse();
           this.openPage(keyPath.join('/'));
         }}
@@ -62,7 +66,10 @@ export default class MenuList extends Vue {
    * @param menuData array with dynamic routerItems
    * @param parentPath posible path
    */
-  renderMenu(menuData: routerItem[], parentPath?: string): (JSX.Element | null)[] {
+  renderMenu(
+    menuData: routerItem[],
+    parentPath?: string,
+  ): (JSX.Element | null)[] {
     return menuData.map((item: routerItem) => {
       if (item.children) {
         // 如果具有[子项目]属性，显示子项目
@@ -74,35 +81,39 @@ export default class MenuList extends Vue {
         });
         if (isEmpty) {
           // 如果没有子菜单，只显示本级菜单
-          return <a-menu-item
-            id={item.path}
-            key={`${item.path}`}>
-            <a-icon type={item.icon}></a-icon>
-            <span>{item.name}</span>
-          </a-menu-item>;
+          return (
+            <a-menu-item id={item.path} key={`${item.path}`}>
+              <a-icon type={item.icon} />
+              <span>{item.name}</span>
+            </a-menu-item>
+          );
         }
         // 如果有子菜单，循环显示子菜单
-        return <a-submenu
-          id={item.path}
-          key={item.path}>
-          <template slot="title">
-          <a-icon type={item.icon}></a-icon>
-            <span>{item.name}</span>
-          </template>
-          {/* 循环显示子菜单 */}
-          {this.renderMenu(item.children, parentPath ? `${parentPath}/${item.path}` : item.path)}
-        </a-submenu>;
-      } if (item.hidden) {
+        return (
+          <a-submenu id={item.path} key={item.path}>
+            <template slot="title">
+              <a-icon type={item.icon} />
+              <span>{item.name}</span>
+            </template>
+            {/* 循环显示子菜单 */}
+            {this.renderMenu(
+              item.children,
+              parentPath ? `${parentPath}/${item.path}` : item.path,
+            )}
+          </a-submenu>
+        );
+      }
+      if (item.hidden) {
         // 如果具有[隐藏]属性，不显示
         return null;
       }
       // 默认返回一个菜单项
-      return <a-menu-item
-        id={item.path}
-        key={`${item.path}`}>
-        <a-icon type={item.icon}></a-icon>
-        <span>{item.name}</span>
-      </a-menu-item>;
+      return (
+        <a-menu-item id={item.path} key={`${item.path}`}>
+          <a-icon type={item.icon} />
+          <span>{item.name}</span>
+        </a-menu-item>
+      );
     });
   }
 

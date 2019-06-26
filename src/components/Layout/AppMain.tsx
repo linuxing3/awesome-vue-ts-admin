@@ -7,7 +7,7 @@ import { menuItem } from '@/interface';
 
 import Header from '@/components/Layout/Header/Header';
 import Sidebar from '@/components/Layout/Sidebar/Sidebar';
-import Footer from '@/components/Layout/Footer/Footer.tsx';
+import Footer from '@/components/Layout/Footer/Footer';
 
 import './AppMain.less';
 
@@ -68,22 +68,27 @@ export default class AppMain extends Vue {
     }
     return (
       <div class={`app-main ${opened ? '' : 'sideLayout'}`}>
-        {
-          isMobile ? null : <Sidebar />
-        }
+        {isMobile ? null : <Sidebar />}
         <div class="page-content">
           <Header />
-          <a-tabs class="page-tabs" activeKey={this.onTabs} type="editable-card" on-change={this.tabChange} on-edit={this.onTabEdit}>
-            {
-              tabList.map((item: any, index: number) => <a-tab-pane
-              closable={tabList.length > 1} key={item.name}
-              tab={item.name}>
-              </a-tab-pane>)
-            }
+          <a-tabs
+            class="page-tabs"
+            activeKey={this.onTabs}
+            type="editable-card"
+            on-change={this.tabChange}
+            on-edit={this.onTabEdit}
+          >
+            {tabList.map((item: any, index: number) => (
+              <a-tab-pane
+                closable={tabList.length > 1}
+                key={item.name}
+                tab={item.name}
+              />
+            ))}
           </a-tabs>
           <div class="page-wrap">
             <keep-alive max={10} include={keepList}>
-              <router-view/>
+              <router-view />
             </keep-alive>
           </div>
           <Footer />

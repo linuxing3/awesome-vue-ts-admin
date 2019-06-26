@@ -1,19 +1,20 @@
 import {
-  Component, Prop, Emit, Vue, Watch,
+  Component, Emit, Vue, Watch,
 } from 'vue-property-decorator';
 import moment from 'moment';
 import {
-  Badge, Dropdown, Breadcrumb, Popover, Icon, Menu, Timeline, Card, Input, Tag,
+  Badge, Dropdown, Breadcrumb, Popover, Button, Icon, Menu, Timeline, Card, Input, Tag, Avatar,
 } from 'ant-design-vue';
 import { routerItem } from '@/interface';
 import { routeToArray } from '@/utils';
 import MenuList from '@/components/Layout/Sidebar/MenuList';
 import models from '@/models';
 import './Header.less';
-import { lazyFilter, checkStringMatch } from '@/utils/helper';
+import { lazyFilter } from '@/utils/helper';
 import { title } from 'change-case';
 
 const Event = models.event;
+const User = models.user;
 
 interface breadItem {
   url: string,
@@ -24,6 +25,8 @@ interface breadItem {
   components: {
     'menu-list': MenuList,
     'a-input': Input,
+    'a-button': Button,
+    'a-avatar': Avatar,
     'a-tag': Tag,
     'a-badge': Badge,
     'a-dropdown': Dropdown,
@@ -42,7 +45,7 @@ interface breadItem {
 export default class Header extends Vue {
   // @Prop() private username!: string;
   // data
-  username: string = 'admin'
+  loginUser: any
 
   get menuData(): routerItem[] {
     return this.$store.state.app.menuData;
@@ -78,10 +81,6 @@ export default class Header extends Vue {
       .get();
   }
 
-  get id() {
-    return this.$store.getters.currentUser.id;
-  }
-
   @Watch('$route', { immediate: true, deep: true })
   routeChange(to: any, from: any) {
     const toDepth = routeToArray(to.path);
@@ -113,15 +112,32 @@ export default class Header extends Vue {
     });
   }
 
+  localeClick(params: { item: any; key: string; keyPath: string[] }) {
+    switch (params.key) {
+      case '1':
+        this.$store.dispatch('setLocale', 'zh_CN');
+        break;
+      case '2':
+        this.$store.dispatch('setLocale', 'en_US');
+        break;
+      case '3':
+        this.$store.dispatch('setLocale', 'es_ES');
+        break;
+      default:
+        this.$store.dispatch('setLocale', 'zh_CN');
+        break;
+    }
+  }
+
   @Emit()
   menuClick(params: { item: any; key: string; keyPath: string[] }): void {
-    const self = this;
+    const { id } = JSON.parse(window.localStorage.getItem('token'));
     switch (params.key) {
       case '1':
         this.$router.push({
           name: 'PersonalCenter',
           params: {
-            id: self.id,
+            id,
           },
         });
         break;
@@ -129,7 +145,7 @@ export default class Header extends Vue {
         this.$router.push({
           name: 'ProfileBaseForm',
           params: {
-            id: self.id,
+            id,
           },
         });
         break;
@@ -186,8 +202,31 @@ export default class Header extends Vue {
     this.$store.dispatch('ToggleSideBar');
   }
 
+  renderLocale() {
+    return (
+      <a-dropdown>
+        <span>Language</span>
+        <a-menu slot="overlay" on-click={this.localeClick}>
+          <a-menu-item key="1"><img style="margin-right: 3px; height: 16px;" class="locale-img" src="/icon/china.svg" />中文</a-menu-item>
+          <a-menu-item key="2"><img style="margin-right: 3px; height: 16px;" class="locale-img" src="/icon/america.svg" />English</a-menu-item>
+          <a-menu-item key="3"><img style="margin-right: 3px; height: 16px;" class="locale-img" src="/icon/china.svg" />Espanol</a-menu-item>
+        </a-menu>
+      </a-dropdown>
+    );
+  }
+
+  renderFold(opened) {
+    return (
+      <i
+      class={`menu-btn iconfont-${opened ? 'indent' : 'outdent'}`}
+      on-click={this.switchSidebar}
+    />
+    );
+  }
+
   render() {
-    this.username = this.$store.getters.currentUser.username;
+    const { id } = JSON.parse(window.localStorage.getItem('token'));
+    this.loginUser = User.find(id);
     const {
       sidebar: { opened },
       isMobile,
@@ -206,10 +245,7 @@ export default class Header extends Vue {
               <i class="menu-btn iconfont-listMenu" />
             </a-popover>
           ) : (
-            <i
-              class={`menu-btn iconfont-${opened ? 'indent' : 'outdent'}`}
-              on-click={this.switchSidebar}
-            />
+            <a-button class="menu-btn" on-click={this.switchSidebar}><a-icon type="menu-fold"></a-icon></a-button>
           )}
           {isMobile ? null : (
             <a-breadcrumb class="header-bread" separator="/">
@@ -225,28 +261,32 @@ export default class Header extends Vue {
           <li style="width: 200px;">
             <a-dropdown>
               <span>
-                <a-input prefix-icon="iconfont-search" on-change={this.search}></a-input>
+                <a-input
+                  prefix-icon="iconfont-search"
+                  on-change={this.search}
+                />
               </span>
               <a-menu slot="overlay">
-              {this.filteredRouter.map((router) => {
-                const name = title(router.name);
-                return (
-                  <a-menu-item key={name} title={name} on-click={() => this.showRouter(router)}>
-                    <a-tag>{name}</a-tag>
-                  </a-menu-item>
-                );
-              })}
+                {this.filteredRouter.map((router) => {
+                  const name = title(router.name);
+                  return (
+                    <a-menu-item
+                      key={name}
+                      title={name}
+                      on-click={() => this.showRouter(router)}
+                    >
+                      <a-tag>{name}</a-tag>
+                    </a-menu-item>
+                  );
+                })}
               </a-menu>
             </a-dropdown>
           </li>
-          <li>
+          <li class="notification-item">
             <a-dropdown>
               <span class="ant-dropdown-link">
                 <a-badge count={this.notifications.length} class="item">
-                  <a-icon
-                    type="inbox"
-                    size="large"
-                  />
+                  <a-icon type="inbox" size="large" />
                 </a-badge>
               </span>
               <a-card slot="overlay" style="width: 300px;">
@@ -260,14 +300,16 @@ export default class Header extends Vue {
                       on-click={() => this.showEvent(event)}
                     >
                       <font color="grey">{event.title}</font>
-                      <a-tag color="blue" style="margin-left: 10px;">{event.startTime}</a-tag>
+                      <a-tag color="blue" style="margin-left: 10px;">
+                        {event.startTime}
+                      </a-tag>
                     </a-timeline-item>
                   ))}
                 </a-timeline>
               </a-card>
             </a-dropdown>
           </li>
-          <li>
+          <li class="repo-item">
             <a
               href="https://github.com/linuxing3/awesome-vue-ts-admin"
               target="_blank"
@@ -275,11 +317,25 @@ export default class Header extends Vue {
               <a-icon type="github" />
             </a>
           </li>
+          <li class="locale-item">
+            {this.renderLocale()}
+          </li>
+          <li class="count-down-item">
+            <m-count-down target={new Date().getTime() + 3000000} />
+          </li>
           <li class="user">
             <a-dropdown>
               <span class="ant-dropdown-link">
-                <a-icon type="user" />
-                <span class="name">{this.username}</span>
+                {this.loginUser.avatarUrl ? (
+                  <a-avatar
+                    class="name"
+                    size={32}
+                    src={this.loginUser.avatarUrl}
+                  />
+                ) : (
+                  <a-icon class="name" type="user" />
+                )}
+                <span class="name">{this.loginUser.username}</span>
               </span>
               <a-menu slot="overlay" on-click={this.menuClick}>
                 <a-menu-item key="1">个人中心</a-menu-item>

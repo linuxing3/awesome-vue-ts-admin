@@ -12,10 +12,28 @@
   left: 0;
   top: 0;
   z-index: 999;
+  .locale-img {
+    margin-right: 3px;
+    height: 16px;
+  }
+  .locale-item {
+    color: @primary-color;
+  }
+  .count-down-item {
+    margin-left: 5px;
+    color: @primary-color;
+    font: bolder; 
+  }
+  .notification-item {
+    margin-left: 3px;
+    color: @primary-color;
+  }
   .menu-btn {
     line-height: @headerHeight;
     width: @headerHeight;
+    height: @headerHeight;
     display: inline-block;
+    border-color: #fff;
     text-align: center;
     transition: .3s all ease-in-out;
     cursor: pointer;
@@ -25,7 +43,7 @@
     // }
   }
   .header-bread {
-    margin-left: 20px;
+    margin-left: 10px;
     display: inline-block;
     font-size: 12px;
   }
