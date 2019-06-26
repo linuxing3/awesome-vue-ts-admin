@@ -29,7 +29,7 @@ module.exports = {
   },
   themeConfig: {
     // 假定是 GitHub. 同时也可以是一个完整的 GitLab URL
-    repo: "linuxing3/awesome-manager",
+    repo: "linuxing3/awesome-vue-ts-admin",
     // 当你的文档不是仓库的根目录时需要设置
     docsDir: "docs",
     // 可选的, 默认是  master
