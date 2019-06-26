@@ -2,7 +2,6 @@ import axios, { AxiosPromise, AxiosInstance } from 'axios';
 import qs from 'qs';
 import jsonp from 'jsonp';
 import lodash from 'lodash';
-import router from '@/router/index';
 import { message } from 'ant-design-vue';
 import { ApiList, Apis, defaultApiList } from './index';
 

@@ -2,89 +2,17 @@ export const roleList = [
   {
     id: '1',
     name: 'admin',
-    permissions: [
-      {
-        // role
-        permissionName: 'user',
-        actionEntitySet: [
-          { key: 'close', describe: 'close' },
-          { key: 'use', describe: 'use' },
-          { key: 'change', describe: 'change' },
-          { key: 'delete', describe: 'delete' },
-          { key: 'update', describe: 'update' },
-          { key: 'dev', describe: 'dev' },
-          { key: 'all', describe: 'all' },
-        ],
-      },
-      {
-        // role
-        permissionName: 'member',
-        actionEntitySet: [
-          { key: 'close', describe: 'close' },
-          { key: 'use', describe: 'use' },
-          { key: 'change', describe: 'change' },
-          { key: 'delete', describe: 'delete' },
-          { key: 'update', describe: 'update' },
-          { key: 'dev', describe: 'dev' },
-          { key: 'all', describe: 'all' },
-        ],
-      },
-      {
-        // role
-        permissionName: 'document',
-        actionEntitySet: [
-          { key: 'close', describe: 'close' },
-          { key: 'use', describe: 'use' },
-          { key: 'change', describe: 'change' },
-          { key: 'delete', describe: 'delete' },
-          { key: 'update', describe: 'update' },
-          { key: 'dev', describe: 'dev' },
-          { key: 'all', describe: 'all' },
-        ],
-      },
-    ],
+    permissions: [],
   },
   {
     id: '2',
     name: 'user',
-    permissions: [
-      {
-        // role
-        permissionName: 'member',
-        actionEntitySet: [
-          { key: 'close', describe: 'close' },
-          { key: 'use', describe: 'use' },
-          { key: 'change', describe: 'change' },
-          { key: 'delete', describe: 'delete' },
-          { key: 'update', describe: 'update' },
-        ],
-      },
-      {
-        // role
-        permissionName: 'document',
-        actionEntitySet: [
-          { key: 'close', describe: 'close' },
-          { key: 'use', describe: 'use' },
-          { key: 'change', describe: 'change' },
-          { key: 'delete', describe: 'delete' },
-          { key: 'update', describe: 'update' },
-        ],
-      },
-    ],
+    permissions: [],
   },
   {
     id: '3',
     name: 'guest',
-    permissions: [
-      {
-        // role
-        permissionName: 'guest',
-        actionEntitySet: [
-          { key: 'close', describe: 'close' },
-          { key: 'use', describe: 'use' },
-        ],
-      },
-    ],
+    permissions: [],
   },
 ];
 

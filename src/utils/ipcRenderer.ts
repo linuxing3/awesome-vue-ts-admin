@@ -2,6 +2,7 @@ import { ipcRenderer, remote } from 'electron';
 const { Menu, MenuItem } = remote;
 
 const graphqlServerURL = 'http://localhost:4000/graphql';
+const storyBookServerURL = 'http://localhost:6006/';
 
 /**
  * Menut template
@@ -73,6 +74,16 @@ ipcRenderer.on('async-show-menu', (event, arg) => {
   console.log('Menu status: ', arg.menuOpened);
 });
 
+ipcRenderer.on('async-show-graphql', (event, arg) => {
+  console.log('async-show-graphql reply event: ', event);
+  console.log('Menu status: ', arg.graphqlServerOpened);
+});
+
+ipcRenderer.on('async-show-storybook', (event, arg) => {
+  console.log('async-show-storybook reply event: ', event);
+  console.log('Menu status: ', arg.storyBookServerOpened);
+});
+
 /**
  * Menu Setting
  */
@@ -88,6 +99,13 @@ menu.append(new MenuItem({
   label: 'Graphql',
   click() {
     ipcRenderer.send('async-open-graphql', { graphqlServerURL });
+  },
+}));
+
+menu.append(new MenuItem({
+  label: 'Storybook',
+  click() {
+    ipcRenderer.send('async-open-storybook', { storyBookServerURL });
   },
 }));
 

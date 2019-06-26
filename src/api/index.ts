@@ -1,3 +1,9 @@
+import lfService from '@/utils/request.localforage';
+import models, { Models } from '@/models';
+export const request = lfService.request;
+
+export const api = lfService;
+
 export interface ApiList {
   [key: string]: {
     url: string; // 请求地址
@@ -10,6 +16,25 @@ export interface ApiList {
 export interface Apis<T> {
   [key: string]: (data?: object, params?: object) => Promise<T>;
 }
+
+export const modelApis = (models: Models): ApiList => {
+  const methodMap = {
+    Fetch: 'get',
+    Create: 'post',
+    Update: 'patch',
+    Delete: 'delete',
+  };
+  return Object.keys(models).reduce((modelApi, modelName) => {
+    Object.keys(methodMap).map((method) => {
+      modelApi[`${modelName}${method}`] = {
+        url: `/${modelName}`,
+        fetchType: 'json',
+        method: methodMap[method],
+      };
+    });
+    return modelApi;
+  }, {});
+};
 
 export const defaultApiList: ApiList = {
   login: {
@@ -58,174 +83,7 @@ export const defaultApiList: ApiList = {
     fetchType: 'jsonp',
   },
   // insert more api below
-  // Leave
-  leaveDelete: {
-    url: '/leave/delete',
-    method: 'delete',
-    fetchType: 'json',
-  },
-  leaveUpdate: {
-    url: '/leave/update',
-    method: 'patch',
-    fetchType: 'json',
-  },
-  leaveCreate: {
-    url: '/leave/create',
-    method: 'post',
-    fetchType: 'json',
-  },
-  leaveFetch: {
-    url: '/leave/fetch',
-    method: 'get',
-    fetchType: 'json',
-  },
-  // Employee
-  employeeDelete: {
-    url: '/employee/delete',
-    method: 'delete',
-    fetchType: 'json',
-  },
-  employeeUpdate: {
-    url: '/employee/update',
-    method: 'patch',
-    fetchType: 'json',
-  },
-  employeeCreate: {
-    url: '/employee/create',
-    method: 'post',
-    fetchType: 'json',
-  },
-  employeeFetch: {
-    url: '/employee/fetch',
-    method: 'get',
-    fetchType: 'json',
-  },
-  // UserDesignation
-  userDesignationDelete: {
-    url: '/userDesignation/delete',
-    method: 'delete',
-    fetchType: 'json',
-  },
-  userDesignationUpdate: {
-    url: '/userDesignation/update',
-    method: 'patch',
-    fetchType: 'json',
-  },
-  userDesignationCreate: {
-    url: '/userDesignation/create',
-    method: 'post',
-    fetchType: 'json',
-  },
-  userDesignationFetch: {
-    url: '/userDesignation/fetch',
-    method: 'get',
-    fetchType: 'json',
-  },
-  // UserPromotion
-  userPromotionDelete: {
-    url: '/userPromotion/delete',
-    method: 'delete',
-    fetchType: 'json',
-  },
-  userPromotionUpdate: {
-    url: '/userPromotion/update',
-    method: 'patch',
-    fetchType: 'json',
-  },
-  userPromotionCreate: {
-    url: '/userPromotion/create',
-    method: 'post',
-    fetchType: 'json',
-  },
-  userPromotionFetch: {
-    url: '/userPromotion/fetch',
-    method: 'get',
-    fetchType: 'json',
-  },
-  // Project
-  projectDelete: {
-    url: '/project/delete',
-    method: 'delete',
-    fetchType: 'json',
-  },
-  projectUpdate: {
-    url: '/project/update',
-    method: 'patch',
-    fetchType: 'json',
-  },
-  projectCreate: {
-    url: '/project/create',
-    method: 'post',
-    fetchType: 'json',
-  },
-  projectFetch: {
-    url: '/project/fetch',
-    method: 'get',
-    fetchType: 'json',
-  },
-  // UserMilitant
-  userMilitantDelete: {
-    url: '/userMilitant/delete',
-    method: 'delete',
-    fetchType: 'json',
-  },
-  userMilitantUpdate: {
-    url: '/userMilitant/update',
-    method: 'patch',
-    fetchType: 'json',
-  },
-  userMilitantCreate: {
-    url: '/userMilitant/create',
-    method: 'post',
-    fetchType: 'json',
-  },
-  userMilitantFetch: {
-    url: '/userMilitant/fetch',
-    method: 'get',
-    fetchType: 'json',
-  },
-  // Militant
-  militantDelete: {
-    url: '/militant/delete',
-    method: 'delete',
-    fetchType: 'json',
-  },
-  militantUpdate: {
-    url: '/militant/update',
-    method: 'patch',
-    fetchType: 'json',
-  },
-  militantCreate: {
-    url: '/militant/create',
-    method: 'post',
-    fetchType: 'json',
-  },
-  militantFetch: {
-    url: '/militant/fetch',
-    method: 'get',
-    fetchType: 'json',
-  },
-  // Document
-  documentDelete: {
-    url: '/document/delete',
-    method: 'delete',
-    fetchType: 'json',
-  },
-  documentUpdate: {
-    url: '/document/update',
-    method: 'patch',
-    fetchType: 'json',
-  },
-  documentCreate: {
-    url: '/document/create',
-    method: 'post',
-    fetchType: 'json',
-  },
-  documentFetch: {
-    url: '/document/fetch',
-    method: 'get',
-    fetchType: 'json',
-  },
+  ...modelApis(models),
 };
 
 export default defaultApiList;

@@ -1,15 +1,7 @@
 interface Window {
-  api: {
-    [key: string]: (
-      data: any,
-    ) => Promise<{
-      success: boolean;
-      message: string;
-      statusCode: number;
-      data: any;
-    }>;
-  };
+  api: any;
   ajax: any;
+  workbox: any;
   ApexCharts: any;
   BMap: any;
   BMapLib: any;

@@ -1,6 +1,6 @@
-import { values } from 'lodash';
 import models from '@/models';
 import { builder, baseData } from '@/utils/builder';
+import { log } from '@/utils/helper';
 import { AGenTableColumns } from '@/utils/genFormData';
 
 export interface BaseData {
@@ -54,6 +54,9 @@ export interface LfResponse<T = any> {
 }
 
 export interface LfService {
+
+  getModel: (modelName: string) => any;
+
   validateUrl: (options: LfRequestConfig) => LfRequestConfig;
 
   request(params: LfRequestConfig): Promise<LfResponse>;
@@ -72,6 +75,7 @@ export interface LfService {
 
 // 创建 axios localforage 实例
 const lfService: LfService = {
+  getModel: (modelName: string) => models[modelName],
   validateUrl: (options: LfRequestConfig) => {
     const [prefix, namespace, action] = options.url.split('/');
     const model: any = models[namespace];
@@ -116,43 +120,68 @@ const lfService: LfService = {
 
     let query = Entity.query();
     let requestedData: BaseData = null;
+    let response: LfResponse = null;
     const requestedConfig: LfRequestConfig = {
       ...options,
     };
 
     // response api
+    log.suc('Checking data', data);
+
     switch (method) {
       case 'post':
-        const createdItems = await Entity.$create({ data });
-        requestedData = baseData('success', '创建成功');
-        requestedData.entity = createdItems;
-        if (createdItems !== undefined) Entity.$fetch();
+        if (data === undefined || data === null || Object.keys(data).length === 0) {
+          requestedData = baseData('fail', '创建失败');
+          requestedData.entity = null;
+        } else {
+          const createdItems = await Entity.$create({ data });
+          requestedData = baseData('success', '创建成功');
+          requestedData.entity = createdItems;
+          if (createdItems !== undefined) Entity.$fetch();
+        }
         break;
       case 'delete':
-        const deletedItems = await Entity.$delete(data.id || data);
-        requestedData = baseData('success', '删除成功');
-        requestedData.entity = deletedItems;
-        if (deletedItems !== undefined) Entity.$fetch();
+        if (
+          data === undefined
+          || data === null
+        ) {
+          requestedData = baseData('fail', '删除失败');
+          requestedData.entity = null;
+        } else {
+          const deletedItems = await Entity.$delete(data.id || data);
+          requestedData = baseData('success', '删除成功');
+          requestedData.entity = deletedItems;
+          if (deletedItems !== undefined) Entity.$fetch();
+        }
         break;
       case 'patch':
-        const patchedItems = await Entity.$update({ data });
-        requestedData = baseData('success', '更新成功');
-        requestedData.entity = patchedItems;
-        if (patchedItems !== undefined) Entity.$fetch();
+        if (
+          data === undefined
+          || data === null
+          || Object.keys(data).length === 0
+        ) {
+          requestedData = baseData('fail', '更新失败');
+          requestedData.entity = null;
+        } else {
+          const patchedItems = await Entity.$update({ data });
+          requestedData = baseData('success', '更新成功');
+          requestedData.entity = patchedItems;
+          if (patchedItems !== undefined) Entity.$fetch();
+        }
         break;
       case 'get':
         if (!data) {
           Entity.$fetch();
           // query with pageParams, header, columns
           if (pageParams.page) {
-            // console.log('Get pagination information');
+            log.info('Get pagination information');
             const paginationConfig = Entity.pageConfig(pageParams);
             query = Entity.pageQuery(paginationConfig, query);
             requestedConfig.params.pageParams = paginationConfig;
           }
           // query with filter
           if (filter) {
-            // console.log('Get fitlered information');
+            log.info('Get fitlered information');
             query = Entity.searchQuery(filter, query);
             requestedConfig.params.filter = filter;
           }
@@ -170,15 +199,29 @@ const lfService: LfService = {
           requestedData.entity = entities[namespace][0];
         }
     }
-    console.log(`${method} Localforage vuex -> `, requestedData);
-    const response = builder(
-      requestedData,
-      `${method} ${namespace} Ok`,
-      200,
-      requestedConfig,
-      {},
-    );
-    resolve(response);
+    log.info('--------------- LocalForage ---------------------');
+    log.info(`${method}  --*--*--*-> `, requestedData);
+    log.info('--------------- LocalForage ---------------------');
+    // build response
+    if (requestedData.entity !== null || requestedData.entity !== undefined) {
+      response = builder(
+        requestedData,
+        `${method} ${namespace} Ok`,
+        200,
+        requestedConfig,
+        {},
+      );
+      resolve(response);
+    } else {
+      response = builder(
+        requestedData,
+        `${method} ${namespace} NotOk`,
+        500,
+        requestedConfig,
+        {},
+      );
+      reject(response);
+    }
   }),
 };
 

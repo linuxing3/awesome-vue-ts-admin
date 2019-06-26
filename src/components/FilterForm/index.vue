@@ -2,9 +2,10 @@
   <div class="filter-form">
     <m-form
       ref="MForm"
+      :is-normal="isNormal"
       :item-list="itemList"
       :edit-data="editData"
-      :form-params="formParams"
+      :filter-item-list="filterItemList"
       :back-params="backParams"
       :out-params="outParams"
       :model-name="modelName"
@@ -12,6 +13,8 @@
       :reset-btn="resetBtn"
       @reset="resetFun"
       @setForm="setForm"
+      @toggleNormal="toggleNormal"
+      @fieldClick="fieldClick"
     />
   </div>
 </template>
@@ -32,11 +35,18 @@ export default class FilterForm extends Vue {
   @Prop({ default: 'member' })
   private modelName!: string;
 
+  @Prop({ default: false })
+  private isNormal!: boolean;
+
   @Prop({ default: {} })
   private editData!: any;
 
-  // 筛选表单生成参数
+  // 初始表单生成参数
   @Prop({ default: [] }) private itemList!: FilterFormList[];
+
+  // 筛选表单生成参数
+  @Prop({ default: [] })
+  private filterItemList!: FilterFormList[];
 
   // 筛选表单存储数据参数
   @Prop({ default: {} })
@@ -57,7 +67,7 @@ export default class FilterForm extends Vue {
   @Prop({ default: false }) private resetBtn!: boolean;
 
   // 请求数据地址
-  @Prop({ default: '' }) private url!: string;
+  @Prop({ default: '/member' }) private url!: string;
 
   // 请求数据类型
   @Prop({ default: 'formData' })
@@ -95,7 +105,6 @@ export default class FilterForm extends Vue {
 
   constructor(props: any) {
     super(props);
-    const self = this;
     this.changeFormList = this.itemList;
   }
 
@@ -127,8 +136,13 @@ export default class FilterForm extends Vue {
   }
 
   @Emit()
-  formClick(key: string, row: any) {
-    this.$emit('menuClick', key, row);
+  toggleNormal(): void {
+    this.$emit('toggleNormal');
+  }
+
+  @Emit()
+  fieldClick(key: string, item: any) {
+    this.$emit('fieldClick', key, item);
   }
 
   @Emit()

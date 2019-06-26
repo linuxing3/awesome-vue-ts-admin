@@ -1,15 +1,18 @@
+// / <reference path="../../../node_modules/ant-design-vue/types/form/form.d.ts" />
 import {
   Component, Prop, Emit, Vue,
 } from 'vue-property-decorator';
 import {
   Input, Select, Form, TimePicker, DatePicker, Cascader, Row, Col, Button, Modal, Checkbox, Radio, Card,
 } from 'ant-design-vue';
+import { cloneDeep } from 'lodash';
 import titleCase from 'title-case';
 import { FilterFormList } from '@/interface';
-import lfService from '@/utils/request.localforage';
+import { api } from '@/api';
 import { convertDate } from '@/utils/datetime';
 
 import './MForm.less';
+import { WrappedFormUtils } from 'ant-design-vue/types/form/form';
 
 @Component({
   components: {
@@ -39,27 +42,35 @@ import './MForm.less';
 })
 class MFormClass extends Vue {
   @Prop()
-  private modelName!: string
+  private modelName!: string;
+
+  @Prop({ default: false })
+  private isNormal!: boolean;
 
   // 筛选表单生成参数
-  @Prop({ default: [] })
-  private itemList!: FilterFormList[]
+  @Prop()
+  private itemList!: FilterFormList[];
 
   // 是否展示新增按钮
-  @Prop({ default: false }) private saveBtn!: boolean
+  @Prop({ default: true }) private saveBtn!: boolean;
 
   // 是否展示导出按钮
-  @Prop({ default: false }) private resetBtn!: boolean
+  @Prop({ default: true }) private resetBtn!: boolean;
+
+  // 是否展示导出按钮
+  @Prop({ default: true }) private filterBtn!: boolean;
 
   // 导出按钮回调事件
-  @Prop({ default: () => {} }) private exportFun!: Function
+  @Prop({ default: () => {} }) private exportFun!: Function;
+
+  private filterItemList: string[] = [];
 
   get id() {
     return this.$route.params.id || -1;
   }
 
   // 弹出窗开关
-  setModal: boolean = false
+  setModal: boolean = false;
 
   nomalLayout = {
     span: 8,
@@ -68,9 +79,18 @@ class MFormClass extends Vue {
     md: 12,
     sm: 12,
     xs: 24,
-  }
+  };
 
-  formItrenderFmLayout = {
+  fullLayout = {
+    span: 24,
+    xl: 24,
+    lg: 24,
+    md: 24,
+    sm: 24,
+    xs: 24,
+  };
+
+  formInpuRenderFmLayout = {
     labelCol: {
       xs: { span: 24 },
       sm: { span: 8 },
@@ -85,6 +105,24 @@ class MFormClass extends Vue {
       lg: { span: 18 },
       xl: { span: 18 },
     },
+  };
+
+  created() {
+    this.setFilterItemListToLs();
+  }
+
+  setFilterItemListToLs() {
+    this.filterItemList = [];
+    this.itemList.map((item) => {
+      if (item.key) {
+        this.filterItemList.push(item.key);
+      }
+      return false;
+    });
+    window.localStorage.setItem(
+      this.modelName,
+      JSON.stringify(this.filterItemList),
+    );
   }
 
   mounted() {
@@ -96,7 +134,7 @@ class MFormClass extends Vue {
   @Emit()
   save(e: HTMLFormElement) {
     e.preventDefault();
-    this.Form.validateFields((err: any, values: object) => {
+    (this.Form as WrappedFormUtils).validateFields((err: any, values: object) => {
       if (!err) {
         console.log('Form Values:', values);
         const data = convertDate(this.itemList, values)[0];
@@ -131,14 +169,14 @@ class MFormClass extends Vue {
   addOrEdit(data) {
     if (this.id === -1) {
       this.$log.suc('Creating...');
-      lfService.request({
+      api.request({
         url: `/${this.modelName}`,
         method: 'post',
         data,
       });
     } else {
       this.$log.suc('updating...');
-      lfService.request({
+      api.request({
         url: `/${this.modelName}`,
         method: 'patch',
         data,
@@ -153,7 +191,7 @@ class MFormClass extends Vue {
       // this.setForm();
       return;
     }
-    lfService
+    api
       .request({
         url: `/${this.modelName}`,
         method: 'get',
@@ -173,24 +211,30 @@ class MFormClass extends Vue {
       setTimeout(resolve, 500);
     }).then(() => {
       this.$log.suc('formData:', data);
-      this.Form.setFieldsValue(data);
+      (this.Form as WrappedFormUtils).setFieldsValue(data);
     });
   }
 
   // methods
   @Emit()
   setForm(): void {
-    const { params } = lfService.validateUrl({
-      url: `/${this.modelName}`,
-      method: 'get',
-      data: { id: this.id },
-    });
-    this.$emit('setForm', params.columns);
+    this.$emit('setForm', this.filterItemList);
+    this.closeModal();
+  }
+
+  @Emit()
+  toggleNormal(): void {
+    this.$emit('toggleNormal');
   }
 
   @Emit()
   reset(event?): void {
-    this.Form.resetFields();
+    // 恢复本地存储的全部字段，并重设表单字段
+    this.setFilterItemListToLs();
+    this.$emit('setForm', this.filterItemList);
+    // 重设表单值为空
+    (this.Form as WrappedFormUtils).resetFields();
+    // 开放跳转
     if (event) this.$emit(event);
   }
 
@@ -209,19 +253,56 @@ class MFormClass extends Vue {
     this.setModal = false;
   }
 
-  renderFormInput(getFieldDecorator: any, item: FilterFormList, index: number) {
+  @Emit()
+  fieldClick(key: string, item: any) {
+    this.$emit('fieldClick', key, item);
+  }
+
+  renderModal() {
+    const itemList = JSON.parse(window.localStorage.getItem(this.modelName));
+    return (
+      <a-modal
+        id="tableSet"
+        width="500px"
+        title="Table Setting"
+        visible={this.setModal}
+        on-ok={this.setForm}
+        on-cancel={this.closeModal}
+      >
+        <a-checkbox-group class="checkbox-list" v-model={this.filterItemList}>
+          {itemList.map(item => (
+            <a-checkbox key={item} value={item}>
+              {item}
+            </a-checkbox>
+          ))}
+        </a-checkbox-group>
+      </a-modal>
+    );
+  }
+
+  renderFormInput(
+    getFieldDecorator: WrappedFormUtils['getFieldDecorator'],
+    item: FilterFormList,
+    index: number,
+  ) {
     const key = item.key;
     const label = `${this.$t(item.key)} / ${item.key}`;
     const placeholder = `Input ${titleCase(item.key)}`;
     const itemDom = <a-input id={key} label={label} placeholder={placeholder} />;
     return (
       <a-col {...{ props: this.nomalLayout }} key={index}>
-        <a-form-item label={label}>{getFieldDecorator(key)(itemDom)}</a-form-item>
+        <a-form-item label={label} on-dbclick={() => this.fieldClick(key, item)}>
+          {getFieldDecorator(key, {})(itemDom)}
+        </a-form-item>
       </a-col>
     );
   }
 
-  renderFormItem(getFieldDecorator: any, item: FilterFormList, index: number) {
+  renderFormItem(
+    getFieldDecorator: WrappedFormUtils['getFieldDecorator'],
+    item: FilterFormList,
+    index: number,
+  ) {
     let itemDom = null;
     const {
       key, value, options, change, fieldNames, disabledTime,
@@ -229,29 +310,44 @@ class MFormClass extends Vue {
     /**
      * 翻译标签和占位符
      */
-    const label = `${this.$t(item.key)} / ${titleCase(item.key)}`;
-    const placeholder = `Input ${titleCase(item.key)}`;
+    // const label = `${this.$t(item.key)} / ${titleCase(item.key)}`;
+    const label = () => (
+      <span style="color: #111000; font-style: italic; font-weight: bold; ">
+        {this.$t(item.key)}
+      </span>
+    );
+    // const label = this.$t(item.key);
+    // const placeholder = `Input ${titleCase(item.key)}`;
+    const placeholder = item.placeholder || titleCase(item.key);
     /**
      * 根据项目类型，动态生成不同的表单控件
      */
     switch (item.type) {
       // 文本框
       case 'input':
-        itemDom = <a-input style="width: 100%;" id={key} label={label} placeholder={placeholder} disabled={key === 'id'} />;
+        itemDom = (
+          <a-input
+            style="width: 100%;"
+            id={key}
+            placeholder={placeholder}
+            disabled={key === 'id'}
+          />
+        );
         break;
       // 段落框
       case 'textarea':
-        itemDom = <a-textarea style="width: 100%;" id={key} label={label} placeholder={placeholder} />;
+        itemDom = (
+          <a-textarea
+            style="width: 100%; min-height: 300px;"
+            id={key}
+            placeholder={'请输入正文。。。'}
+          />
+        );
         break;
       // 选择器
       case 'select':
         itemDom = (
-          <a-select
-            style="width: 100%;"
-            id={key}
-            label={label}
-            placeholder={placeholder}
-          >
+          <a-select style="width: 100%;" id={key} placeholder={placeholder}>
             {options
               && options.map((items: any, indexs: number) => (
                 <a-option key={items.label} value={items.value}>
@@ -268,7 +364,6 @@ class MFormClass extends Vue {
             allowClear
             changeOnSelect
             style="width: 100%;"
-            label={label}
             id={key}
             options={options}
             placeholder={placeholder}
@@ -283,7 +378,6 @@ class MFormClass extends Vue {
           <a-cascader
             style="width: 100%;"
             id={key}
-            label={label}
             allowClear
             changeOnSelect
             fieldNames={fieldNames}
@@ -296,13 +390,7 @@ class MFormClass extends Vue {
       // 日期时间
       case 'datetime':
         itemDom = (
-          <a-time-picker
-            style="width: 100%;"
-            id={key}
-            label={label}
-            format="HH:mm"
-            placeholder={placeholder}
-          />
+          <a-time-picker style="width: 100%;" id={key} format="HH:mm" placeholder={placeholder} />
         );
         break;
       // 日期
@@ -311,7 +399,6 @@ class MFormClass extends Vue {
           <a-date-picker
             style="width: 100%;"
             id={key}
-            label={label}
             format="YYYY/M/D"
             placeholder={placeholder}
           />
@@ -323,7 +410,6 @@ class MFormClass extends Vue {
           <a-range-picker
             style="width: 100%"
             id={key}
-            label={label}
             showTime
             format="YYYY/M/D HH:mm:ss"
             disabledTime={disabledTime}
@@ -334,7 +420,7 @@ class MFormClass extends Vue {
       // 选择按钮
       case 'checkboxButton':
         itemDom = (
-          <a-radio-group on-change={change} label={label} size="small">
+          <a-radio-group on-change={change} size="small">
             {options
               && options.map((items, indexs: number) => (
                 <a-radio-button value={value} key={indexs}>
@@ -347,9 +433,20 @@ class MFormClass extends Vue {
       default:
         break;
     }
+    if (item.type === 'textarea') {
+      return (
+        <a-col {...{ props: this.fullLayout }} key={index}>
+          <a-form-item class="form-item" colon={false} lable={label}>
+            {getFieldDecorator(key, {})(itemDom)}
+          </a-form-item>
+        </a-col>
+      );
+    }
     return (
       <a-col {...{ props: this.nomalLayout }} key={index}>
-        <a-form-item label={label}>{getFieldDecorator(key)(itemDom)}</a-form-item>
+        <a-form-item class="form-item" colon={false} label={label}>
+          {getFieldDecorator(key, {})(itemDom)}
+        </a-form-item>
       </a-col>
     );
   }
@@ -365,17 +462,27 @@ class MFormClass extends Vue {
               icon="plus"
               type="primary"
             >
-              Save
+              保存
             </a-button>
           ) : null}
           {this.resetBtn ? (
             <a-button
-              on-click={this.reset}
+              on-click={() => this.reset('clear')}
               id={isNormal ? 'formExport' : 'formExport2'}
               icon="stop"
               type="danger"
             >
-              Reset
+              重置
+            </a-button>
+          ) : null}
+          {this.filterBtn ? (
+            <a-button
+              on-click={this.openModal}
+              id={isNormal ? 'formFilter' : 'formFilter2'}
+              icon="setting"
+              type="default"
+            >
+              筛选
             </a-button>
           ) : null}
         </div>
@@ -384,22 +491,16 @@ class MFormClass extends Vue {
   }
 
   render() {
-    const { getFieldDecorator } = this.Form as any;
+    const { getFieldDecorator } = this.Form as WrappedFormUtils;
     return (
-      <div>
-        <a-card>
+      <div class="form-wrap">
+        {this.renderModal()}
+        <a-card class="form-card">
           <a-form>
             {/* Render action buttons */}
             <a-row gutter={20}>
-              <a-col
-                push={20}
-                xl={4}
-                lg={4}
-                md={6}
-                sm={12}
-                xs={12}
-              >
-                {this.renderActionBtn(true)}
+              <a-col push={20} xl={4} lg={4} md={6} sm={12} xs={12}>
+                {this.renderActionBtn(this.isNormal)}
               </a-col>
             </a-row>
             {/* render form items with label and input */}
@@ -412,6 +513,18 @@ class MFormClass extends Vue {
     );
   }
 }
+
+/**
+ *  在Vue组件上创建表单.
+ *  1.1.9前 Form.create(options)(组件)
+ *  1.1.9后 组件.$form.createForm(组件)
+ *  在定义文件中，将Form已挂载到原型链。
+ *  declare module 'vue/types/vue' {
+ *     interface Vue {
+ *       $form: Form;
+ *     }
+ *   }
+ */
 const MForm = Form.create({
   props: {
     modelName: String,

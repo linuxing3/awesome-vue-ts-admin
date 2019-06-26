@@ -147,7 +147,14 @@ export const convertDate = (itemList: any[], items: object[]|object, normal = tr
       item[f] = callback(item[f], format);
     });
   };
-  const dateFields = map(itemList.filter(o => o[typeKey] === typeValue), uniKey);
+  const dateFields = map(
+    itemList.filter(
+      o => o[typeKey] === typeValue
+        || o[typeKey] === 'date'
+        || o[typeKey] === 'datetimerange',
+    ),
+    uniKey,
+  );
   // if items is array
   if (Array.isArray(items)) {
     if (normal) {

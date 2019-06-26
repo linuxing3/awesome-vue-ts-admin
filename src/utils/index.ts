@@ -105,7 +105,7 @@ export const loadAntvDataSet = () => new Promise(((resolve, reject) => {
 }));
 
 /* -------------------------------------------------------------
-| Load Antv DataSet
+| Load Antv viser
 |-------------------------------------------------------------*/
 export const loadViserVue = () => new Promise(((resolve, reject) => {
   if (window.ViserVue) {

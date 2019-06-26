@@ -1,6 +1,6 @@
 import { Component, Vue, Emit } from 'vue-property-decorator';
 import { tableList, FilterFormList, operate } from '@/interface';
-import lfService from '@/utils/request.localforage';
+import { api } from '@/api';
 import { upperCaseFirst } from 'change-case';
 
 @Component({})
@@ -80,7 +80,7 @@ export default class TableMixin extends Vue {
   @Emit()
   async handleDelete(row) {
     this.$log.suc('Deleting ... ');
-    const response = await lfService.request({
+    const response = await api.request({
       url: `/${this.modelName}`,
       method: 'delete',
       data: row.id,

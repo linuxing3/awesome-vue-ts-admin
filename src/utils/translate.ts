@@ -10,16 +10,19 @@ const languages = [
   {
     key: 'en',
     title: 'English',
+    locale: 'en_US',
     flag: './america.svg',
   },
   {
     key: 'cn',
     title: '中文',
+    locale: 'zh_CN',
     flag: './china.svg',
   },
   {
     key: 'es',
     title: 'Spanish',
+    locale: 'es_ES',
     flag: './spain.svg',
   },
 ];
@@ -75,16 +78,19 @@ export async function translate() {
     }))
     .filter(item => item.from !== item.to);
 
-  for (const item of tasks) {
-    console.log(`start: ${item.from} -> ${item.to}`);
-    transform({
-      from: item.from,
-      to: item.to,
-      locales,
-      outputPath: `../locales/${item.to}.youdao.json`,
-    });
-    console.log(`completed: ${item.from} -> ${item.to}`);
+  try {
+    for (const item of tasks) {
+      console.log(`start: ${item.from} -> ${item.to}`);
+      transform({
+        from: item.from,
+        to: item.to,
+        locales,
+        outputPath: `../locales/${item.to}.json`,
+      });
+      console.log(`completed: ${item.from} -> ${item.to}`);
+    }
+    return Promise.resolve('All translations have been completed!');
+  } catch (error) {
+    return Promise.reject(error);
   }
-
-  console.log('All translations have been completed.');
 }

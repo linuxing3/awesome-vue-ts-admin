@@ -1,4 +1,5 @@
 import VueI18n, { LocaleMessages } from 'vue-i18n';
+import store from '@/store';
 
 const calendarFormats: any = {
   calendarHeader: {
@@ -49,10 +50,16 @@ const messages = {
   // ...ERPMessages
 };
 
+const locales = {
+  zh_CN: 'cn',
+  en_US: 'en',
+  es_ES: 'es',
+};
+
 console.log(messages);
 
 export default new VueI18n({
-  locale: process.env.VUE_APP_I18N_LOCALE || 'cn',
+  locale: locales[store.getters.locale] || 'cn',
   fallbackLocale: process.env.VUE_APP_I18N_FALLBACK_LOCALE || 'en',
   messages,
   dateTimeFormats,

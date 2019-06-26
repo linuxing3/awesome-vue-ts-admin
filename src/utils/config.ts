@@ -71,6 +71,27 @@ const config = {
   name: 'GENERAL ADMIN',
   footerText: 'General Admin System  © 2019 linuxing3',
   logo: Logo,
+  locale: 'zh_CN',
+  pwa: true,
+  sidebar: {
+    opened: true,
+    bgColor: '#010101',
+    txtColor: '#fff',
+    theme: 'dark',
+    mode: 'inline',
+    side: 'left',
+  },
+  primaryColor: '#1890FF', // primary color of ant design
+  navTheme: 'dark', // theme for nav menu
+  theme: 'dark', // theme for nav menu
+  layout: 'sidemenu', // nav menu position: sidemenu or topmenu
+  contentWidth: 'Fixed', // layout of content: Fluid or Fixed, only works when layout is topmenu
+  fixedHeader: false, // sticky header
+  fixSiderbar: false, // sticky siderbar
+  autoHideHeader: false, //  auto hide header
+  colorWeak: false,
+  multiTab: false,
+  production: process.env.NODE_ENV === 'production' && process.env.VUE_APP_PREVIEW !== 'true',
   icon: '/favicon.ico',
   API,
   openPages: ['/login', '/404', '/401'], // 全屏页面

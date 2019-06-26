@@ -71,7 +71,7 @@ export interface LfService {
 
 
 // 创建 axios localforage 实例
-const lfService: LfService = {
+const grapqlService: LfService = {
   validateUrl: (options: LfRequestConfig) => {
     const [prefix, namespace, action] = options.url.split('/');
     const model: any = models[namespace];
@@ -193,4 +193,4 @@ const lfService: LfService = {
   }),
 };
 
-export default lfService;
+export default grapqlService;
