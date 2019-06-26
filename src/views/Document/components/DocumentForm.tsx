@@ -61,6 +61,9 @@ class DocumentForm extends Mixins(FormMixin) {
             item-list={this.itemList}
             save-btn={true}
             reset-btn={true}
+            filter-btn={true}
+            on-clear={this.clear}
+            on-loadEditInfo={this.loadEditInfo}
             on-setForm={this.setForm}
             on-showDataTable={this.showDataTable}
           />

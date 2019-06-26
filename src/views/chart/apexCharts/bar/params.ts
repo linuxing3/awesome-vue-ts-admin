@@ -14,14 +14,10 @@ export const basicBarOptions = {
   dataLabels: {
     enabled: !1,
   },
-  series: [{
-    name: '文件数量',
-    data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380],
-  }],
+  series: [],
   colors: ['#39afd1'],
   xaxis: {
-    categories: ['South Korea', 'Canada', 'United Kingdom', 'Netherlands', 'Italy', 'France', 'Japan',
-      'United States', 'China', 'Germany'],
+    categories: [],
   },
   states: {
     hover: {
@@ -62,15 +58,9 @@ export const groupedBarOptions = {
     width: 1,
     colors: ['#fff'],
   },
-  series: [{
-    name: '因公',
-    data: [44, 55, 41, 64, 22, 43, 21],
-  }, {
-    name: '因私',
-    data: [53, 32, 33, 52, 13, 44, 32],
-  }],
+  series: [],
   xaxis: {
-    categories: [2001, 2002, 2003, 2004, 2005, 2006, 2007],
+    categories: [],
   },
   states: {
     hover: {
@@ -99,24 +89,9 @@ export const stackedBarOptions = {
   stroke: {
     show: !1,
   },
-  series: [{
-    name: '政新处',
-    data: [44, 55, 41, 37, 22, 43, 21],
-  }, {
-    name: '经商处',
-    data: [53, 32, 33, 52, 13, 43, 32],
-  }, {
-    name: '武官处',
-    data: [12, 17, 11, 9, 15, 11, 20],
-  }, {
-    name: '领侨处',
-    data: [9, 7, 5, 8, 6, 9, 4],
-  }, {
-    name: '办公室',
-    data: [25, 12, 19, 32, 25, 24, 10],
-  }],
+  series: [],
   xaxis: {
-    categories: [2008, 2009, 2010, 2011, 2012, 2013, 2014],
+    categories: [],
     labels: {
       formatter(e: any) {
         return `${e}`;
@@ -172,18 +147,9 @@ export const fullStackedBarOptions = {
     width: 1,
     colors: ['#fff'],
   },
-  series: [{
-    name: '美国',
-    data: [44, 55, 41, 37, 22, 43, 21],
-  }, {
-    name: '欧洲',
-    data: [53, 32, 33, 52, 13, 43, 32],
-  }, {
-    name: '其它',
-    data: [12, 17, 11, 9, 15, 11, 20],
-  }],
+  series: [],
   xaxis: {
-    categories: [2008, 2009, 2010, 2011, 2012, 2013, 2014],
+    categories: [],
   },
   colors: ['#ffbc00', '#39afd1', '#6c757d', '#e3eaef', '#727cf5'],
   tooltip: {

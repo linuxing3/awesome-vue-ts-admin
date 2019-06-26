@@ -128,10 +128,10 @@ export const defaultItemList: FilterFormList[] = [
     ],
   },
   {
-    key: 'fromTime', type: 'datetime', label: 'fromTime', placeholder: 'fromTime',
+    key: 'fromTime', type: 'input', label: 'fromTime', placeholder: 'hh:mm',
   },
   {
-    key: 'toTime', type: 'datetime', label: 'toTime', placeholder: 'toTime',
+    key: 'toTime', type: 'input', label: 'toTime', placeholder: 'hh:mm',
   },
 ];
 

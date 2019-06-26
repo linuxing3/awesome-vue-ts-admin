@@ -1,9 +1,4 @@
 import Vue from 'vue';
-import {
-  MutationOptions,
-  NetworkStatus,
-} from 'apollo-client';
-import { DocumentNode } from 'graphql';
 
 declare module '*.vue' {
   export default Vue;

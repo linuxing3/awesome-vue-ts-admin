@@ -1,9 +1,9 @@
 import { Component, Vue } from 'vue-property-decorator';
 import { Row, Col, Card } from 'ant-design-vue';
 import { loadApexCharts } from '@/utils/index';
-
+import { DVHelper } from '@antv/data-set';
 import {
-  countByCategory, DVHelper, initData, typeTransformer,
+  countByCategory, initData, typeTransformer,
 } from '@/utils/datetime';
 import models from '@/models';
 

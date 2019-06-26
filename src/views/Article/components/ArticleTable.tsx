@@ -1,22 +1,22 @@
-import { Component, Mixins, Emit } from 'vue-property-decorator';
-import { Tag } from 'ant-design-vue';
+import { Component, Mixins } from 'vue-property-decorator';
+import { Tag, Avatar } from 'ant-design-vue';
 import { tableList, FilterFormList, operate } from '@/interface';
-import { api } from '@/api';
 import TableMixin from '@/utils/tableMixin';
-
 import {
   BackParams, operateBtn, tableFieldsList, filterFormItemList, defaultItemList,
 } from './config';
+
 import './index.less';
 
 @Component({
-  name: 'UserMilitantTable',
+  name: 'ArticleTable',
   components: {
     'a-tag': Tag,
+    'a-avatar': Avatar,
   },
 })
-export default class UserMilitantTable extends Mixins(TableMixin) {
-  modelName: string = 'userMilitant'
+export default class ArticleTable extends Mixins(TableMixin) {
+  modelName: string = 'article'
 
   data: any[] = []
 
@@ -28,17 +28,11 @@ export default class UserMilitantTable extends Mixins(TableMixin) {
 
   filterParams: any = {
     name: '',
-    gender: '',
-    department: '',
-    fromEntity: '',
-    arrivingDate: '',
   }
 
   BackParams: any = BackParams
 
-  outParams: any = {
-    itemList: defaultItemList,
-  }
+  outParams: any = {}
 
   filterList: FilterFormList[] = filterFormItemList
 
@@ -53,12 +47,12 @@ export default class UserMilitantTable extends Mixins(TableMixin) {
   editData: object = {}
 
   customRender() {
-    this.tableList[2].customRender = this.genderRender;
-    this.tableList[4].customRender = this.dateRender;
+    this.tableList[0].customRender = this.avatarRender;
+    this.tableList[3].customRender = this.dateRender;
   }
 
-  genderRender(text: any) {
-    return <a-tag color={text ? 'blue' : 'purple'}>{text ? '男' : '女'}</a-tag>;
+  avatarRender(avatar: string) {
+    return <a-avatar size={24} src={avatar}>{avatar ? '男' : '女'}</a-avatar>;
   }
 
   dateRender(value: string) {
@@ -74,7 +68,7 @@ export default class UserMilitantTable extends Mixins(TableMixin) {
           filterList={this.filterList}
           filterGrade={[]}
           scroll={{ x: 900 }}
-          url={'/userMilitant/fetch'}
+          url={'/article/fetch'}
           filterParams={this.filterParams}
           outParams={this.outParams}
           addBtn={true}

@@ -65,15 +65,6 @@ export default class Dashboard extends Vue {
 
   newTag: string = '';
 
-  apollo: any = {
-    // 简单的查询，将更新 'hello' 这个 vue 属性
-    hello: gql`
-      query {
-        hello
-      }
-    `,
-  };
-
   async created() {
     await this.refresh();
   }

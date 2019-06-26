@@ -62,7 +62,9 @@ class CrudFrom extends Mixins(FormMixin) {
             modelName={this.modelName}
             item-list={this.itemList}
             save-btn={true}
-            reset-btn={true}
+                        reset-btn={true}
+            on-clear={this.clear}
+            on-loadEditInfo={this.loadEditInfo}
             on-setForm={this.setForm}
             on-showDataTable={this.showDataTable}
           />

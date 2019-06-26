@@ -32,6 +32,7 @@ class MemberForm extends Mixins(FormMixin) {
 
   outParams: any = {
     itemList: defaultItemList,
+    filterItemList: defaultItemList,
   }
 
   render() {
@@ -45,7 +46,7 @@ class MemberForm extends Mixins(FormMixin) {
             <a-menu slot="overlay">
               <a-menu-item>
                 <a on-click={this.importOrExport}>导入导出</a>
-              </a-menu-item>
+            </a-menu-item>
               <a-menu-item>
                 <a on-click={this.statistic}>统计图表</a>
               </a-menu-item>
@@ -53,10 +54,15 @@ class MemberForm extends Mixins(FormMixin) {
           </a-dropdown>
           <m-form
             ref="MForm"
-            modelName={this.modelName}
+            is-normal={true}
+            model-name={this.modelName}
             item-list={this.itemList}
+            filter-item-list={this.outParams.filterItemList}
             save-btn={true}
             reset-btn={true}
+            filter-btn={true}
+            on-clear={this.clear}
+            on-loadEditInfo={this.loadEditInfo}
             on-setForm={this.setForm}
             on-showDataTable={this.showDataTable}
           />

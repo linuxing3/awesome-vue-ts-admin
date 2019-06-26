@@ -43,7 +43,7 @@ class EmployeeForm extends Mixins(FormMixin) {
             </a>
             <a-menu slot="overlay">
               <a-menu-item>
-                <a on-click={this.importOrExport}>Import/Export</a>
+                <a on-click={this.importOrExport}>导入导出</a>
               </a-menu-item>
               <a-menu-item>
                 <a on-click={this.statistic}>Statistic</a>
@@ -55,7 +55,9 @@ class EmployeeForm extends Mixins(FormMixin) {
             modelName={this.modelName}
             item-list={this.itemList}
             save-btn={true}
-            reset-btn={true}
+                        reset-btn={true}
+            on-clear={this.clear}
+            on-loadEditInfo={this.loadEditInfo}
             on-setForm={this.setForm}
             on-showDataTable={this.showDataTable}
           />

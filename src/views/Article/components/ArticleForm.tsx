@@ -9,7 +9,7 @@ import { defaultItemList } from './config';
 import './index.less';
 
 @Component({
-  name: 'LeaveForm',
+  name: 'ArticleForm',
   components: {
     'm-form': MForm,
     'a-card': Card,
@@ -22,34 +22,26 @@ import './index.less';
     Form,
   },
 })
-class LeaveForm extends Mixins(FormMixin) {
-  modelName: string = 'leave'
+class ArticleForm extends Mixins(FormMixin) {
+  modelName: string = 'article'
 
   formValues: any = {}
 
-  itemList: FilterFormList[] = defaultItemList
+  itemList: any[] = defaultItemList
 
   outParams: any = {
     itemList: defaultItemList,
   }
 
-  save() {
-    const form = this.$refs.MForm as any;
-    this.$log.info(form);
-  }
-
   render() {
     return (
       <div class="base-form-wrap">
-        <a-card title="Leave Form">
+        <a-card title="Article Form">
           <a-dropdown slot="extra">
             <a class="ant-dropdown-link">
               <a-icon type="ellipsis" style="font-size: 22px" />
             </a>
             <a-menu slot="overlay">
-              <a-menu-item>
-                <a on-click={this.save}>Save</a>
-              </a-menu-item>
               <a-menu-item>
                 <a on-click={this.importOrExport}>导入导出</a>
               </a-menu-item>
@@ -75,4 +67,4 @@ class LeaveForm extends Mixins(FormMixin) {
   }
 }
 
-export default Form.create({})(LeaveForm);
+export default Form.create({})(ArticleForm);

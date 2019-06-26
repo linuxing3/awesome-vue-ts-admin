@@ -3,8 +3,14 @@ import { Row, Col, Card } from 'ant-design-vue';
 import { loadApexCharts } from '@/utils/index';
 
 import {
-  countByCategory, DVHelper, initData, yearlyTransformer,
+  countByCategory,
+  initData,
+  yearlyTransformer,
+  typeTransformer,
 } from '@/utils/datetime';
+
+import { DVHelper } from '@antv/data-set';
+
 import models from '@/models';
 
 import {
@@ -78,6 +84,13 @@ export default class Bar extends Vue {
     this.getData();
   }
 
+  clearData() {
+    this.basicBarOption.series = [];
+    this.stackedBarOption.series = [];
+    this.fullStackedBarOption.series = [];
+    this.groupedBarOption.series = [];
+  }
+
   loadChart() {
     this.negativeBarChart = new window.ApexCharts(
       document.querySelector('#negative-bar'),
@@ -97,6 +110,7 @@ export default class Bar extends Vue {
   }
 
   getData() {
+    this.clearData();
     loadApexCharts().then(() => {
       // Basic Bar
       Document.$fetch().then(async () => {
@@ -110,7 +124,10 @@ export default class Bar extends Vue {
         });
         console.log('Basic Chart Data:', this.basicBarSerieData);
         this.basicBarOption.xaxis.categories = this.basicBarSerieData.labels;
-        this.basicBarOption.series[0].data = this.basicBarSerieData.data;
+        this.basicBarOption.series.push({
+          name: 'A',
+          data: this.basicBarSerieData.data,
+        });
         this.basicBarChart = new window.ApexCharts(
           document.querySelector('#basic-bar'),
           this.basicBarOption,
@@ -135,8 +152,10 @@ export default class Bar extends Vue {
         );
         console.log('Grouped Chart Data:', this.groupedBarSerieData);
         this.groupedBarOption.xaxis.categories = this.groupedBarSerieData.labels;
-        this.groupedBarOption.series[0].data = this.groupedBarSerieData.data;
-        this.groupedBarOption.series[1].data = this.groupedBarSerieData.data;
+        this.groupedBarOption.series.push({
+          name: 'A',
+          data: this.groupedBarSerieData.data,
+        });
         this.groupedBarChart = new window.ApexCharts(
           document.querySelector('#grouped-bar'),
           this.groupedBarOption,
@@ -155,11 +174,10 @@ export default class Bar extends Vue {
         });
         console.log('Stacked Chart Data:', this.stackedBarSerieData);
         this.stackedBarOption.xaxis.categories = this.stackedBarSerieData.labels;
-        this.stackedBarOption.series[0].data = this.stackedBarSerieData.data;
-        this.stackedBarOption.series[1].data = this.stackedBarSerieData.data;
-        this.stackedBarOption.series[2].data = this.stackedBarSerieData.data;
-        this.stackedBarOption.series[3].data = this.stackedBarSerieData.data;
-        this.stackedBarOption.series[4].data = this.stackedBarSerieData.data;
+        this.stackedBarOption.series.push({
+          name: 'A',
+          data: this.stackedBarSerieData.data,
+        });
         this.stackedBarChart = new window.ApexCharts(
           document.querySelector('#stacked-bar'),
           this.stackedBarOption,
@@ -169,18 +187,20 @@ export default class Bar extends Vue {
       // FullStacked Bar
       Leave.$fetch().then(async () => {
         const leaves = await Leave.all();
+        const label = ['美国', '欧洲', '其他'];
         console.log('Leave Data:', leaves);
         this.fullStackedBarSerieData = countByCategory(leaves, {
-          field: 'fromDate',
+          field: 'route',
           operate: 'count',
           x: 'x',
           y: 'y',
-        });
+        }, label, initData, typeTransformer);
         console.log('Stacked Chart Data:', this.fullStackedBarSerieData);
         this.fullStackedBarOption.xaxis.categories = this.fullStackedBarSerieData.labels;
-        this.fullStackedBarOption.series[0].data = this.fullStackedBarSerieData.data;
-        this.fullStackedBarOption.series[1].data = this.fullStackedBarSerieData.data;
-        this.fullStackedBarOption.series[2].data = this.fullStackedBarSerieData.data;
+        this.fullStackedBarOption.series.push({
+          name: 'A',
+          data: this.fullStackedBarSerieData.data,
+        });
         this.fullStackedBarChart = new window.ApexCharts(
           document.querySelector('#full-stacked-bar'),
           this.fullStackedBarOption,

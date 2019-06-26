@@ -3,7 +3,7 @@ import {
   Card, Dropdown, Menu, Icon, List, Avatar, Row, Col, Button,
 } from 'ant-design-vue';
 import models from '@/models';
-import lfService from '@/utils/request.localforage';
+import { api } from '@/api';
 import { upperCaseFirst } from 'change-case';
 
 import './card.less';
@@ -72,7 +72,7 @@ export default class MemberCartList extends Vue {
 
   async handleDelete(row) {
     this.$log.suc('Deleting ... ');
-    const response = await lfService.request({
+    const response = await api.request({
       url: `/${this.modelName}`,
       method: 'delete',
       data: row.id,

@@ -1,4 +1,4 @@
-import { Component, Mixins } from 'vue-property-decorator';
+import { Component, Mixins, Prop } from 'vue-property-decorator';
 import { Tag } from 'ant-design-vue';
 import { tableList, FilterFormList, operate } from '@/interface';
 import TableMixin from '@/utils/tableMixin';
@@ -15,6 +15,12 @@ import './index.less';
   },
 })
 export default class ProjectTable extends Mixins(TableMixin) {
+  @Prop({ default: true })
+  addBtn: boolean
+
+  @Prop({ default: true })
+  exportBtn: boolean
+
   modelName: string = 'project'
 
   data: any[] = []
@@ -70,8 +76,8 @@ export default class ProjectTable extends Mixins(TableMixin) {
           url={'/project/fetch'}
           filterParams={this.filterParams}
           outParams={this.outParams}
-          addBtn={true}
-          exportBtn={true}
+          addBtn={this.addBtn}
+          exportBtn={this.exportBtn}
           dataType={'json'}
           rowKey={'id'}
           operate={this.operate}

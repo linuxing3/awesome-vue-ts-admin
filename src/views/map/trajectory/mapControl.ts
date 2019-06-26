@@ -372,13 +372,14 @@ export default class MapContorl {
     this.addTrackPointOverlay(datas, 'trackpoint_in');
     window.api.gpsToAddress({ lat: datas.lat, lng: datas.lng, coordinateSystem: 'bd09ll' }).then((res: any) => {
       const { data } = res;
+      const today: any = new Date(datas.uTCTime);
       if (data.status === 0) {
         const address = data.result.formatted_address + data.result.sematic_description;
         const infor = [
           ['定位', datas.lnglat],
           ['地址', address],
           ['速度', `${datas.speed}km/h`],
-          ['定位时间', new Date(datas.uTCTime).Format('yyyy-MM-dd hh:mm:ss')],
+          ['定位时间', today.Format('yyyy-MM-dd hh:mm:ss')],
         ];
         this.setTrackInfoBox({
           plateNum: datas.plateNum,

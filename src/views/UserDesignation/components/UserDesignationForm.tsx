@@ -43,7 +43,7 @@ class UserDesignationForm extends Mixins(FormMixin) {
             </a>
             <a-menu slot="overlay">
               <a-menu-item>
-                <a on-click={this.importOrExport}>Import/Export</a>
+                <a on-click={this.importOrExport}>导入导出</a>
               </a-menu-item>
               <a-menu-item>
                 <a on-click={this.statistic}>Statistic</a>
@@ -56,6 +56,9 @@ class UserDesignationForm extends Mixins(FormMixin) {
             item-list={this.itemList}
             save-btn={true}
             reset-btn={true}
+            filter-btn={true}
+            on-clear={this.clear}
+            on-loadEditInfo={this.loadEditInfo}
             on-setForm={this.setForm}
             on-showDataTable={this.showDataTable}
           />
