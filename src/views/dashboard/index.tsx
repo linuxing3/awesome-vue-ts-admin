@@ -14,6 +14,7 @@ import {
 import models from '@/models';
 
 import './index.less';
+import { DVHelper } from '@antv/data-set';
 
 const Document: any = models.document;
 const Event: any = models.event;
@@ -36,19 +37,19 @@ const UserMilitant: any = models.userMilitant;
   },
 })
 export default class Dashboard extends Vue {
-  modelName: string = 'member'
+  modelName: string = 'member';
 
   barData = {
     projections: null,
     actuals: null,
-  }
+  };
 
-  doughnutData = {
+  doughnutData: DVHelper = {
     labels: null,
     data: null,
-  }
+  };
 
-  cardList: any[] = []
+  cardList: any[] = [];
 
   lineData = {
     labels: null,
@@ -58,11 +59,11 @@ export default class Dashboard extends Vue {
     second: null,
     third: null,
     fourth: null,
-  }
+  };
 
-  hello: string = ''
+  hello: string = '';
 
-  newTag: string = ''
+  newTag: string = '';
 
   apollo: any = {
     // 简单的查询，将更新 'hello' 这个 vue 属性
@@ -71,7 +72,7 @@ export default class Dashboard extends Vue {
         hello
       }
     `,
-  }
+  };
 
   async created() {
     await this.refresh();
@@ -146,8 +147,8 @@ export default class Dashboard extends Vue {
 
   async fetch() {
     /**
-    * async data from localforage
-    */
+     * async data from localforage
+     */
     await Member.$fetch();
     await Document.$fetch();
     await UserMilitant.$fetch();
@@ -219,7 +220,6 @@ export default class Dashboard extends Vue {
       PreviousYear: lineData.data[2],
     };
 
-
     const leaves = await Leave.all();
     console.log('Leave Data:', leaves);
     // donut chart
@@ -243,19 +243,14 @@ export default class Dashboard extends Vue {
     this.Doughnut();
   }
 
-  BarChartDom: any = null
+  BarChartDom: any = null;
 
   BarChart() {
     const BarChart: any = document.getElementById('BarChart');
     if (!BarChart) {
       return false;
     }
-    const a: any = BarChart.getContext('2d').createLinearGradient(
-      0,
-      500,
-      0,
-      150,
-    );
+    const a: any = BarChart.getContext('2d').createLinearGradient(0, 500, 0, 150);
     a.addColorStop(0, '#fa5c7c');
     a.addColorStop(1, '#727cf5');
     const config: any = {
@@ -394,7 +389,7 @@ export default class Dashboard extends Vue {
     this.BarChartDom = new Chart(LineChart.getContext('2d'), config);
   }
 
-  DoughnutDom: any = null
+  DoughnutDom: any = null;
 
   Doughnut() {
     const config: any = {
@@ -404,7 +399,21 @@ export default class Dashboard extends Vue {
         datasets: [
           {
             data: this.doughnutData.data,
-            backgroundColor: ['#727cf5', '#fa5c7c', '#0acf97', '#ebeff2'],
+            // fixed: 添加多个颜色，长度和数据长度一致，否则显示为绿色
+            backgroundColor: [
+              '#727cf5',
+              '#fa5c7c',
+              '#0acf97',
+              '#ebeff2',
+              '#727cf5',
+              '#fa5c7c',
+              '#0acf97',
+              '#ebeff2',
+              '#727cf5',
+              '#fa5c7c',
+              '#0acf97',
+              '#ebeff2',
+            ],
             borderColor: 'transparent',
             borderWidth: '3',
           },
@@ -422,13 +431,13 @@ export default class Dashboard extends Vue {
     this.DoughnutDom = new Chart(Doughnut.getContext('2d'), config);
   }
 
-  async changeDonut(e) {
+  async changeDoughnut(e) {
     const field = e.target.value;
     this.$log.info('Donut value changed:', field);
     const leaves = await Leave.all();
     let label = [];
     this.$log.info('Leave Data:', leaves);
-    if (field ==='private') {
+    if (field === 'private') {
       label = ['因私', '因公'];
       this.doughnutData = countByCategory(
         leaves,
@@ -443,7 +452,7 @@ export default class Dashboard extends Vue {
         typeTransformer,
       );
     }
-    if (field ==='route') {
+    if (field === 'route') {
       label = ['美国', '欧洲', '其他'];
       this.doughnutData = countByCategory(
         leaves,
@@ -458,16 +467,13 @@ export default class Dashboard extends Vue {
         typeTransformer,
       );
     }
-    if (field ==='month') {
-      this.doughnutData = countByCategory(
-        leaves,
-        {
-          field: 'fromDate',
-          operate: 'count',
-          x: 'x',
-          y: 'y',
-        },
-      );
+    if (field === 'month') {
+      this.doughnutData = countByCategory(leaves, {
+        field: 'fromDate',
+        operate: 'count',
+        x: 'x',
+        y: 'y',
+      });
     }
     // donut chart
     this.$log.info('Leave Statistic:', this.doughnutData);
@@ -480,7 +486,7 @@ export default class Dashboard extends Vue {
     md: 12,
     sm: 24,
     xs: 24,
-  }
+  };
 
   changeRoute(route) {
     const name = `${upperCaseFirst(route)}Table`;
@@ -489,11 +495,11 @@ export default class Dashboard extends Vue {
     });
   }
 
-  iconList = ['team', 'profile', 'calendar', 'folder-open']
+  iconList = ['team', 'profile', 'calendar', 'folder-open'];
 
-  loading: boolean = true
+  loading: boolean = true;
 
-  renderDonut(): JSX.Element {
+  renderDoughnut(): JSX.Element {
     return (
       <a-col span={8} xxl={8} xl={8} lg={24} md={24} sm={24} xs={24}>
         <a-card loading={this.loading} class="dash-box total-wrap">
@@ -503,7 +509,7 @@ export default class Dashboard extends Vue {
             <a-radio-group
               defaultValue="private"
               buttonStyle="solid"
-              on-change={this.changeDonut}
+              on-change={this.changeDoughnut}
             >
               <a-radio-button value="private">公私</a-radio-button>
               <a-radio-button value="route">路线</a-radio-button>
@@ -511,10 +517,7 @@ export default class Dashboard extends Vue {
             </a-radio-group>
             <span class="tips">选择分类</span>
           </div>
-          <div
-            style="height: 225px; margin-top: 40px"
-            class="chartjs-chart"
-          >
+          <div style="height: 225px; margin-top: 40px" class="chartjs-chart">
             <canvas height="100px" id="Doughnut" />
           </div>
           <div class="chart-widget-list">
@@ -543,7 +546,7 @@ export default class Dashboard extends Vue {
               on-click={() => this.changeRoute(item.name)}
             >
               <a-card loading={this.loading} class="dash-card">
-                <h3>{this.$t(item.name)}</h3>
+                <h3 color="blue">{this.$t(`entity.${item.name}`)}</h3>
                 <a-icon class="icon" type={this.iconList[index]} />
                 <p class="number">{numFormat(item.value)}</p>
                 <div class="footer">
@@ -606,9 +609,7 @@ export default class Dashboard extends Vue {
             </div>
             <div class="item">
               <h4 class="item-title">去年</h4>
-              <p class="number number2">
-                {numFormat(this.lineData.PreviousYear)}件
-              </p>
+              <p class="number number2">{numFormat(this.lineData.PreviousYear)}件</p>
             </div>
           </div>
           <div class="float-text">
@@ -618,10 +619,7 @@ export default class Dashboard extends Vue {
               看图说话 <a-icon type="arrow-right" />
             </a-button>
           </div>
-          <div
-            style="height: 364px; margin-top: 40px"
-            class="chartjs-chart"
-          >
+          <div style="height: 364px; margin-top: 40px" class="chartjs-chart">
             <canvas height="100px" id="LineChart" />
           </div>
         </a-card>
@@ -638,7 +636,7 @@ export default class Dashboard extends Vue {
         </a-row>
         <a-row gutter={{ xs: 8, md: 12, xl: 20 }}>
           {this.renderLine()}
-          {this.renderDonut()}
+          {this.renderDoughnut()}
         </a-row>
       </div>
     );

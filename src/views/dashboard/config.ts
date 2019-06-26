@@ -1,4 +1,4 @@
-import DataSet from '@antv/data-set';
+import { View } from '@antv/data-set';
 
 const values = [
   1.2,
@@ -58,7 +58,7 @@ const values = [
 ];
 const sourceData = values.map(value => ({ value }));
 
-const dv = new DataSet.View().source(sourceData);
+const dv = new View().source(sourceData);
 dv.transform({
   type: 'bin.histogram',
   field: 'value',
