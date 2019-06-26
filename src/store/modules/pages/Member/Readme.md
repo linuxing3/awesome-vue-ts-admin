@@ -54,7 +54,7 @@ export default class Member extends Model {
 `crud.vuex.js`文件
 
 ```
-import { lfService } from '@/utils/request.localforage'
+import { api } from '@/api'
 
 /**
  * crud func
@@ -62,7 +62,7 @@ import { lfService } from '@/utils/request.localforage'
  * @returns {Promise<any>}
  */
 function crud ({ url, method, data }) {
-  return lfService.request({
+  return api.request({
     url,
     method,
     data
@@ -70,7 +70,7 @@ function crud ({ url, method, data }) {
 }
 
 function createItem ({ url, data }) {
-  return lfService.request({
+  return api.request({
     url,
     method: 'post',
     data
@@ -78,7 +78,7 @@ function createItem ({ url, data }) {
 }
 
 function updateItem ({ url, data }) {
-  return lfService.request({
+  return api.request({
     url,
     method: 'patch',
     data
@@ -86,7 +86,7 @@ function updateItem ({ url, data }) {
 }
 
 function deleteItem ({ url, data }) {
-  return lfService.request({
+  return api.request({
     url,
     method: 'delete',
     data
@@ -94,7 +94,7 @@ function deleteItem ({ url, data }) {
 }
 
 function fetchItem ({ url, data }) {
-  return lfService.request({
+  return api.request({
     url,
     method: 'get',
     data
@@ -102,7 +102,7 @@ function fetchItem ({ url, data }) {
 }
 
 function fetchItems ({ url, data }) {
-  return lfService.request({
+  return api.request({
     url,
     method: 'get'
   })
@@ -189,128 +189,3 @@ const VueLocalForageAxios = {
 ```
 
 ### `request.localforage.js`中定义类`axios.request`帮助器
-
-```js
-import store from "@/store";
-import { builder } from "@/mock/util";
-import { VueLocalForageAxios } from "./axios";
-import models from "@/store/models";
-
-// 创建 axios 实例
-const service = {
-  validateUrl: ({ url, method, data, pageParams }) => {
-    const [prefix, namespace, action] = url.split("/");
-    const model = models[namespace];
-    return {
-      method,
-      data,
-      model,
-      pageParams,
-      namespace,
-      url,
-      prefix,
-      action
-    };
-  },
-  request: async function(params) {
-    const newParams = this.validateUrl(params);
-    console.log(newParams);
-    const result = await this.handleRequest(newParams);
-    return result;
-  },
-  handleRequest: async ({ method, data, model, namespace, pageParams }) => {
-    // Using vuex-orm with localforage
-    try {
-      let requestedData = null;
-      // data from localforage
-      switch (method) {
-        case "post":
-          const createdItems = await model.$create({ data });
-          requestedData = {
-            model,
-            data: createdItems
-          };
-          break;
-        case "delete":
-          const deletedItems = await model.$delete(data.id || data);
-          requestedData = {
-            model,
-            data: deletedItems
-          };
-          break;
-        case "patch":
-          const updatedItems = await model.$update({ data });
-          requestedData = {
-            model,
-            data: updatedItems
-          };
-          break;
-        case "get":
-          if (!data) {
-            await model.$fetch();
-            // pageParams
-            const totalCount = model.query().count() || 0;
-            const pageNo =
-              (pageParams.pageNo && parseInt(pageParams.pageNo)) || 1;
-            const pageSize =
-              (pageParams.pageSize && parseInt(pageParams.pageSize)) || 10;
-            const totalPage = Math.ceil(totalCount / pageSize) || 0;
-            // offset and next
-            const offset = (pageNo - 1) * pageSize || 0;
-            const next =
-              (pageNo >= totalPage ? totalCount % pageSize : pageSize) + 1;
-            // query with pageParams
-            const paginatedData = model
-              .query()
-              .offset(offset)
-              .limit(pageSize)
-              .get();
-            // build data and attach to result
-            requestedData = {
-              model,
-              pageSize,
-              pageNo,
-              totalCount,
-              totalPage,
-              offset,
-              next,
-              data: paginatedData
-            };
-          } else {
-            await model.$get(data.id || data);
-            const foundItem = model.find(data.id || data) || {};
-            requestedData = {
-              model,
-              data: foundItem
-            };
-          }
-          break;
-      }
-
-      // build response
-      console.log(`${method} Localforage --> vuex:`);
-      console.log(requestedData);
-      const response = builder(
-        requestedData,
-        `${method} ${namespace} Ok`,
-        200,
-        {}
-      );
-      return Promise.resolve(response);
-      // eslint-disable-next-line no-unreachable
-    } catch (error) {
-      const response = builder(error, "Error", 500, {});
-      return Promise.reject(response);
-    }
-  }
-};
-
-const installer = {
-  vm: {},
-  install(Vue) {
-    Vue.use(VueLocalForageAxios, service);
-  }
-};
-
-export { installer as VueLocalForageAxios, service as lfService };
-```

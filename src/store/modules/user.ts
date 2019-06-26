@@ -5,34 +5,41 @@ import router, { asyncRouterMap, constantRouterMap } from '@/router';
 import bcrypt from 'bcryptjs';
 import { routerItem } from '@/interface';
 import { builder, baseData } from '@/utils/builder';
-import User from '@/store/modules/pages/User/models/User';
+import models from '@/models';
 
 interface UserData {
   username: string;
   userid: string;
-  avatarUri: string;
+  avatarUrl: string;
   email: string;
 }
 
-const Entity: any = User;
+const Entity: any = models.user;
 
 function filterAsyncRouter(AsyncRouterMap: routerItem[], permission: string[]): routerItem[] {
-  const routerMap = AsyncRouterMap.filter((item) => {
-    if (typeof item.permission === 'string') {
-      return permission.indexOf(item.permission) > -1;
+  const routerMap = AsyncRouterMap.filter((route) => {
+    if (typeof route.permission === 'string') {
+      return permission.indexOf(route.permission) > -1;
     }
-    if (item.permission instanceof Array) {
-      const filter = item.permission.filter(items => permission.indexOf(items) > -1);
-      if (filter.length && item.children) {
-        item.children = filterAsyncRouter(item.children, permission);
+    if (route.permission instanceof Array) {
+      const filter = route.permission.filter(permissionKey => permission.indexOf(permissionKey) > -1);
+      if (filter.length && route.children) {
+        route.children = filterAsyncRouter(route.children, permission);
       }
       return filter.length;
     }
-    return item.permission;
+    return route.permission;
   });
   return routerMap;
 }
 
+/**
+ * 过滤账户是否拥有某一个权限，并将菜单从加载列表移除
+ *
+ * @param permission
+ * @param route
+ * @returns {boolean}
+ */
 const hasPermission = (permission: string[]) => {
   // 过滤路由
   const filterRouter = filterAsyncRouter(asyncRouterMap, permission);
@@ -41,7 +48,22 @@ const hasPermission = (permission: string[]) => {
   return filterRouter;
 };
 
-const generateUserPermisson = user => user.permissions.reduce((result, value) => {
+/**
+ * 单账户多角色时，使用该方法可过滤角色不存在的菜单
+ *
+ * @param roles
+ * @param route
+ * @returns {*}
+ */
+// eslint-disable-next-line
+function hasRole(roles, route) {
+  if (route.meta && route.meta.roles) {
+    return route.meta.roles.includes(roles.id);
+  }
+  return true;
+}
+
+export const generateUserPermisson = user => user.permissions.reduce((result, value) => {
   result.push({
     roleId: user.username,
     permissionId: userPermissionMap[value],
@@ -57,7 +79,7 @@ const user = {
     user: {
       username: '',
       userid: '',
-      avatar_uri: '',
+      avatarUrl: '',
       email: '',
     },
     roles: [],
@@ -158,9 +180,6 @@ const user = {
     logout: (context: any, loginParams: any) => {
       // clear token
       window.localStorage.clear();
-      // Delete localforage storage
-      // Entity.$fetch();
-      // Entity.all().map(entity => Entity.$destroy(entity.id));
       const data = baseData('success', '登出成功');
       return Promise.resolve(builder(data, '登出，结束会话'));
     },
@@ -179,7 +198,7 @@ const user = {
           const userData: UserData = {
             username: entity.username,
             userid: entity.id,
-            avatarUri: entity.avatar_uri,
+            avatarUrl: entity.avatarUrl,
             email: entity.email,
           };
           // SAVE USER
@@ -197,38 +216,6 @@ const user = {
         }
       });
     },
-    getUserInfo: (context: any) => new Promise((resolve, reject) => {
-      const params = {
-        token: localStorage.getItem('token'),
-      };
-      context.commit('LOADING', false);
-      window.api
-        .getUserInfo(params)
-        .then((res: returnData) => {
-          console.log('getUsrInfo Response:', res);
-          context.commit('LOADING', true);
-          const { result, entity } = res.data;
-          if (!result.resultCode) {
-            const userData: UserData = {
-              username: entity.username,
-              userid: entity.id,
-              avatarUri: entity.avatar_uri,
-              email: entity.email,
-            };
-            context.commit('SAVEUSER', userData);
-            context.commit('SAVEROLES', entity.permissions);
-            const getRouter = hasPermission(entity.permissions.permission);
-            context.dispatch('GetMenuData', getRouter);
-            resolve(entity);
-          } else {
-            reject(result.resultMessage);
-          }
-        })
-        .catch((error: any) => {
-          context.commit('LOADING', true);
-          reject(error);
-        });
-    }),
   },
   getters: {
     currentUser: async (state: any) => {

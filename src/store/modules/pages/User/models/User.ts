@@ -17,19 +17,20 @@ export default class User extends BaseModel {
   static fields() {
     return {
       id: this.increment(),
-      name: this.string('Emacser'),
+      name: this.string('test'),
       userid: this.string('Emacser'),
-      username: this.string('admin'),
-      password: this.string(''),
-      email: this.string(''),
+      username: this.string('test'),
+      password: this.string('123456'),
+      email: this.string('test@qq.com'),
       telephone: this.string(''),
       address: this.string(''),
-      status: this.number('50'),
+      status: this.number('active'),
       hash: this.string(''),
       token: this.string('qqyzkzldrx'),
       role: this.attr(null),
-      avatar_uri: this.string('/avatar2.jpg'),
-      permissions: this.attr(['1', '2', '3', '4', '5']),
+      avatarUrl: this.string('/avatar/man_1.jpg'),
+      permissions: this.attr([]),
+      permissionDetails: this.attr([]),
     };
   }
 }
