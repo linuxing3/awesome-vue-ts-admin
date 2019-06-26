@@ -107,12 +107,12 @@ export default class MTable extends Vue {
 
   @Watch('ids')
   idsChanged(newValue: any[]) {
-    this.$log.info('New ids: ', newValue);
+    this.$log.info('[表格] ---> 更新数据唯一标识符集合: ', newValue);
   }
 
   @Watch('tableData')
   tableDataChanged(newValue: any[]) {
-    this.$log.info('Data counts: ', newValue.length);
+    this.$log.info('[表格] ---> 数据记录总数 ', newValue.length);
   }
 
   constructor(props: any) {
@@ -137,28 +137,28 @@ export default class MTable extends Vue {
    * @method 获取表格数据
    */
   getData() {
-    this.$log.info('Fetching ...');
+    this.$log.info('[表格] ---> 开始异步获取数据');
     this.loading = true;
     const params = {
       pageParams: { ...this.pageParams },
       filter: { ...this.tableParams },
       out: { ...this.outParams },
     };
-    this.$log.info('Mtable get Data Params:', params);
+    this.$log.info('[表格] ---> 异步获取数据参数:', params);
     api.request({
       url: this.url,
       method: this.fetchType,
       params,
     }).then((res: any) => {
-      this.$log.info('Table Fetch response:', res);
+      this.$log.info('[表格] ---> 异步获取数据结果:', res);
       this.loading = false;
       const code = getValue(this.backParams.code, res);
       if (code === this.backParams.codeOK) {
         this.tableData = getValue(this.backParams.data, res);
         this.$log.suc('MTable table data:', this.tableData);
-        // table list and columns
+        // 自动生成全部表格列
         // this.tableList = getValue(this.backParams.columns, res);
-        // table total
+        // 计算表格总数
         this.dataTotal = getValue(this.backParams.total, res)
           ? getValue(this.backParams.total, res) : 0;
       } else {
@@ -205,7 +205,7 @@ export default class MTable extends Vue {
   }
 
   render() {
-    // Generate table list/ columns
+    // 添加表格的操作列属性 Generate table action columns
     if (this.operate.length && this.tableList[this.tableList.length -1].title !== '操作') {
       this.tableList.push({
         title: '操作',
@@ -214,6 +214,7 @@ export default class MTable extends Vue {
         customRender: this.renderOperate,
       });
     }
+    // 生成表格的列属性 Generate table  columns
     const tableList = this.tableList.reduce((list: tableList[], item: tableList) => {
       const title = `${this.$t(item.dataIndex).toString()} / ${titleCase(item.dataIndex)}`;
       list.push({
@@ -300,9 +301,11 @@ export default class MTable extends Vue {
 
   // page, filter, sorter changed
   tableChange(pagination: any, filters: any, sorter: any) {
+    this.$log.info('[标题] ---> 分页过滤排序变化');
     this.pageParams.pageSize = pagination.pageSize;
     this.pageParams.pageNum = pagination.current;
     this.getData();
+    // this.$emit('tableChange', this.pageParams, filters, sorter);
   }
 
   // when action menu clicked

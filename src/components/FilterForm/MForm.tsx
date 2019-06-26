@@ -3,19 +3,18 @@ import {
   Component, Prop, Emit, Vue,
 } from 'vue-property-decorator';
 import {
-  Input, Select, Form, TimePicker, DatePicker, Cascader, Row, Col, Button, Modal, Checkbox, Radio, Card,
+  Input, Select, Form, TimePicker, DatePicker, Cascader, Row, Col, Button, Modal, Checkbox, Radio, Card, Divider,
 } from 'ant-design-vue';
-import { cloneDeep } from 'lodash';
 import titleCase from 'title-case';
 import { FilterFormList } from '@/interface';
 import { api } from '@/api';
 import { convertDate } from '@/utils/datetime';
-
-import './MForm.less';
 import { WrappedFormUtils } from 'ant-design-vue/types/form/form';
+import './MForm.less';
 
 @Component({
   components: {
+    'a-divider': Divider,
     'a-card': Card,
     'a-input': Input,
     'a-textarea': Input.TextArea,
@@ -168,14 +167,14 @@ class MFormClass extends Vue {
   @Emit()
   addOrEdit(data) {
     if (this.id === -1) {
-      this.$log.suc('Creating...');
+      this.$log.suc('[表单] ---> 添加新数据...');
       api.request({
         url: `/${this.modelName}`,
         method: 'post',
         data,
       });
     } else {
-      this.$log.suc('updating...');
+      this.$log.suc('[表单] ---> 更新数据...');
       api.request({
         url: `/${this.modelName}`,
         method: 'patch',
@@ -186,7 +185,7 @@ class MFormClass extends Vue {
 
   @Emit()
   getInfo() {
-    this.$log.info('getting edit info...');
+    this.$log.info('[表单] ---> 获取编辑信息...');
     if (this.id === -1) {
       // this.setForm();
       return;
@@ -198,15 +197,16 @@ class MFormClass extends Vue {
         data: { id: this.id },
       })
       .then(({ data, config }) => {
-        this.$log.info('Get Data:', data.entity);
+        this.$log.info('[表单] ---> 提取实际信息:', data.entity);
         this.loadEditInfo(convertDate(this.itemList, data.entity, false)[0]);
       });
   }
 
   @Emit()
   loadEditInfo(data) {
-    this.$emit('loadEditInfo', data);
     this.$log.suc(`编辑记录 ${this.id}`);
+    // 更新父组件的编辑信息
+    this.$emit('loadEditInfo', data);
     new Promise((resolve) => {
       setTimeout(resolve, 500);
     }).then(() => {
@@ -312,7 +312,7 @@ class MFormClass extends Vue {
      */
     // const label = `${this.$t(item.key)} / ${titleCase(item.key)}`;
     const label = () => (
-      <span style="color: #111000; font-style: italic; font-weight: bold; ">
+      <span class="form-label">
         {this.$t(item.key)}
       </span>
     );
@@ -453,7 +453,6 @@ class MFormClass extends Vue {
 
   renderActionBtn(isNormal: boolean): JSX.Element {
     return (
-      <div>
         <div class="right-btn">
           {this.saveBtn ? (
             <a-button
@@ -479,14 +478,13 @@ class MFormClass extends Vue {
             <a-button
               on-click={this.openModal}
               id={isNormal ? 'formFilter' : 'formFilter2'}
-              icon="setting"
+              icon="pushpin"
               type="default"
             >
               筛选
             </a-button>
           ) : null}
         </div>
-      </div>
     );
   }
 
@@ -499,10 +497,11 @@ class MFormClass extends Vue {
           <a-form>
             {/* Render action buttons */}
             <a-row gutter={20}>
-              <a-col push={20} xl={4} lg={4} md={6} sm={12} xs={12}>
+              <a-col push={16} xl={8} lg={8} md={8} sm={12} xs={12}>
                 {this.renderActionBtn(this.isNormal)}
               </a-col>
             </a-row>
+            <a-divider dashed={true} />
             {/* render form items with label and input */}
             <a-row gutter={20}>
               {this.itemList.map((item, index) => this.renderFormItem(getFieldDecorator, item, index))}

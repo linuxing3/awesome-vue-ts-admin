@@ -98,7 +98,7 @@ export default class FilterTable extends Vue {
   @Prop({ default: 'filterTable' }) private localName!: string;
 
   // 请求错误回调事件
-  @Prop() private fetchError!: string;
+  @Prop() private fetchError!: Function;
 
   // 默认分页数量
   @Prop({ default: 50 }) private defaultPageSize!: number;
