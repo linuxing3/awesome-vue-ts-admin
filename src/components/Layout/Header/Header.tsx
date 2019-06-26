@@ -8,6 +8,7 @@ import {
 import { routerItem } from '@/interface';
 import { routeToArray } from '@/utils';
 import MenuList from '@/components/Layout/Sidebar/MenuList';
+import CountDown from '@/components/CountDown/index.vue';
 import models from '@/models';
 import './Header.less';
 import { lazyFilter } from '@/utils/helper';
@@ -24,6 +25,7 @@ interface breadItem {
 @Component({
   components: {
     'menu-list': MenuList,
+    'm-count-down': CountDown,
     'a-input': Input,
     'a-button': Button,
     'a-avatar': Avatar,

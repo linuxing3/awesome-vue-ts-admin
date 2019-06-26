@@ -8,3 +8,4 @@ declare module 'vuex-orm-localforage';
 declare module '@/components/FilterTable/index.vue';
 declare module '@/components/FilterForm/index.vue';
 declare module '@/components/Loader/index.vue'
+declare module '@/components/CountDown/index.vue'

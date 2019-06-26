@@ -182,14 +182,15 @@ export default class ExportHelper extends Mixins(exportMixin) {
     const columns = this.itemList.slice(0, 6).reduce((list, item) => {
       list.push({
         title: this.$t(item.key),
-        dateIndex: item.key,
+        dataIndex: item.key,
+        align: 'center',
       });
       return list;
     }, []);
-    this.$log.info('Sample data:', dataSource);
+    this.$log.info('显示要导出的示例数据:', dataSource);
     return (
       <div style="{ margin: '16px' }">
-        <a-table bordered rowKey={'id'} dataSource={dataSource} columns={columns} />
+        <a-table bordered rowKey='id' dataSource={dataSource} columns={columns} />
       </div>
     );
   }
@@ -234,7 +235,7 @@ export default class ExportHelper extends Mixins(exportMixin) {
   }
 
   render() {
-    const { modelName } = this;
+    const { modelName, data } = this;
     return (
       <div style="width: 100%;" class="helper-wrap">
         <a-card title={`Import and Export [${modelName}]`}>
@@ -248,7 +249,7 @@ export default class ExportHelper extends Mixins(exportMixin) {
             </a-col>
           </a-row>
           <a-row>
-            <a-col {...{ props: this.normalLayout }}>{this.renderSampleData()}</a-col>
+            <a-col {...{ props: this.normalLayout }}>{this.data.length > 0 ? (this.renderSampleData()) : (<span>没有示例数据</span>)}</a-col>
           </a-row>
         </a-card>
       </div>
