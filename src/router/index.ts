@@ -78,7 +78,7 @@ export const constantRouterMap: routerItem[] & RouterOptions['routes'] = [
  * permission 有3种类型： Boolean Array String
  * Boolean值的情况，为true，有权限，为false，没有权限
  * Array值的情况，只要其中一个有，就有权限，
- * String值，会匹配vuex里面的perssions数组，如果有，就有权限
+ * String值，会匹配vuex里面的permissions数组，如果有，就有权限
  * meta.key 这个是用来匹配缓存的，请确保key值和对应页面的class名称一致，否则页面无法正常缓存
  */
 export const asyncRouterMap: routerItem[] = [
@@ -113,6 +113,20 @@ export const asyncRouterMap: routerItem[] = [
         component: getComponent('Document/components/DocumentTable'),
         permission: true,
         meta: { key: 'DocumentTable' },
+      },
+      {
+        path: 'article-form',
+        name: 'ArticleForm',
+        component: getComponent('Article/components/ArticleForm'),
+        permission: true,
+        meta: { key: 'ArticleForm' },
+      },
+      {
+        path: 'article-table',
+        name: 'ArticleTable',
+        component: getComponent('Article/components/ArticleTable'),
+        permission: true,
+        meta: { key: 'ArticleTable' },
       },
     ],
   },
@@ -349,30 +363,51 @@ export const asyncRouterMap: routerItem[] = [
     path: '/profile',
     icon: 'setting',
     name: '用户设置',
-    component: getComponent('components/index'),
+    component: getComponent('profile/index'),
     permission: true,
     meta: { key: 'Profile' },
     children: [
       {
         path: 'baseForm',
         name: 'ProfileBaseForm',
-        component: getComponent('components/form/baseForm/index'),
+        component: getComponent('profile/information/baseForm/index'),
         permission: true,
         meta: { key: 'ProfileBaseForm' },
       },
       {
         path: 'personalCenter',
         name: 'PersonalCenter',
-        component: getComponent('components/form/personalCenter/index'),
+        component: getComponent('profile/information/personalCenter/index'),
         permission: true,
         meta: { key: 'PersonalCenter' },
       },
       {
         path: 'userRoleTable',
         name: 'UserRoleTable',
-        component: getComponent('components/list/userRoleTable/index'),
+        component: getComponent('profile/information/userRoleTable/index'),
         permission: true,
         meta: { key: 'UserRoleTable' },
+      },
+      {
+        path: 'userArticleList',
+        name: 'UserArticleList',
+        component: getComponent('profile/information/userArticleList/index'),
+        permission: true,
+        meta: { key: 'UserArticleList' },
+      },
+      {
+        path: 'baseSettings',
+        name: 'BaseSettings',
+        component: getComponent('profile/settings/index'),
+        permission: true,
+        meta: { key: 'BaseSettings' },
+      },
+      {
+        path: 'securitySettings',
+        name: 'SecuritySettings',
+        component: getComponent('profile/settings/security'),
+        permission: true,
+        meta: { key: 'SecuritySettings' },
       },
     ],
   },
@@ -381,14 +416,14 @@ export const asyncRouterMap: routerItem[] = [
     icon: 'environment',
     name: '地图',
     component: getComponent('map/index'),
-    permission: true,
+    permission: ['6', '7', '8'],
     meta: { key: 'Map' },
     children: [
       {
         path: 'trajectory',
         name: 'Trajectory',
         component: getComponent('map/trajectory/index'),
-        permission: true,
+        permission: ['6', '7', '8'],
         meta: { key: 'Trajectory' },
       },
     ],

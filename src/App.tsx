@@ -1,10 +1,12 @@
 import {
-  Component, Prop, Emit, Vue, Inject, Provide,
+  Component, Prop, Emit, Vue, Inject, Provide, Watch,
 } from 'vue-property-decorator';
 import { LocaleProvider } from 'ant-design-vue';
 import zh_CN from 'ant-design-vue/lib/locale-provider/zh_CN';
 import en_US from 'ant-design-vue/lib/locale-provider/en_US';
+import es_ES from 'ant-design-vue/lib/locale-provider/es_ES';
 import 'moment/locale/zh-cn';
+// import 'moment/locale/en-us';
 import AppMain from '@/components/Layout/AppMain';
 import Loader from '@/components/Loader/index.vue';
 import './App.less';
@@ -16,6 +18,23 @@ import './App.less';
   },
 })
 export default class App extends Vue {
+  locales = {
+    zh_CN,
+    en_US,
+    es_ES,
+  }
+
+  locale = zh_CN
+
+  get localeName() {
+    return this.$store.state.app.locale;
+  }
+
+  @Watch('localeName', { immediate: true, deep: true })
+  localeChange(to: any, from: any) {
+    this.locale = this.locales[to];
+  }
+
   created() {
     this.isMobile();
     window.onresize = () => {
@@ -40,7 +59,7 @@ export default class App extends Vue {
     return (
       <div id="app">
         <loader spinning={self.$store.getters.spinning} fullScreen></loader>
-        <a-locale-provider locale={zh_CN}>
+        <a-locale-provider locale={this.locale}>
           <AppMain />
         </a-locale-provider>
       </div>
