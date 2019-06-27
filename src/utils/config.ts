@@ -69,7 +69,7 @@ export const actionEntitySetString = '[{"action":"add","defaultCheck":false,"des
 
 const config = {
   name: 'GENERAL ADMIN',
-  footerText: 'General Admin System  © 2019 linuxing3',
+  footerText: 'General Admin System © 2019 linuxing3',
   logo: Logo,
   locale: 'zh_CN',
   pwa: true,
@@ -96,6 +96,12 @@ const config = {
   API,
   openPages: ['/login', '/404', '/401'], // 全屏页面
   noLoginList: ['#/login'],
+  // localstorage
+  storageOptions: {
+    namespace: 'pro__', // key prefix
+    name: 'ls', // name variable Vue.[ls] or this.[$ls],
+    storage: 'local', // storage name session, local, memory
+  },
 };
 
 export default config;

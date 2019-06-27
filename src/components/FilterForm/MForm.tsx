@@ -1,10 +1,11 @@
-// / <reference path="../../../node_modules/ant-design-vue/types/form/form.d.ts" />
+/// <reference path="../../../node_modules/ant-design-vue/types/form/form.d.ts" />
 import {
   Component, Prop, Emit, Vue,
 } from 'vue-property-decorator';
 import {
   Input, Select, Form, TimePicker, DatePicker, Cascader, Row, Col, Button, Modal, Checkbox, Radio, Card, Divider,
 } from 'ant-design-vue';
+import { Get, Sync, Call } from 'vuex-pathify';
 import titleCase from 'title-case';
 import { FilterFormList } from '@/interface';
 import { api } from '@/api';
@@ -40,29 +41,32 @@ import './MForm.less';
   },
 })
 class MFormClass extends Vue {
-  @Prop()
-  private modelName!: string;
+  @Prop({ default: 'member'}) modelName!: string;
 
-  @Prop({ default: false })
-  private isNormal!: boolean;
+  @Prop({ default: false }) isNormal!: boolean;
 
   // 筛选表单生成参数
-  @Prop()
-  private itemList!: FilterFormList[];
+  @Prop() itemList!: FilterFormList[];
 
   // 是否展示新增按钮
-  @Prop({ default: true }) private saveBtn!: boolean;
+  @Prop({ default: true }) saveBtn!: boolean;
 
   // 是否展示导出按钮
-  @Prop({ default: true }) private resetBtn!: boolean;
+  @Prop({ default: true }) resetBtn!: boolean;
 
   // 是否展示导出按钮
-  @Prop({ default: true }) private filterBtn!: boolean;
+  @Prop({ default: true }) filterBtn!: boolean;
 
   // 导出按钮回调事件
-  @Prop({ default: () => {} }) private exportFun!: Function;
+  @Prop({ default: () => {} }) exportFun!: Function;
+  
+  @Sync('app@state.locale') synclocale: string;
 
-  private filterItemList: string[] = [];
+  @Get('app@state.locale') locale: string;
+
+  @Call('app@SET_LOCALE') setLocal: Function;
+
+  filterItemList: string[] = [];
 
   get id() {
     return this.$route.params.id || -1;
@@ -107,10 +111,17 @@ class MFormClass extends Vue {
   };
 
   created() {
-    this.setFilterItemListToLs();
+    this.$log.info('Current Locale', this.locale);
+    this.setFilterItemListToLocalstorage();
   }
 
-  setFilterItemListToLs() {
+  mounted() {
+    this.$nextTick(() => {
+      this.getInfo();
+    });
+  }
+
+  setFilterItemListToLocalstorage() {
     this.filterItemList = [];
     this.itemList.map((item) => {
       if (item.key) {
@@ -124,20 +135,15 @@ class MFormClass extends Vue {
     );
   }
 
-  mounted() {
-    this.$nextTick(() => {
-      this.getInfo();
-    });
-  }
-
   @Emit()
   save(e: HTMLFormElement) {
     e.preventDefault();
-    (this.Form as WrappedFormUtils).validateFields((err: any, values: object) => {
+    const { validateFields } = this.Form as WrappedFormUtils;
+    validateFields((err: any, values: object) => {
       if (!err) {
-        console.log('Form Values:', values);
+        this.$log.info('Form Values:', values);
         const data = convertDate(this.itemList, values)[0];
-        console.log('Converted Form Values:', data);
+        this.$log.info('Converted Form Values:', data);
         Modal.confirm({
           title: '表单数据',
           okText: 'Next Record',
@@ -160,6 +166,8 @@ class MFormClass extends Vue {
             });
           },
         });
+      } else {
+        this.$log.info('Error', err)
       }
     });
   }
@@ -204,6 +212,7 @@ class MFormClass extends Vue {
 
   @Emit()
   loadEditInfo(data) {
+    const { setFieldsValue } = this.Form as WrappedFormUtils;
     this.$log.suc(`编辑记录 ${this.id}`);
     // 更新父组件的编辑信息
     this.$emit('loadEditInfo', data);
@@ -211,7 +220,7 @@ class MFormClass extends Vue {
       setTimeout(resolve, 500);
     }).then(() => {
       this.$log.suc('formData:', data);
-      (this.Form as WrappedFormUtils).setFieldsValue(data);
+      setFieldsValue(data);
     });
   }
 
@@ -230,7 +239,7 @@ class MFormClass extends Vue {
   @Emit()
   reset(event?): void {
     // 恢复本地存储的全部字段，并重设表单字段
-    this.setFilterItemListToLs();
+    this.setFilterItemListToLocalstorage();
     this.$emit('setForm', this.filterItemList);
     // 重设表单值为空
     (this.Form as WrappedFormUtils).resetFields();
@@ -260,11 +269,12 @@ class MFormClass extends Vue {
 
   renderModal() {
     const itemList = JSON.parse(window.localStorage.getItem(this.modelName));
+    const title = `Choose Form Fields [${this.locale}]`;
     return (
       <a-modal
-        id="tableSet"
+        id="formSetting"
         width="500px"
-        title="Table Setting"
+        title={title}
         visible={this.setModal}
         on-ok={this.setForm}
         on-cancel={this.closeModal}
@@ -467,7 +477,7 @@ class MFormClass extends Vue {
           {this.resetBtn ? (
             <a-button
               on-click={() => this.reset('clear')}
-              id={isNormal ? 'formExport' : 'formExport2'}
+              id={isNormal ? 'formReset' : 'formReset2'}
               icon="stop"
               type="danger"
             >
@@ -492,6 +502,7 @@ class MFormClass extends Vue {
     const { getFieldDecorator } = this.Form as WrappedFormUtils;
     return (
       <div class="form-wrap">
+        {/* reander modal */}
         {this.renderModal()}
         <a-card class="form-card">
           <a-form>

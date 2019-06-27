@@ -2,6 +2,7 @@ import { Component, Emit, Vue } from 'vue-property-decorator';
 import {
   Form, Button, Input, Icon,
 } from 'ant-design-vue';
+import { WrappedFormUtils } from 'ant-design-vue/types/form/form';
 import config from '@/utils/config';
 
 import './login.less';
@@ -30,12 +31,10 @@ class Login extends Vue {
 
   loading = false;
 
-  created() {
-  }
-
   @Emit()
   login() {
-    this.Form.validateFields((err: any, values: object) => {
+    const { validateFields } = this.Form as WrappedFormUtils;
+    validateFields((err: any, values: object) => {
       if (!err) {
         this.loading = true;
         // window.api.login({ ...values })
@@ -72,7 +71,8 @@ class Login extends Vue {
 
   @Emit()
   register() {
-    this.Form.validateFields((err: any, values: object) => {
+    const { validateFields } = this.Form as WrappedFormUtils;
+    validateFields((err: any, values: object) => {
       if (!err) {
         this.loading = true;
         this.$store.dispatch('registerByName', values)
@@ -99,7 +99,7 @@ class Login extends Vue {
   }
 
   render() {
-    const { getFieldDecorator } = this.Form;
+    const { getFieldDecorator } = this.Form as WrappedFormUtils;
     return (
       <div class="loginWrap">
         <h2 class="loginTxt">
