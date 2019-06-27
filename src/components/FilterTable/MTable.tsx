@@ -8,9 +8,9 @@ import {
 } from 'ant-design-vue';
 import { tableList, operate, Directives } from '@/interface';
 import Spin from '@/components/Spin';
-import './MTable.less';
 import { api } from '@/api';
 import { getValue } from '@/utils/helper';
+import './MTable.less';
 
 @Component({
   components: {
@@ -84,7 +84,7 @@ export default class MTable extends Vue {
   @Prop({ default: null }) private scroll!: {x: number, y: number};
 
   // data
-  tableData: any = [];
+  tableData: any[] = [];
 
   pageParams: {
     pageSize: number,
@@ -136,7 +136,7 @@ export default class MTable extends Vue {
   /**
    * @method 获取表格数据
    */
-  getData() {
+  getData(): void {
     this.$log.info('[表格] ---> 开始异步获取数据');
     this.loading = true;
     const params = {
@@ -149,10 +149,10 @@ export default class MTable extends Vue {
       url: this.url,
       method: this.fetchType,
       params,
-    }).then((res: any) => {
+    }).then((res) => {
       this.$log.info('[表格] ---> 异步获取数据结果:', res);
       this.loading = false;
-      const code = getValue(this.backParams.code, res);
+      const code: number = getValue(this.backParams.code, res);
       if (code === this.backParams.codeOK) {
         this.tableData = getValue(this.backParams.data, res);
         this.$log.suc('MTable table data:', this.tableData);

@@ -299,3 +299,97 @@ export interface Point {
   lng: number,
   lat: number,
 }
+
+export interface StatisticInfo {
+  field?: string;
+  max?: number;
+  min?: number;
+  sum?: number;
+  statistic?: {};
+}
+
+export interface PageParams {
+  page: boolean;
+  pageNum: string;
+  pageSize: string;
+}
+
+export interface PageConfig {
+  page: boolean;
+  total: number;
+  totalPage: number;
+  offset: number;
+  next: number;
+  pageNum: number;
+  pageSize: number;
+}
+
+export interface BaseData {
+  result: {
+    resultCode: number;
+    resultMessage: any;
+  };
+  entity: any;
+}
+export interface LfBasicCredentials {
+  username: string;
+  password: string;
+}
+
+export interface LfRequestConfig {
+  url?: string;
+  method?: string;
+  params?: any;
+  data?: any;
+  fetchType?: string;
+  baseURL?: string;
+  headers?: any;
+  paramsSerializer?: (params: any) => string;
+  timeout?: number;
+  withCredentials?: boolean;
+  auth?: LfBasicCredentials;
+  responseType?: string;
+  xsrfCookieName?: string;
+  xsrfHeaderName?: string;
+  onUploadProgress?: (progressEvent: any) => void;
+  onDownloadProgress?: (progressEvent: any) => void;
+  maxContentLength?: number;
+  validateStatus?: (status: number) => boolean;
+  maxRedirects?: number;
+  httpAgent?: any;
+  httpsAgent?: any;
+}
+
+export interface LfResponse<D = BaseData, C = LfRequestConfig> {
+  data: D;
+  status?: number;
+  statusText?: string;
+  headers?: any;
+  config?: C;
+  request?: any;
+  success?: boolean;
+  message?: string;
+  code?: number;
+  statusCode?: number;
+  timestamp?: number;
+}
+
+export interface LfService<T = LfRequestConfig, R = LfResponse> {
+
+  getModel: (modelName: string) => any;
+
+  validateUrl: (options: T) => T;
+
+  request(params: T): Promise<R>;
+
+  post?(model: any, data: any): Promise<R>;
+
+  remove?(model: any, data: any): Promise<R>;
+
+  patch?(model: any, data: any): Promise<R>;
+
+  fetch: (options: T) => Promise<R>;
+
+  response(params: any): Promise<R>;
+}
+

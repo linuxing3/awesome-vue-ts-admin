@@ -22,19 +22,11 @@ import {
 import {
   keys, pullAll, uniq, map, countBy,
 } from 'lodash';
-import moment, { months } from 'moment';
 import { checkStringMatch } from '@/utils/helper';
 import {
   countAllByMonth,
 } from '@/utils/datetime';
-
-interface StatisticInfo {
-  field?: string;
-  max?: number;
-  min?: number;
-  sum?: number;
-  statistic?: {};
-}
+import { PageParams, PageConfig, StatisticInfo } from '@/interface';
 
 export class BaseModel extends Model {
   static primaryKey = 'id';
@@ -93,9 +85,9 @@ export class BaseModel extends Model {
   /**
    * 获取分页配置
    * @param {any} pageParams page params should be equal to front
-   * @returns {any}
+   * @returns {PageConfig}
    */
-  static pageConfig(pageParams: { page, pageNum, pageSize}): any {
+  static pageConfig(pageParams: PageParams): PageConfig {
     const total = this.query().count();
     const page = pageParams.page;
     const pageNum = (pageParams.pageNum && parseInt(pageParams.pageNum)) || 1;

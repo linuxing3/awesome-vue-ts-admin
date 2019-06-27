@@ -1,4 +1,5 @@
-import { LfResponse } from '@/utils/request.localforage';
+import { LfResponse, BaseData } from '@/interface';
+
 const responseBody: LfResponse = {
   data: null,
   config: {},
@@ -13,12 +14,12 @@ const responseBody: LfResponse = {
 
 /**
  * 获取数据，包装成axios类似的返回格式
- * @param {any} data Data from request
+ * @param {BaseData} data Data from request
  * @param {string} message Response messag
  * @param {number} code Response code
  * @param {any} headers Response headers
  */
-export const builder = (data, message, code = 0, config = {}, headers = {}) => {
+export const builder = (data: BaseData, message = '', code = 0, config = {}, headers = {}) => {
   responseBody.data = data;
   responseBody.config = config;
   if (message !== undefined && message !== null) {

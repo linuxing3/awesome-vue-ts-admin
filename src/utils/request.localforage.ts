@@ -2,76 +2,9 @@ import models from '@/models';
 import { builder, baseData } from '@/utils/builder';
 import { log } from '@/utils/helper';
 import { AGenTableColumns } from '@/utils/genFormData';
-
-export interface BaseData {
-  result: {
-    resultCode: number;
-    resultMessage: any;
-  };
-  entity: any;
-}
-export interface LfBasicCredentials {
-  username: string;
-  password: string;
-}
-
-export interface LfRequestConfig {
-  url?: string;
-  method?: string;
-  params?: any;
-  data?: any;
-  fetchType?: string;
-  baseURL?: string;
-  headers?: any;
-  paramsSerializer?: (params: any) => string;
-  timeout?: number;
-  withCredentials?: boolean;
-  auth?: LfBasicCredentials;
-  responseType?: string;
-  xsrfCookieName?: string;
-  xsrfHeaderName?: string;
-  onUploadProgress?: (progressEvent: any) => void;
-  onDownloadProgress?: (progressEvent: any) => void;
-  maxContentLength?: number;
-  validateStatus?: (status: number) => boolean;
-  maxRedirects?: number;
-  httpAgent?: any;
-  httpsAgent?: any;
-}
-
-export interface LfResponse<T = any> {
-  data: T;
-  status?: number;
-  statusText?: string;
-  headers?: any;
-  config?: LfRequestConfig;
-  request?: any;
-  success?: boolean;
-  message?: string;
-  code?: number;
-  statusCode?: number;
-  timestamp?: number;
-}
-
-export interface LfService {
-
-  getModel: (modelName: string) => any;
-
-  validateUrl: (options: LfRequestConfig) => LfRequestConfig;
-
-  request(params: LfRequestConfig): Promise<LfResponse>;
-
-  post?(model: any, data: any): Promise<LfResponse>;
-
-  remove?(model: any, data: any): Promise<LfResponse>;
-
-  patch?(model: any, data: any): Promise<LfResponse>;
-
-  fetch: (options: LfRequestConfig) => Promise<LfResponse>;
-
-  response(params: any): Promise<LfResponse>;
-}
-
+import { Query } from '@vuex-orm/core';
+import { LfService, LfResponse, LfBasicCredentials,LfRequestConfig, BaseData, PageParams, PageConfig, StatisticInfo } from '@/interface';
+import { BaseModel } from '@/models/BaseModel';
 
 // 创建 axios localforage 实例
 const lfService: LfService = {
@@ -107,23 +40,28 @@ const lfService: LfService = {
     const result = await this.fetch(newOpitons);
     return result;
   },
+  /**
+   * 获取需求
+   * @param {any} options
+   * @returns {Promise<any>}
+   */
   fetch: async (options: LfRequestConfig) => new Promise(async (resolve, reject) => {
     const {
       method,
       data,
       params: {
-        model, namespace, pageParams, filter, statistic,
+        model, namespace, filter, statistic,
       },
     } = options;
-
-    const Entity = model;
-
-    let query = Entity.query();
-    let requestedData: BaseData = null;
-    let response: LfResponse = null;
+    const pageParams: PageParams = options.params.pageParams;
+    const Entity: typeof BaseModel = model;
     const requestedConfig: LfRequestConfig = {
       ...options,
     };
+
+    let query: Query = Entity.query();
+    let requestedData: BaseData = null;
+    let response: LfResponse = null;
 
     // response api
     log.suc('Checking data', data);
@@ -134,10 +72,12 @@ const lfService: LfService = {
           requestedData = baseData('fail', '创建失败');
           requestedData.entity = null;
         } else {
-          const createdItems = await Entity.$create({ data });
+          const createdItems: {
+            [namespace: string]: any[]
+          } = await (Entity as any).$create({ data });
           requestedData = baseData('success', '创建成功');
           requestedData.entity = createdItems;
-          if (createdItems !== undefined) Entity.$fetch();
+          if (createdItems !== undefined) (Entity as any).$fetch();
         }
         break;
       case 'delete':
@@ -148,10 +88,12 @@ const lfService: LfService = {
           requestedData = baseData('fail', '删除失败');
           requestedData.entity = null;
         } else {
-          const deletedItems = await Entity.$delete(data.id || data);
+          const deletedItems: {
+            [namespace: string] : any[]
+          } = await (Entity as any).$delete(data.id || data);
           requestedData = baseData('success', '删除成功');
           requestedData.entity = deletedItems;
-          if (deletedItems !== undefined) Entity.$fetch();
+          if (deletedItems !== undefined) (Entity as any).$fetch();
         }
         break;
       case 'patch':
@@ -163,19 +105,21 @@ const lfService: LfService = {
           requestedData = baseData('fail', '更新失败');
           requestedData.entity = null;
         } else {
-          const patchedItems = await Entity.$update({ data });
+          const patchedItems: {
+            [namespace: string] : any[]
+          } = await (Entity as any).$update({ data });
           requestedData = baseData('success', '更新成功');
           requestedData.entity = patchedItems;
-          if (patchedItems !== undefined) Entity.$fetch();
+          if (patchedItems !== undefined) (Entity as any).$fetch();
         }
         break;
       case 'get':
         if (!data) {
-          Entity.$fetch();
+          (Entity as any).$fetch();
           // query with pageParams, header, columns
           if (pageParams.page) {
             log.info('Get pagination information');
-            const paginationConfig = Entity.pageConfig(pageParams);
+            const paginationConfig: PageConfig = Entity.pageConfig(pageParams);
             query = Entity.pageQuery(paginationConfig, query);
             requestedConfig.params.pageParams = paginationConfig;
           }
@@ -191,12 +135,15 @@ const lfService: LfService = {
           }
           requestedData = baseData('success', '查询成功');
           // using query builder get real data
-          requestedData.entity = query.orderBy('id', 'desc').get();
+          const entities: any[] = query.orderBy('id', 'desc').get();
+          requestedData.entity = entities;
         } else {
-          await Entity.$fetch();
-          const entities = await Entity.$get(data.id.toString());
+          await (Entity as any).$fetch();
+          const entities: {
+            [namespace: string]: any[]
+          } = await (Entity as any).$get(data.id.toString());
           requestedData = baseData('success', '查询成功');
-          requestedData.entity = entities[namespace][0];
+          requestedData.entity = entities.namespace[0];
         }
     }
     log.info('--------------- LocalForage ---------------------');
