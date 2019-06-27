@@ -6,7 +6,6 @@ import {
 import { roleList } from '@/utils/constant';
 
 import './index.less';
-import lfService from '@/utils/request.localforage';
 
 @Component({
   name: 'UserList',

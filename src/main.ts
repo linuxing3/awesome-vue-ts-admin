@@ -26,7 +26,6 @@ import Api from '@/api/api.lf';
 import { log } from '@/utils/helper';
 import { api } from '@/api';
 // import { genModelConfigJson } from '@/utils/generator';
-// import { apolloProvider } from '@/utils/apollo';
 /*-----------------------------------------------------------------------
 / 格式和组件
 /-----------------------------------------------------------------------*/
@@ -98,7 +97,6 @@ const app = new Vue({
   router,
   store,
   i18n,
-  // apolloProvider,
   created() {
     /*-----------------------------------------------------------------------
     | 启动默认用户数据

@@ -1,8 +1,6 @@
-import {
-  adminUsers, userPermissionMap, actionEntityArray, actionEntitySetString,
-} from '@/utils/config';
-import router, { asyncRouterMap, constantRouterMap } from '@/router';
 import bcrypt from 'bcryptjs';
+import { adminUsers } from '@/utils/config';
+import router, { asyncRouterMap, constantRouterMap } from '@/router';
 import { routerItem } from '@/interface';
 import { builder, baseData } from '@/utils/builder';
 import models from '@/models';
@@ -63,17 +61,6 @@ function hasRole(roles, route) {
   return true;
 }
 
-export const generateUserPermisson = user => user.permissions.reduce((result, value) => {
-  result.push({
-    roleId: user.username,
-    permissionId: userPermissionMap[value],
-    permissionName: userPermissionMap[value],
-    actions: actionEntitySetString,
-    actionEntitySet: actionEntityArray,
-  });
-  return result;
-}, []);
-
 const user = {
   state: {
     user: {
@@ -119,6 +106,8 @@ const user = {
               permissions: user.permissions,
             },
           });
+          // fix:
+          await Entity.generatePermissionDetails(newUser);
           console.log('Created new User:', newUser);
         } else {
           console.log('Found Existing User:', foundItems);
@@ -141,6 +130,8 @@ const user = {
             permissions: ['1', '2', '3', '4', '5'],
           },
         });
+        // fix:
+        await Entity.generatePermissionDetails(newUser);
         if (newUser !== undefined) {
           const data = baseData('success', '注册成功，请登录');
           return Promise.resolve(builder(data, '注册成功，请登录'));
@@ -205,8 +196,6 @@ const user = {
           context.commit('SAVEUSER', userData);
           // SAVE PERMISSION
           context.commit('SAVEROLES', entity.permissions);
-          // SAVE PERMISSION ROLES
-          context.commit('SAVEPERMISSIONROLES', generateUserPermisson(entity));
           // GET ROUTERS
           const getRouter = hasPermission(entity.permissions);
           context.dispatch('GetMenuData', getRouter);
@@ -226,4 +215,4 @@ const user = {
   },
 };
 
-export default user;
+export default user
