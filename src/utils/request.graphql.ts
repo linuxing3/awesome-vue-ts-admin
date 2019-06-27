@@ -15,7 +15,7 @@ export interface LfBasicCredentials {
   password: string;
 }
 
-export interface LfRequestConfig {
+export interface LfRequestOption {
   url?: string;
   method?: string;
   params?: any;
@@ -44,7 +44,7 @@ export interface LfResponse<T = any> {
   status?: number;
   statusText?: string;
   headers?: any;
-  config?: LfRequestConfig;
+  config?: LfRequestOption;
   request?: any;
   success?: boolean;
   message?: string;
@@ -54,7 +54,7 @@ export interface LfResponse<T = any> {
 }
 
 export interface LfService {
-  validateUrl: (options: LfRequestConfig) => LfRequestConfig;
+  validateUrl: (options: LfRequestOption) => LfRequestOption;
 
   request(params: any): Promise<LfResponse>;
 
@@ -64,7 +64,7 @@ export interface LfService {
 
   patch?(model: any, data: any): Promise<LfResponse>;
 
-  fetch: (options: LfRequestConfig) => Promise<LfResponse>;
+  fetch: (options: LfRequestOption) => Promise<LfResponse>;
 
   response(params: any): Promise<LfResponse>;
 }
@@ -72,12 +72,12 @@ export interface LfService {
 
 // 创建 axios localforage 实例
 const grapqlService: LfService = {
-  validateUrl: (options: LfRequestConfig) => {
+  validateUrl: (options: LfRequestOption) => {
     const [prefix, namespace, action] = options.url.split('/');
     const model: any = models[namespace];
     // header, columns
     const columns = AGenTableColumns(model.fieldsKeys());
-    const newOptions: LfRequestConfig = {
+    const newOptions: LfRequestOption = {
       ...options,
       params: {
         ...options.params,
@@ -98,12 +98,12 @@ const grapqlService: LfService = {
    * 从请求参数中获取model等，包装返回类axios的内容
    * @param {any} options 请求参数
    */
-  async request(options: LfRequestConfig) {
+  async request(options: LfRequestOption) {
     const newOpitons = this.validateUrl(options);
     const result = await this.fetch(newOpitons);
     return result;
   },
-  fetch: async (options: LfRequestConfig) => new Promise(async (resolve, reject) => {
+  fetch: async (options: LfRequestOption) => new Promise(async (resolve, reject) => {
     const {
       method,
       data,
@@ -116,7 +116,7 @@ const grapqlService: LfService = {
 
     let query = Entity.query();
     let requestedData: BaseData = null;
-    const requestedConfig: LfRequestConfig = {
+    const requestedOption: LfRequestOption = {
       ...options,
     };
 
@@ -159,17 +159,17 @@ const grapqlService: LfService = {
             // console.log('Get pagination information');
             const paginationConfig = Entity.pageConfig(pageParams);
             query = Entity.pageQuery(paginationConfig, query);
-            requestedConfig.params.pageParams = paginationConfig;
+            requestedOption.params.pageParams = paginationConfig;
           }
           // query with filter
           if (filter) {
             // console.log('Get fitlered information');
             query = Entity.searchQuery(filter, query);
-            requestedConfig.params.filter = filter;
+            requestedOption.params.filter = filter;
           }
           if (statistic) {
             const statistic = Entity.aggregateValuesOfAllFields();
-            requestedConfig.params.statistic = statistic;
+            requestedOption.params.statistic = statistic;
           }
           requestedData = baseData('success', '查询成功');
           // using query builder get real data
@@ -186,7 +186,7 @@ const grapqlService: LfService = {
       requestedData,
       `${method} ${namespace} Ok`,
       200,
-      requestedConfig,
+      requestedOption,
       {},
     );
     resolve(response);

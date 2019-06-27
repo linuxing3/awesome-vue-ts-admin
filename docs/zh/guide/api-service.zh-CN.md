@@ -53,9 +53,9 @@ export interface LfService {
 
   getModel: (modelName: string ) => any;
 
-  validateUrl: (options: LfRequestConfig) => LfRequestConfig;
+  validateUrl: (options: LfRequestOption) => LfRequestOption;
 
-  request(params: LfRequestConfig): Promise<LfResponse>;
+  request(params: LfRequestOption): Promise<LfResponse>;
 
   post?(model: any, data: any): Promise<LfResponse>;
 
@@ -63,7 +63,7 @@ export interface LfService {
 
   patch?(model: any, data: any): Promise<LfResponse>;
 
-  fetch: (options: LfRequestConfig) => Promise<LfResponse>;
+  fetch: (options: LfRequestOption) => Promise<LfResponse>;
 
   response(params: any): Promise<LfResponse>;
 }

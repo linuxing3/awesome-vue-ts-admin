@@ -3,18 +3,22 @@ import { builder, baseData } from '@/utils/builder';
 import { log } from '@/utils/helper';
 import { AGenTableColumns } from '@/utils/genFormData';
 import { Query } from '@vuex-orm/core';
-import { LfService, LfResponse, LfBasicCredentials,LfRequestConfig, BaseData, PageParams, PageConfig, StatisticInfo } from '@/interface';
+import {
+  LfService, LfResponse, LfRequestOption, BaseData, PageParams, PageConfig,
+} from '@/interface';
 import { BaseModel } from '@/models/BaseModel';
 
 // 创建 axios localforage 实例
 const lfService: LfService = {
-  getModel: (modelName: string) => models[modelName],
-  validateUrl: (options: LfRequestConfig) => {
+
+  getModel: (modelName: string): typeof BaseModel => models[modelName] as typeof BaseModel,
+
+  validateUrl: (options: LfRequestOption) => {
     const [prefix, namespace, action] = options.url.split('/');
     const model: any = models[namespace];
     // header, columns
     const columns = AGenTableColumns(model.fieldsKeys());
-    const newOptions: LfRequestConfig = {
+    const newOptions: LfRequestOption = {
       ...options,
       params: {
         ...options.params,
@@ -27,25 +31,19 @@ const lfService: LfService = {
     };
     return newOptions;
   },
-  async response(params) {
-    const result = await this.request(params);
+
+  async response(options: LfRequestOption) {
+    const result = await this.request(options);
     return result;
   },
-  /**
-   * 从请求参数中获取model等，包装返回类axios的内容
-   * @param {any} options 请求参数
-   */
-  async request(options: LfRequestConfig) {
+
+  async request(options: LfRequestOption) {
     const newOpitons = this.validateUrl(options);
     const result = await this.fetch(newOpitons);
     return result;
   },
-  /**
-   * 获取需求
-   * @param {any} options
-   * @returns {Promise<any>}
-   */
-  fetch: async (options: LfRequestConfig) => new Promise(async (resolve, reject) => {
+
+  fetch: async (options: LfRequestOption) => new Promise(async (resolve, reject) => {
     const {
       method,
       data,
@@ -55,7 +53,7 @@ const lfService: LfService = {
     } = options;
     const pageParams: PageParams = options.params.pageParams;
     const Entity: typeof BaseModel = model;
-    const requestedConfig: LfRequestConfig = {
+    const requestedOption: LfRequestOption = {
       ...options,
     };
 
@@ -64,7 +62,7 @@ const lfService: LfService = {
     let response: LfResponse = null;
 
     // response api
-    log.suc('Checking data', data);
+    log.suc('[LfRequestOption Helper] ---> 检查请求是否包含数据', data);
 
     switch (method) {
       case 'post':
@@ -121,17 +119,17 @@ const lfService: LfService = {
             log.info('Get pagination information');
             const paginationConfig: PageConfig = Entity.pageConfig(pageParams);
             query = Entity.pageQuery(paginationConfig, query);
-            requestedConfig.params.pageParams = paginationConfig;
+            requestedOption.params.pageParams = paginationConfig;
           }
           // query with filter
           if (filter) {
             log.info('Get fitlered information');
             query = Entity.searchQuery(filter, query);
-            requestedConfig.params.filter = filter;
+            requestedOption.params.filter = filter;
           }
           if (statistic) {
             const statistic = Entity.aggregateValuesOfAllFields();
-            requestedConfig.params.statistic = statistic;
+            requestedOption.params.statistic = statistic;
           }
           requestedData = baseData('success', '查询成功');
           // using query builder get real data
@@ -143,7 +141,7 @@ const lfService: LfService = {
             [namespace: string]: any[]
           } = await (Entity as any).$get(data.id.toString());
           requestedData = baseData('success', '查询成功');
-          requestedData.entity = entities.namespace[0];
+          requestedData.entity = entities[namespace][0];
         }
     }
     log.info('--------------- LocalForage ---------------------');
@@ -155,8 +153,8 @@ const lfService: LfService = {
         requestedData,
         `${method} ${namespace} Ok`,
         200,
-        requestedConfig,
-        {},
+        requestedOption,
+        options,
       );
       resolve(response);
     } else {
@@ -164,8 +162,8 @@ const lfService: LfService = {
         requestedData,
         `${method} ${namespace} NotOk`,
         500,
-        requestedConfig,
-        {},
+        requestedOption,
+        options,
       );
       reject(response);
     }

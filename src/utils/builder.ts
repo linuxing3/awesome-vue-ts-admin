@@ -1,17 +1,5 @@
 import { LfResponse, BaseData } from '@/interface';
 
-const responseBody: LfResponse = {
-  data: null,
-  config: {},
-  status: null,
-  statusText: '',
-  headers: null,
-  message: '',
-  success: false,
-  code: 0,
-  timestamp: 0,
-};
-
 /**
  * 获取数据，包装成axios类似的返回格式
  * @param {BaseData} data Data from request
@@ -19,7 +7,18 @@ const responseBody: LfResponse = {
  * @param {number} code Response code
  * @param {any} headers Response headers
  */
-export const builder = (data: BaseData, message = '', code = 0, config = {}, headers = {}) => {
+export const builder = (data: BaseData, message = '', code = 0, config = {}, headers = {}): LfResponse => {
+  const responseBody: LfResponse = {
+    data: null,
+    config: {},
+    status: null,
+    statusText: '',
+    headers: null,
+    message: '',
+    success: false,
+    code: 0,
+    timestamp: 0,
+  };
   responseBody.data = data;
   responseBody.config = config;
   if (message !== undefined && message !== null) {
@@ -62,7 +61,7 @@ export const getQueryParameters = (options) => {
  */
 export const getBody = options => options.body && JSON.parse(options.body);
 
-export const baseData = (type, message, code?) => {
+export const baseData = (type, message, code?): BaseData => {
   let resultCode = 0;
   if (code) {
     resultCode = code;

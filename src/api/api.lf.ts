@@ -1,5 +1,6 @@
 import { ApiList, Apis, defaultApiList } from './index';
-import lfService, { LfService, LfResponse } from '@/utils/request.localforage';
+import lfService from '@/utils/request.localforage';
+import { LfService, LfResponse } from '@/interface';
 
 export default class LfApi {
   service: LfService;

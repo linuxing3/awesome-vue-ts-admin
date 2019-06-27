@@ -1,4 +1,3 @@
-import { VNode } from 'vue';
 import { ScopedSlot } from 'vue/types/vnode';
 
 /**
@@ -309,19 +308,20 @@ export interface StatisticInfo {
 }
 
 export interface PageParams {
-  page: boolean;
-  pageNum: string;
-  pageSize: string;
+  page?: boolean;
+  pageNum?: string;
+  pageSize?: string;
+  [name: string]: any;
 }
 
 export interface PageConfig {
-  page: boolean;
-  total: number;
-  totalPage: number;
-  offset: number;
-  next: number;
-  pageNum: number;
-  pageSize: number;
+  page?: boolean;
+  total?: number;
+  totalPage?: number;
+  offset?: number;
+  next?: number;
+  pageNum?: number;
+  pageSize?: number;
 }
 
 export interface BaseData {
@@ -336,10 +336,19 @@ export interface LfBasicCredentials {
   password: string;
 }
 
-export interface LfRequestConfig {
+export interface LfRequestOptionParams {
+  model?: any;
+  namespace?: string;
+  filter?: any;
+  statistic?: any;
+  pageParams?: any;
+  [name: string]: any;
+}
+
+export interface LfRequestOption {
   url?: string;
   method?: string;
-  params?: any;
+  params?: LfRequestOptionParams;
   data?: any;
   fetchType?: string;
   baseURL?: string;
@@ -360,12 +369,12 @@ export interface LfRequestConfig {
   httpsAgent?: any;
 }
 
-export interface LfResponse<D = BaseData, C = LfRequestConfig> {
+export interface LfResponse<D = BaseData, C = LfRequestOption> {
   data: D;
+  config?: C;
   status?: number;
   statusText?: string;
   headers?: any;
-  config?: C;
   request?: any;
   success?: boolean;
   message?: string;
@@ -374,13 +383,25 @@ export interface LfResponse<D = BaseData, C = LfRequestConfig> {
   timestamp?: number;
 }
 
-export interface LfService<T = LfRequestConfig, R = LfResponse> {
+export interface LfService<T = LfRequestOption, R = LfResponse> {
 
+  /**
+   * 从modelsMap自动获取[模型]
+   */
   getModel: (modelName: string) => any;
 
+  /**
+   * 转换网络请求选项
+   */
   validateUrl: (options: T) => T;
 
-  request(params: T): Promise<R>;
+  response(options: T): Promise<R>;
+
+  /**
+   * 从网络请求参数包装返回类axios的内容
+   * @param {any} options 请求参数
+   */
+  request(options: T): Promise<R>;
 
   post?(model: any, data: any): Promise<R>;
 
@@ -388,8 +409,11 @@ export interface LfService<T = LfRequestConfig, R = LfResponse> {
 
   patch?(model: any, data: any): Promise<R>;
 
+  /**
+   * 获取网络请求
+   * @param {any} options
+   * @returns {Promise<any>}
+   */
   fetch: (options: T) => Promise<R>;
 
-  response(params: any): Promise<R>;
 }
-
