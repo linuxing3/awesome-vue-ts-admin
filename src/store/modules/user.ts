@@ -92,10 +92,10 @@ const user = {
     setDefaultUsers: async (context: any) => {
       await Entity.$fetch();
       adminUsers.map(async (user) => {
-        const foundItems = Entity.query()
+        const foundUsers = Entity.query()
           .where('username', user.username)
           .get();
-        if (foundItems.length === 0) {
+        if (foundUsers.length === 0) {
           const hash = await bcrypt.hash(user.password, 10);
           const newUser = await Entity.$create({
             data: {
@@ -110,16 +110,16 @@ const user = {
           await Entity.generatePermissionDetails(newUser);
           console.log('Created new User:', newUser);
         } else {
-          console.log('Found Existing User:', foundItems);
+          console.log('Found Existing User:', foundUsers);
         }
       });
     },
     registerByName: async (context: any, loginParams: any) => {
       await Entity.$fetch();
-      const foundItems = Entity.query()
+      const foundUsers = Entity.query()
         .where('username', loginParams.username)
         .get();
-      if (foundItems.length === 0) {
+      if (foundUsers.length === 0) {
         const hash = await bcrypt.hash(loginParams.password, 10);
         const newUser = await Entity.$create({
           data: {
@@ -132,7 +132,7 @@ const user = {
         });
         // fix:
         await Entity.generatePermissionDetails(newUser);
-        if (newUser !== undefined) {
+        if (newUser.length > 0) {
           const data = baseData('success', '注册成功，请登录');
           return Promise.resolve(builder(data, '注册成功，请登录'));
         }
@@ -144,7 +144,7 @@ const user = {
     },
     loginByName: async (context: any, loginParams: any) => {
       await Entity.$fetch();
-      const user = Entity.query()
+      const user: any[] = Entity.query()
         .where('username', loginParams.username)
         .get();
       if (user.length > 0) {
@@ -194,7 +194,9 @@ const user = {
           };
           // SAVE USER
           context.commit('SAVEUSER', userData);
-          // SAVE PERMISSION
+          // SAVE PERMISSION to entities.user.state.permissionList
+          Entity.generatePermissionDetails({ user: [ entity ]});
+          // SAVE PERMISSION to user.permission_roles
           context.commit('SAVEROLES', entity.permissions);
           // GET ROUTERS
           const getRouter = hasPermission(entity.permissions);

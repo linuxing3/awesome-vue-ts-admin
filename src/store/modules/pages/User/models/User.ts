@@ -36,14 +36,9 @@ export default class User extends BaseModel {
     section: 'core',
   }
 
-  static state() {
-    return {
-      permissionList: []
-    }
-  }
-
   // Fix: this functions cause webpack compile fail
-  static generatePermissionDetails(user: any) {
+  static generatePermissionDetails(userMap: any) {
+    const user = userMap.user[0];
     const userName = user.name || 'guest';
     let roleId
     switch (user.permissions.length) {
@@ -57,7 +52,7 @@ export default class User extends BaseModel {
         roleId = 'default'
         break;
     }
-    const permissionDetails = user.permissions && user.permissions.reduce((result, value) => {
+    const permissionDetails = user.permissions.reduce((result, value) => {
       result.push({
         roleId,
         permissionId: userPermissionMap[value],
@@ -67,12 +62,14 @@ export default class User extends BaseModel {
       return result;
     }, []);
     this.commit((state: any) => {
+      console.log('Original permission Details', state.permissionList);
       const users = state.permissionList.filter(p => p.user === userName)
-      if (!users.length) {
+      if (users.length === 0) {
         state.permissionList.push({
           user: userName,
           permissionDetails
         })
+        console.log('Committed permission Details', state.permissionList);
       }
     });
   }

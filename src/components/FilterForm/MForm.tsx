@@ -59,12 +59,12 @@ class MFormClass extends Vue {
 
   // 导出按钮回调事件
   @Prop({ default: () => {} }) exportFun!: Function;
-  
-  @Sync('app@state.locale') synclocale: string;
 
-  @Get('app@state.locale') locale: string;
+  @Sync('app.locale') synclocale: string;
 
-  @Call('app@SET_LOCALE') setLocal: Function;
+  @Get('app.locale') locale: string;
+
+  @Call('app.setLocale') setLocal: Function;
 
   filterItemList: string[] = [];
 
