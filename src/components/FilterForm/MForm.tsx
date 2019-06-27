@@ -1,4 +1,4 @@
-/// <reference path="../../../node_modules/ant-design-vue/types/form/form.d.ts" />
+// / <reference path="../../../node_modules/ant-design-vue/types/form/form.d.ts" />
 import {
   Component, Prop, Emit, Vue,
 } from 'vue-property-decorator';
@@ -41,7 +41,7 @@ import './MForm.less';
   },
 })
 class MFormClass extends Vue {
-  @Prop({ default: 'member'}) modelName!: string;
+  @Prop({ default: 'member' }) modelName!: string;
 
   @Prop({ default: false }) isNormal!: boolean;
 
@@ -167,7 +167,7 @@ class MFormClass extends Vue {
           },
         });
       } else {
-        this.$log.info('Error', err)
+        this.$log.info('Error', err);
       }
     });
   }

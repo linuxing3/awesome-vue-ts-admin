@@ -29,7 +29,7 @@ const state: IUserState = {
   defaultUser: {
     name: '',
   },
-  permissionList:[],
+  permissionList: [],
 };
 
 const mutations: MutationTree<IUserState> = {

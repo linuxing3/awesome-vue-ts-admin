@@ -9,14 +9,14 @@ export interface IUser {
 }
 
 export class UserPermission extends BaseModel {
-
   static entity = 'userPermission'
+
   static state() {
     return {
       userPermission,
       userPermissionMap,
-      actionEntityArray
-    }
+      actionEntityArray,
+    };
   }
 
   static fields() {
@@ -25,7 +25,7 @@ export class UserPermission extends BaseModel {
       action: this.attr(''),
       describe: this.attr(''),
       defaultCheck: this.boolean(0),
-    }
+    };
   }
 }
 
@@ -40,16 +40,16 @@ export default class User extends BaseModel {
   static generatePermissionDetails(userMap: any) {
     const user = userMap.user[0];
     const userName = user.name || 'guest';
-    let roleId
+    let roleId;
     switch (user.permissions.length) {
       case 3:
-        roleId = 'develop'
+        roleId = 'develop';
         break;
       case 8:
-        roleId = 'admin'
+        roleId = 'admin';
         break;
       default:
-        roleId = 'default'
+        roleId = 'default';
         break;
     }
     const permissionDetails = user.permissions.reduce((result, value) => {
@@ -63,12 +63,12 @@ export default class User extends BaseModel {
     }, []);
     this.commit((state: any) => {
       console.log('Original permission Details', state.permissionList);
-      const users = state.permissionList.filter(p => p.user === userName)
+      const users = state.permissionList.filter(p => p.user === userName);
       if (users.length === 0) {
         state.permissionList.push({
           user: userName,
-          permissionDetails
-        })
+          permissionDetails,
+        });
         console.log('Committed permission Details', state.permissionList);
       }
     });

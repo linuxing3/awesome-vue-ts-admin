@@ -195,7 +195,7 @@ const user = {
           // SAVE USER
           context.commit('SAVEUSER', userData);
           // SAVE PERMISSION to entities.user.state.permissionList
-          Entity.generatePermissionDetails({ user: [ entity ]});
+          Entity.generatePermissionDetails({ user: [entity] });
           // SAVE PERMISSION to user.permission_roles
           context.commit('SAVEROLES', entity.permissions);
           // GET ROUTERS
@@ -217,4 +217,4 @@ const user = {
   },
 };
 
-export default user
+export default user;
