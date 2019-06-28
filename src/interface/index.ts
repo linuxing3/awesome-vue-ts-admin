@@ -417,3 +417,5 @@ export interface LfService<T = LfRequestOption, R = LfResponse> {
   fetch: (options: T) => Promise<R>;
 
 }
+
+export interface LfPromise<T = any> extends Promise<LfResponse<T>> {}
