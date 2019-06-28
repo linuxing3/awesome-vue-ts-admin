@@ -1,9 +1,12 @@
 import bcrypt from 'bcryptjs';
-import { adminUsers } from '@/utils/config';
 import router, { asyncRouterMap } from '@/router';
 import { routerItem } from '@/interface';
 import { builder, baseData } from '@/utils/builder';
-import User from '@/store/modules/pages/User/models/User';
+import { adminUsers } from '@/utils/config';
+import models from '@/models';
+import { BaseModel } from '@/models/BaseModel';
+
+const User = models.user as typeof BaseModel;
 
 interface UserData {
   id?: string;
@@ -12,6 +15,14 @@ interface UserData {
   avatarUrl: string;
   email: string;
   permissions?: any[];
+}
+
+interface IUserState {
+  user: UserData;
+  roles: any[];
+  permission_routers: any[];
+  permission_roles: any[];
+  spinning: boolean;
 }
 
 function filterAsyncRouter(AsyncRouterMap: routerItem[], permission: string[]): routerItem[] {
@@ -61,25 +72,29 @@ function hasRole(roles, route) {
   return true;
 }
 
-const user = {
-  state: {
-    user: {
-      username: '',
-      userid: '',
-      avatarUrl: '',
-      email: '',
-    },
-    roles: [],
-    permission_routers: [],
-    permission_roles: [],
-    spinning: true,
+const state: IUserState = {
+  user: {
+    username: '',
+    userid: '',
+    avatarUrl: '',
+    email: '',
   },
+  roles: [],
+  permission_roles: [],
+  permission_routers: [],
+  spinning: true,
+};
+
+const user = {
+  state,
   mutations: {
     SAVEROLES: (state: any, roles: Array<any>) => {
       state.roles = roles;
+      window.localStorage.setItem('ROLES', JSON.stringify(roles));
     },
     SAVEPERMISSIONROLES: (state: any, roles: Array<any>) => {
       state.permission_roles = roles;
+      window.localStorage.setItem('PERMISSION_ROLES', JSON.stringify(roles));
     },
     SAVEUSER: (state: any, userData: UserData) => {
       state.user = user;
@@ -107,7 +122,7 @@ const user = {
             },
           });
           // fix:
-          await User.generatePermissionDetails(newUser);
+          await (User as any).generatePermissionDetails(newUser);
           console.log('Created new User:', newUser);
         } else {
           console.log('Found Existing User:', foundUsers);
@@ -131,7 +146,7 @@ const user = {
           },
         });
         // fix:
-        await User.generatePermissionDetails(newUser);
+        await (User as any).generatePermissionRoles(newUser);
         if (newUser.length > 0) {
           const data = baseData('success', '注册成功，请登录');
           return Promise.resolve(builder(data, '注册成功，请登录'));
@@ -191,8 +206,8 @@ const user = {
           };
           // SAVE USER
           context.commit('SAVEUSER', userData);
-          // SAVE PERMISSION to entities.user.state.permissionList
-          User.generatePermissionDetails({ user: [entity] });
+          // SAVE PERMISSION to entities.user.state.permission_roles
+          (User as any).generatePermissionRoles({ user: [entity] });
           // SAVE PERMISSION to user.permission_roles
           context.commit('SAVEROLES', entity.permissions);
           // GET ROUTERS

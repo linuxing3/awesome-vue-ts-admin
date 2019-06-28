@@ -1,11 +1,15 @@
 import { BaseModel } from '@/models/BaseModel';
 import { userPermission, userPermissionMap, actionEntityArray } from '@/utils/config';
+import { isObject } from 'util';
 
 export interface IUser {
   id?: string
   name?: string
   username?: string
   password?: string
+  hash?: string
+  token?: string
+  permissions?: string[]
 }
 
 export class UserPermission extends BaseModel {
@@ -37,10 +41,16 @@ export default class User extends BaseModel {
   }
 
   // Fix: this functions cause webpack compile fail
-  static generatePermissionDetails(userMap: any) {
-    const user = userMap.user[0];
+  static generatePermissionRoles(userMap: IUser | Array<IUser> | { user: IUser }| { user: Array<IUser> }) {
+    let roleId = '';
+    let user: IUser = null;
+    if (isObject(userMap)) {
+      user = userMap['user'] === undefined ? userMap : userMap['user'][0];
+    };
+    if (Array.isArray(userMap)) {
+      user = userMap[0];
+    }
     const userName = user.name || 'guest';
-    let roleId;
     switch (user.permissions.length) {
       case 3:
         roleId = 'develop';
@@ -62,14 +72,14 @@ export default class User extends BaseModel {
       return result;
     }, []);
     this.commit((state: any) => {
-      console.log('Original permission Details', state.permissionList);
-      const users = state.permissionList.filter(p => p.user === userName);
+      console.log('Original permission Details', state.permission_roles);
+      const users = state.permission_roles.filter(p => p.user === userName);
       if (users.length === 0) {
-        state.permissionList.push({
+        state.permission_roles.push({
           user: userName,
           permissionDetails,
         });
-        console.log('Committed permission Details', state.permissionList);
+        console.log('Committed permission Details', state.permission_roles);
       }
     });
   }

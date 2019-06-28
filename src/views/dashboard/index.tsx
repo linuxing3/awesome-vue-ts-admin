@@ -1,25 +1,25 @@
 import { Component, Vue } from 'vue-property-decorator';
-import { months } from 'moment';
 import {
   Button, DatePicker, Modal, Row, Col, Card, Icon, Radio,
 } from 'ant-design-vue';
 import Chart from 'chart.js';
+import models from '@/models';
+import { BaseModel } from '@/models/BaseModel';
+import { DVHelper } from '@antv/data-set';
+import { months } from 'moment';
 import { upperCaseFirst } from 'change-case';
-
 import { numFormat } from '@/utils/index';
 import {
   countByCategory, initData, yearlyTransformer, typeTransformer,
 } from '@/utils/datetime';
-import models from '@/models';
 
 import './index.less';
-import { DVHelper } from '@antv/data-set';
 
-const Document: any = models.document;
-const Event: any = models.event;
-const Member: any = models.member;
-const Leave: any = models.leave;
-const UserMilitant: any = models.userMilitant;
+const Document = models.document as typeof BaseModel;
+const Event = models.event as typeof BaseModel;
+const Member = models.member as typeof BaseModel;
+const Leave = models.leave as typeof BaseModel;
+const UserMilitant = models.userMilitant as typeof BaseModel;
 
 @Component({
   name: 'Dashboard',
