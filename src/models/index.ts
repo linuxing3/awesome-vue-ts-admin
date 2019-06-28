@@ -1,16 +1,9 @@
 // 获取模型
-import * as Vuex from 'vuex';
 import { Model } from '@vuex-orm/core';
 import { BaseModel } from '@/models/BaseModel';
 import { lowerFirst, tail, last } from 'lodash';
 
 // entity interface
-export interface Entity {
-  name: string;
-  model: typeof Model;
-  module: Vuex.Module<any, any>;
-}
-
 export interface Models {
   [name: string]: typeof BaseModel | typeof Model;
 }
