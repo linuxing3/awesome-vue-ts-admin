@@ -1,5 +1,4 @@
 import {
-  Model,
   Query,
   Attr,
   String,
@@ -20,7 +19,7 @@ import {
   Attribute,
 } from '@vuex-orm/core';
 import {
-  keys, pullAll, uniq, map, countBy,
+  keys, pullAll, uniq, map,
 } from 'lodash';
 import { checkStringMatch } from '@/utils/helper';
 import {
