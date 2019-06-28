@@ -1,7 +1,7 @@
 declare module 'vuex-orm-localforage' {
 
   import { Plugin, Store } from 'vuex';
-  import { Database } from '@vuex-orm/core'
+  import { Database, Model } from '@vuex-orm/core'
   import { Components } from '@vuex-orm/core/lib/plugins/use'
   import Entity from '@vuex-orm/core/lib/database/Entity';
 
@@ -64,7 +64,7 @@ declare module 'vuex-orm-localforage' {
     setupLifecycles(): void
   }
 
-  export class Model {
+  export class LocalForageModel extends Model {
     /**
      * Tells if a field is a attribute (and thus not a relation)
      * @param {Field} field
@@ -72,7 +72,18 @@ declare module 'vuex-orm-localforage' {
      */
     static isFieldAtribute(field: any): boolean
 
+    static $fetch(config?: any): Promise<any>;
+
+    static $get(config?: any): Promise<any>;
+
+    static $create(config?: any): Promise<any>;
+
+    static $update(config?: any): Promise<any>;
+
+    static $delete(config?: any): Promise<any>;
+
     getPersistableFields(model: any): string[]
+
   }
 
   export class Context {
@@ -95,7 +106,7 @@ declare module 'vuex-orm-localforage' {
      * @returns {Context}
      */
     setup(
-      components: any,
+      components: Components,
       options: VuexOrmPluginConfig
     ): Context
 
@@ -126,6 +137,17 @@ declare module 'vuex-orm-localforage' {
     static transformModel(model: Model): any
 
     static getRecordKey(record: any): any
+
+    $get?: typeof Get.call;
+
+    $fetch?: typeof Fetch.call;
+
+    $update?: typeof Persist.update;
+
+    $create?: typeof Persist.create;
+
+    $delete?: typeof Destroy.call;
+
   }
 
   export class Get extends Action {
@@ -161,21 +183,21 @@ declare module 'vuex-orm-localforage' {
      * @param {Store} store
      * @param {object} params
      */
-    call({ dispatch }: any, payload: any, action?: string): Promise<any>
+    static call({ dispatch }: any, payload: any, action?: string): Promise<any>
 
     /**
      * Call $fetch helper method
      * @param {Context} context
      * @param {object} payload
      */
-    create(context: Context, payload: any): Promise<any>
+    static create(context: Context, payload: any): Promise<any>
 
     /**
      * Call $fetch helper method
      * @param {Context} context
      * @param {object} payload
      */
-    update(context: Context, payload: any): Promise<any>
+    static update(context: Context, payload: any): Promise<any>
   }
 
   const localForagePlugin: VuexOrmLocalForagePlugin

@@ -11,11 +11,11 @@ import { BaseModel } from '@/models/BaseModel';
 // 创建 axios localforage 实例
 const lfService: LfService = {
 
-  getModel: (modelName: string): typeof BaseModel => models[modelName] as typeof BaseModel,
+  getModel: (modelName: string) => models[modelName] as typeof BaseModel,
 
   validateUrl: (options: LfRequestOption) => {
     const [prefix, namespace, action] = options.url.split('/');
-    const model: any = models[namespace];
+    const model = models[namespace] as typeof BaseModel;
     // header, columns
     const columns = AGenTableColumns(model.fieldsKeys());
     const newOptions: LfRequestOption = {
@@ -52,12 +52,12 @@ const lfService: LfService = {
       },
     } = options;
     const pageParams: PageParams = options.params.pageParams;
-    const Entity: typeof BaseModel = model;
+    const Model: typeof BaseModel = model;
     const requestedOption: LfRequestOption = {
       ...options,
     };
 
-    let query: Query = Entity.query();
+    let query: Query = Model.query();
     let requestedData: BaseData = null;
     let response: LfResponse = null;
 
@@ -72,10 +72,10 @@ const lfService: LfService = {
         } else {
           const createdItems: {
             [namespace: string]: any[]
-          } = await (Entity as any).$create({ data });
+          } = await Model.$create({ data });
           requestedData = baseData('success', '创建成功');
           requestedData.entity = createdItems;
-          if (createdItems !== undefined) (Entity as any).$fetch();
+          if (createdItems !== undefined) Model.$fetch();
         }
         break;
       case 'delete':
@@ -88,10 +88,10 @@ const lfService: LfService = {
         } else {
           const deletedItems: {
             [namespace: string] : any[]
-          } = await (Entity as any).$delete(data.id || data);
+          } = await Model.$delete(data.id || data);
           requestedData = baseData('success', '删除成功');
           requestedData.entity = deletedItems;
-          if (deletedItems !== undefined) (Entity as any).$fetch();
+          if (deletedItems !== undefined) Model.$fetch();
         }
         break;
       case 'patch':
@@ -105,30 +105,30 @@ const lfService: LfService = {
         } else {
           const patchedItems: {
             [namespace: string] : any[]
-          } = await (Entity as any).$update({ data });
+          } = await Model.$update({ data });
           requestedData = baseData('success', '更新成功');
           requestedData.entity = patchedItems;
-          if (patchedItems !== undefined) (Entity as any).$fetch();
+          if (patchedItems !== undefined) Model.$fetch();
         }
         break;
       case 'get':
         if (!data) {
-          (Entity as any).$fetch();
+          Model.$fetch();
           // query with pageParams, header, columns
           if (pageParams.page) {
             log.info('Get pagination information');
-            const paginationConfig: PageConfig = Entity.pageConfig(pageParams);
-            query = Entity.pageQuery(paginationConfig, query);
+            const paginationConfig: PageConfig = Model.pageConfig(pageParams);
+            query = Model.pageQuery(paginationConfig, query);
             requestedOption.params.pageParams = paginationConfig;
           }
           // query with filter
           if (filter) {
             log.info('Get fitlered information');
-            query = Entity.searchQuery(filter, query);
+            query = Model.searchQuery(filter, query);
             requestedOption.params.filter = filter;
           }
           if (statistic) {
-            const statistic = Entity.aggregateValuesOfAllFields();
+            const statistic = Model.aggregateValuesOfAllFields();
             requestedOption.params.statistic = statistic;
           }
           requestedData = baseData('success', '查询成功');
@@ -136,10 +136,10 @@ const lfService: LfService = {
           const entities: any[] = query.orderBy('id', 'desc').get();
           requestedData.entity = entities;
         } else {
-          await (Entity as any).$fetch();
+          await Model.$fetch();
           const entities: {
             [namespace: string]: any[]
-          } = await (Entity as any).$get(data.id.toString());
+          } = await Model.$get(data.id.toString());
           requestedData = baseData('success', '查询成功');
           requestedData.entity = entities[namespace][0];
         }

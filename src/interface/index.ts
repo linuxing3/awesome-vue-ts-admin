@@ -1,4 +1,5 @@
 import { ScopedSlot } from 'vue/types/vnode';
+import { BaseModel } from '@/models/BaseModel';
 
 /**
  * @interface 筛选表格的表单参数
@@ -388,7 +389,7 @@ export interface LfService<T = LfRequestOption, R = LfResponse> {
   /**
    * 从modelsMap自动获取[模型]
    */
-  getModel: (modelName: string) => any;
+  getModel: (modelName: string) => typeof BaseModel;
 
   /**
    * 转换网络请求选项

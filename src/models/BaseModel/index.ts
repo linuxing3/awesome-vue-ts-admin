@@ -27,8 +27,9 @@ import {
   countAllByMonth,
 } from '@/utils/datetime';
 import { PageParams, PageConfig, StatisticInfo } from '@/interface';
+import { LocalForageModel } from 'vuex-orm-localforage';
 
-export class BaseModel extends Model {
+export class BaseModel extends LocalForageModel {
   static primaryKey = 'id';
 
   static meta = {

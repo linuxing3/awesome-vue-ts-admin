@@ -1,19 +1,18 @@
 import bcrypt from 'bcryptjs';
 import { adminUsers } from '@/utils/config';
-import router, { asyncRouterMap, constantRouterMap } from '@/router';
+import router, { asyncRouterMap } from '@/router';
 import { routerItem } from '@/interface';
 import { builder, baseData } from '@/utils/builder';
-import models from '@/models';
-import { BaseModel } from '@/models/BaseModel';
+import User from '@/store/modules/pages/User/models/User';
 
 interface UserData {
+  id?: string;
   username: string;
   userid: string;
   avatarUrl: string;
   email: string;
+  permissions?: any[];
 }
-
-const User: typeof BaseModel = models.user as typeof BaseModel;
 
 function filterAsyncRouter(AsyncRouterMap: routerItem[], permission: string[]): routerItem[] {
   const routerMap = AsyncRouterMap.filter((route) => {
@@ -91,14 +90,14 @@ const user = {
   },
   actions: {
     setDefaultUsers: async (context: any) => {
-      await (User as any).$fetch();
+      await User.$fetch();
       adminUsers.map(async (user) => {
         const foundUsers = User.query()
           .where('username', user.username)
           .get();
         if (foundUsers.length === 0) {
           const hash = await bcrypt.hash(user.password, 10);
-          const newUser = await (User as any).$create({
+          const newUser = await User.$create({
             data: {
               name: user.username,
               username: user.username,
@@ -108,21 +107,21 @@ const user = {
             },
           });
           // fix:
-          await (User as any).generatePermissionDetails(newUser);
-          console.log('Created new (User as any):', newUser);
+          await User.generatePermissionDetails(newUser);
+          console.log('Created new User:', newUser);
         } else {
-          console.log('Found Existing ((User as any) as any):', foundUsers);
+          console.log('Found Existing User:', foundUsers);
         }
       });
     },
     registerByName: async (context: any, loginParams: any) => {
-      await (User as any).$fetch();
-      const foundUsers = (User as any).query()
+      await User.$fetch();
+      const foundUsers = User.query()
         .where('username', loginParams.username)
         .get();
       if (foundUsers.length === 0) {
         const hash = await bcrypt.hash(loginParams.password, 10);
-        const newUser = await (User as any).$create({
+        const newUser = await User.$create({
           data: {
             name: loginParams.username,
             username: loginParams.username,
@@ -132,7 +131,7 @@ const user = {
           },
         });
         // fix:
-        await (User as any).generatePermissionDetails(newUser);
+        await User.generatePermissionDetails(newUser);
         if (newUser.length > 0) {
           const data = baseData('success', '注册成功，请登录');
           return Promise.resolve(builder(data, '注册成功，请登录'));
@@ -144,7 +143,7 @@ const user = {
       return Promise.reject(builder(error, '用户名已存在'));
     },
     loginByName: async (context: any, loginParams: any) => {
-      await (User as any).$fetch();
+      await User.$fetch();
       const user: any[] = User.query()
         .where('username', loginParams.username)
         .get();
@@ -176,15 +175,12 @@ const user = {
       return Promise.resolve(builder(data, '登出，结束会话'));
     },
     getUserLocalInfo: async (context: any) => {
-      // for localforage Model.$fetch
-      if ((User as any).$fetch) (User as any).$fetch();
+      User.$fetch();
       const token = JSON.parse(window.localStorage.getItem('token'));
       console.log('token:', token);
-      const entity = (User as any).find(token.id);
-      // for graghql entity.fetch
-      if (entity.fetch) entity.fetch();
+      const entity: any = await User.find(token.id);
 
-      console.log('(User as any) (User as any):', entity);
+      console.log('User User:', entity);
       return new Promise((resolve, reject) => {
         if (entity) {
           const userData: UserData = {
@@ -196,7 +192,7 @@ const user = {
           // SAVE USER
           context.commit('SAVEUSER', userData);
           // SAVE PERMISSION to entities.user.state.permissionList
-          (User as any).generatePermissionDetails({ user: [entity] });
+          User.generatePermissionDetails({ user: [entity] });
           // SAVE PERMISSION to user.permission_roles
           context.commit('SAVEROLES', entity.permissions);
           // GET ROUTERS
@@ -212,7 +208,7 @@ const user = {
   getters: {
     currentUser: async (state: any) => {
       const { id } = JSON.parse(window.localStorage.getItem('token'));
-      const entity = await (User as any).$get(id);
+      const entity = await User.$get(id);
       return entity;
     },
   },
