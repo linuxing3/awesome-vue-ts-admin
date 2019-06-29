@@ -1,7 +1,7 @@
 // 获取模型
+import { lowerFirst, tail, last } from 'lodash';
 import { Model } from '@vuex-orm/core';
 import { BaseModel } from '@/models/BaseModel';
-import { lowerFirst, tail, last } from 'lodash';
 
 // entity interface
 export interface Models {

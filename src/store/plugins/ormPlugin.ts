@@ -1,6 +1,7 @@
 /**
  * ORM插件将vuex状态持久化
  */
+import { Plugin } from 'vuex';
 import VuexORM, { Database, Model } from '@vuex-orm/core';
 import localForagePlugin from 'vuex-orm-localforage';
 import models, { Models } from '@/models';
@@ -9,7 +10,6 @@ import { AGenTableColumns } from '@/utils/genFormData';
 import { writeFile } from 'fs';
 import { resolve } from 'path';
 import { upperFirst } from 'lodash';
-
 
 export const persistentSchema = (Entity: typeof Model) => {
   const entity = Entity.fields();
@@ -28,8 +28,7 @@ export const persistentSchema = (Entity: typeof Model) => {
 /**
  * 在数据库中注册模型和模块
  */
-export const registerDatabase = (models: Models, modules: Modules): Database => {
-  const database = new Database();
+export const registerDatabase = (database: Database, models: Models, modules: Modules): Database => {
   // base models
   Object.keys(models).map((modelName: string) => {
     console.log(`Registering ORM Model -> [${modelName}]`);
@@ -47,7 +46,7 @@ export const registerDatabase = (models: Models, modules: Modules): Database => 
 /**
  * 生成数据库
  */
-export const database = registerDatabase(models, modules);
+const database = registerDatabase(new Database(), models, modules);
 
 /**
  * 载入插件
@@ -58,6 +57,6 @@ VuexORM.use(localForagePlugin, { database });
 /**
  * 安装localForage ORM databse
  */
-const ormPlugin = VuexORM.install(database);
+const ormPlugin: Plugin<{}> = VuexORM.install(database);
 
 export default ormPlugin;
