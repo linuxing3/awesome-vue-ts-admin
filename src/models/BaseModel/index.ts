@@ -1,4 +1,5 @@
 import {
+  Model,
   Query,
   Attr,
   String,
@@ -26,9 +27,9 @@ import {
   countAllByMonth,
 } from '@/utils/datetime';
 import { PageParams, PageConfig, StatisticInfo } from '@/interface';
-import { LocalForageModel } from 'vuex-orm-localforage';
+import { ILocalForageModel } from 'vuex-orm-localforage';
 
-export class BaseModel extends LocalForageModel {
+export class BaseModel extends Model implements ILocalForageModel {
   static primaryKey = 'id';
 
   static meta = {

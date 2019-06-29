@@ -3,12 +3,10 @@ import {
   Form, Table, Input, Select, Radio, Card, Icon, Button, Col, Row, Avatar, Tag, Dropdown, Menu,
 } from 'ant-design-vue';
 
-import { roleList } from '@/utils/constant';
-
 import './index.less';
 
 @Component({
-  name: 'UserList',
+  name: 'UserRoleTable',
   components: {
     'a-form': Form,
     'a-table': Table,
@@ -29,7 +27,11 @@ import './index.less';
     'a-tag': Tag,
   },
 })
-export default class UserList extends Vue {
+export default class UserRoleTable extends Vue {
+  get data() {
+    return this.$store.state.entities.user.permissionRoles;
+  }
+
   labelCol = {
     xs: { span: 24 },
     sm: { span: 5 },
@@ -64,11 +66,8 @@ export default class UserList extends Vue {
 
   keyPath = 'permissions'
 
-  data = []
-
   mounted() {
-    this.$log.info('Permission roles:', this.$store.getters.permission_roles);
-    this.data = roleList;
+    this.$log.info('Permission roles:', this.data);
   }
 
   handleChange(value, key, column, record) {

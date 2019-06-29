@@ -41,17 +41,16 @@ export default class User extends BaseModel {
   }
 
   // Fix: this functions cause webpack compile fail
-  static generatePermissionRoles(userMap: IUser | Array<IUser> | { user: IUser }| { user: Array<IUser> }) {
+  static generatePermissionRoles({ user }) {
     let roleId = '';
-    let user: IUser = null;
-    if (isObject(userMap)) {
-      user = userMap['user'] === undefined ? userMap : userMap['user'][0];
-    };
-    if (Array.isArray(userMap)) {
-      user = userMap[0];
+    let currentUser = null;
+    console.log('Original userMap', user);
+    if (Array.isArray(user)) {
+      currentUser = user[0];
     }
-    const userName = user.name || 'guest';
-    switch (user.permissions.length) {
+    console.log('Validated userMap', user);
+    const userName = currentUser.name || 'guest';
+    switch (currentUser.permissions.length) {
       case 3:
         roleId = 'develop';
         break;
@@ -62,7 +61,7 @@ export default class User extends BaseModel {
         roleId = 'default';
         break;
     }
-    const permissionDetails = user.permissions.reduce((result, value) => {
+    const permissionDetails = currentUser.permissions.reduce((result, value) => {
       result.push({
         roleId,
         permissionId: userPermissionMap[value],
@@ -72,14 +71,15 @@ export default class User extends BaseModel {
       return result;
     }, []);
     this.commit((state: any) => {
-      console.log('Original permission Details', state.permission_roles);
-      const users = state.permission_roles.filter(p => p.user === userName);
+      const users = state.permissionRoles.filter(p => p.user === userName);
       if (users.length === 0) {
-        state.permission_roles.push({
+        state.permissionRoles.push({
           user: userName,
           permissionDetails,
         });
-        console.log('Committed permission Details', state.permission_roles);
+        console.log('Committed permission Details ', state.permissionRoles);
+      } else {
+        console.log('Permission Details exists ', state.permissionRoles);
       }
     });
   }

@@ -5,8 +5,9 @@ import { builder, baseData } from '@/utils/builder';
 import { adminUsers } from '@/utils/config';
 import models from '@/models';
 import { BaseModel } from '@/models/BaseModel';
+import { ILocalForageModel } from 'vuex-orm-localforage';
 
-const User = models.user as typeof BaseModel;
+const User = models.user as ILocalForageModel;
 
 interface UserData {
   id?: string;
@@ -107,7 +108,7 @@ const user = {
     setDefaultUsers: async (context: any) => {
       await User.$fetch();
       adminUsers.map(async (user) => {
-        const foundUsers = User.query()
+        const foundUsers = (User as typeof BaseModel).query()
           .where('username', user.username)
           .get();
         if (foundUsers.length === 0) {
@@ -131,7 +132,7 @@ const user = {
     },
     registerByName: async (context: any, loginParams: any) => {
       await User.$fetch();
-      const foundUsers = User.query()
+      const foundUsers = (User as typeof BaseModel).query()
         .where('username', loginParams.username)
         .get();
       if (foundUsers.length === 0) {
@@ -159,7 +160,7 @@ const user = {
     },
     loginByName: async (context: any, loginParams: any) => {
       await User.$fetch();
-      const user: any[] = User.query()
+      const user: any[] = (User as typeof BaseModel).query()
         .where('username', loginParams.username)
         .get();
       if (user.length > 0) {
@@ -193,7 +194,7 @@ const user = {
       User.$fetch();
       const token = JSON.parse(window.localStorage.getItem('token'));
       console.log('token:', token);
-      const entity: any = await User.find(token.id);
+      const entity: any = await (User as typeof BaseModel).find(token.id);
 
       console.log('User User:', entity);
       return new Promise((resolve, reject) => {

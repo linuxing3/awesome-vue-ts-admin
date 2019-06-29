@@ -25,9 +25,9 @@ const pages = {
 };
 
 module.exports = {
-  configureWebpack: {
-    devtool: 'source-map',
-  },
+  // configureWebpack: {
+  //   devtool: 'source-map',
+  // },
   pages: {
     index: pages.index,
     playpage: pages.playpage,

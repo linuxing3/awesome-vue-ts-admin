@@ -15,11 +15,11 @@ import {
 
 import './index.less';
 
-const Document = models.document as typeof BaseModel;
-const Event = models.event as typeof BaseModel;
-const Member = models.member as typeof BaseModel;
-const Leave = models.leave as typeof BaseModel;
-const UserMilitant = models.userMilitant as typeof BaseModel;
+const Document: any = models.document;
+const Event: any = models.event;
+const Member: any = models.member;
+const Leave: any = models.leave;
+const UserMilitant: any = models.userMilitant;
 
 @Component({
   name: 'Dashboard',

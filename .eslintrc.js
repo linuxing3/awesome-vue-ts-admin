@@ -17,6 +17,7 @@ module.exports = {
     'no-mixed-operators': 'off',
     'no-nested-ternary': 'off',
     'no-unused-expressions': 'off',
+    'no-useless-constructor': 'off',
     'no-underscore-dangle': 'off',
     'no-plusplus': 'off',
     'no-fallthrough': 'off',

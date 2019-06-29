@@ -8,7 +8,7 @@ interface IUserState {
   name: string;
   items: IUser[];
   defaultUser: IUser;
-  permissionList: any[];
+  permissionRoles: any[];
 }
 
 export interface IUserGetters {
@@ -29,7 +29,7 @@ const state: IUserState = {
   defaultUser: {
     name: '',
   },
-  permissionList: [],
+  permissionRoles: [],
 };
 
 const mutations: MutationTree<IUserState> = {

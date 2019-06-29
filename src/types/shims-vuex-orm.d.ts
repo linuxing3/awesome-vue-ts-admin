@@ -1,8 +1,8 @@
 declare module 'vuex-orm-localforage' {
 
   import { Plugin, Store } from 'vuex';
-  import { Database, Model } from '@vuex-orm/core'
-  import { Components } from '@vuex-orm/core/lib/plugins/use'
+  import { Database, Model } from '@vuex-orm/core';
+  import { Components } from '@vuex-orm/core/lib/plugins/use';
   import Entity from '@vuex-orm/core/lib/database/Entity';
 
   export class VuexOrmLocalForagePlugin {
@@ -52,19 +52,36 @@ declare module 'vuex-orm-localforage' {
      * @param {VuexOrmPluginConfig} options The options passed to VuexORM.install
      */
     constructor(components: Components, options: VuexOrmPluginConfig)
+
     /**
      * This method will setup following Vuex actions: $fetch, $get
      */
     setupActions(): void
+
     /**
      * This method will setup following model methods: Model.$fetch, Model.$get, Model.$create,
      * Model.$update, Model.$delete
      */
     setupModels(): void
+
     setupLifecycles(): void
   }
 
-  export class LocalForageModel extends Model {
+  export interface ILocalForageModel {
+
+    $fetch?(config?: any): Promise<any>;
+
+    $get?(config?: any): Promise<any>;
+
+    $create?(config?: any): Promise<any>;
+
+    $update?(config?: any): Promise<any>;
+
+    $delete?(config?: any): Promise<any>;
+
+  }
+
+  export class LocalForageModel extends Model implements ILocalForageModel {
     /**
      * Tells if a field is a attribute (and thus not a relation)
      * @param {Field} field
@@ -72,18 +89,17 @@ declare module 'vuex-orm-localforage' {
      */
     static isFieldAtribute(field: any): boolean
 
-    static $fetch(config?: any): Promise<any>;
+    static $fetch?(config?: any): Promise<any>;
 
-    static $get(config?: any): Promise<any>;
+    static $get?(config?: any): Promise<any>;
 
-    static $create(config?: any): Promise<any>;
+    static $create?(config?: any): Promise<any>;
 
-    static $update(config?: any): Promise<any>;
+    static $update?(config?: any): Promise<any>;
 
-    static $delete(config?: any): Promise<any>;
+    static $delete?(config?: any): Promise<any>;
 
     getPersistableFields(model: any): string[]
-
   }
 
   export class Context {
@@ -147,7 +163,6 @@ declare module 'vuex-orm-localforage' {
     $create?: typeof Persist.create;
 
     $delete?: typeof Destroy.call;
-
   }
 
   export class Get extends Action {
@@ -200,7 +215,7 @@ declare module 'vuex-orm-localforage' {
     static update(context: Context, payload: any): Promise<any>
   }
 
-  const localForagePlugin: VuexOrmLocalForagePlugin
+  const localForagePlugin: VuexOrmLocalForagePlugin;
 
-  export default localForagePlugin
+  export default localForagePlugin;
 }

@@ -52,7 +52,7 @@ const lfService: LfService = {
       },
     } = options;
     const pageParams: PageParams = options.params.pageParams;
-    const Model: typeof BaseModel = model;
+    const Model: any = model;
     const requestedOption: LfRequestOption = {
       ...options,
     };

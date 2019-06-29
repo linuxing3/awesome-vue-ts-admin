@@ -17,7 +17,7 @@
     "allowUnreachableCode": false,
     "noEmitOnError": true,
     "strictFunctionTypes": false,
-    "sourceMap": false,
+    "sourceMap": true,
     "baseUrl": ".",
     "types": ["webpack-env"],
     "paths": {
