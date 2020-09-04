@@ -54,7 +54,7 @@
     "mock": "^0.1.1",
     "mockjs": "^1.0.1-beta3",
     "moment": "^2.24.0",
-    "papaparse": "^4.6.3",
+    "papaparse": "^5.2.0",
     "path-to-regexp": "^3.0.0",
     "q": "^1.5.1",
     "qs": "^6.7.0",
