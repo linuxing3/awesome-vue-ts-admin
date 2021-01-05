@@ -31,7 +31,7 @@
     "apollo-client": "^2.6.2",
     "apollo-link": "^1.2.11",
     "apollo-link-http": "^1.5.14",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "babel-plugin-import": "^1.11.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
