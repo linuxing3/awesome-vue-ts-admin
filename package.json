@@ -35,7 +35,7 @@
     "babel-plugin-import": "^1.11.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
-    "chart.js": "^2.8.0",
+    "chart.js": "^2.9.4",
     "constants": "^0.0.2",
     "cookies": "^0.7.3",
     "csv": "^5.1.1",
