@@ -42,7 +42,7 @@
     "docx": "^4.7.0",
     "docx-template": "^2.2.3",
     "docx-templates": "^3.0.0",
-    "electron": "^3.0.0",
+    "electron": "^18.3.7",
     "extract-text-webpack-plugin": "^3.0.2",
     "graphql": "^14.3.1",
     "graphql-tag": "^2.10.1",
