@@ -57,7 +57,7 @@
     "papaparse": "^4.6.3",
     "path-to-regexp": "^3.0.0",
     "q": "^1.5.1",
-    "qs": "^6.7.0",
+    "qs": "^6.7.3",
     "rxjs": "^6.4.0",
     "storyboard": "^3.1.4",
     "storyboard-listener-console": "^3.1.4",
